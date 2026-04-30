@@ -2,6 +2,7 @@ import CallToAction from "./components/CallToAction";
 import Footer from "./components/Footer";
 import Hero from "./components/Hero";
 import Navbar from "./components/Navbar";
+import PortfolioPreview from "./components/PortfolioPreview";
 import ProblemSolution from "./components/ProblemSolution";
 import Process from "./components/Process";
 import SolutionsGrid from "./components/SolutionsGrid";
@@ -16,6 +17,7 @@ export default function Home() {
         <ProblemSolution />
         <SolutionsGrid />
         <Process />
+        <PortfolioPreview />
         <WhyAvlys />
         <CallToAction />
       </main>
