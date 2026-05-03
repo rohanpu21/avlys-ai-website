@@ -55,6 +55,20 @@ const Footer = () => {
             </div>
           </div>
         </div>
+        <div className="flex flex-wrap gap-4 font-mono text-xs uppercase tracking-[0.2em] text-[var(--muted-strong)]">
+          <a href="/blog" className="transition-opacity hover:opacity-70">
+            Blog
+          </a>
+          <a href="/#solutions" className="transition-opacity hover:opacity-70">
+            Solutions
+          </a>
+          <a href="/#portfolio" className="transition-opacity hover:opacity-70">
+            Portfolio
+          </a>
+          <a href="/#contact" className="transition-opacity hover:opacity-70">
+            Contact
+          </a>
+        </div>
         <div className="flex flex-col gap-3 font-mono text-xs uppercase tracking-[0.2em] text-[var(--muted-strong)] sm:flex-row sm:justify-between">
           <span>Hyderabad, India / Remote-first</span>
           <span>2026 Avlys AI. All rights reserved.</span>

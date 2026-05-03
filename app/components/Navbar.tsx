@@ -1,9 +1,10 @@
 import Link from "next/link";
 
 const navLinks = [
-  { label: "Process", href: "#process" },
-  { label: "Solutions", href: "#solutions" },
-  { label: "Portfolio", href: "#portfolio" },
+  { label: "Process", href: "/#process" },
+  { label: "Solutions", href: "/#solutions" },
+  { label: "Portfolio", href: "/#portfolio" },
+  { label: "Blog", href: "/blog" },
 ];
 
 const Navbar = () => {
@@ -24,14 +25,14 @@ const Navbar = () => {
             </Link>
           ))}
           <a
-            href="#contact"
+            href="/#contact"
             className="border border-[var(--border-strong)] px-4 py-2 font-mono text-xs uppercase tracking-[0.18em] transition-colors hover:bg-[var(--surface-hover)]"
           >
             Book Strategy Call
           </a>
         </div>
         <a
-          href="#contact"
+          href="/#contact"
           className="border border-[var(--border-strong)] px-3 py-2 font-mono text-xs uppercase tracking-[0.18em] md:hidden"
         >
           Book Call
