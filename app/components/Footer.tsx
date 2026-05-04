@@ -1,15 +1,33 @@
+import Link from "next/link";
+
 const Footer = () => {
   return (
     <footer className="border-t border-[var(--border-subtle)] px-6 py-12">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 text-sm text-[var(--muted)]">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div>
+        <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
+          <div className="max-w-xs">
             <p className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--foreground)]">Avlys AI</p>
-            <p className="mt-3 max-w-md text-sm leading-6">
+            <p className="mt-3 text-sm leading-6">
               AI automation, calling agents, chatbots, custom platforms, and support systems for businesses
               in India and globally.
             </p>
           </div>
+
+          <div className="flex flex-col gap-2">
+            <p className="mb-1 font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted-strong)]">
+              Navigate
+            </p>
+            <Link href="/portfolio" className="transition-opacity hover:opacity-50">
+              Portfolio
+            </Link>
+            <Link href="/blog" className="transition-opacity hover:opacity-50">
+              Blog
+            </Link>
+            <a href="/#contact" className="transition-opacity hover:opacity-50">
+              Book a call
+            </a>
+          </div>
+
           <div className="flex flex-col gap-4 text-sm">
             <div className="flex flex-col gap-2">
               <a href="mailto:official@avlysai.com" className="transition-opacity hover:opacity-50">
