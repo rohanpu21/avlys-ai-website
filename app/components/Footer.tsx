@@ -57,7 +57,11 @@ const Footer = () => {
         </div>
         <div className="flex flex-col gap-3 font-mono text-xs uppercase tracking-[0.2em] text-[var(--muted-strong)] sm:flex-row sm:justify-between">
           <span>Hyderabad, India / Remote-first</span>
-          <span>2026 Avlys AI. All rights reserved.</span>
+          <div className="flex items-center gap-6">
+            <a href="/blog" className="transition-opacity hover:opacity-50">Blog</a>
+            <a href="/portfolio" className="transition-opacity hover:opacity-50">Portfolio</a>
+            <span>2026 Avlys AI. All rights reserved.</span>
+          </div>
         </div>
       </div>
     </footer>

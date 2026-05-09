@@ -4,6 +4,7 @@ const navLinks = [
   { label: "Process", href: "#process" },
   { label: "Solutions", href: "#solutions" },
   { label: "Portfolio", href: "#portfolio" },
+  { label: "Blog", href: "/blog" },
 ];
 
 const Navbar = () => {
