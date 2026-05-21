@@ -306,6 +306,14 @@ const textBlock = (text: string, style = {}) => (
   <div style={{ display: "flex", ...style }}>{text}</div>
 );
 
+const headlineSize = (title: string) => {
+  if (title.length > 48) return 34;
+  if (title.length > 42) return 37;
+  return 43;
+};
+
+const displayTitle = (title: string) => title.replace(/E-Commerce/g, "E‑Commerce");
+
 const Tag = ({ children }: { children: string }) => (
   <div
     style={{
@@ -775,7 +783,7 @@ export default async function Image({ params, searchParams }: ImageProps) {
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
           <div style={{ display: "flex", justifyContent: "space-between", gap: 34, alignItems: "flex-end" }}>
             <div style={{ display: "flex", flexDirection: "column", gap: 12, maxWidth: 735 }}>
-              {textBlock(caseStudy.title, { fontSize: caseStudy.title.length > 50 ? 38 : 43, lineHeight: 0.98 })}
+              {textBlock(displayTitle(caseStudy.title), { fontSize: headlineSize(caseStudy.title), lineHeight: 1.02 })}
               {textBlock(spec.secondary, { color: muted, fontSize: 20, lineHeight: 1.3 })}
             </div>
             <div style={{ display: "flex", gap: 10, flexWrap: "wrap", justifyContent: "flex-end", width: 330 }}>
