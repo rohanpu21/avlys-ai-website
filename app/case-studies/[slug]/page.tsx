@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import CaseStudyImage from "../../components/CaseStudyImage";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import ProjectVisual from "../../components/ProjectVisual";
@@ -155,10 +156,11 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                 <span>Market: {caseStudy.market}</span>
               </div>
             </div>
-            <ProjectVisual
-              kind={caseStudy.visualKind}
+            <CaseStudyImage
+              slug={caseStudy.slug}
               title={caseStudy.title}
-              category={caseStudy.category}
+              priority
+              sizes="(min-width: 1024px) 50vw, 100vw"
             />
           </div>
         </section>
@@ -196,11 +198,10 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
               </p>
             </div>
             <div className="grid gap-6">
-              <ProjectVisual
-                kind={caseStudy.visualKind}
+              <CaseStudyImage
+                slug={caseStudy.slug}
                 title={`${caseStudy.title} system view`}
-                category={caseStudy.type}
-                index={2}
+                sizes="(min-width: 1024px) 58vw, 100vw"
               />
               <div className="grid gap-6 md:grid-cols-2">
                 <ProjectVisual
@@ -309,18 +310,16 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                 </Link>
               </div>
               <div className="mt-10 grid gap-6 md:grid-cols-3">
-                {related.map((item, index) => (
+                {related.map((item) => (
                   <Link
                     key={item.slug}
                     href={`/case-studies/${item.slug}`}
                     className="group border border-[var(--border-subtle)] p-4 transition-colors hover:border-[var(--border-strong)] hover:bg-[var(--surface-subtle)]"
                   >
-                    <ProjectVisual
-                      kind={item.visualKind}
+                    <CaseStudyImage
+                      slug={item.slug}
                       title={item.title}
-                      category={item.type}
-                      index={index + 1}
-                      compact
+                      sizes="(min-width: 768px) 30vw, 100vw"
                     />
                     <h3 className="mt-6 text-lg font-light leading-snug">{item.title}</h3>
                     <p className="mt-3 text-sm leading-6 text-[var(--muted)]">{item.headline}</p>

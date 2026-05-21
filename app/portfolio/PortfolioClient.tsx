@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import ProjectVisual from "../components/ProjectVisual";
+import CaseStudyImage from "../components/CaseStudyImage";
 import { caseStudies } from "../data/caseStudies";
 import { categories } from "../data/portfolio";
 
@@ -67,13 +67,17 @@ const PortfolioClient = () => {
               index === 0 || item.title.includes("Agentic AI Architecture") ? "md:col-span-2" : ""
             }`}
           >
-            <ProjectVisual
-              kind={item.visualKind}
+            <CaseStudyImage
+              slug={item.slug}
               title={item.title}
-              category={item.category}
-              index={index + 1}
+              priority={index < 2}
+              sizes={
+                index === 0 || item.title.includes("Agentic AI Architecture")
+                  ? "(min-width: 768px) 70vw, 100vw"
+                  : "(min-width: 768px) 45vw, 100vw"
+              }
             />
-            <div className="flex items-start justify-between gap-6">
+            <div className="mt-6 flex items-start justify-between gap-6">
               <p className="font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted-soft)]">
                 {String(index + 1).padStart(2, "0")}
               </p>

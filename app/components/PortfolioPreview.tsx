@@ -1,5 +1,5 @@
 import Link from "next/link";
-import ProjectVisual from "./ProjectVisual";
+import CaseStudyImage from "./CaseStudyImage";
 import { featuredCaseStudies } from "../data/caseStudies";
 
 const PortfolioPreview = () => {
@@ -30,16 +30,15 @@ const PortfolioPreview = () => {
             <Link
               key={item.title}
               href={`/case-studies/${item.slug}`}
-              className="border border-[var(--border-subtle)] p-6 transition-colors hover:border-[var(--border-strong)] hover:bg-[var(--surface-subtle)]"
+              className="group border border-[var(--border-subtle)] p-6 transition-colors hover:border-[var(--border-strong)] hover:bg-[var(--surface-subtle)]"
             >
-              <ProjectVisual
-                kind={item.visualKind}
+              <CaseStudyImage
+                slug={item.slug}
                 title={item.title}
-                category={item.category}
-                index={index + 1}
-                compact
+                priority={index < 2}
+                sizes="(min-width: 768px) 45vw, 100vw"
               />
-              <p className="font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted-soft)]">
+              <p className="mt-6 font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted-soft)]">
                 {String(index + 1).padStart(2, "0")}
               </p>
               <h3 className="mt-6 text-xl font-light leading-snug">{item.title}</h3>

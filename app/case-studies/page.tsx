@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
+import CaseStudyImage from "../components/CaseStudyImage";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import ProjectVisual from "../components/ProjectVisual";
 import StructuredData from "../components/StructuredData";
 import { caseStudies } from "../data/caseStudies";
 import { absoluteUrl, siteConfig } from "../lib/site";
@@ -76,7 +77,7 @@ export default function CaseStudiesPage() {
       <Navbar />
       <main className="px-6 py-20 sm:py-28">
         <div className="mx-auto w-full max-w-6xl">
-          <div className="grid gap-10 lg:grid-cols-[1fr_320px] lg:items-end">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(360px,0.72fr)] lg:items-end">
             <div className="max-w-4xl">
               <p className="font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted-strong)]">
                 Case Studies
@@ -90,11 +91,25 @@ export default function CaseStudiesPage() {
                 project-specific visual proof.
               </p>
             </div>
-            <div className="border border-[var(--border-subtle)] bg-[var(--surface-subtle)] p-6">
-              <p className="font-mono text-4xl font-light">{caseStudies.length}</p>
-              <p className="mt-2 text-xs uppercase tracking-[0.18em] text-[var(--muted-strong)]">
-                Published studies
-              </p>
+            <div className="grid gap-4">
+              <div className="overflow-hidden border border-[var(--border-subtle)] bg-[var(--surface-subtle)]">
+                <Image
+                  src="/case-studies/opengraph-image"
+                  alt="Avlys AI case studies visual index"
+                  width={1200}
+                  height={630}
+                  sizes="(min-width: 1024px) 36vw, 100vw"
+                  priority
+                  unoptimized
+                  className="h-auto w-full"
+                />
+              </div>
+              <div className="border border-[var(--border-subtle)] bg-[var(--surface-subtle)] p-6">
+                <p className="font-mono text-4xl font-light">{caseStudies.length}</p>
+                <p className="mt-2 text-xs uppercase tracking-[0.18em] text-[var(--muted-strong)]">
+                  Published studies
+                </p>
+              </div>
             </div>
           </div>
 
@@ -107,11 +122,15 @@ export default function CaseStudiesPage() {
                   index === 0 || caseStudy.visualKind === "voice-agent" ? "md:col-span-2" : ""
                 }`}
               >
-                <ProjectVisual
-                  kind={caseStudy.visualKind}
+                <CaseStudyImage
+                  slug={caseStudy.slug}
                   title={caseStudy.title}
-                  category={caseStudy.category}
-                  index={index + 1}
+                  priority={index < 2}
+                  sizes={
+                    index === 0 || caseStudy.visualKind === "voice-agent"
+                      ? "(min-width: 768px) 70vw, 100vw"
+                      : "(min-width: 768px) 45vw, 100vw"
+                  }
                 />
                 <div className="p-3 pt-6">
                   <p className="font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted-soft)]">
