@@ -6,6 +6,7 @@ type CaseStudyImageProps = {
   className?: string;
   priority?: boolean;
   sizes?: string;
+  variant?: "cover" | "system";
 };
 
 const CaseStudyImage = ({
@@ -14,13 +15,16 @@ const CaseStudyImage = ({
   className = "",
   priority = false,
   sizes = "(min-width: 1024px) 50vw, 100vw",
+  variant = "cover",
 }: CaseStudyImageProps) => {
+  const query = variant === "cover" ? "" : `?variant=${variant}`;
+
   return (
     <div
       className={`relative aspect-[1200/630] overflow-hidden border border-[var(--border-subtle)] bg-[var(--surface-subtle)] ${className}`}
     >
       <Image
-        src={`/case-studies/${slug}/opengraph-image`}
+        src={`/case-studies/${slug}/opengraph-image${query}`}
         alt={`${title} case study visual`}
         width={1200}
         height={630}

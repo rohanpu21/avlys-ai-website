@@ -202,6 +202,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                 slug={caseStudy.slug}
                 title={`${caseStudy.title} system view`}
                 sizes="(min-width: 1024px) 58vw, 100vw"
+                variant="system"
               />
               <div className="grid gap-6 md:grid-cols-2">
                 <ProjectVisual
