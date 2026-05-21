@@ -16,9 +16,15 @@ const Footer = () => {
           <div className="grid gap-8 sm:grid-cols-2">
             <div>
               <p className="font-mono text-xs uppercase tracking-[0.18em] text-[var(--foreground)]">
-                Services
+                Explore
               </p>
               <div className="mt-4 grid gap-2">
+                <Link href="/case-studies" className="transition-opacity hover:opacity-50">
+                  Case Studies
+                </Link>
+                <Link href="/portfolio" className="transition-opacity hover:opacity-50">
+                  Portfolio
+                </Link>
                 {featuredServicePages.map((service) => (
                   <Link
                     key={service.slug}

@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { portfolioPreviewItems } from "../data/portfolio";
+import ProjectVisual from "./ProjectVisual";
+import { featuredCaseStudies } from "../data/caseStudies";
 
 const PortfolioPreview = () => {
   return (
@@ -25,11 +26,19 @@ const PortfolioPreview = () => {
           </Link>
         </div>
         <div className="mt-12 grid gap-6 md:grid-cols-2">
-          {portfolioPreviewItems.map((item, index) => (
-            <article
+          {featuredCaseStudies.slice(0, 4).map((item, index) => (
+            <Link
               key={item.title}
+              href={`/case-studies/${item.slug}`}
               className="border border-[var(--border-subtle)] p-6 transition-colors hover:border-[var(--border-strong)] hover:bg-[var(--surface-subtle)]"
             >
+              <ProjectVisual
+                kind={item.visualKind}
+                title={item.title}
+                category={item.category}
+                index={index + 1}
+                compact
+              />
               <p className="font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted-soft)]">
                 {String(index + 1).padStart(2, "0")}
               </p>
@@ -40,7 +49,10 @@ const PortfolioPreview = () => {
                 <span>Market: {item.market}</span>
               </div>
               <p className="mt-4 text-sm leading-6 text-[var(--muted)]">{item.description}</p>
-            </article>
+              <p className="mt-8 font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted-strong)] transition-opacity hover:opacity-50">
+                Open Case Study
+              </p>
+            </Link>
           ))}
         </div>
       </div>

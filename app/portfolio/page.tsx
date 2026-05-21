@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import StructuredData from "../components/StructuredData";
-import { portfolioItems } from "../data/portfolio";
+import { caseStudies } from "../data/caseStudies";
 import { absoluteUrl, siteConfig } from "../lib/site";
 import PortfolioClient from "./PortfolioClient";
 
@@ -43,11 +43,12 @@ const structuredData = {
     {
       "@type": "ItemList",
       "@id": `${portfolioUrl}#portfolio-items`,
-      itemListElement: portfolioItems.map((item, index) => ({
+      itemListElement: caseStudies.map((item, index) => ({
         "@type": "ListItem",
         position: index + 1,
         name: item.title,
         description: item.description,
+        url: absoluteUrl(`/case-studies/${item.slug}`),
       })),
     },
     {

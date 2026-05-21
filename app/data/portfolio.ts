@@ -1,4 +1,4 @@
-export type PortfolioItem = {
+export type PortfolioItemBase = {
   title: string;
   type: string;
   stack: string;
@@ -6,6 +6,17 @@ export type PortfolioItem = {
   description: string;
   category: string;
 };
+
+export type PortfolioItem = PortfolioItemBase & {
+  slug: string;
+};
+
+export const createProjectSlug = (title: string) =>
+  title
+    .toLowerCase()
+    .replace(/&/g, "and")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
 
 export const categories = [
   "All",
@@ -17,7 +28,7 @@ export const categories = [
   "Website Maintenance & Support",
 ];
 
-export const portfolioItems: PortfolioItem[] = [
+const rawPortfolioItems: PortfolioItemBase[] = [
   {
     title: "Pooja Banvar - Professional Business Website",
     type: "Website Development",
@@ -199,5 +210,10 @@ export const portfolioItems: PortfolioItem[] = [
     category: "Website Maintenance & Support",
   },
 ];
+
+export const portfolioItems: PortfolioItem[] = rawPortfolioItems.map((item) => ({
+  ...item,
+  slug: createProjectSlug(item.title),
+}));
 
 export const portfolioPreviewItems = portfolioItems.slice(0, 4);

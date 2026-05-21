@@ -1,17 +1,20 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
-import { categories, portfolioItems } from "../data/portfolio";
+import ProjectVisual from "../components/ProjectVisual";
+import { caseStudies } from "../data/caseStudies";
+import { categories } from "../data/portfolio";
 
 const PortfolioClient = () => {
   const [activeCategory, setActiveCategory] = useState("All");
 
   const filteredItems = useMemo(() => {
     if (activeCategory === "All") {
-      return portfolioItems;
+      return caseStudies;
     }
 
-    return portfolioItems.filter((item) => item.category === activeCategory);
+    return caseStudies.filter((item) => item.category === activeCategory);
   }, [activeCategory]);
 
   return (
@@ -57,12 +60,19 @@ const PortfolioClient = () => {
 
       <div className="mt-12 grid gap-6 md:grid-cols-2">
         {filteredItems.map((item, index) => (
-          <article
+          <Link
             key={item.title}
+            href={`/case-studies/${item.slug}`}
             className={`group border border-[var(--border-subtle)] p-6 transition-colors hover:border-[var(--border-strong)] hover:bg-[var(--surface-subtle)] ${
               index === 0 || item.title.includes("Agentic AI Architecture") ? "md:col-span-2" : ""
             }`}
           >
+            <ProjectVisual
+              kind={item.visualKind}
+              title={item.title}
+              category={item.category}
+              index={index + 1}
+            />
             <div className="flex items-start justify-between gap-6">
               <p className="font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted-soft)]">
                 {String(index + 1).padStart(2, "0")}
@@ -100,7 +110,10 @@ const PortfolioClient = () => {
             >
               {item.description}
             </p>
-          </article>
+            <p className="mt-8 font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted-strong)] transition-opacity group-hover:opacity-50">
+              Open Case Study
+            </p>
+          </Link>
         ))}
       </div>
     </>
