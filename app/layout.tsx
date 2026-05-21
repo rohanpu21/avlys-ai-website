@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import StructuredData from "./components/StructuredData";
 import "./globals.css";
 import { siteConfig } from "./lib/site";
@@ -120,6 +121,7 @@ export default function RootLayout({
       <body className="min-h-full bg-[var(--background)] text-[var(--foreground)]">
         <StructuredData data={organizationSchema} />
         {children}
+        <Analytics />
       </body>
     </html>
   );
