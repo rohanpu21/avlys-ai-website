@@ -16,6 +16,27 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/case-studies",
   },
+  openGraph: {
+    url: absoluteUrl("/case-studies"),
+    title: "AI Automation Case Studies | Avlys AI",
+    description:
+      "Explore Avlys AI case studies across AI calling agents, WhatsApp chatbots, marketplaces, ecommerce builds, websites, agentic systems, and automation workflows.",
+    images: [
+      {
+        url: absoluteUrl("/case-studies/opengraph-image"),
+        width: 1200,
+        height: 630,
+        alt: "Avlys AI case studies",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "AI Automation Case Studies | Avlys AI",
+    description:
+      "Explore Avlys AI case studies across AI calling agents, WhatsApp chatbots, marketplaces, ecommerce builds, websites, agentic systems, and automation workflows.",
+    images: [absoluteUrl("/case-studies/opengraph-image")],
+  },
 };
 
 const caseStudiesUrl = absoluteUrl("/case-studies");
