@@ -13,11 +13,12 @@ const Hero = () => {
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(280px,360px)] lg:items-end">
           <div>
             <h1 className="max-w-5xl font-mono text-[clamp(3rem,10vw,8.5rem)] font-light leading-[0.95]">
-              AI that works after launch.
+              AI automation agency in India.
             </h1>
             <p className="mt-8 max-w-2xl text-lg leading-8 text-[var(--muted)]">
-              Avlys AI builds custom chatbots, calling agents, automation systems, and tailored software
-              for businesses that need faster operations, cleaner handoffs, and fewer missed leads.
+              Avlys AI builds custom chatbots, AI calling agents, WhatsApp automation,
+              and tailored software for businesses that need faster operations, cleaner
+              handoffs, and fewer missed leads.
             </p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row">
               <a
@@ -39,8 +40,8 @@ const Hero = () => {
               Hyderabad and global
             </p>
             <p className="mt-4 text-sm leading-6 text-[var(--muted)]">
-              Strategy, architecture, build, integration, and post-launch support for AI-powered
-              operations.
+              Strategy, architecture, build, integration, and post-launch support for
+              AI-powered operations across India and global markets.
             </p>
             <div className="mt-6 grid gap-4">
               {proof.map((item) => (

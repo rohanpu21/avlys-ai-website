@@ -1,9 +1,9 @@
 import Link from "next/link";
 
 const navLinks = [
-  { label: "Process", href: "#process" },
-  { label: "Solutions", href: "#solutions" },
-  { label: "Portfolio", href: "#portfolio" },
+  { label: "Process", href: "/#process" },
+  { label: "Solutions", href: "/#solutions" },
+  { label: "Portfolio", href: "/portfolio" },
 ];
 
 const Navbar = () => {
@@ -23,19 +23,19 @@ const Navbar = () => {
               {link.label}
             </Link>
           ))}
-          <a
-            href="#contact"
+          <Link
+            href="/#contact"
             className="border border-[var(--border-strong)] px-4 py-2 font-mono text-xs uppercase tracking-[0.18em] transition-colors hover:bg-[var(--surface-hover)]"
           >
             Book Strategy Call
-          </a>
+          </Link>
         </div>
-        <a
-          href="#contact"
+        <Link
+          href="/#contact"
           className="border border-[var(--border-strong)] px-3 py-2 font-mono text-xs uppercase tracking-[0.18em] md:hidden"
         >
           Book Call
-        </a>
+        </Link>
       </nav>
     </header>
   );
