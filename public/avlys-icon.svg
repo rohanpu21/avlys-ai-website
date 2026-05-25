@@ -1,0 +1,49 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Avlys AI logo</title>
+  <desc id="desc">Avlys logo with blue dotted fields, white AV mark, and small LYS letters.</desc>
+  <rect width="512" height="512" fill="#000000"/>
+  <defs>
+    <radialGradient id="leftGlow" cx="48%" cy="48%" r="58%">
+      <stop offset="0%" stop-color="#3c46ff"/>
+      <stop offset="58%" stop-color="#302df0"/>
+      <stop offset="100%" stop-color="#161152"/>
+    </radialGradient>
+    <radialGradient id="rightGlow" cx="46%" cy="50%" r="58%">
+      <stop offset="0%" stop-color="#4658ff"/>
+      <stop offset="56%" stop-color="#3439ff"/>
+      <stop offset="100%" stop-color="#121044"/>
+    </radialGradient>
+    <pattern id="dots" width="10" height="10" patternUnits="userSpaceOnUse">
+      <circle cx="5" cy="5" r="2.1" fill="#5962ff"/>
+    </pattern>
+    <mask id="leftDisc">
+      <rect width="512" height="512" fill="black"/>
+      <circle cx="218" cy="263" r="152" fill="white"/>
+    </mask>
+    <mask id="rightDisc">
+      <rect width="512" height="512" fill="black"/>
+      <circle cx="327" cy="263" r="147" fill="white"/>
+    </mask>
+  </defs>
+  <g mask="url(#leftDisc)" opacity="0.82">
+    <circle cx="218" cy="263" r="152" fill="url(#leftGlow)"/>
+    <rect x="62" y="108" width="312" height="312" fill="url(#dots)"/>
+  </g>
+  <g mask="url(#rightDisc)" opacity="0.88">
+    <circle cx="327" cy="263" r="147" fill="url(#rightGlow)"/>
+    <rect x="176" y="112" width="302" height="302" fill="url(#dots)"/>
+  </g>
+  <path
+    d="M148 354 L229 178 L284 354 M319 179 L377 354 L473 179"
+    fill="none"
+    stroke="#ffffff"
+    stroke-width="9"
+    stroke-linecap="square"
+    stroke-linejoin="miter"
+  />
+  <g fill="#f0f1ff" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="400">
+    <text x="235" y="297" text-anchor="middle">L</text>
+    <text x="317" y="297" text-anchor="middle">Y</text>
+    <text x="396" y="297" text-anchor="middle">S</text>
+  </g>
+</svg>

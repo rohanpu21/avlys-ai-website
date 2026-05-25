@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import StructuredData from "./components/StructuredData";
 import "./globals.css";
-import { siteConfig } from "./lib/site";
+import { absoluteUrl, siteConfig } from "./lib/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,6 +17,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   applicationName: siteConfig.name,
+  manifest: "/site.webmanifest",
   title: {
     default: "Avlys AI | AI Automation Agency India",
     template: "%s | Avlys AI",
@@ -28,6 +29,18 @@ export const metadata: Metadata = {
   publisher: siteConfig.name,
   alternates: {
     canonical: "/",
+  },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/avlys-icon.svg", type: "image/svg+xml" },
+      { url: "/avlys-icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/avlys-icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
   robots: {
     index: true,
@@ -63,6 +76,8 @@ const organizationSchema = {
       "@id": `${siteConfig.url}/#organization`,
       name: siteConfig.name,
       url: siteConfig.url,
+      logo: absoluteUrl("/avlys-icon-512.png"),
+      image: absoluteUrl("/avlys-logo.png"),
       email: siteConfig.email,
       telephone: siteConfig.phone,
       sameAs: siteConfig.socialLinks,
@@ -73,6 +88,8 @@ const organizationSchema = {
       "@id": `${siteConfig.url}/#professional-service`,
       name: siteConfig.name,
       url: siteConfig.url,
+      logo: absoluteUrl("/avlys-icon-512.png"),
+      image: absoluteUrl("/avlys-logo.png"),
       email: siteConfig.email,
       telephone: siteConfig.phone,
       areaServed: [
