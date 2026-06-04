@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { caseStudies } from "./data/caseStudies";
+import { blogPosts } from "./data/blogPosts";
 import { servicePages } from "./data/services";
 import { absoluteUrl } from "./lib/site";
 
@@ -42,6 +43,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "monthly" as const,
       priority: 0.85,
+    })),
+    {
+      url: absoluteUrl("/blog"),
+      lastModified: now,
+      changeFrequency: "daily" as const,
+      priority: 0.9,
+    },
+    ...blogPosts.map((post) => ({
+      url: absoluteUrl(`/blog/${post.slug}`),
+      lastModified: new Date(post.publishedAt),
+      changeFrequency: "monthly" as const,
+      priority: 0.75,
     })),
   ];
 }
