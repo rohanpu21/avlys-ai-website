@@ -1,42 +1,41 @@
 import Link from "next/link";
+import BookCallCta from "./BookCallCta";
 
 const navLinks = [
-  { label: "Process", href: "/#process" },
-  { label: "Solutions", href: "/#solutions" },
+  { label: "Services", href: "/services" },
   { label: "Case Studies", href: "/case-studies" },
-  { label: "Portfolio", href: "/portfolio" },
+  { label: "About", href: "/about" },
+  { label: "Insights", href: "/blog" },
+  { label: "Contact", href: "/contact" },
 ];
 
+// Global nav per DESIGN-apple.md: ultra-thin true-black bar, 12px links.
 const Navbar = () => {
   return (
-    <header className="sticky top-0 z-50 border-b border-[var(--border-subtle)] bg-[var(--background)]/95 backdrop-blur">
-      <nav className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-5">
-        <Link href="/" className="font-mono text-sm uppercase tracking-[0.2em] transition-opacity hover:opacity-50">
+    <header className="sticky top-0 z-50 bg-true-black text-on-dark">
+      <nav className="mx-auto flex h-11 w-full max-w-5xl items-center justify-between px-6">
+        <Link
+          href="/"
+          className="text-[14px] font-semibold tracking-tight transition-opacity hover:opacity-70"
+        >
           Avlys AI
         </Link>
-        <div className="hidden items-center gap-8 md:flex">
+        <div className="hidden items-center gap-7 md:flex">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm text-[var(--muted)] transition-opacity hover:opacity-50"
+              className="text-[12px] text-on-dark-muted transition-colors hover:text-on-dark"
             >
               {link.label}
             </Link>
           ))}
-          <Link
-            href="/#contact"
-            className="border border-[var(--border-strong)] px-4 py-2 font-mono text-xs uppercase tracking-[0.18em] transition-colors hover:bg-[var(--surface-hover)]"
-          >
-            Book Strategy Call
-          </Link>
         </div>
-        <Link
-          href="/#contact"
-          className="border border-[var(--border-strong)] px-3 py-2 font-mono text-xs uppercase tracking-[0.18em] md:hidden"
-        >
-          Book Call
-        </Link>
+        <BookCallCta
+          location="navbar"
+          label="Book a call"
+          className="!min-h-0 !px-4 !py-1.5 !text-[12px]"
+        />
       </nav>
     </header>
   );

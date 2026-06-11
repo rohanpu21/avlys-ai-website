@@ -1,47 +1,75 @@
 import type { MetadataRoute } from "next";
+import { blogPosts } from "./data/blog";
 import { caseStudies } from "./data/caseStudies";
 import { servicePages } from "./data/services";
 import { absoluteUrl } from "./lib/site";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
+// Honest lastModified dates: bump these when the corresponding content
+// actually changes (a `new Date()` on every build devalues the signal).
+const SITE_REDESIGN_DATE = new Date("2026-06-10");
+const CASE_STUDIES_UPDATED = new Date("2026-06-10");
 
+export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
       url: absoluteUrl("/"),
-      lastModified: now,
+      lastModified: SITE_REDESIGN_DATE,
       changeFrequency: "weekly",
       priority: 1,
     },
     {
-      url: absoluteUrl("/portfolio"),
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
       url: absoluteUrl("/services"),
-      lastModified: now,
+      lastModified: SITE_REDESIGN_DATE,
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
       url: absoluteUrl("/case-studies"),
-      lastModified: now,
+      lastModified: CASE_STUDIES_UPDATED,
       changeFrequency: "weekly",
       priority: 0.9,
     },
-    ...caseStudies.map((caseStudy) => ({
-      url: absoluteUrl(`/case-studies/${caseStudy.slug}`),
-      lastModified: now,
+    {
+      url: absoluteUrl("/portfolio"),
+      lastModified: CASE_STUDIES_UPDATED,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: absoluteUrl("/about"),
+      lastModified: SITE_REDESIGN_DATE,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: absoluteUrl("/contact"),
+      lastModified: SITE_REDESIGN_DATE,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: absoluteUrl("/blog"),
+      lastModified: SITE_REDESIGN_DATE,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    ...blogPosts.map((post) => ({
+      url: absoluteUrl(`/blog/${post.slug}`),
+      lastModified: new Date(post.updatedDate ?? post.publishedDate),
       changeFrequency: "monthly" as const,
       priority: 0.75,
     })),
     ...servicePages.map((service) => ({
       url: absoluteUrl(`/services/${service.slug}`),
-      lastModified: now,
+      lastModified: SITE_REDESIGN_DATE,
       changeFrequency: "monthly" as const,
       priority: 0.85,
+    })),
+    ...caseStudies.map((caseStudy) => ({
+      url: absoluteUrl(`/case-studies/${caseStudy.slug}`),
+      lastModified: CASE_STUDIES_UPDATED,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
     })),
   ];
 }

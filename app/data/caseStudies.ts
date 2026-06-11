@@ -22,14 +22,52 @@ export type CaseStudyDetail = {
 
 export type CaseStudy = PortfolioItem & CaseStudyDetail;
 
-const defaultProcess = [
-  "Mapped the user journey, operating workflow, and conversion or handoff points.",
-  "Defined the information architecture, system rules, and implementation plan.",
-  "Built the interface, integration layer, content structure, and launch-ready handoff.",
-  "Reviewed performance, responsiveness, QA issues, and post-launch support needs.",
-];
+const processByKind: Record<VisualKind, string[]> = {
+  website: [
+    "Audited the existing presence, audience, and the conversion paths that mattered.",
+    "Defined the information architecture, page structure, and content plan.",
+    "Built the responsive interface, lead capture, and on-page SEO foundations.",
+    "Tested performance and responsiveness, then handed over with documentation.",
+  ],
+  commerce: [
+    "Mapped the catalog, checkout flow, and the trust points buyers need before paying.",
+    "Designed the storefront structure, product presentation, and merchandising sections.",
+    "Built the catalog, cart, checkout, and payment integration with speed work included.",
+    "Verified the purchase flow end to end and set up the store for ongoing campaigns.",
+  ],
+  marketplace: [
+    "Mapped every role - customers, vendors, admins - and the rules connecting them.",
+    "Designed the data model, matching or listing logic, and payment/commission flows.",
+    "Built the portals, onboarding, order management, and admin controls.",
+    "Stress-tested the role workflows and handed over with operating documentation.",
+  ],
+  "ai-system": [
+    "Audited the data sources, workflows, and constraints the system had to respect.",
+    "Designed the agent architecture: orchestration, state, grounding, and human checkpoints.",
+    "Built the pipelines, integrations, and evaluation harness around real cases.",
+    "Reviewed accuracy and failure modes, then documented the architecture for extension.",
+  ],
+  "voice-agent": [
+    "Defined call scenarios, qualification questions, escalation rules, and tone.",
+    "Designed the call flow with structured data capture and handoff points.",
+    "Connected telephony, scheduling, WhatsApp follow-up, and lead storage.",
+    "Tested edge cases - failed calls, transfers, after-hours - before go-live.",
+  ],
+  automation: [
+    "Mapped the manual workflow: where requests arrive, wait, and get dropped.",
+    "Designed the automation rules, routing logic, and approval gates with the team.",
+    "Built the flows, integrations, and logging so every action is traceable.",
+    "Monitored the first weeks of real usage and tuned rules against actual cases.",
+  ],
+  maintenance: [
+    "Audited the sites: versions, vulnerabilities, backup state, and performance.",
+    "Set the maintenance calendar: updates, backups, scans, and reporting cadence.",
+    "Ran the monthly cycle of patching, content updates, and performance fixes.",
+    "Reported the work done each month with issues found and actions taken.",
+  ],
+};
 
-const detailsBySlug: Record<string, CaseStudyDetail> = {
+const detailsBySlug: Record<string, Omit<CaseStudyDetail, "process">> = {
   "pooja-banvar-professional-business-website": {
     headline: "A polished professional website built to turn credibility into inbound inquiries.",
     context:
@@ -45,7 +83,6 @@ const detailsBySlug: Record<string, CaseStudyDetail> = {
       "A direct contact path for qualified inquiries.",
       "A maintainable content foundation for future updates.",
     ],
-    process: defaultProcess,
     visualKind: "website",
   },
   "saud-khan-freelance-developer-personal-website": {
@@ -63,7 +100,6 @@ const detailsBySlug: Record<string, CaseStudyDetail> = {
       "A lower-friction path from visitor interest to contact.",
       "A site structure that can grow with future case work.",
     ],
-    process: defaultProcess,
     visualKind: "website",
   },
   "darshan-thaker-b2b-engineering-cms-website": {
@@ -81,7 +117,6 @@ const detailsBySlug: Record<string, CaseStudyDetail> = {
       "More practical lead paths through maps and WhatsApp.",
       "Improved technical foundations for search and speed.",
     ],
-    process: defaultProcess,
     visualKind: "website",
   },
   "aniket-nikhade-high-performance-custom-website": {
@@ -99,7 +134,6 @@ const detailsBySlug: Record<string, CaseStudyDetail> = {
       "A stronger technical base for search engines.",
       "Better maintainability through CMS integration.",
     ],
-    process: defaultProcess,
     visualKind: "website",
   },
   "aqua-flight-luxury-yacht-services-rebuild": {
@@ -117,7 +151,6 @@ const detailsBySlug: Record<string, CaseStudyDetail> = {
       "A stronger foundation for search migration and service growth.",
       "A visual system better aligned with luxury expectations.",
     ],
-    process: defaultProcess,
     visualKind: "website",
   },
   "luis-orozco-casino-and-gaming-brand-website": {
@@ -135,7 +168,6 @@ const detailsBySlug: Record<string, CaseStudyDetail> = {
       "A clearer handoff from design into implementation.",
       "A launch process supported by structured QA.",
     ],
-    process: defaultProcess,
     visualKind: "website",
   },
   "alesonfoods-d2c-food-e-commerce-website": {
@@ -153,7 +185,6 @@ const detailsBySlug: Record<string, CaseStudyDetail> = {
       "A storefront structure ready for paid and organic traffic.",
       "A maintainable ecommerce base for future campaigns.",
     ],
-    process: defaultProcess,
     visualKind: "commerce",
   },
   "fat-cow-skincare-d2c-beauty-e-commerce-website": {
@@ -171,7 +202,6 @@ const detailsBySlug: Record<string, CaseStudyDetail> = {
       "Improved mobile browsing for D2C traffic.",
       "A structure that supports education-led conversion.",
     ],
-    process: defaultProcess,
     visualKind: "commerce",
   },
   "shopify-freelance-build-d2c-brand-store": {
@@ -189,7 +219,6 @@ const detailsBySlug: Record<string, CaseStudyDetail> = {
       "Better support for trust and upsell moments.",
       "A practical Shopify base for future changes.",
     ],
-    process: defaultProcess,
     visualKind: "commerce",
   },
   "multi-vendor-marketplace-platform": {
@@ -207,7 +236,6 @@ const detailsBySlug: Record<string, CaseStudyDetail> = {
       "A scalable foundation for commerce operations.",
       "Improved visibility over onboarding, orders, and commissions.",
     ],
-    process: defaultProcess,
     visualKind: "marketplace",
   },
   "ariana-lloyd-webflow-directory-platform": {
@@ -225,7 +253,6 @@ const detailsBySlug: Record<string, CaseStudyDetail> = {
       "Cleaner content operations through editorial CMS.",
       "A responsive system built from connected no-code tools.",
     ],
-    process: defaultProcess,
     visualKind: "marketplace",
   },
   "kristen-leaman-creator-and-brand-jobs-board": {
@@ -243,7 +270,6 @@ const detailsBySlug: Record<string, CaseStudyDetail> = {
       "Payment and CRM workflows connected to the platform.",
       "A practical base for marketplace validation.",
     ],
-    process: defaultProcess,
     visualKind: "marketplace",
   },
   "joanna-koh-client-vendor-service-platform": {
@@ -261,7 +287,6 @@ const detailsBySlug: Record<string, CaseStudyDetail> = {
       "Operational visibility for platform admins.",
       "A full-stack base for service marketplace growth.",
     ],
-    process: defaultProcess,
     visualKind: "marketplace",
   },
   "off-grid-modular-ai-ecosystem": {
@@ -279,7 +304,6 @@ const detailsBySlug: Record<string, CaseStudyDetail> = {
       "Connected retrieval, automation, and generation services.",
       "A system architecture that can be extended module by module.",
     ],
-    process: defaultProcess,
     visualKind: "ai-system",
   },
   "agentic-ai-architecture-and-engineering": {
@@ -297,7 +321,6 @@ const detailsBySlug: Record<string, CaseStudyDetail> = {
       "Defined checkpoints for human review and error handling.",
       "Reusable architecture patterns for advanced AI workflows.",
     ],
-    process: defaultProcess,
     visualKind: "ai-system",
   },
   "multi-agent-customer-support-system": {
@@ -315,7 +338,6 @@ const detailsBySlug: Record<string, CaseStudyDetail> = {
       "Defined agent roles for routing, retrieval, and response.",
       "A research-backed base for support automation implementation.",
     ],
-    process: defaultProcess,
     visualKind: "ai-system",
   },
   "ai-real-estate-voice-agent": {
@@ -333,7 +355,6 @@ const detailsBySlug: Record<string, CaseStudyDetail> = {
       "Structured notes for sales follow-up.",
       "A faster bridge from call interest to WhatsApp engagement.",
     ],
-    process: defaultProcess,
     visualKind: "voice-agent",
   },
   "lead-automation-suite": {
@@ -351,7 +372,6 @@ const detailsBySlug: Record<string, CaseStudyDetail> = {
       "Cleaner handoffs from intake to CRM.",
       "More consistent follow-up for not-ready prospects.",
     ],
-    process: defaultProcess,
     visualKind: "automation",
   },
   "whatsapp-chatbot-systems": {
@@ -369,7 +389,6 @@ const detailsBySlug: Record<string, CaseStudyDetail> = {
       "Faster brochure and information delivery.",
       "Cleaner routing from chat to sales or support.",
     ],
-    process: defaultProcess,
     visualKind: "automation",
   },
   "ngo-website-maintenance-dual-site-retainer": {
@@ -387,35 +406,35 @@ const detailsBySlug: Record<string, CaseStudyDetail> = {
       "Clearer visibility through reporting.",
       "A predictable support rhythm for ongoing website needs.",
     ],
-    process: defaultProcess,
     visualKind: "maintenance",
   },
 };
 
-const fallbackDetail = (item: PortfolioItem): CaseStudyDetail => ({
-  headline: `${item.title} delivered as a focused Avlys AI case study.`,
-  context: item.description,
-  challenge:
-    "The project needed a cleaner operating model, stronger digital presentation, and a launch-ready system that could be maintained after delivery.",
-  solution:
-    "Avlys mapped the requirements, designed the workflow and interface, built the system, and prepared the handoff for ongoing use.",
-  deliverables: [item.type, item.stack, "Responsive implementation", "Post-launch support"],
-  outcomes: [
-    "Clearer user journeys.",
-    "A stronger technical foundation.",
-    "More maintainable project structure.",
-    "A practical path for future iteration.",
-  ],
-  process: defaultProcess,
-  visualKind: "website",
+export const caseStudies: CaseStudy[] = portfolioItems.map((item) => {
+  const detail = detailsBySlug[item.slug];
+  if (!detail) {
+    throw new Error(`Missing case study detail for slug: ${item.slug}`);
+  }
+  return {
+    ...item,
+    ...detail,
+    process: processByKind[detail.visualKind],
+  };
 });
 
-export const caseStudies: CaseStudy[] = portfolioItems.map((item) => ({
-  ...item,
-  ...(detailsBySlug[item.slug] ?? fallbackDetail(item)),
-}));
+// Curated for the enterprise audience: platform and AI builds lead.
+const featuredSlugs = [
+  "multi-vendor-marketplace-platform",
+  "agentic-ai-architecture-and-engineering",
+  "joanna-koh-client-vendor-service-platform",
+  "ai-real-estate-voice-agent",
+  "kristen-leaman-creator-and-brand-jobs-board",
+  "aqua-flight-luxury-yacht-services-rebuild",
+];
 
-export const featuredCaseStudies = caseStudies.slice(0, 6);
+export const featuredCaseStudies = featuredSlugs
+  .map((slug) => caseStudies.find((caseStudy) => caseStudy.slug === slug))
+  .filter((caseStudy): caseStudy is CaseStudy => Boolean(caseStudy));
 
 export const getCaseStudy = (slug: string) =>
   caseStudies.find((caseStudy) => caseStudy.slug === slug);

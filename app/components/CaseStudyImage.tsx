@@ -21,7 +21,7 @@ const CaseStudyImage = ({
 
   return (
     <div
-      className={`relative aspect-[1200/630] overflow-hidden border border-[var(--border-subtle)] bg-[var(--surface-subtle)] ${className}`}
+      className={`relative aspect-[1200/630] overflow-hidden bg-parchment ${className}`}
     >
       <Image
         src={`/case-studies/${slug}/opengraph-image${query}`}

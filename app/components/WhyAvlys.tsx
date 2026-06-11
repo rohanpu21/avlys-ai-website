@@ -1,43 +1,49 @@
-const features = [
+import Reveal from "./Reveal";
+
+const commitments = [
   {
-    title: "Tailored Architecture",
-    description: "Not generic API wrappers. Every solution is custom-built for your business logic and data.",
+    title: "Fixed price before work begins",
+    description:
+      "Every phase is scoped and priced upfront. No open-ended billing, no surprise change orders.",
   },
   {
-    title: "Seamless Integration",
-    description: "Works with your CRM, ERP, website, WhatsApp, and existing tools with minimal disruption.",
+    title: "Senior engineers on every call",
+    description:
+      "The people who scope your project are the people who build it. No sales layer, no handoff chain.",
   },
   {
-    title: "Data Security",
-    description: "Designed around controlled access, privacy-aware workflows, and enterprise-ready handover.",
+    title: "Your IP, completely",
+    description:
+      "Source code, infrastructure, and documentation transfer to you. We work in your repos and cloud when you prefer.",
   },
   {
-    title: "Execution Ownership",
-    description: "From roadmap to build to support, Avlys AI focuses on systems your team can actually operate.",
+    title: "We don't leave after launch",
+    description:
+      "90 days of post-deploy tuning included on every build - real usage reviewed, edge cases fixed, team trained.",
   },
 ];
 
 const WhyAvlys = () => {
   return (
-    <section id="why" className="px-6 py-20 sm:py-28">
+    <section id="why" className="bg-canvas px-6 py-20">
       <div className="mx-auto w-full max-w-6xl">
-        <div className="max-w-2xl">
-          <p className="font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted-strong)]">
-            Why Avlys AI
-          </p>
-          <h2 className="mt-4 text-3xl font-light leading-tight sm:text-4xl">
-            We do not sell generic wrappers. We engineer operational advantages.
+        <Reveal className="mx-auto max-w-2xl text-center">
+          <h2 className="type-display-lg text-ink">
+            How we keep the risk on our side.
           </h2>
-        </div>
-        <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {features.map((feature) => (
-            <div
-              key={feature.title}
-              className="border border-[var(--border-subtle)] p-8 transition-colors hover:border-[var(--border-strong)]"
-            >
-              <h3 className="text-lg font-light">{feature.title}</h3>
-              <p className="mt-3 text-sm leading-6 text-[var(--muted)]">{feature.description}</p>
-            </div>
+        </Reveal>
+        <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          {commitments.map((commitment, index) => (
+            <Reveal key={commitment.title} delay={index * 0.05}>
+              <div className="h-full rounded-[18px] border border-hairline p-6">
+                <h3 className="text-[17px] font-semibold text-ink">
+                  {commitment.title}
+                </h3>
+                <p className="type-caption mt-3 text-ink-muted">
+                  {commitment.description}
+                </p>
+              </div>
+            </Reveal>
           ))}
         </div>
       </div>

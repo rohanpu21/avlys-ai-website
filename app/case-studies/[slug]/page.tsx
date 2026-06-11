@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import CallToAction from "../../components/CallToAction";
 import CaseStudyImage from "../../components/CaseStudyImage";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
-import ProjectVisual from "../../components/ProjectVisual";
 import StructuredData from "../../components/StructuredData";
 import { caseStudies, getCaseStudy } from "../../data/caseStudies";
 import { absoluteUrl, siteConfig } from "../../lib/site";
@@ -45,7 +45,6 @@ export async function generateMetadata({
       caseStudy.category,
       caseStudy.stack,
       "Avlys AI case study",
-      "AI automation case study",
     ],
     alternates: {
       canonical: path,
@@ -104,7 +103,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
         mainEntityOfPage: caseStudyUrl,
         articleSection: caseStudy.category,
         image: `${caseStudyUrl}/opengraph-image`,
-        inLanguage: "en-IN",
+        inLanguage: "en-US",
       },
       {
         "@type": "BreadcrumbList",
@@ -134,196 +133,129 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
   };
 
   return (
-    <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
+    <div className="min-h-screen bg-canvas text-ink">
       <StructuredData data={structuredData} />
       <Navbar />
       <main>
-        <section className="px-6 pt-20 sm:pt-28">
-          <div className="mx-auto grid w-full max-w-6xl gap-12 pb-16 lg:min-h-[calc(100vh-84px)] lg:grid-cols-[minmax(0,0.95fr)_minmax(420px,1.05fr)] lg:items-end">
-            <div>
-              <p className="font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted-strong)]">
-                {caseStudy.category}
-              </p>
-              <h1 className="mt-4 font-mono text-[clamp(2.75rem,8vw,6.4rem)] font-light leading-[0.95]">
-                {caseStudy.title}
-              </h1>
-              <p className="mt-8 max-w-2xl text-lg leading-8 text-[var(--muted)]">
-                {caseStudy.headline}
-              </p>
-              <div className="mt-8 grid gap-3 border-y border-[var(--border-subtle)] py-5 text-xs text-[var(--muted-strong)] sm:grid-cols-3">
-                <span>Type: {caseStudy.type}</span>
-                <span>Stack: {caseStudy.stack}</span>
-                <span>Market: {caseStudy.market}</span>
-              </div>
-            </div>
+        <section className="bg-canvas px-6 pb-16 pt-20 sm:pt-24">
+          <div className="mx-auto w-full max-w-4xl text-center">
+            <p className="type-caption-strong uppercase tracking-wide text-primary">
+              {caseStudy.category}
+            </p>
+            <h1 className="type-display-lg mt-4 text-ink">{caseStudy.title}</h1>
+            <p className="type-lead mx-auto mt-6 max-w-2xl text-ink-muted">
+              {caseStudy.headline}
+            </p>
+            <p className="type-caption mt-6 text-ink-faint">
+              {caseStudy.type} · {caseStudy.stack} · {caseStudy.market}
+            </p>
+          </div>
+          <div className="mx-auto mt-12 w-full max-w-5xl overflow-hidden rounded-[18px] border border-hairline">
             <CaseStudyImage
               slug={caseStudy.slug}
               title={caseStudy.title}
               priority
-              sizes="(min-width: 1024px) 50vw, 100vw"
+              sizes="(min-width: 1024px) 64rem, 100vw"
             />
           </div>
         </section>
 
-        <section className="px-6 py-20 sm:py-28">
-          <div className="mx-auto grid w-full max-w-6xl gap-6 lg:grid-cols-3">
+        <section className="bg-parchment px-6 py-16">
+          <div className="mx-auto grid w-full max-w-6xl gap-5 lg:grid-cols-3">
             {[
               ["Context", caseStudy.context],
               ["Challenge", caseStudy.challenge],
               ["Solution", caseStudy.solution],
             ].map(([label, copy]) => (
-              <article key={label} className="border border-[var(--border-subtle)] p-8">
-                <p className="font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted-strong)]">
+              <article key={label} className="rounded-[18px] border border-hairline bg-canvas p-7">
+                <p className="type-caption-strong uppercase tracking-wide text-primary">
                   {label}
                 </p>
-                <p className="mt-6 text-sm leading-7 text-[var(--muted)]">{copy}</p>
+                <p className="mt-4 text-[15px] leading-relaxed text-ink-muted">{copy}</p>
               </article>
             ))}
           </div>
         </section>
 
-        <section className="px-6 py-20 sm:py-28">
-          <div className="mx-auto grid w-full max-w-6xl gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+        <section className="bg-canvas px-6 py-16">
+          <div className="mx-auto grid w-full max-w-6xl gap-12 lg:grid-cols-2">
             <div>
-              <p className="font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted-strong)]">
-                Visual Proof
-              </p>
-              <h2 className="mt-4 text-3xl font-light leading-tight sm:text-4xl">
-                A designed view of the system Avlys delivered.
-              </h2>
-              <p className="mt-6 max-w-md text-sm leading-6 text-[var(--muted)]">
-                These visuals are clean representative mockups of the project
-                system, not fabricated client screenshots. Real labels and
-                project context stay in HTML for quality and accessibility.
-              </p>
+              <h2 className="type-display-lg text-ink">Delivered.</h2>
+              <div className="mt-8 flex flex-col gap-3">
+                {caseStudy.deliverables.map((deliverable) => (
+                  <div
+                    key={deliverable}
+                    className="flex items-start gap-4 rounded-[11px] border border-hairline p-4"
+                  >
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                    <p className="text-[15px] leading-relaxed text-ink-muted">{deliverable}</p>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div className="grid gap-6">
-              <CaseStudyImage
-                slug={caseStudy.slug}
-                title={`${caseStudy.title} system view`}
-                sizes="(min-width: 1024px) 58vw, 100vw"
-                variant="system"
-              />
-              <div className="grid gap-6 md:grid-cols-2">
-                <ProjectVisual
-                  kind={caseStudy.visualKind}
-                  title={`${caseStudy.title} detail view`}
-                  category="Detail View"
-                  index={3}
-                  compact
-                />
-                <ProjectVisual
-                  kind={caseStudy.visualKind}
-                  title={`${caseStudy.title} workflow view`}
-                  category="Workflow View"
-                  index={4}
-                  compact
-                />
+            <div>
+              <h2 className="type-display-lg text-ink">Outcomes.</h2>
+              <div className="mt-8 flex flex-col gap-3">
+                {caseStudy.outcomes.map((outcome) => (
+                  <div
+                    key={outcome}
+                    className="flex items-start gap-4 rounded-[11px] border border-hairline p-4"
+                  >
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                    <p className="text-[15px] leading-relaxed text-ink-muted">{outcome}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
         </section>
 
-        <section className="px-6 py-20 sm:py-28">
-          <div className="mx-auto grid w-full max-w-6xl gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-            <div>
-              <p className="font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted-strong)]">
-                Scope
-              </p>
-              <h2 className="mt-4 text-3xl font-light leading-tight sm:text-4xl">
-                What was delivered.
-              </h2>
-            </div>
-            <div className="grid border border-[var(--border-subtle)]">
-              {caseStudy.deliverables.map((deliverable, index) => (
-                <div
-                  key={deliverable}
-                  className="grid gap-4 border-b border-[var(--border-subtle)] p-6 last:border-b-0 sm:grid-cols-[120px_1fr]"
-                >
-                  <p className="font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted-soft)]">
+        <section className="on-dark bg-tile-1 px-6 py-16 text-on-dark">
+          <div className="mx-auto w-full max-w-6xl">
+            <h2 className="type-display-lg text-center">How it was built.</h2>
+            <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+              {caseStudy.process.map((step, index) => (
+                <div key={step} className="rounded-[18px] bg-tile-3 p-6">
+                  <span className="type-caption-strong text-primary-on-dark">
                     {String(index + 1).padStart(2, "0")}
-                  </p>
-                  <p className="text-sm leading-6 text-[var(--muted)]">{deliverable}</p>
+                  </span>
+                  <p className="type-caption mt-3 text-on-dark-muted">{step}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        <section className="px-6 py-20 sm:py-28">
-          <div className="mx-auto grid w-full max-w-6xl gap-10 lg:grid-cols-2">
-            <div>
-              <p className="font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted-strong)]">
-                Process
-              </p>
-              <div className="mt-8 grid border border-[var(--border-subtle)]">
-                {caseStudy.process.map((step, index) => (
-                  <div
-                    key={step}
-                    className="border-b border-[var(--border-subtle)] p-6 last:border-b-0"
-                  >
-                    <p className="font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted-soft)]">
-                      Step {String(index + 1).padStart(2, "0")}
-                    </p>
-                    <p className="mt-4 text-sm leading-6 text-[var(--muted)]">{step}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div>
-              <p className="font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted-strong)]">
-                Outcomes
-              </p>
-              <div className="mt-8 grid border border-[var(--border-subtle)]">
-                {caseStudy.outcomes.map((outcome, index) => (
-                  <div
-                    key={outcome}
-                    className="border-b border-[var(--border-subtle)] p-6 last:border-b-0"
-                  >
-                    <p className="font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted-soft)]">
-                      Outcome {String(index + 1).padStart(2, "0")}
-                    </p>
-                    <p className="mt-4 text-sm leading-6 text-[var(--muted)]">{outcome}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
         {related.length > 0 && (
-          <section className="px-6 py-20 sm:py-28">
+          <section className="bg-parchment px-6 py-16">
             <div className="mx-auto w-full max-w-6xl">
-              <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-                <div>
-                  <p className="font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted-strong)]">
-                    Related Work
-                  </p>
-                  <h2 className="mt-4 text-3xl font-light leading-tight sm:text-4xl">
-                    More case studies in this direction.
-                  </h2>
-                </div>
+              <div className="flex flex-wrap items-end justify-between gap-4">
+                <h2 className="type-display-lg text-ink">Related work.</h2>
                 <Link
                   href="/case-studies"
-                  className="w-fit border border-[var(--border-strong)] px-6 py-3 font-mono text-xs uppercase tracking-[0.2em] transition-colors hover:bg-[var(--surface-hover)]"
+                  className="text-[17px] text-primary transition-opacity hover:opacity-70"
                 >
-                  View All Studies
+                  All case studies &rarr;
                 </Link>
               </div>
-              <div className="mt-10 grid gap-6 md:grid-cols-3">
+              <div className="mt-10 grid gap-5 md:grid-cols-3">
                 {related.map((item) => (
                   <Link
                     key={item.slug}
                     href={`/case-studies/${item.slug}`}
-                    className="group border border-[var(--border-subtle)] p-4 transition-colors hover:border-[var(--border-strong)] hover:bg-[var(--surface-subtle)]"
+                    className="overflow-hidden rounded-[18px] border border-hairline bg-canvas transition-colors hover:border-ink-faint"
                   >
                     <CaseStudyImage
                       slug={item.slug}
                       title={item.title}
                       sizes="(min-width: 768px) 30vw, 100vw"
                     />
-                    <h3 className="mt-6 text-lg font-light leading-snug">{item.title}</h3>
-                    <p className="mt-3 text-sm leading-6 text-[var(--muted)]">{item.headline}</p>
+                    <div className="p-5">
+                      <h3 className="text-[17px] font-semibold leading-snug text-ink">
+                        {item.title}
+                      </h3>
+                      <p className="type-caption mt-2 text-ink-muted">{item.headline}</p>
+                    </div>
                   </Link>
                 ))}
               </div>
@@ -331,24 +263,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
           </section>
         )}
 
-        <section className="px-6 py-20 sm:py-28">
-          <div className="mx-auto grid w-full max-w-6xl gap-8 border border-[var(--border-strong)] bg-[var(--surface-subtle)] p-10 sm:p-12 lg:grid-cols-[1fr_auto] lg:items-center">
-            <div>
-              <p className="font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted-strong)]">
-                Build With Avlys
-              </p>
-              <h2 className="mt-4 max-w-3xl text-3xl font-light leading-tight sm:text-4xl">
-                Need a system like this for your business?
-              </h2>
-            </div>
-            <Link
-              href="/#contact"
-              className="w-fit bg-[var(--foreground)] px-6 py-3 font-mono text-xs uppercase tracking-[0.2em] text-[var(--background)] transition-opacity hover:opacity-90"
-            >
-              Map My Workflow
-            </Link>
-          </div>
-        </section>
+        <CallToAction />
       </main>
       <Footer />
     </div>

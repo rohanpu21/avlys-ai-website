@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import CallToAction from "../components/CallToAction";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import StructuredData from "../components/StructuredData";
@@ -8,18 +9,18 @@ import PortfolioClient from "./PortfolioClient";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "AI Automation Portfolio - Chatbots, Calling Agents & Custom Platforms | Avlys AI",
+    absolute: "Portfolio - Platforms, AI Systems & Custom Software | Avlys AI",
   },
   description:
-    "Browse Avlys AI case-study proof across AI calling agents, WhatsApp chatbots, agentic systems, automation workflows, e-commerce builds, marketplaces, and custom software.",
+    "Browse delivered Avlys AI projects: marketplaces, AI agent systems, automation workflows, e-commerce builds, and custom software for Indian and US clients.",
   alternates: {
     canonical: "/portfolio",
   },
   openGraph: {
     url: absoluteUrl("/portfolio"),
-    title: "AI Automation Portfolio - Avlys AI",
+    title: "Portfolio - Platforms, AI Systems & Custom Software | Avlys AI",
     description:
-      "AI calling agents, WhatsApp chatbots, automation workflows, and custom platforms delivered for Indian and international clients.",
+      "Delivered projects: marketplaces, AI agent systems, automation workflows, e-commerce builds, and custom software.",
   },
 };
 
@@ -32,13 +33,13 @@ const structuredData = {
       "@type": "CollectionPage",
       "@id": `${portfolioUrl}#webpage`,
       url: portfolioUrl,
-      name: "AI Automation Portfolio - Avlys AI",
+      name: "Portfolio - Avlys AI",
       description:
-        "A portfolio of AI automation, chatbot, calling agent, marketplace, website, and custom software projects from Avlys AI.",
+        "A portfolio of platforms, AI systems, automation, marketplace, commerce, and website projects from Avlys AI.",
       isPartOf: {
         "@id": `${siteConfig.url}/#website`,
       },
-      inLanguage: "en-IN",
+      inLanguage: "en-US",
     },
     {
       "@type": "ItemList",
@@ -74,14 +75,15 @@ const structuredData = {
 
 export default function PortfolioPage() {
   return (
-    <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
+    <div className="min-h-screen bg-canvas text-ink">
       <StructuredData data={structuredData} />
       <Navbar />
-      <main className="px-6 py-20 sm:py-28">
+      <main className="px-6 py-20 sm:py-24">
         <div className="mx-auto w-full max-w-6xl">
           <PortfolioClient />
         </div>
       </main>
+      <CallToAction />
       <Footer />
     </div>
   );

@@ -1,54 +1,68 @@
+import Reveal from "./Reveal";
+
 const steps = [
   {
-    title: "Roadmap",
-    description: "Identify the workflow, data sources, response rules, success criteria, and fastest launch path.",
+    number: "01",
+    title: "Audit",
+    detail:
+      "We map your systems, data, and the workflow you want to change - and agree the success metric before anything is built.",
+    artifacts: "System map · Data review · Success criteria",
   },
   {
-    title: "Architecture",
-    description: "Design the agent, chatbot, automation, or software system around your business logic.",
+    number: "02",
+    title: "Pilot",
+    detail:
+      "A fixed-price, fixed-scope working system in 4-6 weeks, tested against real cases. Working software, not a slide deck.",
+    artifacts: "Working pilot · Evaluation results · Production plan",
   },
   {
-    title: "Build",
-    description: "Ship the working interface, integrations, handoffs, dashboards, and operator controls.",
+    number: "03",
+    title: "Integrate",
+    detail:
+      "Wired into your stack - CRM, ERP, telephony, internal tools - with access controls, logging, and human-review checkpoints.",
+    artifacts: "Integrations · Audit controls · Runbook",
   },
   {
-    title: "Optimize",
-    description: "Review usage, tighten prompts and flows, document operations, and support post-launch changes.",
+    number: "04",
+    title: "Scale",
+    detail:
+      "90 days of post-deploy tuning included. We review real usage, fix edge cases, and hand over a system your team operates.",
+    artifacts: "Usage reviews · Documentation · Handover",
   },
 ];
 
 const Process = () => {
   return (
-    <section className="px-6 py-20 sm:py-28">
+    <section id="process" className="bg-parchment px-6 py-20">
       <div className="mx-auto w-full max-w-6xl">
-        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-          <div>
-            <p className="font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted-strong)]">
-              Build Process
-            </p>
-            <h2 className="mt-4 text-3xl font-light leading-tight sm:text-4xl">
-              A practical path from messy workflow to running system.
-            </h2>
-            <p className="mt-6 max-w-sm text-sm leading-6 text-[var(--muted)]">
-              The goal is not a demo. The goal is a handoff your operators can trust after the first week.
-            </p>
-          </div>
-          <div className="grid border border-[var(--border-subtle)]">
-            {steps.map((step, index) => (
-              <div
-                key={step.title}
-                className="grid gap-4 border-b border-[var(--border-subtle)] p-6 last:border-b-0 sm:grid-cols-[120px_1fr]"
-              >
-                <p className="font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted-soft)]">
-                  0{index + 1}
+        <Reveal className="mx-auto max-w-2xl text-center">
+          <h2 className="type-display-lg text-ink">
+            Fixed scope. Working software. No discovery-phase theater.
+          </h2>
+          <p className="type-lead-airy mt-4 text-ink-muted">
+            Every engagement follows the same four steps, and you know the
+            price before each one begins.
+          </p>
+        </Reveal>
+        <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          {steps.map((step, index) => (
+            <Reveal key={step.number} delay={index * 0.05}>
+              <div className="flex h-full flex-col rounded-[18px] border border-hairline bg-canvas p-6">
+                <span className="type-caption-strong text-primary">
+                  {step.number}
+                </span>
+                <h3 className="mt-2 text-[17px] font-semibold text-ink">
+                  {step.title}
+                </h3>
+                <p className="type-caption mt-3 flex-1 text-ink-muted">
+                  {step.detail}
                 </p>
-                <div>
-                  <h3 className="text-xl font-light">{step.title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-[var(--muted)]">{step.description}</p>
-                </div>
+                <p className="type-fine-print mt-4 text-ink-faint">
+                  {step.artifacts}
+                </p>
               </div>
-            ))}
-          </div>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>

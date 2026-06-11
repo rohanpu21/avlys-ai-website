@@ -2,6 +2,7 @@
 
 import type { ChangeEvent, FormEvent } from "react";
 import { useState } from "react";
+import posthog from "posthog-js";
 
 type FormStatus = "idle" | "loading" | "success" | "error";
 
@@ -10,7 +11,9 @@ type LeadFormState = {
   email: string;
   phone: string;
   company: string;
+  projectType: string;
   message: string;
+  website: string; // honeypot - humans never see or fill this
 };
 
 const initialState: LeadFormState = {
@@ -18,15 +21,32 @@ const initialState: LeadFormState = {
   email: "",
   phone: "",
   company: "",
+  projectType: "",
   message: "",
+  website: "",
 };
+
+const projectTypes = [
+  "AI integration into existing systems",
+  "Custom software build",
+  "AI agents / automation",
+  "AI consulting / readiness assessment",
+  "Something else",
+];
+
+const inputClass =
+  "w-full rounded-[11px] border border-hairline bg-canvas px-4 py-3 text-[15px] text-ink placeholder:text-ink-faint focus:border-primary-focus focus:outline-none";
+
+const labelClass = "grid gap-1.5 text-[13px] font-semibold text-ink-muted";
 
 const LeadCaptureForm = () => {
   const [formState, setFormState] = useState<LeadFormState>(initialState);
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     const { name, value } = event.target;
     setFormState((prev) => ({ ...prev, [name]: value }));
   };
@@ -47,7 +67,9 @@ const LeadCaptureForm = () => {
           email: formState.email.trim(),
           phone: formState.phone.trim(),
           company: formState.company.trim(),
+          projectType: formState.projectType,
           message: formState.message.trim(),
+          website: formState.website,
           source: "website",
         }),
       });
@@ -57,6 +79,10 @@ const LeadCaptureForm = () => {
         throw new Error(payload?.error || "Something went wrong. Please try again.");
       }
 
+      posthog.capture("lead_submitted", {
+        project_type: formState.projectType,
+        has_company: Boolean(formState.company.trim()),
+      });
       setFormState(initialState);
       setStatus("success");
     } catch (error) {
@@ -69,73 +95,108 @@ const LeadCaptureForm = () => {
   return (
     <form onSubmit={handleSubmit} className="grid gap-4">
       <div className="grid gap-4 sm:grid-cols-2">
-        <label className="grid gap-2 text-xs uppercase tracking-[0.16em] text-[var(--muted-strong)]">
+        <label className={labelClass}>
           Name
           <input
             name="name"
-            value={formState.name ?? ""}
+            value={formState.name}
             onChange={handleChange}
             required
-            className="w-full border border-[var(--border-subtle)] bg-transparent px-4 py-3 text-sm text-[var(--foreground)] focus:border-[var(--border-strong)] focus:outline-none"
+            autoComplete="name"
+            className={inputClass}
           />
         </label>
-        <label className="grid gap-2 text-xs uppercase tracking-[0.16em] text-[var(--muted-strong)]">
-          Email
+        <label className={labelClass}>
+          Work email
           <input
             name="email"
             type="email"
-            value={formState.email ?? ""}
+            value={formState.email}
             onChange={handleChange}
             required
-            className="w-full border border-[var(--border-subtle)] bg-transparent px-4 py-3 text-sm text-[var(--foreground)] focus:border-[var(--border-strong)] focus:outline-none"
+            autoComplete="email"
+            className={inputClass}
           />
         </label>
       </div>
-      <label className="grid gap-2 text-xs uppercase tracking-[0.16em] text-[var(--muted-strong)]">
-        Mobile Number
-        <input
-          name="phone"
-          type="tel"
-          value={formState.phone ?? ""}
+      <div className="grid gap-4 sm:grid-cols-2">
+        <label className={labelClass}>
+          Company
+          <input
+            name="company"
+            value={formState.company}
+            onChange={handleChange}
+            autoComplete="organization"
+            className={inputClass}
+          />
+        </label>
+        <label className={labelClass}>
+          Phone (optional)
+          <input
+            name="phone"
+            type="tel"
+            value={formState.phone}
+            onChange={handleChange}
+            autoComplete="tel"
+            className={inputClass}
+          />
+        </label>
+      </div>
+      <label className={labelClass}>
+        What do you need?
+        <select
+          name="projectType"
+          value={formState.projectType}
           onChange={handleChange}
           required
-          className="w-full border border-[var(--border-subtle)] bg-transparent px-4 py-3 text-sm text-[var(--foreground)] focus:border-[var(--border-strong)] focus:outline-none"
-        />
+          className={inputClass}
+        >
+          <option value="" disabled>
+            Select one
+          </option>
+          {projectTypes.map((type) => (
+            <option key={type} value={type}>
+              {type}
+            </option>
+          ))}
+        </select>
       </label>
-      <label className="grid gap-2 text-xs uppercase tracking-[0.16em] text-[var(--muted-strong)]">
-        Company (Optional)
-        <input
-          name="company"
-          value={formState.company ?? ""}
-          onChange={handleChange}
-          className="w-full border border-[var(--border-subtle)] bg-transparent px-4 py-3 text-sm text-[var(--foreground)] focus:border-[var(--border-strong)] focus:outline-none"
-        />
-      </label>
-      <label className="grid gap-2 text-xs uppercase tracking-[0.16em] text-[var(--muted-strong)]">
-        Project Details
+      <label className={labelClass}>
+        Project details
         <textarea
           name="message"
-          value={formState.message ?? ""}
+          value={formState.message}
           onChange={handleChange}
           required
           rows={4}
-          className="w-full border border-[var(--border-subtle)] bg-transparent px-4 py-3 text-sm text-[var(--foreground)] focus:border-[var(--border-strong)] focus:outline-none"
+          placeholder="The workflow or system, what you want it to do, and any timeline."
+          className={inputClass}
         />
       </label>
+      <input
+        type="text"
+        name="website"
+        value={formState.website}
+        onChange={handleChange}
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="hidden"
+      />
       <button
         type="submit"
         disabled={status === "loading"}
-        className="bg-[var(--foreground)] px-6 py-3 text-center font-mono text-xs uppercase tracking-[0.2em] text-[var(--background)] transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+        className="btn-pill-primary disabled:cursor-not-allowed disabled:opacity-60"
       >
-        {status === "loading" ? "Sending..." : "Submit Request"}
+        {status === "loading" ? "Sending..." : "Send project details"}
       </button>
       {status === "success" && (
-        <p className="text-sm text-[var(--muted-strong)]">
-          Thanks! We will get back to you within 24 hours.
+        <p className="text-[15px] text-ink">
+          Thanks - we&rsquo;ll reply within one business day.
         </p>
       )}
       {status === "error" && (
-        <p className="text-sm text-red-400">{errorMessage}</p>
+        <p className="text-[15px] text-red-600">{errorMessage}</p>
       )}
     </form>
   );

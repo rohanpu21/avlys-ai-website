@@ -1,3 +1,14 @@
+export type ServiceCapability = {
+  title: string;
+  description: string;
+};
+
+export type ServiceWorkflowStep = {
+  title: string;
+  detail: string;
+  artifacts: string[];
+};
+
 export type ServicePage = {
   slug: string;
   title: string;
@@ -8,294 +19,457 @@ export type ServicePage = {
   h1: string;
   description: string;
   proof: string[];
+  capabilities: ServiceCapability[];
+  systems: string[];
   outcomes: string[];
-  workflow: string[];
+  workflow: ServiceWorkflowStep[];
   faqs: Array<{
     question: string;
     answer: string;
   }>;
 };
 
+const pilotWorkflow: ServiceWorkflowStep[] = [
+  {
+    title: "Audit",
+    detail:
+      "We map your current systems, data sources, and the workflow you want to change, then define the success metric with you before anything is built.",
+    artifacts: ["System map", "Data readiness review", "Success criteria document"],
+  },
+  {
+    title: "Pilot",
+    detail:
+      "A fixed-scope, fixed-price build of the core working loop in 4-6 weeks. Working software your team can test against real cases, not a slide deck.",
+    artifacts: ["Working pilot system", "Evaluation results", "Pilot-to-production plan"],
+  },
+  {
+    title: "Integrate",
+    detail:
+      "We wire the system into your stack - CRM, ERP, databases, telephony, internal tools - with access controls, logging, and human-review checkpoints.",
+    artifacts: ["Production integrations", "Access and audit controls", "Runbook"],
+  },
+  {
+    title: "Scale",
+    detail:
+      "90 days of post-deploy tuning are included. We review real usage, fix edge cases, and hand over a system your team can operate and extend.",
+    artifacts: ["Usage reviews", "Documentation", "Handover and training"],
+  },
+];
+
 export const servicePages: ServicePage[] = [
   {
-    slug: "ai-automation-agency-india",
-    title: "AI Automation Agency India",
-    metaTitle: "AI Automation Agency India | Avlys AI",
+    slug: "ai-integration",
+    title: "AI Integration",
+    metaTitle: "AI Integration Services for Enterprise Systems | Avlys AI",
     metaDescription:
-      "Avlys AI builds AI automation systems for Indian businesses: chatbots, calling agents, CRM workflows, lead routing, customer support automation, and custom software.",
+      "Embed AI into Salesforce, SAP, and custom apps without disrupting operations. RAG, copilots, AI agents - delivered by US + India teams. Fixed-price pilot scope.",
     keywords: [
-      "AI automation agency India",
-      "AI automation company India",
-      "AI automation agency Hyderabad",
-      "business automation India",
+      "AI integration services",
+      "integrate AI into existing software",
+      "enterprise AI integration",
+      "AI integration company",
     ],
-    eyebrow: "AI Automation Agency India",
-    h1: "AI automation systems for Indian businesses.",
+    eyebrow: "AI Integration Services",
+    h1: "AI built into the systems you already run.",
     description:
-      "Avlys AI maps manual workflows, designs AI agents around your business rules, and ships production-ready automation for sales, support, operations, and internal teams.",
-    proof: ["Hyderabad-based", "India and global delivery", "Strategy to post-launch support"],
+      "Most AI projects fail because they try to replace working systems instead of extending them. We embed AI capability - retrieval, reasoning, automation - into your existing ERP, CRM, and custom applications, so your team keeps the tools and data they know.",
+    proof: ["No rip-and-replace", "Fixed-scope pilots", "90-day post-deploy tuning"],
+    capabilities: [
+      {
+        title: "Retrieval-augmented generation (RAG)",
+        description:
+          "LLM answers grounded in your documents, policies, tickets, and databases - with citations, access control, and evaluation suites so answers stay accurate.",
+      },
+      {
+        title: "Copilots inside existing tools",
+        description:
+          "Assistants embedded in the software your team already uses: drafting in your CRM, lookups in your ERP, summaries in your support desk.",
+      },
+      {
+        title: "Document and data pipelines",
+        description:
+          "Extraction, classification, and routing for invoices, contracts, claims, and emails - structured output written back into your systems of record.",
+      },
+      {
+        title: "API and middleware integration",
+        description:
+          "Model providers (OpenAI, Anthropic, open-source) connected to your stack through a maintainable service layer with logging, fallbacks, and cost controls.",
+      },
+    ],
+    systems: [
+      "Salesforce",
+      "SAP",
+      "HubSpot",
+      "NetSuite",
+      "ServiceNow",
+      "Zendesk",
+      "PostgreSQL",
+      "Legacy ERPs",
+      "Internal tools",
+    ],
     outcomes: [
-      "Faster lead response across website, WhatsApp, and phone channels.",
-      "Cleaner handoffs into CRM, spreadsheets, dashboards, and operator workflows.",
-      "Reusable systems your team can maintain instead of one-off demos.",
-      "Documented automation logic for sales, support, and operations.",
+      "AI features running inside your current stack instead of another disconnected tool.",
+      "Answers and automations grounded in your data, with citations and audit trails.",
+      "A measured pilot before any production commitment - success criteria agreed upfront.",
+      "An integration layer your engineers can maintain, documented and handed over.",
     ],
-    workflow: [
-      "Audit the workflow, data sources, handoff rules, and success criteria.",
-      "Design the chatbot, calling agent, integration flow, or custom platform architecture.",
-      "Build the interface, prompts, automations, CRM sync, and operator controls.",
-      "Launch, review real usage, and improve the system after deployment.",
-    ],
+    workflow: pilotWorkflow,
     faqs: [
       {
-        question: "What does an AI automation agency do?",
+        question: "Can you integrate AI without replacing our existing software?",
         answer:
-          "An AI automation agency identifies repeatable business workflows and builds AI agents, chatbots, integrations, and dashboards that complete or accelerate those workflows.",
+          "Yes - that is the core of what we do. We build an integration layer around your current ERP, CRM, or custom applications. Your systems of record stay where they are; AI reads from and writes to them through controlled APIs.",
       },
       {
-        question: "Does Avlys AI work with Indian businesses?",
+        question: "How do you keep our data secure?",
         answer:
-          "Yes. Avlys AI is based in Hyderabad and works with Indian and international clients across service, real estate, commerce, marketplace, and support workflows.",
+          "Engagements run under NDA. We design around least-privilege access, keep your data inside your cloud where possible, support private model deployments when required, and document every data flow before it ships.",
       },
       {
-        question: "What can be automated first?",
+        question: "What does a typical engagement look like?",
         answer:
-          "The fastest starting points are lead capture, follow-up, FAQ support, appointment booking, call qualification, WhatsApp responses, and CRM routing.",
+          "A fixed-price, fixed-scope pilot of 4-6 weeks that ships a working integration against one workflow, measured against success criteria we agree on in week one. If the pilot proves out, we move to production integration and scaling.",
+      },
+      {
+        question: "Which AI models do you work with?",
+        answer:
+          "OpenAI, Anthropic, Google, and open-source models, chosen per use case for accuracy, latency, cost, and data-residency requirements - not by default vendor preference.",
       },
     ],
   },
   {
-    slug: "ai-calling-agents",
-    title: "AI Calling Agents",
-    metaTitle: "AI Calling Agents for Lead Qualification | Avlys AI",
+    slug: "custom-software-development",
+    title: "Custom Software Development",
+    metaTitle: "Custom Software Development Services - USA & India | Avlys AI",
     metaDescription:
-      "Build AI calling agents for inbound calls, outbound qualification, appointment booking, reminders, and follow-ups with CRM and WhatsApp handoffs.",
+      "Web platforms, internal tools, and marketplaces built by senior engineers across the US and India. AI-native architecture, fixed-scope delivery, full IP transfer.",
     keywords: [
-      "AI calling agents",
-      "voice AI agent India",
-      "AI phone agent",
-      "AI appointment booking agent",
+      "custom software development company",
+      "custom software development USA India",
+      "web application development company",
+      "enterprise software development",
     ],
-    eyebrow: "AI Calling Agents",
-    h1: "Voice AI agents for leads, bookings, and follow-ups.",
+    eyebrow: "Custom Software Development",
+    h1: "Software built for your operation, not adapted to it.",
     description:
-      "Avlys AI builds calling agents that answer inbound inquiries, qualify prospects, collect requirements, schedule next steps, and pass structured notes to your team.",
-    proof: ["Inbound and outbound flows", "CRM-ready summaries", "WhatsApp handoffs"],
+      "Platforms, internal tools, marketplaces, and customer-facing products - designed around your workflows and built AI-native from the first commit. Senior engineers, US-hours communication, India build velocity, and full IP transfer on every engagement.",
+    proof: ["Senior engineers on every call", "Full IP transfer", "US + India delivery"],
+    capabilities: [
+      {
+        title: "Web platforms and portals",
+        description:
+          "Customer portals, vendor platforms, and multi-role systems with authentication, payments, dashboards, and admin control built in.",
+      },
+      {
+        title: "Internal tools and dashboards",
+        description:
+          "Operations consoles that replace the spreadsheet-and-email layer: order management, approvals, reporting, and team workflows.",
+      },
+      {
+        title: "Marketplaces and multi-vendor systems",
+        description:
+          "Onboarding, listings, matching, scheduling, escrow payments, reviews, and commission logic across customer, vendor, and admin roles.",
+      },
+      {
+        title: "Modernization with AI",
+        description:
+          "Rebuilding aging systems with AI capability designed in - search, extraction, and automation as architecture, not an afterthought.",
+      },
+    ],
+    systems: [
+      "Next.js",
+      "React",
+      "Node.js",
+      "Python",
+      "PostgreSQL",
+      "Supabase",
+      "Stripe",
+      "AWS",
+      "Vercel",
+    ],
     outcomes: [
-      "Lower missed-call leakage during peak hours and after business hours.",
-      "Consistent qualification questions for every prospect.",
-      "Call summaries, budget, timeline, and next action captured for sales teams.",
-      "Follow-up messages sent through WhatsApp, email, or CRM workflows.",
+      "A system shaped by your operating model instead of workarounds shaped by a template.",
+      "Production architecture: typed codebases, CI, staging environments, and documentation.",
+      "Transparent fixed-scope phases - you know the price before each phase begins.",
+      "Your code, your infrastructure, your IP - handed over completely.",
     ],
-    workflow: [
-      "Define call scenarios, qualification questions, escalation rules, and tone.",
-      "Connect telephony, calendar, CRM, WhatsApp, and lead storage systems.",
-      "Test edge cases, failed calls, transfer rules, and human handoff paths.",
-      "Monitor call outcomes and improve prompts after real conversations.",
-    ],
+    workflow: pilotWorkflow,
     faqs: [
       {
-        question: "Can an AI calling agent qualify real estate leads?",
+        question: "Who owns the code and IP?",
         answer:
-          "Yes. It can ask budget, location, timeline, property type, visit preference, and financing questions before routing qualified leads to the sales team.",
+          "You do, fully. Source code, infrastructure, designs, and documentation transfer to you. We work in your repositories and your cloud accounts whenever you prefer.",
       },
       {
-        question: "Can the voice agent transfer to a human?",
+        question: "How do you price projects?",
         answer:
-          "Yes. Transfer rules can be designed for urgent calls, high-intent leads, unsupported questions, or VIP customers.",
+          "Fixed scope, fixed price, phase by phase. Every engagement starts with a scoped first phase priced before work begins, so there is no open-ended billing surprise.",
       },
       {
-        question: "Does the calling agent store call notes?",
+        question: "How does the US + India model work?",
         answer:
-          "It can store structured summaries, tags, outcomes, call status, and next steps in a CRM, spreadsheet, database, or dashboard.",
+          "Senior engineers in India deliver the build; communication, demos, and decision meetings run on US-friendly hours. You get one accountable team, not a handoff chain.",
+      },
+      {
+        question: "Do you maintain software after launch?",
+        answer:
+          "Yes. Every build includes 90 days of post-deploy tuning, and we offer ongoing maintenance retainers covering updates, monitoring, fixes, and feature iterations.",
       },
     ],
   },
   {
-    slug: "whatsapp-ai-chatbots",
-    title: "WhatsApp AI Chatbots",
-    metaTitle: "WhatsApp AI Chatbot for Business | Avlys AI",
+    slug: "ai-agents",
+    title: "AI Agent Development",
+    metaTitle: "AI Agent Development Services | Avlys AI",
     metaDescription:
-      "Avlys AI builds WhatsApp AI chatbots for FAQs, brochures, lead capture, requirement collection, follow-up automation, and customer support.",
+      "Production AI agents for support, sales, voice, and operations - with orchestration, human-in-the-loop control, and your business rules. Fixed-scope pilots.",
     keywords: [
-      "WhatsApp AI chatbot",
-      "WhatsApp chatbot for business India",
-      "AI WhatsApp bot",
-      "WhatsApp automation agency",
+      "AI agent development company",
+      "AI agent development services",
+      "enterprise AI agents",
+      "multi-agent systems",
     ],
-    eyebrow: "WhatsApp AI Chatbots",
-    h1: "WhatsApp chatbots that qualify and route buyers.",
+    eyebrow: "AI Agent Development",
+    h1: "Agents that complete workflows, not just conversations.",
     description:
-      "Avlys AI designs WhatsApp automation for businesses that need faster replies, guided discovery, brochure delivery, requirement capture, and structured sales handoffs.",
-    proof: ["Lead capture", "FAQ automation", "Brochure and follow-up flows"],
+      "We design and ship AI agents that execute real business processes - qualifying leads, resolving support tickets, handling calls, processing documents - with the orchestration, state management, and human checkpoints that production systems require.",
+    proof: ["Human-in-the-loop by design", "Grounded answers only", "Production orchestration"],
+    capabilities: [
+      {
+        title: "Support and service agents",
+        description:
+          "Agents that answer from approved policies, retrieve order and account data, and escalate sensitive cases to your team with full context.",
+      },
+      {
+        title: "Sales and intake agents",
+        description:
+          "Qualification across web, chat, and voice: structured questions, scoring, CRM write-back, and routing to the right person with notes attached.",
+      },
+      {
+        title: "Voice agents",
+        description:
+          "Inbound and outbound calling agents that qualify, book, remind, and follow up - with transfer rules and structured call summaries.",
+      },
+      {
+        title: "Multi-agent orchestration",
+        description:
+          "LangGraph-style architectures with state management, error handling, evaluation suites, and observability - designed for operations teams, not demos.",
+      },
+    ],
+    systems: [
+      "LangGraph",
+      "OpenAI",
+      "Anthropic",
+      "CrewAI",
+      "Twilio",
+      "WhatsApp Business API",
+      "HubSpot",
+      "Salesforce",
+      "Custom CRMs",
+    ],
     outcomes: [
-      "Instant replies to common buyer and customer questions.",
-      "Structured requirement collection before human involvement.",
-      "Automated brochure, pricing, catalog, or booking links.",
-      "Clean routing to sales, support, or operations based on intent.",
+      "Agents constrained to your business rules, with escalation paths for everything else.",
+      "Structured data written back to your systems - not transcripts left in another inbox.",
+      "Evaluation and monitoring so you can see accuracy, coverage, and failure modes.",
+      "A system your operators control: prompts, rules, and knowledge sources they can update.",
     ],
-    workflow: [
-      "Map conversation paths for inquiries, FAQs, objections, and support cases.",
-      "Design response logic, knowledge sources, and qualification fields.",
-      "Connect WhatsApp API, CRM, lead sheets, forms, or internal tools.",
-      "Launch with analytics and iterate based on conversation data.",
-    ],
+    workflow: pilotWorkflow,
     faqs: [
       {
-        question: "What can a WhatsApp AI chatbot do?",
+        question: "How do you stop an agent from making things up?",
         answer:
-          "It can answer FAQs, collect customer requirements, share brochures, qualify leads, book appointments, trigger follow-ups, and route conversations to humans.",
+          "Grounding and constraint. Agents answer only from approved knowledge sources, cite what they used, refuse outside their scope, and escalate to humans on low confidence. We ship evaluation suites that measure this before and after launch.",
       },
       {
-        question: "Is WhatsApp automation useful for Indian businesses?",
+        question: "Can agents hand off to our team?",
         answer:
-          "Yes. Many Indian buyers already prefer WhatsApp for service inquiries, real estate discussions, D2C questions, and appointment coordination.",
+          "Yes - handoff is designed first, not bolted on. Urgency rules, confidence thresholds, VIP routing, and full-context transfer to your existing tools.",
       },
       {
-        question: "Can the chatbot connect to a CRM?",
+        question: "What channels can agents operate on?",
         answer:
-          "Yes. The bot can send qualified leads, tags, notes, and conversation summaries into a CRM, spreadsheet, database, or custom dashboard.",
+          "Web chat, WhatsApp, voice calls, email, and internal tools like Slack - usually starting with the single channel where you lose the most time or leads.",
+      },
+      {
+        question: "How long until a working agent?",
+        answer:
+          "A scoped pilot agent against one workflow typically ships in 4-6 weeks, including integration with your data sources and a measured evaluation against agreed success criteria.",
       },
     ],
   },
   {
-    slug: "custom-ai-chatbot-development",
-    title: "Custom AI Chatbot Development",
-    metaTitle: "Custom AI Chatbot Development Company India | Avlys AI",
+    slug: "ai-automation",
+    title: "AI Automation",
+    metaTitle: "AI Automation Services for Business Workflows | Avlys AI",
     metaDescription:
-      "Build custom AI chatbots for websites, WhatsApp, support portals, lead capture, onboarding, knowledge bases, and business workflows.",
+      "Automate lead response, support triage, document processing, and CRM workflows with AI - integrated into your existing tools. Fixed-scope delivery in weeks.",
     keywords: [
-      "custom AI chatbot development",
-      "AI chatbot development company India",
-      "website AI chatbot",
-      "enterprise AI chatbot",
+      "AI automation services",
+      "business workflow automation",
+      "AI process automation",
+      "CRM automation services",
     ],
-    eyebrow: "Custom AI Chatbot Development",
-    h1: "Custom AI chatbots for support, sales, and operations.",
+    eyebrow: "AI Automation Services",
+    h1: "Workflows that run themselves, with your rules.",
     description:
-      "Avlys AI builds chatbots that understand your services, collect structured data, answer grounded questions, and hand off conversations to the right system or person.",
-    proof: ["Website and WhatsApp", "Knowledge-grounded answers", "Human handoff"],
+      "The repetitive layer of your operation - lead follow-up, support triage, data entry, document handling, status chasing - automated with AI and wired into the tools you already use. Every automation follows business logic you approve and can change.",
+    proof: ["Your tools, automated", "Approval gates built in", "Measured before scaled"],
+    capabilities: [
+      {
+        title: "Lead response and routing",
+        description:
+          "Instant first response across web, chat, and phone; qualification questions; scoring; CRM updates; and routing to the right salesperson with context.",
+      },
+      {
+        title: "Support triage and resolution",
+        description:
+          "Repeat questions answered from approved sources, tickets classified and routed, and unresolved cases escalated with a clean summary.",
+      },
+      {
+        title: "Document processing",
+        description:
+          "Invoices, contracts, applications, and forms extracted into structured data, validated against rules, and written into your systems.",
+      },
+      {
+        title: "Operations glue",
+        description:
+          "The handoffs between tools - CRM to spreadsheet to email to dashboard - replaced with reliable automations that log every action.",
+      },
+    ],
+    systems: [
+      "HubSpot",
+      "Salesforce",
+      "Zendesk",
+      "WhatsApp Business API",
+      "Slack",
+      "Google Workspace",
+      "n8n",
+      "Zapier",
+      "Custom APIs",
+    ],
     outcomes: [
-      "Reduced repeat support questions and faster customer replies.",
-      "Lead forms replaced with guided conversations.",
-      "Knowledge-base answers grounded in approved business information.",
-      "Cleaner routing across sales, support, and operations teams.",
+      "First response in seconds on the channels where you currently lose leads.",
+      "Consistent handling: the same questions, rules, and routing on every case.",
+      "Hours of manual data movement replaced with logged, auditable automations.",
+      "Visibility - dashboards showing what ran, what escalated, and what failed.",
     ],
-    workflow: [
-      "Collect FAQs, service pages, policies, brochures, and internal knowledge.",
-      "Design intents, conversation paths, fallback behavior, and handoff rules.",
-      "Build the chatbot, retrieval layer, admin controls, and analytics.",
-      "Review transcripts and improve answer quality after launch.",
-    ],
+    workflow: pilotWorkflow,
     faqs: [
       {
-        question: "How is a custom AI chatbot different from a generic bot?",
+        question: "What should we automate first?",
         answer:
-          "A custom chatbot is built around your services, customer journeys, handoff rules, knowledge sources, and internal tools instead of a generic scripted flow.",
+          "The workflow where delay costs the most - usually inbound lead response or support triage. We pick the first automation by measurable impact and data readiness, not by what demos well.",
       },
       {
-        question: "Can the chatbot answer from our documents?",
+        question: "Will automation break when our process changes?",
         answer:
-          "Yes. It can use approved website content, documents, FAQs, policies, and product information as a retrieval source.",
+          "Automations are built with explicit, documented rules your team can update, plus monitoring that flags failures instead of hiding them. Change the process, update the rule - no rebuild.",
       },
       {
-        question: "Can Avlys AI build both the chatbot and backend system?",
+        question: "Do we need new software for this?",
         answer:
-          "Yes. Avlys AI can build the chatbot, integration layer, database, dashboard, and workflow automation around it.",
+          "Usually not. We integrate with the CRM, helpdesk, and messaging tools you already run. New tooling enters only when something is genuinely missing.",
+      },
+      {
+        question: "How do you measure whether it worked?",
+        answer:
+          "Each automation ships with a success metric defined upfront - response time, resolution rate, hours saved - and a dashboard that tracks it against the pre-automation baseline.",
       },
     ],
   },
   {
-    slug: "ai-customer-support-automation",
-    title: "AI Customer Support Automation",
-    metaTitle: "AI Customer Support Automation | Avlys AI",
+    slug: "ai-consulting-mid-market",
+    title: "AI Consulting for Mid-Sized Companies",
+    metaTitle: "AI Consulting for Mid-Sized Companies | Avlys AI",
     metaDescription:
-      "Automate customer support with AI agents, ticket routing, FAQ answers, policy retrieval, escalation paths, and human handoff workflows.",
+      "AI strategy for mid-market teams without a data science department: readiness assessment, use-case selection, build-vs-buy analysis, and a costed pilot plan.",
     keywords: [
-      "AI customer support automation",
-      "AI support agent",
-      "customer service AI automation",
-      "AI ticket routing",
+      "AI consulting for mid-sized companies",
+      "AI readiness assessment",
+      "AI strategy consulting",
+      "mid-market AI adoption",
     ],
-    eyebrow: "AI Customer Support Automation",
-    h1: "Support automation that answers, routes, and escalates.",
+    eyebrow: "AI Consulting - Mid-Market",
+    h1: "Enterprise-grade AI, scoped for mid-market reality.",
     description:
-      "Avlys AI builds support systems that resolve repeat questions, retrieve approved policies, collect context, and escalate sensitive cases to your team.",
-    proof: ["FAQ resolution", "Policy-grounded answers", "Escalation workflows"],
+      "You don't need a data science team to adopt AI - you need an honest assessment of where it pays back, what your data supports today, and what it will cost. We deliver that as a fixed-price engagement that ends in a costed, buildable plan.",
+    proof: ["Fixed-price assessment", "Build-vs-buy honesty", "Ends in a costed plan"],
+    capabilities: [
+      {
+        title: "AI readiness assessment",
+        description:
+          "A structured review of your systems, data quality, and workflows that identifies what AI can use today and what needs fixing first.",
+      },
+      {
+        title: "Use-case selection by ROI",
+        description:
+          "Candidate use cases ranked by measurable impact, feasibility, and time to value - with the weak ones eliminated before they consume budget.",
+      },
+      {
+        title: "Build-vs-buy analysis",
+        description:
+          "Where an off-the-shelf tool is the right answer, we say so. Custom builds are recommended only where they create a durable advantage.",
+      },
+      {
+        title: "Pilot roadmap and costing",
+        description:
+          "A concrete first pilot: scope, architecture, success metrics, timeline, and a fixed price - ready to execute with us or any competent team.",
+      },
+    ],
+    systems: [
+      "Your existing CRM/ERP",
+      "OpenAI",
+      "Anthropic",
+      "Open-source LLMs",
+      "Data warehouses",
+      "Spreadsheet workflows",
+    ],
     outcomes: [
-      "Lower support load from repeat questions.",
-      "Faster triage for order, service, account, and policy requests.",
-      "Consistent answers grounded in approved documentation.",
-      "Better visibility into unresolved customer issues.",
+      "A clear answer to 'where does AI actually pay back for us' - with numbers and assumptions shown.",
+      "Use cases you should not pursue, identified before they cost you a failed project.",
+      "A pilot plan with fixed scope, success metrics, and price - executable immediately.",
+      "Plain-language documentation your leadership team can act on.",
     ],
     workflow: [
-      "Audit current support channels, issue types, policy sources, and escalation paths.",
-      "Design support intents, knowledge retrieval, ticket routing, and human takeover.",
-      "Build the assistant, integrations, moderation rules, and reporting view.",
-      "Review tickets and transcripts to improve coverage over time.",
+      {
+        title: "Discover",
+        detail:
+          "Interviews with your operators and a review of your systems and data - where time goes, where leads leak, where decisions wait.",
+        artifacts: ["Workflow inventory", "Data readiness review"],
+      },
+      {
+        title: "Evaluate",
+        detail:
+          "Candidate AI use cases scored on impact, feasibility, and cost, with build-vs-buy recommendations for each.",
+        artifacts: ["Ranked use-case matrix", "Build-vs-buy analysis"],
+      },
+      {
+        title: "Plan",
+        detail:
+          "The strongest use case turned into a concrete pilot: scope, architecture, integration points, success metrics, and a fixed price.",
+        artifacts: ["Pilot specification", "Costed roadmap", "Executive summary"],
+      },
     ],
     faqs: [
       {
-        question: "Can AI fully replace a support team?",
+        question: "We don't have a data team. Is AI realistic for us?",
         answer:
-          "Usually no. The best support systems automate repeat questions and triage while escalating complex, sensitive, or high-value cases to humans.",
+          "Usually yes. Most mid-market AI wins - lead response, support triage, document processing - run on the data already in your CRM, helpdesk, and inbox. The assessment tells you precisely what is realistic with what you have.",
       },
       {
-        question: "Can the AI support agent follow company policy?",
+        question: "Are you just going to recommend hiring you to build it?",
         answer:
-          "Yes. It can be grounded on approved policies and designed to avoid unsupported promises, with escalation for edge cases.",
+          "The deliverable is a plan you can execute with any competent team - scope, architecture, and success metrics included. If an off-the-shelf product fits better than a custom build, the plan says so.",
       },
       {
-        question: "What channels can be automated?",
+        question: "How long does the assessment take?",
         answer:
-          "Common channels include website chat, WhatsApp, internal dashboards, support forms, email workflows, and ticketing tools.",
-      },
-    ],
-  },
-  {
-    slug: "lead-qualification-ai-agents",
-    title: "Lead Qualification AI Agents",
-    metaTitle: "Lead Qualification AI Agents | Avlys AI",
-    metaDescription:
-      "Build AI agents that capture, qualify, score, route, and follow up with leads across website, WhatsApp, phone, forms, and CRM workflows.",
-    keywords: [
-      "lead qualification AI agents",
-      "AI lead automation",
-      "AI lead scoring",
-      "AI sales automation India",
-    ],
-    eyebrow: "Lead Qualification AI Agents",
-    h1: "AI agents that qualify leads before your team steps in.",
-    description:
-      "Avlys AI builds lead automation systems that respond quickly, ask the right questions, score readiness, route prospects, and trigger follow-up sequences.",
-    proof: ["Lead capture", "Qualification logic", "CRM routing"],
-    outcomes: [
-      "Faster first response across high-intent lead channels.",
-      "Standardized qualification questions for budget, timeline, need, and fit.",
-      "Better prioritization for sales teams.",
-      "Automated nurturing for leads that are not ready yet.",
-    ],
-    workflow: [
-      "Define qualification criteria, lead stages, routing rules, and sales handoff expectations.",
-      "Build the AI intake flow across website, WhatsApp, calls, or forms.",
-      "Connect scoring, CRM updates, notifications, and follow-up messaging.",
-      "Review conversion data and tune qualification rules.",
-    ],
-    faqs: [
-      {
-        question: "What questions can an AI lead agent ask?",
-        answer:
-          "It can ask about budget, timeline, location, problem, team size, preferred solution, urgency, decision-maker status, and contact preferences.",
+          "Two to three weeks for most mid-market teams: one week of discovery, then evaluation and a costed pilot plan, delivered as working documents plus a leadership walkthrough.",
       },
       {
-        question: "Can the agent score leads automatically?",
+        question: "What does it cost?",
         answer:
-          "Yes. It can score leads based on explicit answers, source, urgency, buying fit, and custom criteria defined with your sales team.",
-      },
-      {
-        question: "Where do qualified leads go?",
-        answer:
-          "They can be routed to a CRM, spreadsheet, Slack, email, dashboard, calendar flow, or directly to a salesperson.",
+          "It is a fixed-price engagement, quoted after a 30-minute scoping call based on the number of workflows and systems in scope - agreed before work begins, like everything we do.",
       },
     ],
   },

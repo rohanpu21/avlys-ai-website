@@ -1,17 +1,19 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import CallToAction from "../components/CallToAction";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import Reveal from "../components/Reveal";
 import StructuredData from "../components/StructuredData";
 import { servicePages } from "../data/services";
 import { absoluteUrl, siteConfig } from "../lib/site";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "AI Automation Services | Avlys AI",
+    absolute: "AI Development & Custom Software Services | Avlys AI",
   },
   description:
-    "Explore Avlys AI services for AI calling agents, WhatsApp AI chatbots, customer support automation, lead qualification agents, and custom AI chatbot development.",
+    "AI integration, custom software development, AI agents, workflow automation, and mid-market AI consulting - fixed-scope engagements for US and Indian teams.",
   alternates: {
     canonical: "/services",
   },
@@ -26,13 +28,13 @@ const structuredData = {
       "@type": "CollectionPage",
       "@id": `${servicesUrl}#webpage`,
       url: servicesUrl,
-      name: "AI Automation Services - Avlys AI",
+      name: "AI Development & Custom Software Services - Avlys AI",
       description:
-        "AI automation services from Avlys AI for calling agents, WhatsApp chatbots, customer support automation, lead qualification, and custom chatbot development.",
+        "AI integration, custom software development, AI agent development, AI automation, and AI consulting services from Avlys AI.",
       isPartOf: {
         "@id": `${siteConfig.url}/#website`,
       },
-      inLanguage: "en-IN",
+      inLanguage: "en-US",
     },
     {
       "@type": "ItemList",
@@ -49,46 +51,46 @@ const structuredData = {
 
 export default function ServicesPage() {
   return (
-    <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
+    <div className="min-h-screen bg-canvas text-ink">
       <StructuredData data={structuredData} />
       <Navbar />
-      <main className="px-6 py-20 sm:py-28">
-        <div className="mx-auto w-full max-w-6xl">
-          <div className="max-w-4xl">
-            <p className="font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted-strong)]">
-              Avlys AI Services
-            </p>
-            <h1 className="mt-4 font-mono text-[clamp(3rem,9vw,7.5rem)] font-light leading-[0.95]">
-              AI automation services for operators.
-            </h1>
-            <p className="mt-8 max-w-2xl text-lg leading-8 text-[var(--muted)]">
-              Focused service pages for the workflows businesses search for most:
-              AI calling agents, WhatsApp chatbots, support automation, lead
-              qualification, and custom AI chatbot development.
+      <main>
+        <section className="bg-canvas px-6 pb-16 pt-20 sm:pt-24">
+          <div className="mx-auto w-full max-w-4xl text-center">
+            <h1 className="type-hero text-ink">Services.</h1>
+            <p className="type-lead mx-auto mt-6 max-w-2xl text-ink-muted">
+              Five ways teams work with us. Every engagement is fixed-scope,
+              priced before work begins, and measured against a success metric
+              agreed upfront.
             </p>
           </div>
-
-          <div className="mt-12 grid gap-6 md:grid-cols-2">
+        </section>
+        <section className="bg-parchment px-6 py-16">
+          <div className="mx-auto grid w-full max-w-6xl gap-5 md:grid-cols-2">
             {servicePages.map((service, index) => (
-              <Link
-                key={service.slug}
-                href={`/services/${service.slug}`}
-                className="group border border-[var(--border-subtle)] p-6 transition-colors hover:border-[var(--border-strong)] hover:bg-[var(--surface-subtle)]"
-              >
-                <p className="font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted-soft)]">
-                  {String(index + 1).padStart(2, "0")}
-                </p>
-                <h2 className="mt-8 text-2xl font-light leading-snug">{service.title}</h2>
-                <p className="mt-4 text-sm leading-6 text-[var(--muted)]">
-                  {service.metaDescription}
-                </p>
-                <p className="mt-8 font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted-strong)] transition-opacity group-hover:opacity-50">
-                  Open Service
-                </p>
-              </Link>
+              <Reveal key={service.slug} delay={index * 0.04}>
+                <Link
+                  href={`/services/${service.slug}`}
+                  className="flex h-full flex-col rounded-[18px] border border-hairline bg-canvas p-8 transition-colors hover:border-ink-faint"
+                >
+                  <p className="type-caption-strong uppercase tracking-wide text-primary">
+                    {service.eyebrow}
+                  </p>
+                  <h2 className="mt-3 text-[21px] font-semibold leading-snug text-ink">
+                    {service.h1}
+                  </h2>
+                  <p className="mt-4 flex-1 text-[15px] leading-relaxed text-ink-muted">
+                    {service.description}
+                  </p>
+                  <span className="mt-6 text-[15px] text-primary">
+                    Learn more &rarr;
+                  </span>
+                </Link>
+              </Reveal>
             ))}
           </div>
-        </div>
+        </section>
+        <CallToAction />
       </main>
       <Footer />
     </div>

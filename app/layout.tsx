@@ -1,16 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import StructuredData from "./components/StructuredData";
 import "./globals.css";
 import { absoluteUrl, siteConfig } from "./lib/site";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
@@ -19,7 +14,7 @@ export const metadata: Metadata = {
   applicationName: siteConfig.name,
   manifest: "/site.webmanifest",
   title: {
-    default: "Avlys AI | AI Automation Agency India",
+    default: "Enterprise AI Development & Custom Software Company | Avlys AI",
     template: "%s | Avlys AI",
   },
   description: siteConfig.description,
@@ -55,15 +50,15 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    locale: "en_IN",
+    locale: "en_US",
     url: siteConfig.url,
     siteName: siteConfig.name,
-    title: "Avlys AI | AI Automation Agency India",
+    title: "Enterprise AI Development & Custom Software Company | Avlys AI",
     description: siteConfig.description,
   },
   twitter: {
-    card: "summary",
-    title: "Avlys AI | AI Automation Agency India",
+    card: "summary_large_image",
+    title: "Enterprise AI Development & Custom Software Company | Avlys AI",
     description: siteConfig.description,
   },
 };
@@ -93,6 +88,7 @@ const organizationSchema = {
       email: siteConfig.email,
       telephone: siteConfig.phone,
       areaServed: [
+        { "@type": "Country", name: "United States" },
         { "@type": "Country", name: "India" },
         { "@type": "Place", name: "Global remote delivery" },
       ],
@@ -103,12 +99,12 @@ const organizationSchema = {
         addressCountry: siteConfig.country,
       },
       serviceType: [
-        "AI automation agency",
-        "AI calling agents",
-        "WhatsApp AI chatbots",
-        "AI customer support automation",
-        "Lead qualification AI agents",
+        "Enterprise AI development",
+        "AI integration services",
         "Custom software development",
+        "AI agent development",
+        "AI automation services",
+        "AI consulting",
       ],
     },
     {
@@ -119,7 +115,7 @@ const organizationSchema = {
       publisher: {
         "@id": `${siteConfig.url}/#organization`,
       },
-      inLanguage: "en-IN",
+      inLanguage: "en-US",
     },
   ],
 };
@@ -130,11 +126,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full bg-[var(--background)] text-[var(--foreground)]">
+    <html lang="en" className={`${inter.variable} h-full antialiased`}>
+      <body className="min-h-full bg-canvas text-ink">
         <StructuredData data={organizationSchema} />
         {children}
       </body>

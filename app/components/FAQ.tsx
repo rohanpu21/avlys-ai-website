@@ -1,54 +1,59 @@
+import Reveal from "./Reveal";
+
 const faqs = [
   {
-    question: "What is Avlys AI?",
+    question: "How do engagements work and what do they cost?",
     answer:
-      "Avlys AI is an AI automation agency in Hyderabad, India. We build AI calling agents, WhatsApp chatbots, customer support automation, lead qualification systems, and custom software for Indian and global businesses.",
+      "Every project starts with a fixed-scope, fixed-price phase - usually a 4-6 week pilot against one workflow - quoted after a 30-minute scoping call. You know the price before work begins, and each subsequent phase is scoped and priced the same way. Larger builds run as fixed-price phases; ongoing work runs as a monthly retainer.",
   },
   {
-    question: "What AI automation services does Avlys AI offer?",
+    question: "Who owns the code, and how is our data protected?",
     answer:
-      "Avlys AI offers AI calling agents, custom AI chatbots, WhatsApp automation, lead capture and qualification, CRM workflow automation, support automation, agentic systems, and tailored software platforms.",
+      "You own everything: source code, infrastructure, designs, and documentation. Engagements run under NDA, access follows least-privilege, your data stays inside your cloud where possible, and every data flow is documented before it ships.",
   },
   {
-    question: "Who should use AI calling agents?",
+    question: "How are you different from a traditional outsourcing firm?",
     answer:
-      "AI calling agents are useful for real estate teams, service businesses, clinics, education providers, marketplaces, and sales teams that miss calls or need consistent lead qualification and appointment booking.",
+      "Small senior team, AI-native from the start, and no pyramid: the engineers who scope your project build it. We integrate into the systems you already run instead of selling a platform migration, and we commit to a measurable success metric per engagement instead of billable hours.",
   },
   {
-    question: "How does Avlys AI optimize automation after launch?",
+    question: "Can you work with our existing ERP, CRM, or legacy systems?",
     answer:
-      "After launch, Avlys AI reviews usage data, transcripts, lead quality, handoff accuracy, and operator feedback to improve prompts, workflows, integrations, and response logic.",
+      "Yes - that is most of our work. We build integration layers around Salesforce, SAP, HubSpot, NetSuite, helpdesks, databases, and custom or legacy applications, so AI capability lands inside the tools your team already uses.",
+  },
+  {
+    question: "How fast can we see something working?",
+    answer:
+      "A scoped pilot ships in 4-6 weeks: a working system tested against your real cases and measured against success criteria agreed in week one. An AI readiness assessment - if you want a plan before a build - takes 2-3 weeks.",
+  },
+  {
+    question: "Where is the team, and how do time zones work?",
+    answer:
+      "Engineering is based in Hyderabad, India, with delivery for US and Indian clients. Demos, decisions, and communication run on your hours; the build runs on ours - which usually means you wake up to progress.",
   },
 ];
 
 const FAQ = () => {
   return (
-    <section id="faq" className="px-6 py-20 sm:py-28">
-      <div className="mx-auto w-full max-w-6xl">
-        <div className="max-w-2xl">
-          <p className="font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted-strong)]">
-            Common Questions
-          </p>
-          <h2 className="mt-4 text-3xl font-light leading-tight sm:text-4xl">
-            Clear answers for buyers comparing AI automation partners.
+    <section id="faq" className="bg-parchment px-6 py-20">
+      <div className="mx-auto w-full max-w-3xl">
+        <Reveal>
+          <h2 className="type-display-lg text-center text-ink">
+            Questions buyers actually ask.
           </h2>
-        </div>
-        <div className="mt-10 grid border border-[var(--border-subtle)]">
-          {faqs.map((faq, index) => (
-            <div
-              key={faq.question}
-              className="grid gap-5 border-b border-[var(--border-subtle)] p-6 last:border-b-0 lg:grid-cols-[160px_1fr]"
-            >
-              <p className="font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted-soft)]">
-                {String(index + 1).padStart(2, "0")}
-              </p>
-              <div>
-                <h3 className="text-xl font-light">{faq.question}</h3>
-                <p className="mt-3 max-w-3xl text-sm leading-6 text-[var(--muted)]">
+        </Reveal>
+        <div className="mt-12 flex flex-col gap-4">
+          {faqs.map((faq) => (
+            <Reveal key={faq.question}>
+              <div className="rounded-[18px] border border-hairline bg-canvas p-6">
+                <h3 className="text-[17px] font-semibold text-ink">
+                  {faq.question}
+                </h3>
+                <p className="mt-3 text-[15px] leading-relaxed text-ink-muted">
                   {faq.answer}
                 </p>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>

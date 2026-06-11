@@ -1,31 +1,34 @@
 import type { Metadata } from "next";
 import CallToAction from "./components/CallToAction";
+import CaseStudyStrip from "./components/CaseStudyStrip";
 import FAQ, { homepageFaqs } from "./components/FAQ";
 import Footer from "./components/Footer";
 import Hero from "./components/Hero";
+import IntegrationTile from "./components/IntegrationTile";
+import LogoMarquee from "./components/LogoMarquee";
 import Navbar from "./components/Navbar";
-import PortfolioPreview from "./components/PortfolioPreview";
-import ProblemSolution from "./components/ProblemSolution";
 import Process from "./components/Process";
-import SolutionsGrid from "./components/SolutionsGrid";
+import ServicesGrid from "./components/ServicesGrid";
+import StickyCtaBar from "./components/StickyCtaBar";
 import StructuredData from "./components/StructuredData";
+import Testimonials from "./components/Testimonials";
 import WhyAvlys from "./components/WhyAvlys";
 import { siteConfig } from "./lib/site";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "AI Automation Agency India - Chatbots, Calling Agents & Custom Software",
+    absolute: "Enterprise AI Development & Custom Software Company | Avlys AI",
   },
   description:
-    "Avlys AI is a Hyderabad-based AI automation agency building AI calling agents, WhatsApp chatbots, customer support automation, lead qualification systems, and custom software.",
+    "Avlys AI builds custom software and integrates AI into the systems you already run - ERP, CRM, legacy apps. Fixed-scope pilots in weeks. Book a strategy call.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
     url: siteConfig.url,
-    title: "AI Automation Agency India - Chatbots, Calling Agents & Custom Software",
+    title: "Enterprise AI Development & Custom Software Company | Avlys AI",
     description:
-      "Avlys AI builds custom AI calling agents, WhatsApp chatbots, and automation systems for businesses in India and globally.",
+      "Custom software and AI integration for enterprise and mid-market teams in the US and India. Fixed-scope pilots delivered in weeks.",
   },
 };
 
@@ -36,7 +39,7 @@ const homeSchema = {
       "@type": "WebPage",
       "@id": `${siteConfig.url}/#webpage`,
       url: siteConfig.url,
-      name: "AI Automation Agency India - Avlys AI",
+      name: "Enterprise AI Development & Custom Software Company - Avlys AI",
       isPartOf: {
         "@id": `${siteConfig.url}/#website`,
       },
@@ -44,7 +47,7 @@ const homeSchema = {
         "@id": `${siteConfig.url}/#organization`,
       },
       description: siteConfig.description,
-      inLanguage: "en-IN",
+      inLanguage: "en-US",
     },
     {
       "@type": "FAQPage",
@@ -63,19 +66,22 @@ const homeSchema = {
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
+    <div className="min-h-screen bg-canvas text-ink">
       <StructuredData data={homeSchema} />
       <Navbar />
       <main>
         <Hero />
-        <ProblemSolution />
-        <SolutionsGrid />
+        <LogoMarquee />
+        <IntegrationTile />
+        <ServicesGrid />
         <Process />
-        <PortfolioPreview />
+        <CaseStudyStrip />
+        <Testimonials />
         <WhyAvlys />
         <FAQ />
         <CallToAction />
       </main>
+      <StickyCtaBar />
       <Footer />
     </div>
   );

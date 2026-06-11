@@ -1,27 +1,29 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import CaseStudyImage from "../components/CaseStudyImage";
+import CallToAction from "../components/CallToAction";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import StructuredData from "../components/StructuredData";
-import { caseStudies } from "../data/caseStudies";
+import { caseStudies, featuredCaseStudies } from "../data/caseStudies";
 import { absoluteUrl, siteConfig } from "../lib/site";
+
+const pageTitle = "Case Studies - Platforms, AI Agents & Automation | Avlys AI";
+const pageDescription =
+  "Shipped systems: marketplaces, AI agent architectures, voice agents, automation suites, and custom platforms - each with context, solution, and delivery scope.";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "AI Automation Case Studies | Avlys AI",
+    absolute: pageTitle,
   },
-  description:
-    "Explore Avlys AI case studies across AI calling agents, WhatsApp chatbots, marketplaces, ecommerce builds, websites, agentic systems, and automation workflows.",
+  description: pageDescription,
   alternates: {
     canonical: "/case-studies",
   },
   openGraph: {
     url: absoluteUrl("/case-studies"),
-    title: "AI Automation Case Studies | Avlys AI",
-    description:
-      "Explore Avlys AI case studies across AI calling agents, WhatsApp chatbots, marketplaces, ecommerce builds, websites, agentic systems, and automation workflows.",
+    title: pageTitle,
+    description: pageDescription,
     images: [
       {
         url: absoluteUrl("/case-studies/opengraph-image"),
@@ -33,9 +35,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI Automation Case Studies | Avlys AI",
-    description:
-      "Explore Avlys AI case studies across AI calling agents, WhatsApp chatbots, marketplaces, ecommerce builds, websites, agentic systems, and automation workflows.",
+    title: pageTitle,
+    description: pageDescription,
     images: [absoluteUrl("/case-studies/opengraph-image")],
   },
 };
@@ -49,13 +50,12 @@ const structuredData = {
       "@type": "CollectionPage",
       "@id": `${caseStudiesUrl}#webpage`,
       url: caseStudiesUrl,
-      name: "AI Automation Case Studies - Avlys AI",
-      description:
-        "Avlys AI case studies across automation, AI agents, commerce, marketplaces, websites, and support systems.",
+      name: "Case Studies - Avlys AI",
+      description: pageDescription,
       isPartOf: {
         "@id": `${siteConfig.url}/#website`,
       },
-      inLanguage: "en-IN",
+      inLanguage: "en-US",
     },
     {
       "@type": "ItemList",
@@ -70,86 +70,59 @@ const structuredData = {
   ],
 };
 
+// Featured (platform/AI) work leads; the rest follows.
+const featuredSlugSet = new Set(featuredCaseStudies.map((item) => item.slug));
+const orderedCaseStudies = [
+  ...featuredCaseStudies,
+  ...caseStudies.filter((caseStudy) => !featuredSlugSet.has(caseStudy.slug)),
+];
+
 export default function CaseStudiesPage() {
   return (
-    <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
+    <div className="min-h-screen bg-canvas text-ink">
       <StructuredData data={structuredData} />
       <Navbar />
-      <main className="px-6 py-20 sm:py-28">
-        <div className="mx-auto w-full max-w-6xl">
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(360px,0.72fr)] lg:items-end">
-            <div className="max-w-4xl">
-              <p className="font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted-strong)]">
-                Case Studies
-              </p>
-              <h1 className="mt-4 font-mono text-[clamp(3rem,9vw,7.5rem)] font-light leading-[0.95]">
-                Proof from shipped systems.
-              </h1>
-              <p className="mt-8 max-w-2xl text-lg leading-8 text-[var(--muted)]">
-                Every portfolio project is now presented as a case study with
-                context, challenge, solution, delivery scope, outcomes, and
-                project-specific visual proof.
-              </p>
-            </div>
-            <div className="grid gap-4">
-              <div className="overflow-hidden border border-[var(--border-subtle)] bg-[var(--surface-subtle)]">
-                <Image
-                  src="/case-studies/opengraph-image"
-                  alt="Avlys AI case studies visual index"
-                  width={1200}
-                  height={630}
-                  sizes="(min-width: 1024px) 36vw, 100vw"
-                  priority
-                  unoptimized
-                  className="h-auto w-full"
-                />
-              </div>
-              <div className="border border-[var(--border-subtle)] bg-[var(--surface-subtle)] p-6">
-                <p className="font-mono text-4xl font-light">{caseStudies.length}</p>
-                <p className="mt-2 text-xs uppercase tracking-[0.18em] text-[var(--muted-strong)]">
-                  Published studies
-                </p>
-              </div>
-            </div>
+      <main>
+        <section className="bg-canvas px-6 pb-16 pt-20 sm:pt-24">
+          <div className="mx-auto w-full max-w-4xl text-center">
+            <h1 className="type-hero text-ink">Shipped systems.</h1>
+            <p className="type-lead mx-auto mt-6 max-w-2xl text-ink-muted">
+              Marketplaces, AI agent architectures, voice agents, automations,
+              and custom platforms - each documented with the context, the
+              solution, and what was delivered.
+            </p>
           </div>
-
-          <div className="mt-14 grid gap-6 md:grid-cols-2">
-            {caseStudies.map((caseStudy, index) => (
+        </section>
+        <section className="bg-parchment px-6 py-16">
+          <div className="mx-auto grid w-full max-w-6xl gap-5 md:grid-cols-2">
+            {orderedCaseStudies.map((caseStudy, index) => (
               <Link
                 key={caseStudy.slug}
                 href={`/case-studies/${caseStudy.slug}`}
-                className={`group border border-[var(--border-subtle)] p-4 transition-colors hover:border-[var(--border-strong)] hover:bg-[var(--surface-subtle)] ${
-                  index === 0 || caseStudy.visualKind === "voice-agent" ? "md:col-span-2" : ""
-                }`}
+                className="group overflow-hidden rounded-[18px] border border-hairline bg-canvas transition-colors hover:border-ink-faint"
               >
                 <CaseStudyImage
                   slug={caseStudy.slug}
                   title={caseStudy.title}
                   priority={index < 2}
-                  sizes={
-                    index === 0 || caseStudy.visualKind === "voice-agent"
-                      ? "(min-width: 768px) 70vw, 100vw"
-                      : "(min-width: 768px) 45vw, 100vw"
-                  }
+                  sizes="(min-width: 768px) 45vw, 100vw"
                 />
-                <div className="p-3 pt-6">
-                  <p className="font-mono text-xs uppercase tracking-[0.18em] text-[var(--muted-soft)]">
-                    {caseStudy.type}
+                <div className="p-6">
+                  <p className="type-caption-strong uppercase tracking-wide text-primary">
+                    {caseStudy.category}
                   </p>
-                  <h2 className="mt-4 text-2xl font-light leading-snug">{caseStudy.title}</h2>
-                  <p className="mt-4 text-sm leading-6 text-[var(--muted)]">
+                  <h2 className="mt-3 text-[21px] font-semibold leading-snug text-ink">
                     {caseStudy.headline}
+                  </h2>
+                  <p className="type-caption mt-4 text-ink-faint">
+                    {caseStudy.stack} · {caseStudy.market}
                   </p>
-                  <div className="mt-6 grid gap-2 border-t border-[var(--border-subtle)] pt-5 text-xs text-[var(--muted-strong)] sm:grid-cols-3">
-                    <span>Stack: {caseStudy.stack}</span>
-                    <span>Market: {caseStudy.market}</span>
-                    <span>Category: {caseStudy.category}</span>
-                  </div>
                 </div>
               </Link>
             ))}
           </div>
-        </div>
+        </section>
+        <CallToAction />
       </main>
       <Footer />
     </div>
