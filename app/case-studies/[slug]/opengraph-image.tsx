@@ -294,7 +294,7 @@ const fallbackSpec = (slug: string): VisualSpec => ({
 });
 
 const ink = "#ffffff";
-const bg = "#1f2228";
+const bg = "#272729";
 const muted = "rgba(255,255,255,0.66)";
 const soft = "rgba(255,255,255,0.42)";
 const surface = "rgba(255,255,255,0.035)";

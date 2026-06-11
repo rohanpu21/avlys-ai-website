@@ -18,7 +18,7 @@ export default function Image() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#1f2228",
+          background: "#272729",
           color: "#ffffff",
           padding: "56px",
           fontFamily: "Arial",
@@ -35,7 +35,7 @@ export default function Image() {
               Proof from shipped systems.
             </div>
             <div style={{ display: "flex", marginTop: 28, maxWidth: 680, color: "rgba(255,255,255,0.72)", fontSize: 25, lineHeight: 1.45 }}>
-              AI calling agents, WhatsApp automation, marketplaces, ecommerce builds, websites, and agentic systems.
+              Marketplaces, AI agent architectures, voice agents, automation systems, and custom platforms.
             </div>
           </div>
           <div style={{ width: 345, display: "flex", flexDirection: "column", gap: 14 }}>

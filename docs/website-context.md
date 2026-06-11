@@ -1,123 +1,45 @@
 # Avlys AI Website Context and Change Log
 
-Last updated: 2026-04-30
+Last updated: 2026-06-11
 
 ## Project overview
 - Framework: Next.js App Router (Next 16.2.4) with React 19
-- Styling: Tailwind CSS v4 + CSS variables in [app/globals.css](../app/globals.css)
-- Fonts: Geist Sans + Geist Mono via [app/layout.tsx](../app/layout.tsx)
-- Primary pages:
-  - Home: [app/page.tsx](../app/page.tsx)
-  - Portfolio listing: [app/portfolio/page.tsx](../app/portfolio/page.tsx)
-- Data module: [app/data/portfolio.ts](../app/data/portfolio.ts)
-- Lead capture API: [app/api/leads/route.ts](../app/api/leads/route.ts)
+- Styling: Tailwind CSS v4 + design tokens in [app/globals.css](../app/globals.css), per the Apple design system spec in [DESIGN-apple.md](./DESIGN-apple.md)
+- Font: Inter (SF Pro substitute) via [app/layout.tsx](../app/layout.tsx)
+- Motion: GSAP + @gsap/react ([app/components/Reveal.tsx](../app/components/Reveal.tsx), hero stagger in [app/components/Hero.tsx](../app/components/Hero.tsx)), CSS marquee in globals.css
+- Analytics: PostHog ([instrumentation-client.ts](../instrumentation-client.ts)); events: cta_click, booking_opened, lead_submitted
+- Lead capture: [app/components/LeadCaptureForm.tsx](../app/components/LeadCaptureForm.tsx) → [app/api/leads/route.ts](../app/api/leads/route.ts) → Supabase `lead_submissions` (validation + honeypot + per-instance rate limit)
 
-## Current site structure (home page)
-- Navbar (sticky, CTA button links to contact form)
-- Hero (headline + CTAs)
-- Process shift block (old vs Avlys way)
-- Solutions grid
-- Portfolio preview (4 items)
-- Why Avlys features
-- Contact / lead form
-- Footer (contact + social icons)
+## Positioning (2026-06 enterprise pivot)
+Target: enterprise/mid-market buyers of custom software + AI integration, US + India.
+Differentiators: fixed-scope/fixed-price pilots (4-6 weeks), integrate-into-existing-systems (not rip-and-replace), senior engineers on every call, full IP transfer, 90-day post-deploy tuning.
 
-Home page sections and anchors:
-- #process: [app/components/ProblemSolution.tsx](../app/components/ProblemSolution.tsx)
-- #solutions: [app/components/SolutionsGrid.tsx](../app/components/SolutionsGrid.tsx)
-- #portfolio: [app/components/PortfolioPreview.tsx](../app/components/PortfolioPreview.tsx)
-- #contact: [app/components/CallToAction.tsx](../app/components/CallToAction.tsx)
+## Site structure
+- `/` home: Hero → LogoMarquee → IntegrationTile → ServicesGrid → Process → CaseStudyStrip → Testimonials → WhyAvlys → FAQ → CallToAction (+ StickyCtaBar)
+- `/services` + 5 service pages (data: [app/data/services.ts](../app/data/services.ts)): ai-integration, custom-software-development, ai-agents, ai-automation, ai-consulting-mid-market
+- `/case-studies` (+20 detail pages, data: [app/data/caseStudies.ts](../app/data/caseStudies.ts), curated featured list), `/portfolio` (filterable)
+- `/about`, `/contact`, `/blog` (+post pages, data: [app/data/blog.ts](../app/data/blog.ts) aggregating app/data/posts/*)
+- 301 redirects from retired India-SMB service slugs in [next.config.ts](../next.config.ts)
 
-## Change log (summary of work done)
-- Removed the old Proof block and replaced it with a Portfolio preview section.
-  - [app/components/WhyAvlys.tsx](../app/components/WhyAvlys.tsx)
-  - [app/components/PortfolioPreview.tsx](../app/components/PortfolioPreview.tsx)
-- Centralized portfolio data into a shared module used by the preview and full portfolio page.
-  - [app/data/portfolio.ts](../app/data/portfolio.ts)
-  - [app/portfolio/page.tsx](../app/portfolio/page.tsx)
-- Added a lead capture form inside the CTA section.
-  - [app/components/LeadCaptureForm.tsx](../app/components/LeadCaptureForm.tsx)
-  - [app/components/CallToAction.tsx](../app/components/CallToAction.tsx)
-- Wired form submission to Supabase via a server route.
-  - [app/api/leads/route.ts](../app/api/leads/route.ts)
-- Added Mobile Number field to the form and API insert.
-  - [app/components/LeadCaptureForm.tsx](../app/components/LeadCaptureForm.tsx)
-  - [app/api/leads/route.ts](../app/api/leads/route.ts)
-- Updated footer with LinkedIn and Instagram icons + links.
-  - [app/components/Footer.tsx](../app/components/Footer.tsx)
-- Updated navbar order to Process -> Solutions -> Portfolio and CTA to jump to #contact.
-  - [app/components/Navbar.tsx](../app/components/Navbar.tsx)
+## Conversion system
+- Single CTA language: "Book a strategy call". [app/components/BookCallCta.tsx](../app/components/BookCallCta.tsx) opens a Cal.com embed when `siteConfig.bookingUrl` ([app/lib/site.ts](../app/lib/site.ts)) is set; falls back to /contact while empty.
+- Secondary path: lead form (phone optional, project-type qualifier).
+- Sticky CTA bar appears after the hero, hides near #contact.
 
-## Supabase integration
-Environment variables required in .env.local:
-- SUPABASE_URL=...
-- SUPABASE_SERVICE_ROLE_KEY=...
+## Content rules (anti-slop)
+- No invented metrics; testimonials require name/role/company ([app/data/testimonials.ts](../app/data/testimonials.ts) - section hidden while empty)
+- Client marquee ([app/data/marquee.ts](../app/data/marquee.ts)) lists only real clients with permission; tech strip is always on
+- Case-study processes are per-delivery-type, not copy-pasted
 
-Table needed (example):
-```
-create table if not exists lead_submissions (
-  id uuid primary key default gen_random_uuid(),
-  name text not null,
-  email text not null,
-  phone text not null,
-  company text,
-  message text not null,
-  source text default 'website',
-  created_at timestamp with time zone default now()
-);
-```
+## SEO state
+- sitemap.ts uses honest lastModified constants - bump them when content changes
+- robots.ts allows search + AI crawlers; public/llms.txt published
+- Root opengraph-image.tsx (light brand card), per-case-study OG generators (dark schematic)
+- KNOWN ISSUE (2026-06): only the homepage was indexed by Google with a stale snippet. Required actions: set up Google Search Console, submit sitemap, request indexing; create profiles on Clutch/GoodFirms/DesignRush/Crunchbase; Google Business Profile (Hyderabad)
 
-## Security audit (current state)
-
-### Findings (high to low)
-1) Service-role key in a server route
-   - Risk: If the server environment leaks, the key grants full database access.
-   - Mitigation: Keep the key server-only, never expose to client, and restrict the Supabase project with RLS. Consider using a limited key or RPC function.
-   - File: [app/api/leads/route.ts](../app/api/leads/route.ts)
-
-2) No rate limiting or bot protection on lead capture
-   - Risk: Spam or abuse of the form and database writes.
-   - Mitigation: Add rate limiting (middleware or edge), CAPTCHA/honeypot, and basic IP throttling.
-   - File: [app/api/leads/route.ts](../app/api/leads/route.ts)
-
-3) Input validation is minimal
-   - Risk: Poor data quality; potential abuse (very long strings, invalid email/phone).
-   - Mitigation: Validate length and format server-side (email/phone regex or library) and enforce max size.
-   - File: [app/api/leads/route.ts](../app/api/leads/route.ts)
-
-4) Error handling returns generic errors but logs nothing
-   - Risk: Hard to debug in production.
-   - Mitigation: Log errors server-side (without PII) or use a logging service.
-   - File: [app/api/leads/route.ts](../app/api/leads/route.ts)
-
-### Positive notes
-- Supabase key is only used server-side in an API route.
-- Form uses POST and does not expose credentials on the client.
-
-## Testing audit (current state)
-
-### Coverage gaps
-- No automated tests found (unit, integration, or e2e).
-- No form submission test to verify Supabase insert in dev.
-
-### Manual checks recommended
-- Navbar anchors scroll to the correct sections:
-  - #process, #solutions, #portfolio, #contact
-- CTA button "Book Strategy Call" scrolls to the form.
-- Form submission:
-  - Required fields: name, email, phone, message
-  - Optional field: company
-  - Success and error states display correctly
-- Portfolio page filter buttons update the list count and cards.
-
-### Suggested minimal tests (if added later)
-- Playwright e2e: home page load, anchor navigation, form validation, portfolio filters.
-- API test: POST /api/leads with valid and invalid payloads.
-
-## Quick edit pointers
-- Navbar links/CTA: [app/components/Navbar.tsx](../app/components/Navbar.tsx)
-- Portfolio preview cards: [app/components/PortfolioPreview.tsx](../app/components/PortfolioPreview.tsx)
-- Portfolio data: [app/data/portfolio.ts](../app/data/portfolio.ts)
-- Lead form UI: [app/components/LeadCaptureForm.tsx](../app/components/LeadCaptureForm.tsx)
-- Lead API handler: [app/api/leads/route.ts](../app/api/leads/route.ts)
-- Footer socials: [app/components/Footer.tsx](../app/components/Footer.tsx)
+## Pending owner inputs
+- Cal.com event link → siteConfig.bookingUrl
+- Real client list + permissions → marquee.ts clientBrands
+- Real testimonials → testimonials.ts
+- Case-study metrics + named clients → caseStudies.ts rewrite
+- Founder name/photo/LinkedIn → /about
