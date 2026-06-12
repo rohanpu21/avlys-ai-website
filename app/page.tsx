@@ -5,6 +5,7 @@ import FAQ, { homepageFaqs } from "./components/FAQ";
 import Footer from "./components/Footer";
 import Hero from "./components/Hero";
 import IntegrationTile from "./components/IntegrationTile";
+import LaunchFilmTile from "./components/LaunchFilmTile";
 import LogoMarquee from "./components/LogoMarquee";
 import Navbar from "./components/Navbar";
 import Process from "./components/Process";
@@ -71,6 +72,7 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
+        <LaunchFilmTile />
         <LogoMarquee />
         <IntegrationTile />
         <ServicesGrid />
