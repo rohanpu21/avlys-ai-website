@@ -29,7 +29,8 @@ const Hero = () => {
     <section ref={ref} className="bg-canvas px-6 pb-20 pt-20 sm:pt-28">
       <div className="mx-auto flex w-full max-w-4xl flex-col items-center text-center">
         <h1 data-hero-stagger className="type-hero max-w-3xl text-ink">
-          Custom software and AI, built into the systems you already run.
+          Custom software <span className="text-shimmer">and AI</span>, built
+          into the systems you already run.
         </h1>
         <p data-hero-stagger className="type-lead mt-6 max-w-2xl text-ink-muted">
           Avlys AI designs, builds, and integrates AI-native software for
