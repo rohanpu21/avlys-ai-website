@@ -5,6 +5,7 @@ const navLinks = [
   { label: "Solutions", href: "/#solutions" },
   { label: "Case Studies", href: "/case-studies" },
   { label: "Portfolio", href: "/portfolio" },
+  { label: "Blog", href: "/blog" },
 ];
 
 const Navbar = () => {
