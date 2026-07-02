@@ -28,6 +28,15 @@ Home page sections and anchors:
 - #portfolio: [app/components/PortfolioPreview.tsx](../app/components/PortfolioPreview.tsx)
 - #contact: [app/components/CallToAction.tsx](../app/components/CallToAction.tsx)
 
+## Blog section
+- Added a blog section for SEO/organic growth content.
+  - [app/data/blog.ts](../app/data/blog.ts) — post data model + 10 initial posts across Web Development, E-Commerce Development, Agentic AI Apps, Deep Tech AI Software, Landing Page Design, and AI Agents for Enterprises.
+  - [app/blog/page.tsx](../app/blog/page.tsx) — blog index/listing.
+  - [app/blog/[slug]/page.tsx](../app/blog/[slug]/page.tsx) — article page with Article/BreadcrumbList/FAQPage structured data.
+  - [app/blog/opengraph-image.tsx](../app/blog/opengraph-image.tsx) and [app/blog/[slug]/opengraph-image.tsx](../app/blog/[slug]/opengraph-image.tsx) — OG images.
+  - Wired into [app/sitemap.ts](../app/sitemap.ts), [app/components/Navbar.tsx](../app/components/Navbar.tsx), and [app/components/Footer.tsx](../app/components/Footer.tsx).
+- New posts should follow the same `BlogPost` shape in `app/data/blog.ts` (slug, metaTitle/metaDescription, keywords, category, intro/sections/takeaways/faqs) — pages and structured data are generated automatically from that array.
+
 ## Change log (summary of work done)
 - Removed the old Proof block and replaced it with a Portfolio preview section.
   - [app/components/WhyAvlys.tsx](../app/components/WhyAvlys.tsx)
