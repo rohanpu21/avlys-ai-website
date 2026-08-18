@@ -11,6 +11,7 @@
 - [Custom Software Development](https://avlysai.com/services/custom-software-development): platforms, internal tools, and marketplaces - US + India delivery, full IP transfer.
 - [AI Agent Development](https://avlysai.com/services/ai-agents): support, sales, and voice agents with human-in-the-loop orchestration.
 - [AI Automation](https://avlysai.com/services/ai-automation): lead response, support triage, and document processing wired into existing tools.
+- [Data Collection & Preparation](https://avlysai.com/services/ai-training-data): collection, annotation, cleaning, and evaluation sets for AI training - delivered by a core team under NDA/DPA.
 - [AI Consulting for Mid-Sized Companies](https://avlysai.com/services/ai-consulting-mid-market): readiness assessment, use-case ranking, and a costed pilot plan.
 
 ## Proof

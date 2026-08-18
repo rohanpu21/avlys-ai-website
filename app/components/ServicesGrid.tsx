@@ -11,7 +11,7 @@ const ServicesGrid = () => {
         <Reveal className="mx-auto max-w-2xl text-center">
           <h2 className="type-display-lg text-ink">What we build.</h2>
           <p className="type-lead-airy mt-4 text-ink-muted">
-            Five ways teams work with us - every one starting with a fixed
+            Six ways teams work with us - every one starting with a fixed
             scope and a success metric.
           </p>
         </Reveal>

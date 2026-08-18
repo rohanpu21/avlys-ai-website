@@ -56,6 +56,41 @@ const pilotWorkflow: ServiceWorkflowStep[] = [
   },
 ];
 
+// Data work has its own lifecycle: the calibration batch and the independent
+// audit pass replace the pilot/integrate rhythm of a build engagement.
+const dataWorkflow: ServiceWorkflowStep[] = [
+  {
+    title: "Scope",
+    detail:
+      "We define the dataset with you: what the model has to learn, the label taxonomy, the edge cases that decide quality, and the bar that counts as done - written down before any data is touched.",
+    artifacts: ["Annotation guidelines", "Label taxonomy", "Quality thresholds"],
+  },
+  {
+    title: "Calibrate",
+    detail:
+      "A small paid batch against the real taxonomy. You review actual output and we resolve genuine disagreements, so the guidelines are corrected on evidence rather than assumption before volume begins.",
+    artifacts: ["Sample dataset", "Calibration notes", "Per-unit pricing"],
+  },
+  {
+    title: "Produce",
+    detail:
+      "The core team collects, cleans, and labels to the agreed guidelines, with automated checks for duplicates, malformed records, and missing fields running alongside the human work.",
+    artifacts: ["Working dataset", "Automated check log", "Progress reporting"],
+  },
+  {
+    title: "Audit",
+    detail:
+      "A second pass reviews the work independently of whoever produced it and scores it against a held-out gold set, so quality arrives as a number you can inspect instead of a claim.",
+    artifacts: ["Gold-set audit results", "Agreement scores", "Correction log"],
+  },
+  {
+    title: "Deliver",
+    detail:
+      "Structured delivery in the format your pipeline expects, with schema, guidelines, and known limitations documented - and the option to carry it straight into the build that consumes it.",
+    artifacts: ["Final dataset", "Schema and data dictionary", "Handover documentation"],
+  },
+];
+
 export const servicePages: ServicePage[] = [
   {
     slug: "ai-integration",
@@ -378,6 +413,92 @@ export const servicePages: ServicePage[] = [
     ],
   },
   {
+    slug: "ai-training-data",
+    title: "Data Collection & Preparation",
+    metaTitle: "AI Training Data Services - Collection & Preparation | Avlys AI",
+    metaDescription:
+      "Datasets built for the model you are training: collection, annotation, cleaning, and evaluation sets. Delivered by a named core team under NDA and DPA.",
+    keywords: [
+      "AI training data services",
+      "data collection and preparation",
+      "data annotation services India",
+      "dataset preparation for LLM fine-tuning",
+      "AI data preparation company",
+    ],
+    eyebrow: "Data Collection & Preparation",
+    h1: "The dataset your model actually needs.",
+    description:
+      "Collection, annotation, cleaning, and evaluation sets - scoped to the model you are training rather than sold by the seat. Delivered by the same core team that builds the systems the data feeds.",
+    proof: ["Core team, not a crowd", "Paid calibration batch first", "Per-unit pricing"],
+    capabilities: [
+      {
+        title: "Collection and sourcing",
+        description:
+          "Text, documents, images, audio, video, and multilingual data gathered or sourced to a spec agreed upfront - including the long-tail cases your model keeps getting wrong.",
+      },
+      {
+        title: "Annotation and labeling",
+        description:
+          "Classification, extraction, entity and intent labeling, transcription, bounding boxes, and segmentation - against a written taxonomy, with edge cases settled before volume production starts.",
+      },
+      {
+        title: "Cleaning and curation",
+        description:
+          "Deduplication, normalization, PII handling, chunking and metadata for RAG corpora, and instruction/response formatting for fine-tuning runs.",
+      },
+      {
+        title: "Evaluation and golden sets",
+        description:
+          "Held-out test sets and scored benchmarks, so you can prove whether a model actually improved instead of judging it on a demo.",
+      },
+    ],
+    systems: [
+      "JSONL",
+      "CSV / Parquet",
+      "COCO / YOLO",
+      "WAV / MP3",
+      "Label Studio",
+      "Hugging Face Datasets",
+      "S3 / GCS",
+      "PostgreSQL / pgvector",
+      "Custom schemas",
+    ],
+    outcomes: [
+      "A dataset shaped by your model's actual failure modes, not a generic labeling template.",
+      "Quality you can inspect: a held-out gold set, agreement scores, and a correction log.",
+      "Per-unit pricing agreed after a paid calibration batch - no open-ended data spend.",
+      "Documented schema and guidelines, so the dataset stays usable long after handover.",
+    ],
+    workflow: dataWorkflow,
+    faqs: [
+      {
+        question: "Who actually does the annotation?",
+        answer:
+          "Our core team. Work is not pushed out to an anonymous crowd platform, so the same accountable people stay on your project throughout - which is what lets domain context and calibration hold across a dataset.",
+      },
+      {
+        question: "What data types can you handle?",
+        answer:
+          "Text, documents, images, audio, video, and multilingual data, scoped per project. We agree the taxonomy and quality bar with you first. If a dataset needs specialist domain knowledge we do not have, we say so before the engagement starts rather than after.",
+      },
+      {
+        question: "How do you measure quality?",
+        answer:
+          "Every project runs a second review pass, independent of whoever produced the work, scored against a held-out gold set. You receive the agreement scores and the correction log along with the data - not just the finished files.",
+      },
+      {
+        question: "Who owns the data, and how is it protected?",
+        answer:
+          "You own the dataset outright. Engagements run under NDA with a data processing agreement, least-privilege access, and your data kept in your storage where you prefer. We do not currently hold HIPAA or SOC 2 certification - if your data requires certified handling, we will tell you that upfront instead of after signing.",
+      },
+      {
+        question: "Can you also build the system that uses the data?",
+        answer:
+          "Yes, and that is usually the point. Most data vendors hand over files and leave. We can prepare the dataset and carry it straight into the pilot that consumes it, so nothing is lost translating between two vendors.",
+      },
+    ],
+  },
+  {
     slug: "ai-consulting-mid-market",
     title: "AI Consulting for Mid-Sized Companies",
     metaTitle: "AI Consulting for Mid-Sized Companies | Avlys AI",
@@ -474,8 +595,6 @@ export const servicePages: ServicePage[] = [
     ],
   },
 ];
-
-export const featuredServicePages = servicePages.slice(0, 4);
 
 export const getServicePage = (slug: string) =>
   servicePages.find((service) => service.slug === slug);

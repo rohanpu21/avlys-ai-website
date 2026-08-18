@@ -59,7 +59,7 @@ export default function ServicesPage() {
           <div className="mx-auto w-full max-w-4xl text-center">
             <h1 className="type-hero text-ink">Services.</h1>
             <p className="type-lead mx-auto mt-6 max-w-2xl text-ink-muted">
-              Five ways teams work with us. Every engagement is fixed-scope,
+              Six ways teams work with us. Every engagement is fixed-scope,
               priced before work begins, and measured against a success metric
               agreed upfront.
             </p>
