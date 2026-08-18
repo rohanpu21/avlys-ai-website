@@ -3,14 +3,18 @@ export const siteConfig = {
   url: "https://avlysai.com",
   description:
     "Avlys AI builds custom software and integrates AI into the systems enterprises already run - ERP, CRM, and legacy applications. Fixed-scope pilots delivered in weeks by senior engineers across the US and India.",
-  email: "official@avlysai.com",
+  email: "sales@avlysai.com",
   phone: "+91 93377 09699",
   phoneHref: "+919337709699",
+  // WhatsApp line for the "Book a strategy call" CTAs. Digits only, with the
+  // country code and no "+", as wa.me requires.
+  whatsappNumber: "919937730039",
   city: "Hyderabad",
   region: "Telangana",
   country: "IN",
-  // Cal.com event link. When set, every "Book a strategy call" CTA opens the
-  // embedded scheduler; while empty, CTAs fall back to the contact form.
+  // Cal.com event link. Only used when whatsappNumber is empty: WhatsApp takes
+  // precedence for every "Book a strategy call" CTA. While both are empty,
+  // CTAs fall back to the contact form.
   bookingUrl: "",
   socialLinks: [
     "https://www.linkedin.com/company/avlys-ai/",
@@ -30,3 +34,8 @@ export const siteConfig = {
 
 export const absoluteUrl = (path = "/") =>
   new URL(path, siteConfig.url).toString();
+
+export const whatsappUrl = (
+  message = "Hi Avlys AI, I would like to book a strategy call."
+) =>
+  `https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(message)}`;

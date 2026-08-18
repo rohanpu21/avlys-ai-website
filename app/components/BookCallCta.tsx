@@ -3,7 +3,7 @@
 import Link from "next/link";
 import posthog from "posthog-js";
 import { useEffect } from "react";
-import { siteConfig } from "../lib/site";
+import { siteConfig, whatsappUrl } from "../lib/site";
 
 type BookCallCtaProps = {
   label?: string;
@@ -20,7 +20,8 @@ const BookCallCta = ({
   location,
   className = "",
 }: BookCallCtaProps) => {
-  const hasBooking = Boolean(siteConfig.bookingUrl);
+  const hasWhatsapp = Boolean(siteConfig.whatsappNumber);
+  const hasBooking = !hasWhatsapp && Boolean(siteConfig.bookingUrl);
 
   useEffect(() => {
     if (!hasBooking) return;
@@ -34,11 +35,32 @@ const BookCallCta = ({
   const buttonClass = `${variant === "primary" ? "btn-pill-primary" : "btn-pill-ghost"} ${className}`;
 
   const trackClick = () => {
-    posthog.capture("cta_click", { location, booking_enabled: hasBooking });
+    posthog.capture("cta_click", {
+      location,
+      booking_enabled: hasBooking,
+      whatsapp_enabled: hasWhatsapp,
+    });
+    if (hasWhatsapp) {
+      posthog.capture("whatsapp_opened", { location });
+    }
     if (hasBooking) {
       posthog.capture("booking_opened", { location });
     }
   };
+
+  if (hasWhatsapp) {
+    return (
+      <a
+        href={whatsappUrl()}
+        target="_blank"
+        rel="noreferrer"
+        onClick={trackClick}
+        className={buttonClass}
+      >
+        {label}
+      </a>
+    );
+  }
 
   if (hasBooking) {
     return (
