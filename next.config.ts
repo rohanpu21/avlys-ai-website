@@ -4,6 +4,9 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: process.cwd(),
   },
+  // Hides the floating Next.js dev-tools badge. It never shipped to production
+  // builds; this just keeps local previews clean.
+  devIndicators: false,
   async redirects() {
     // Permanent redirects from the retired India-SMB service pages to the
     // enterprise service pages (also resolves the old homepage keyword
