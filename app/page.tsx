@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     absolute: "Enterprise AI Development & Custom Software Company | Avlys AI",
   },
   description:
-    "Avlys AI builds custom software and integrates AI into the systems you already run - ERP, CRM, legacy apps. Fixed-scope pilots in weeks. Book a strategy call.",
+    "Avlys AI builds AI-native custom software, intelligent agents, and enterprise automation systems for teams in India and globally.",
   alternates: {
     canonical: "/",
   },
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     url: siteConfig.url,
     title: "Enterprise AI Development & Custom Software Company | Avlys AI",
     description:
-      "Custom software and AI integration for enterprise and mid-market teams in the US and India. Fixed-scope pilots delivered in weeks.",
+      "AI-native custom software, intelligent agents, and operational automation for enterprise teams.",
   },
 };
 

@@ -10,7 +10,7 @@ import { absoluteUrl, siteConfig } from "../lib/site";
 export const metadata: Metadata = {
   title: "Insights",
   description:
-    "Practical guides on AI integration, custom software costs, AI agents, and pilots - written for CTOs and operators at enterprise and mid-market companies.",
+    "Practical guides on AI integration, custom software costs, AI agents, and pilots - written for enterprise technology leaders and operators.",
   alternates: {
     canonical: "/blog",
   },

@@ -207,14 +207,27 @@ const LeadCaptureForm = () => {
         Send project details
       </button>
       {status === "success" && (
-        <p className="text-[15px] text-ink">
-          Your email app should now be open with the details ready to send. If it
-          did not open, email us directly at{" "}
-          <a href={`mailto:${siteConfig.email}`} className="underline">
-            {siteConfig.email}
-          </a>
-          .
-        </p>
+        <div className="rounded-[18px] border border-hairline bg-parchment p-5 text-[15px] text-ink">
+          <p className="font-semibold text-ink">Inquiry prepared.</p>
+          <p className="mt-1 text-ink-muted">
+            Your email app should now be open with your project details ready to send. If it
+            did not open, please send your details directly to{" "}
+            <a href={`mailto:${siteConfig.email}`} className="font-semibold text-primary underline">
+              {siteConfig.email}
+            </a>
+            .
+          </p>
+          <button
+            type="button"
+            onClick={() => {
+              setFormState(initialState);
+              setStatus("idle");
+            }}
+            className="mt-3 inline-block text-[14px] font-semibold text-primary transition-all active:scale-95 hover:opacity-75"
+          >
+            Send another inquiry &rarr;
+          </button>
+        </div>
       )}
     </form>
   );

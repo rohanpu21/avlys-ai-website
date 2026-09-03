@@ -96,29 +96,49 @@ export default function CaseStudiesPage() {
         <section className="bg-parchment px-6 py-16">
           <div className="mx-auto grid w-full max-w-6xl gap-5 md:grid-cols-2">
             {orderedCaseStudies.map((caseStudy, index) => (
-              <Link
+              <article
                 key={caseStudy.slug}
-                href={`/case-studies/${caseStudy.slug}`}
                 className="group overflow-hidden rounded-[18px] border border-hairline bg-canvas transition-colors hover:border-ink-faint"
               >
-                <CaseStudyImage
-                  slug={caseStudy.slug}
-                  title={caseStudy.title}
-                  priority={index < 2}
-                  sizes="(min-width: 768px) 45vw, 100vw"
-                />
-                <div className="p-6">
-                  <p className="type-caption-strong uppercase tracking-wide text-primary">
-                    {caseStudy.category}
-                  </p>
-                  <h2 className="mt-3 text-[21px] font-semibold leading-snug text-ink">
-                    {caseStudy.headline}
-                  </h2>
-                  <p className="type-caption mt-4 text-ink-faint">
-                    {caseStudy.stack} · {caseStudy.market}
-                  </p>
+                <Link href={`/case-studies/${caseStudy.slug}`}>
+                  <CaseStudyImage
+                    slug={caseStudy.slug}
+                    title={caseStudy.title}
+                    coverImage={caseStudy.coverImage}
+                    priority={index < 2}
+                    sizes="(min-width: 768px) 45vw, 100vw"
+                  />
+                  <div className="p-6 pb-0">
+                    <p className="type-caption-strong uppercase tracking-wide text-primary">
+                      {caseStudy.category}
+                    </p>
+                    <h2 className="mt-3 text-[21px] font-semibold leading-snug text-ink">
+                      {caseStudy.headline}
+                    </h2>
+                    <p className="type-caption mt-4 text-ink-faint">
+                      {caseStudy.stack} · {caseStudy.market}
+                    </p>
+                  </div>
+                </Link>
+                <div className="flex flex-wrap items-center gap-4 px-6 pb-6 pt-4">
+                  <Link
+                    href={`/case-studies/${caseStudy.slug}`}
+                    className="text-[15px] text-primary transition-opacity hover:opacity-65"
+                  >
+                    Case study
+                  </Link>
+                  {caseStudy.liveUrl ? (
+                    <a
+                      href={caseStudy.liveUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-[15px] text-primary transition-opacity hover:opacity-65"
+                    >
+                      Visit site
+                    </a>
+                  ) : null}
                 </div>
-              </Link>
+              </article>
             ))}
           </div>
         </section>

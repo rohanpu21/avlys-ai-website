@@ -68,7 +68,7 @@ const Footer = () => {
               <a
                 href={siteConfig.socialLinks[0]}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="transition-opacity hover:opacity-60"
               >
                 LinkedIn
@@ -76,7 +76,7 @@ const Footer = () => {
               <a
                 href={siteConfig.socialLinks[1]}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="transition-opacity hover:opacity-60"
               >
                 Instagram

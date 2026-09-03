@@ -2,10 +2,10 @@ export const siteConfig = {
   name: "Avlys AI",
   url: "https://avlysai.com",
   description:
-    "Avlys AI builds custom software and integrates AI into the systems enterprises already run - ERP, CRM, and legacy applications. Fixed-scope pilots delivered in weeks by senior engineers across the US and India.",
+    "Avlys AI is a founder-led AI-native custom software development partner for enterprises, building intelligent systems and automation for teams in India and globally.",
   email: "sales@avlysai.com",
-  phone: "+91 93377 09699",
-  phoneHref: "+919337709699",
+  phone: "+91 99377 30039",
+  phoneHref: "+919937730039",
   // WhatsApp line for the "Book a strategy call" CTAs. Digits only, with the
   // country code and no "+", as wa.me requires.
   whatsappNumber: "919937730039",
@@ -25,7 +25,7 @@ export const siteConfig = {
     "AI integration services",
     "custom software development company",
     "AI agent development services",
-    "AI consulting for mid-sized companies",
+    "AI consulting for enterprises",
     "integrate AI into existing software",
     "AI automation services",
     "custom software development India USA",

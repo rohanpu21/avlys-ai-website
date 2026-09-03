@@ -7,6 +7,7 @@ type CaseStudyImageProps = {
   priority?: boolean;
   sizes?: string;
   variant?: "cover" | "system";
+  coverImage?: string;
 };
 
 const CaseStudyImage = ({
@@ -16,15 +17,17 @@ const CaseStudyImage = ({
   priority = false,
   sizes = "(min-width: 1024px) 50vw, 100vw",
   variant = "cover",
+  coverImage,
 }: CaseStudyImageProps) => {
   const query = variant === "cover" ? "" : `?variant=${variant}`;
+  const src = coverImage ?? `/case-studies/${slug}/opengraph-image${query}`;
 
   return (
     <div
       className={`relative aspect-[1200/630] overflow-hidden bg-parchment ${className}`}
     >
       <Image
-        src={`/case-studies/${slug}/opengraph-image${query}`}
+        src={src}
         alt={`${title} case study visual`}
         width={1200}
         height={630}

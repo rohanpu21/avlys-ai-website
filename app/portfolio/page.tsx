@@ -78,10 +78,8 @@ export default function PortfolioPage() {
     <div className="min-h-screen bg-canvas text-ink">
       <StructuredData data={structuredData} />
       <Navbar />
-      <main className="px-6 py-20 sm:py-24">
-        <div className="mx-auto w-full max-w-6xl">
-          <PortfolioClient />
-        </div>
+      <main>
+        <PortfolioClient />
       </main>
       <CallToAction />
       <Footer />

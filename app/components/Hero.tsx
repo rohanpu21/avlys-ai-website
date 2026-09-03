@@ -21,19 +21,6 @@ const headlineWords = [
   "work.",
 ];
 
-// Two separate propositions rather than one clause - the build offer and the
-// data offer read as distinct services instead of a single run-on sentence.
-const heroPoints = [
-  {
-    title: "Custom software, built with AI.",
-    body: "Avlys AI delivers fixed-scope builds at record speed and lower cost, integrated into the ERP, CRM, and tools you already run.",
-  },
-  {
-    title: "Data collection and preparation.",
-    body: "Any data type - collected, annotated, cleaned, and evaluated by our core team, ready for the model that consumes it.",
-  },
-];
-
 const Hero = () => {
   const ref = useRef<HTMLElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
@@ -102,18 +89,6 @@ const Hero = () => {
       </div>
 
       <div className="mx-auto flex w-full max-w-4xl flex-col items-center text-center">
-        <Link
-          data-hero-fade
-          href="/services/ai-training-data"
-          className="inline-flex items-center gap-2 rounded-full border border-hairline bg-parchment px-3.5 py-1.5 text-[13px] font-semibold text-ink-muted transition-colors hover:border-ink-faint"
-        >
-          <span className="relative flex h-1.5 w-1.5">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
-            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-primary" />
-          </span>
-          New - data collection &amp; preparation
-        </Link>
-
         <h1 ref={headlineRef} className="type-hero mt-6 max-w-3xl text-ink">
           {headlineWords.map((word, index) => (
             <Fragment key={`${word}-${index}`}>
@@ -127,23 +102,11 @@ const Hero = () => {
           ))}
         </h1>
 
-        <div className="mt-8 grid w-full max-w-3xl gap-5 text-left sm:mt-10 sm:grid-cols-2 sm:gap-8">
-          {heroPoints.map((point, index) => (
-            <div
-              key={point.title}
-              data-hero-fade
-              className="border-t border-hairline pt-4"
-            >
-              <span className="type-caption-strong text-primary">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <p className="mt-2 text-[17px] leading-[1.45] text-ink-muted">
-                <span className="font-semibold text-ink">{point.title}</span>{" "}
-                {point.body}
-              </p>
-            </div>
-          ))}
-        </div>
+        <p data-hero-fade className="type-lead mt-6 max-w-2xl text-ink-muted">
+          Avlys AI designs, builds, and integrates AI-native software for
+          enterprise and mid-market teams — without ripping out the ERP, CRM,
+          and tools your operation depends on.
+        </p>
 
         <div data-hero-fade className="mt-9 flex flex-col gap-4 sm:flex-row">
           <BookCallCta location="hero" />

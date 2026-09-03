@@ -149,11 +149,24 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             <p className="type-caption mt-6 text-ink-faint">
               {caseStudy.type} · {caseStudy.stack} · {caseStudy.market}
             </p>
+            {caseStudy.liveUrl ? (
+              <p className="mt-6">
+                <a
+                  href={caseStudy.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[17px] text-primary transition-opacity hover:opacity-65"
+                >
+                  Visit live website
+                </a>
+              </p>
+            ) : null}
           </div>
           <div className="mx-auto mt-12 w-full max-w-5xl overflow-hidden rounded-[18px] border border-hairline">
             <CaseStudyImage
               slug={caseStudy.slug}
               title={caseStudy.title}
+              coverImage={caseStudy.coverImage}
               priority
               sizes="(min-width: 1024px) 64rem, 100vw"
             />
@@ -248,6 +261,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                     <CaseStudyImage
                       slug={item.slug}
                       title={item.title}
+                      coverImage={item.coverImage}
                       sizes="(min-width: 768px) 30vw, 100vw"
                     />
                     <div className="p-5">

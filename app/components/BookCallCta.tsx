@@ -53,7 +53,7 @@ const BookCallCta = ({
       <a
         href={whatsappUrl()}
         target="_blank"
-        rel="noreferrer"
+        rel="noopener noreferrer"
         onClick={trackClick}
         className={buttonClass}
       >

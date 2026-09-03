@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     absolute: "AI Development & Custom Software Services | Avlys AI",
   },
   description:
-    "AI integration, custom software development, AI agents, workflow automation, and mid-market AI consulting - fixed-scope engagements for US and Indian teams.",
+    "AI-native custom software development, AI agents, workflow automation, and enterprise AI consulting - fixed-scope engagements for global teams.",
   alternates: {
     canonical: "/services",
   },

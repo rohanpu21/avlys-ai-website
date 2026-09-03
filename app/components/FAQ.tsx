@@ -29,7 +29,7 @@ const faqs = [
   {
     question: "Where is the team, and how do time zones work?",
     answer:
-      "Engineering is based in Hyderabad, India, with delivery for US and Indian clients. Demos, decisions, and communication run on your hours; the build runs on ours - which usually means you wake up to progress.",
+      "Our team works from Hyderabad and Bengaluru, India, with delivery for US and Indian clients. Demos, decisions, and communication run on your hours; the build runs on ours - which usually means you wake up to progress.",
   },
 ];
 
