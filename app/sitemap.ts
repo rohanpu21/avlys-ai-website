@@ -6,8 +6,8 @@ import { absoluteUrl } from "./lib/site";
 
 // Honest lastModified dates: bump these when the corresponding content
 // actually changes (a `new Date()` on every build devalues the signal).
-const SITE_REDESIGN_DATE = new Date("2026-09-04");
-const CASE_STUDIES_UPDATED = new Date("2026-09-04");
+const SITE_REDESIGN_DATE = new Date("2026-09-06");
+const CASE_STUDIES_UPDATED = new Date("2026-09-06");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -22,6 +22,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: SITE_REDESIGN_DATE,
       changeFrequency: "weekly",
       priority: 0.9,
+    },
+    {
+      url: absoluteUrl("/data"),
+      lastModified: SITE_REDESIGN_DATE,
+      changeFrequency: "monthly",
+      priority: 0.85,
     },
     {
       url: absoluteUrl("/case-studies"),

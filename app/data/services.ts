@@ -499,21 +499,21 @@ export const servicePages: ServicePage[] = [
     ],
   },
   {
-    slug: "ai-consulting-mid-market",
-    title: "AI Consulting for Mid-Sized Companies",
-    metaTitle: "AI Consulting for Mid-Sized Companies | Avlys AI",
+    slug: "enterprise-ai-consulting",
+    title: "Enterprise AI Consulting",
+    metaTitle: "Enterprise AI Consulting | Avlys AI",
     metaDescription:
-      "AI strategy for mid-market teams without a data science department: readiness assessment, use-case selection, build-vs-buy analysis, and a costed pilot plan.",
+      "AI strategy for enterprises: readiness assessment, use-case selection, build-vs-buy analysis, and a costed pilot plan.",
     keywords: [
-      "AI consulting for mid-sized companies",
+      "enterprise AI consulting",
       "AI readiness assessment",
       "AI strategy consulting",
-      "mid-market AI adoption",
+      "enterprise AI adoption",
     ],
-    eyebrow: "AI Consulting - Mid-Market",
-    h1: "Enterprise-grade AI, scoped for mid-market reality.",
+    eyebrow: "Enterprise AI Consulting",
+    h1: "An AI roadmap your enterprise can build on.",
     description:
-      "You don't need a data science team to adopt AI - you need an honest assessment of where it pays back, what your data supports today, and what it will cost. We deliver that as a fixed-price engagement that ends in a costed, buildable plan.",
+      "Align your business priorities, data readiness, security requirements, and existing systems before you invest in AI. We deliver that as a fixed-price engagement that ends in a costed, buildable plan.",
     proof: ["Fixed-price assessment", "Build-vs-buy honesty", "Ends in a costed plan"],
     capabilities: [
       {
@@ -573,9 +573,9 @@ export const servicePages: ServicePage[] = [
     ],
     faqs: [
       {
-        question: "We don't have a data team. Is AI realistic for us?",
+        question: "Can we start with the data and systems we already have?",
         answer:
-          "Usually yes. Most mid-market AI wins - lead response, support triage, document processing - run on the data already in your CRM, helpdesk, and inbox. The assessment tells you precisely what is realistic with what you have.",
+          "Often, yes. Workflows such as lead response, support triage, and document processing can use the data already in your CRM, helpdesk, and inbox. The assessment tells you precisely what is realistic with what you have.",
       },
       {
         question: "Are you just going to recommend hiring you to build it?",
@@ -585,7 +585,7 @@ export const servicePages: ServicePage[] = [
       {
         question: "How long does the assessment take?",
         answer:
-          "Two to three weeks for most mid-market teams: one week of discovery, then evaluation and a costed pilot plan, delivered as working documents plus a leadership walkthrough.",
+          "A focused assessment typically takes two to three weeks. Timing depends on system access, stakeholder availability, and the workflows in scope. We agree the schedule before discovery begins.",
       },
       {
         question: "What does it cost?",

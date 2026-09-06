@@ -1,4 +1,6 @@
 import { ImageResponse } from "next/og";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 import { caseStudies, getCaseStudy } from "../../data/caseStudies";
@@ -861,6 +863,19 @@ export default async function Image({ params, searchParams }: ImageProps) {
 
   if (!caseStudy) {
     notFound();
+  }
+
+  if (caseStudy.coverImage?.startsWith("/portfolio/covers/")) {
+    const data = await readFile(join(process.cwd(), "public", caseStudy.coverImage));
+    const mime = caseStudy.coverImage.endsWith(".jpeg") ? "image/jpeg" : "image/png";
+    return new ImageResponse(
+      <div style={{ display: "flex", width: "100%", height: "100%", alignItems: "center", justifyContent: "center", background: "white" }}>
+        {/* Raster source is embedded for the server-side Open Graph renderer. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={`data:${mime};base64,${data.toString("base64")}`} width={1200} height={630} alt={`${caseStudy.title} product illustration`} style={{ objectFit: "cover" }} />
+      </div>,
+      size,
+    );
   }
 
   const spec = visualSpecs[caseStudy.slug] ?? fallbackSpec(caseStudy.slug);

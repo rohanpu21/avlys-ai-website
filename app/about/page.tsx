@@ -5,6 +5,9 @@ import CallToAction from "../components/CallToAction";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Reveal from "../components/Reveal";
+import { team } from "../data/team";
+import TeamPortrait from "../components/TeamPortrait";
+import StudioReels from "../components/StudioReels";
 import StructuredData from "../components/StructuredData";
 import { absoluteUrl, siteConfig } from "../lib/site";
 
@@ -27,74 +30,6 @@ const structuredData = {
   about: { "@id": `${siteConfig.url}/#organization` },
   inLanguage: "en-US",
 };
-
-type TeamMember = {
-  name: string;
-  role: string;
-  experience?: string;
-  detail?: string;
-  bio: string;
-  image?: string;
-  imageClass?: string;
-  linkedin?: string;
-};
-
-const team: TeamMember[] = [
-  {
-    name: "Gopal Jain",
-    role: "Technology Consultant",
-    experience: "B.Tech in Electrical Engineering",
-    detail: "IIT Roorkee alumnus · Former Microsoft",
-    bio: "Gopal handles system design consulting and architectural decisions, bringing a systems-led perspective to ambitious technical problems and connecting strategy with sound execution.",
-    image: "/team/gopal-jain.jpeg",
-    linkedin: "https://www.linkedin.com/in/gopal-jain",
-  },
-  {
-    name: "Gaurav Purohit",
-    role: "Co-founder & Head of Sales, Avlys",
-    experience: "BBA LLB",
-    detail: "KIIT School of Law alumnus",
-    bio: "Gaurav leads sales and commercial partnerships at Avlys, helping shape how we turn early-stage ideas and operational bottlenecks into focused, high-leverage software.",
-    image: "/team/gaurav-purohit-outdoor.jpeg",
-    imageClass: "object-[center_20%]",
-    linkedin: "https://www.linkedin.com/in/gaurav-purohit-230463285",
-  },
-  {
-    name: "Rohan Purohit",
-    role: "Co-founder & Head of Product, Avlys",
-    experience: "M.B.A.",
-    detail: "KIIT School of Management alumnus",
-    bio: "Rohan leads product designing and head of product at Avlys, working at the intersection of user experience and AI-native delivery to turn operational needs into intuitive, robust systems.",
-    image: "/team/rohan-purohit.jpeg",
-    linkedin: "https://www.linkedin.com/in/rohan-purohit-04860517b",
-  },
-  {
-    name: "Aadil Ahmed Khan",
-    role: "Co-founder & Product Designer, Avlys",
-    experience: "B.Tech in Design",
-    detail: "UI/UX & Product Design",
-    bio: "Aadil focuses on UI/UX, product designing, and rigorous testing, building thoughtful, resilient software and intelligent automation around real business workflows.",
-    image: "/team/aadil-ahmed-khan.jpeg",
-    linkedin: "https://www.linkedin.com/in/aadil-ahmad-khan-681272254",
-  },
-  {
-    name: "Roshan Dharua",
-    role: "Co-founder, Avlys",
-    experience: "Master's in Psychology",
-    detail: "Ravenshaw University alumnus",
-    bio: "Roshan brings a deep behavioral and psychological perspective to the build process, collaborating on systems that are practical, intuitive, and seamlessly adopted from the first release onward.",
-    image: "/team/roshan-dharua-portrait.jpeg",
-    linkedin: "https://www.linkedin.com/in/roshan-dharua-27b540234",
-  },
-  {
-    name: "Deepak Sahu",
-    role: "Co-founder & Full Stack AI Engineer, Avlys",
-    experience: "B.Tech in Electronics & Communication",
-    detail: "NIT Rourkela alumnus",
-    bio: "Deepak architects and builds full stack AI systems, staying close to the technical core, direct with the problem, and relentless about shipping reliable software.",
-    linkedin: "https://www.linkedin.com/in/deepak-sahu-9ab150214",
-  },
-];
 
 const studioPhotos = [
   {
@@ -156,24 +91,17 @@ export default function AboutPage() {
             </Reveal>
             <div className="mt-14 grid border-l border-t border-hairline sm:grid-cols-2 lg:grid-cols-3">
               {team.map((person, index) => (
-                <Reveal key={person.name} delay={index * 0.035}>
-                  <article className="flex min-h-[400px] flex-col border-b border-r border-hairline bg-canvas p-7 sm:p-8">
-                    {person.image ? (
-                      <Image src={person.image} alt={`Portrait of ${person.name}`} width={144} height={144} sizes="144px" className={`h-28 w-28 rounded-full object-cover ${person.imageClass ?? ""}`} />
-                    ) : (
-                      <div className="flex h-28 w-28 items-center justify-center rounded-full bg-parchment text-[22px] font-semibold tracking-[-0.02em] text-ink" aria-hidden="true">
-                        {person.name.split(" ").filter(Boolean).slice(0, 2).map((part) => part[0]).join("")}
-                      </div>
-                    )}
+                <Reveal key={person.name} delay={index * 0.035} className="h-full">
+                  <article id={person.name.toLowerCase().replaceAll(" ", "-")} className="flex h-full scroll-mt-24 flex-col border-b border-r border-hairline bg-canvas p-7 sm:p-8">
+                    <TeamPortrait person={person} />
                     <div className="mt-7 flex flex-1 flex-col">
-                      <p className="type-caption-strong uppercase tracking-[0.12em] text-ink-faint">{person.role}</p>
+                      <p className="type-caption-strong min-h-10 text-ink-muted">{person.role}</p>
                       <h3 className="mt-3 text-[25px] font-semibold leading-tight tracking-[-0.02em] text-ink">{person.name}</h3>
-                      <p className="type-caption mt-2 text-ink-muted">{person.experience}{person.experience && person.detail ? " · " : ""}{person.detail}</p>
+                      <p className="type-caption mt-2 sm:min-h-[60px] text-ink-muted">{person.experience}{person.experience && person.detail ? " · " : ""}{person.detail}</p>
                       <p className="type-caption mt-5 text-ink-muted">{person.bio}</p>
-                      {person.linkedin ? (
-                        <a href={person.linkedin} target="_blank" rel="noopener noreferrer" className="mt-7 inline-flex w-fit items-center gap-2 text-[15px] text-primary transition-opacity hover:opacity-65"><LinkedInIcon /> LinkedIn</a>
-                      ) : (
-                        <span className="mt-7 inline-flex w-fit items-center gap-2 text-[15px] text-ink-faint" aria-label="LinkedIn link coming soon"><LinkedInIcon /> LinkedIn coming soon</span>
+                      {person.experienceNote && <p className="type-caption mt-3 text-ink-muted">{person.experienceNote}</p>}
+                      {person.linkedin && (
+                        <a href={person.linkedin} target="_blank" rel="noopener noreferrer" className="mt-auto pt-7 inline-flex min-h-11 w-fit items-center gap-2 text-[15px] text-primary transition-opacity hover:opacity-65"><LinkedInIcon /> LinkedIn</a>
                       )}
                     </div>
                   </article>
@@ -202,7 +130,7 @@ export default function AboutPage() {
             <Reveal>
               <p className="type-caption-strong uppercase tracking-[0.18em] text-ink-faint">Studio journal</p>
               <h2 className="type-display-lg mt-4 text-ink">Follow the work as it happens.</h2>
-              <p className="type-caption mt-6 max-w-md text-ink-muted">Our Instagram is the right home for short build moments, office sessions, and launches. It adds proof without interrupting the main story of the site.</p>
+              <p className="type-caption mt-6 max-w-md text-ink-muted">Inside Avlys: product demos, engineering sessions, and the people building your next system.</p>
               <a href={siteConfig.socialLinks[1]} target="_blank" rel="noopener noreferrer" className="btn-pill-primary mt-8">View Avlys on Instagram</a>
             </Reveal>
             <Reveal delay={0.08}>
@@ -215,6 +143,7 @@ export default function AboutPage() {
               </div>
             </Reveal>
           </div>
+          <StudioReels />
         </section>
         <CallToAction />
       </main>

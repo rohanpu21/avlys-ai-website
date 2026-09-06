@@ -9,17 +9,7 @@ import BookCallCta from "./BookCallCta";
 gsap.registerPlugin(useGSAP);
 
 // Split per word so each can ride up out of its own clip box.
-const headlineWords = [
-  "Software",
-  "and",
-  "AI",
-  "that",
-  "fit",
-  "how",
-  "you",
-  "already",
-  "work.",
-];
+const headlineWords = ["AI-native", "custom", "software", "for", "enterprises."];
 
 const Hero = () => {
   const ref = useRef<HTMLElement>(null);
@@ -103,9 +93,8 @@ const Hero = () => {
         </h1>
 
         <p data-hero-fade className="type-lead mt-6 max-w-2xl text-ink-muted">
-          Avlys AI designs, builds, and integrates AI-native software for
-          enterprise and mid-market teams — without ripping out the ERP, CRM,
-          and tools your operation depends on.
+          We build intelligent applications and integrate AI into your existing
+          systems—from the first pilot to production.
         </p>
 
         <div data-hero-fade className="mt-9 flex flex-col gap-4 sm:flex-row">

@@ -27,7 +27,8 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "Most companies don't need a new AI product. They need AI working inside the software they already run. Here is the integration playbook, step by step.",
     publishedDate: "2026-06-11",
-    body: `Most mid-market companies don't need a new AI product. They need AI working inside the systems they already run: the ERP that holds orders, the CRM that holds customers, the ticketing tool that holds problems. Rip-and-replace projects fail for organizational reasons before they fail for technical ones — so the practical question is not "what can we build with AI?" but "where does AI attach to what we have?"
+    updatedDate: "2026-09-06",
+    body: `Many enterprises don't need a new AI product. They need AI working inside the systems they already run: the ERP that holds orders, the CRM that holds customers, the ticketing tool that holds problems. Rip-and-replace projects fail for organizational reasons before they fail for technical ones — so the practical question is not "what can we build with AI?" but "where does AI attach to what we have?"
 
 This guide covers the three integration patterns that work, a seven-step process for getting from idea to production, and the failure modes that kill these projects.
 
@@ -83,7 +84,7 @@ Ship the system in draft mode: AI proposes, a person approves. Measure the edit 
 
 For a single workflow with accessible data: one to two weeks for the audit and scoping, two to four weeks to a working pilot integrated with real data, and another two to four weeks of supervised rollout before full automation of the safe categories. Months-long timelines usually mean the scope is a program pretending to be a project.
 
-Avlys AI builds and integrates systems like these for enterprise and mid-market teams in the US and India — fixed-scope pilots, integrated into the software you already run. If you have a workflow in mind, [book a strategy call](/contact).`,
+Avlys AI builds and integrates systems like these for enterprise teams in the US and India — fixed-scope pilots, integrated into the software you already run. If you have a workflow in mind, [request a strategy call](/contact#project-form).`,
     sources: [
       {
         name: "MIT NANDA — The GenAI Divide: State of AI in Business 2025",
@@ -104,6 +105,7 @@ Avlys AI builds and integrates systems like these for enterprise and mid-market 
     excerpt:
       "Published estimates for AI projects span an order of magnitude. Here is how to read those ranges, what actually drives cost, and the line items vendors skip.",
     publishedDate: "2026-06-11",
+    updatedDate: "2026-09-06",
     body: `Ask three vendors what an AI project costs and you'll get numbers an order of magnitude apart — all of them defensible, because "AI integration" covers everything from a two-week API hookup to a multi-year platform build. This article breaks the question into project types with realistic ranges, explains what moves a project up or down inside a range, and lists the costs that don't appear in proposals but always appear in invoices.
 
 ## The ranges, by project type
@@ -115,7 +117,7 @@ Published cost guides from development firms and cloud-cost analysts (CloudZero,
 | API-level integration (one workflow, existing model: draft, classify, extract) | $5,000 – $50,000 | 2–6 weeks |
 | Custom AI application or sidecar system (RAG over company data, agent with integrations, human-review workflow) | $40,000 – $200,000 | 6 weeks – 6 months |
 | Large custom AI platform (multiple workflows, fine-tuning, strict compliance, scale) | $200,000 – $500,000+ | 6 months+ |
-| Ongoing model usage (inference/API costs) | Hundreds to low thousands of dollars per month for most mid-market workloads | Ongoing |
+| Ongoing model usage (inference/API costs) | Depends on model choice, volume, context length, and latency requirements | Ongoing |
 | Maintenance, evals, prompt and model updates | Commonly budgeted at 15–25% of build cost per year | Ongoing |
 
 Two notes on reading this table honestly. First, the bands overlap because complexity, not category, sets the price — a "simple chatbot" that must answer from 4,000 unmaintained documents costs more than a "custom agent" with one clean data source. Second, the cheapest band is the most underrated: a large share of real business value ships there, because modern foundation models already handle drafting, extraction, and classification without custom training.
@@ -148,7 +150,7 @@ The pattern that consistently protects buyers: a fixed-price, fixed-scope pilot 
 
 Questions that separate serious vendors from slide decks: What exactly ships at the end of the pilot? Which of our systems will it actually touch? What is the success metric and who measures it? What are the monthly run costs at production volume? Who owns the code and prompts? (The answer to the last one should be: you.)
 
-Avlys AI delivers AI integration for enterprise and mid-market companies in the US and India on exactly this model — fixed-scope pilots priced before work begins, integrated into the systems you already run, with IP assigned to you. [Book a strategy call](/contact) to scope yours.`,
+Avlys AI delivers AI integration for enterprise companies in the US and India on exactly this model — fixed-scope pilots priced before work begins, integrated into the systems you already run, with IP assigned to you. [Request a strategy call](/contact#project-form) to scope yours.`,
     sources: [
       {
         name: "CloudZero — How Much Does AI Cost?",
@@ -189,6 +191,7 @@ Avlys AI delivers AI integration for enterprise and mid-market companies in the 
     excerpt:
       "RPA bots replay rules against stable interfaces. AI agents reason over messy, variable input. Most back offices need both — here is the decision framework.",
     publishedDate: "2026-06-11",
+    updatedDate: "2026-09-06",
     body: `Robotic process automation (RPA) and AI agents both promise the same thing — software doing work people do today — which is why they get confused in buying decisions. Technically they are almost opposites. RPA executes predefined rules against structured interfaces: click this field, copy this value, paste it there. AI agents use a language model to interpret a goal, reason over unstructured input, and decide which actions to take. One replays a recording; the other improvises within guardrails.
 
 That difference decides which one fits a given workflow, and getting it wrong is expensive in both directions.
@@ -243,7 +246,7 @@ Ask four questions about the workflow you want to automate:
 
 If you already run RPA: don't rip it out. The highest-ROI move is usually adding an agent layer at the intake end — the place where your team currently does manual reading, typing, and routing before the bots can take over — and letting your existing deterministic automation keep doing what it's good at.
 
-Avlys AI designs and builds exactly these hybrid automations — agents grounded in your data, integrated with the ERP, CRM, and ticketing systems you already run — for enterprise and mid-market teams in the US and India. [Book a strategy call](/contact) to map your highest-ROI workflow.`,
+Avlys AI designs and builds exactly these hybrid automations — agents grounded in your data, integrated with the ERP, CRM, and ticketing systems you already run — for enterprise teams in the US and India. [Request a strategy call](/contact#project-form) to map your highest-ROI workflow.`,
     sources: [
       {
         name: "UiPath — Agentic AI (RPA vendor's agent + RPA hybrid positioning)",

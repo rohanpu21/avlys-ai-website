@@ -1,4 +1,5 @@
 import Link from "next/link";
+import AskAi from "./AskAi";
 import { servicePages } from "../data/services";
 import { siteConfig } from "../lib/site";
 
@@ -11,14 +12,16 @@ const Footer = () => {
           <div>
             <p className="text-[17px] font-semibold text-ink">Avlys AI</p>
             <p className="type-caption mt-3 max-w-xs">
-              Custom software and AI integration for enterprise and mid-market
-              teams in the US and India. Built in Hyderabad, delivered on your
-              hours.
+              AI-native custom software and intelligent systems for enterprises.
+              From Hyderabad and Bengaluru, working with teams in India and globally.
             </p>
           </div>
           <div>
             <p className="type-caption-strong text-ink">Services</p>
             <div className="mt-3 grid gap-1 text-[15px] leading-[2.2]">
+              <Link href="/data" className="transition-opacity hover:opacity-60">
+                Avlys Data
+              </Link>
               {servicePages.map((service) => (
                 <Link
                   key={service.slug}
@@ -34,7 +37,7 @@ const Footer = () => {
             <p className="type-caption-strong text-ink">Company</p>
             <div className="mt-3 grid gap-1 text-[15px] leading-[2.2]">
               <Link href="/about" className="transition-opacity hover:opacity-60">
-                About
+                About Us
               </Link>
               <Link href="/case-studies" className="transition-opacity hover:opacity-60">
                 Case Studies
@@ -84,9 +87,10 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="mt-12 flex flex-col gap-2 border-t border-hairline pt-6 sm:flex-row sm:justify-between">
+        <div className="mt-12"><AskAi /></div>
+        <div className="mt-8 flex flex-col gap-2 border-t border-hairline pt-6 sm:flex-row sm:justify-between">
           <span className="type-fine-print text-ink-faint">
-            Hyderabad, India · Serving US and Indian teams
+            Hyderabad · Bengaluru, India · Working globally
           </span>
           <span className="type-fine-print text-ink-faint">
             &copy; 2026 Avlys AI. All rights reserved.

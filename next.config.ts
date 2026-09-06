@@ -13,6 +13,11 @@ const nextConfig: NextConfig = {
     // cannibalization with /services/ai-automation-agency-india).
     return [
       {
+        source: "/services/ai-consulting-mid-market",
+        destination: "/services/enterprise-ai-consulting",
+        permanent: true,
+      },
+      {
         source: "/services/ai-automation-agency-india",
         destination: "/services/ai-automation",
         permanent: true,

@@ -85,7 +85,7 @@ export default function CaseStudiesPage() {
       <main>
         <section className="bg-canvas px-6 pb-16 pt-20 sm:pt-24">
           <div className="mx-auto w-full max-w-4xl text-center">
-            <h1 className="type-hero text-ink">Shipped systems.</h1>
+            <h1 className="type-hero text-ink">Selected work.</h1>
             <p className="type-lead mx-auto mt-6 max-w-2xl text-ink-muted">
               Marketplaces, AI agent architectures, voice agents, automations,
               and custom platforms - each documented with the context, the
@@ -110,7 +110,7 @@ export default function CaseStudiesPage() {
                   />
                   <div className="p-6 pb-0">
                     <p className="type-caption-strong uppercase tracking-wide text-primary">
-                      {caseStudy.category}
+                      {caseStudy.engagement ?? "Software build"}
                     </p>
                     <h2 className="mt-3 text-[21px] font-semibold leading-snug text-ink">
                       {caseStudy.headline}

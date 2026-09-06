@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import CallToAction from "../../components/CallToAction";
 import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
@@ -154,6 +155,9 @@ export default async function ServicePage({ params }: ServicePageProps) {
             </p>
             <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <BookCallCta location={`service_${service.slug}`} />
+              {service.slug === "ai-training-data" && (
+                <Link href="/data" className="btn-pill-ghost">Explore Avlys Data</Link>
+              )}
             </div>
             <div className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2">
               {service.proof.map((item) => (

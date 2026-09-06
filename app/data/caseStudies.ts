@@ -11,6 +11,9 @@ export type VisualKind =
 
 export type CaseStudyDetail = {
   headline: string;
+  engagement?: "Software build" | "Architecture engagement" | "Prototype / MVP";
+  deliveryTimeline?: string;
+  verifiedResults?: { label: string; value: string; measurementNote: string }[];
   context: string;
   challenge: string;
   solution: string;
@@ -67,22 +70,24 @@ const processByKind: Record<VisualKind, string[]> = {
   ],
 };
 
-const detailsBySlug: Record<string, Omit<CaseStudyDetail, "process">> = {
+const detailsBySlug: Record<string, Omit<CaseStudyDetail, "process"> & { process?: string[] }> = {
   "workshop-management-system": {
-    headline: "An HR workshop platform with registration, waitlists, and approved AI insights.",
+    headline: "An HR workshop demo with registration, waitlists, and human-reviewed insight drafts.",
+    engagement: "Prototype / MVP",
     context:
       "HR teams needed a single place to publish quarterly workshops, manage capacity, and keep calendar and email reminders in sync without a spreadsheet pile.",
     challenge:
       "Workshop operations break when capacity, waitlists, reminders, and post-event notes live in different tools. AI summaries also cannot go out unreviewed.",
     solution:
-      "Avlys built a Next.js and Fastify platform with PostgreSQL, Google Workspace adapters, FIFO waitlists, T-3 reminders, and Azure OpenAI insight drafts that stay behind an approval gate.",
-    deliverables: ["Workshop publishing and registration", "Capacity and waitlist rules", "Google Workspace reminders", "AI insight drafts with approval"],
+      "The demo combines a Next.js portal, Fastify API, shared workflow rules, and mock adapters. PostgreSQL schemas and Google Workspace / Azure OpenAI adapters are included, but a durable repository, SSO/RBAC, and production worker wiring are still required. Production mode intentionally refuses to boot until that work is complete.",
+    deliverables: ["Workshop portal and API foundation", "Capacity and FIFO waitlist rules", "Reminder and provider-adapter scaffolds", "AI draft approval workflow"],
     outcomes: [
       "A single operating surface for HR, facilitators, and employees.",
       "Hard capacity with an ordered waitlist instead of overbooking.",
-      "Calendar and email reminders tied to the same registration record.",
+      "Reminder rules demonstrated with mock adapters.",
       "AI notes that stay drafts until a human approves them.",
     ],
+    process: ["Defined the workshop roles and registration rules.", "Implemented shared workflow contracts and a demo portal.", "Added database schemas and provider-adapter scaffolds.", "Kept production mode disabled pending durable storage, access control, and worker integration."],
     visualKind: "marketplace",
   },
   "mike-legal-ai": {
@@ -92,7 +97,7 @@ const detailsBySlug: Record<string, Omit<CaseStudyDetail, "process">> = {
     challenge:
       "Document intelligence fails when auth, storage, conversion, and model access are separate. Office files also need a reliable path into a reviewable PDF.",
     solution:
-      "Avlys shipped a Next.js frontend with an Express API, Supabase auth and Postgres, S3-compatible storage, LibreOffice conversion, and pluggable model providers.",
+      "The implementation combines a Next.js frontend, an Express API, Supabase auth and Postgres, S3-compatible storage, LibreOffice conversion, and pluggable model providers.",
     deliverables: ["Authenticated document workspace", "Office-to-PDF conversion", "Object storage for source files", "Model-backed query interface"],
     outcomes: [
       "Documents live in one authenticated product instead of shared drives.",
@@ -100,6 +105,7 @@ const detailsBySlug: Record<string, Omit<CaseStudyDetail, "process">> = {
       "Teams can query the corpus without leaving the workspace.",
       "Storage and model providers can be swapped without rewriting the app.",
     ],
+    process: ["Organized the workspace around authenticated document access.", "Connected metadata and object storage through the API.", "Added office-file conversion and model-provider adapters.", "Documented setup and configuration for the frontend and backend."],
     visualKind: "ai-system",
   },
   "magic-creation-studio-wedding-photography-erp": {
@@ -122,9 +128,9 @@ const detailsBySlug: Record<string, Omit<CaseStudyDetail, "process">> = {
   "hospital-voice-agent": {
     headline: "A trilingual hospital receptionist that books appointments from inbound calls.",
     context:
-      "Hospitals in Odisha needed a cheap inbound receptionist that could speak Hindi, Odia, and English and write the booking into Google Calendar.",
+      "This project explores inbound appointment reception in Hindi, Odia, and English, with bookings recorded in Google Calendar.",
     challenge:
-      "Voice reception has to collect a slot, confirm it, and stay cheap enough for a local hospital. The agent also has to switch languages without a separate product per language.",
+      "The call flow needs to understand spoken requests, check available times, and confirm a booking while keeping the speech and calendar tools coordinated.",
     solution:
       "Avlys built a FastAPI call server with Sarvam speech, Groq tool-calling, and Google Calendar booking, plus a text test path so the flow can be checked without a live trunk.",
     deliverables: ["Inbound call flow", "Hindi / Odia / English handling", "Google Calendar booking tools", "Text-only test endpoint"],
@@ -134,6 +140,7 @@ const detailsBySlug: Record<string, Omit<CaseStudyDetail, "process">> = {
       "The same agent can take Hindi, Odia, or English without a fork.",
       "Staff can rehearse the flow in text before connecting telephony.",
     ],
+    process: ["Defined configurable hospital hours, doctors, and conversation prompts.", "Connected audio input and output through FastAPI and Sarvam speech services.", "Added Groq tool calls for calendar availability and appointment creation.", "Provided a text conversation endpoint for testing before telephony integration."],
     visualKind: "voice-agent",
   },
   "hiredesk-recruiting-match-system": {
@@ -151,6 +158,7 @@ const detailsBySlug: Record<string, Omit<CaseStudyDetail, "process">> = {
       "First-pass ranking is vector-based, with a slower LLM rerank on top.",
       "A backend ready for a recruiter UI without rewriting the match core.",
     ],
+    process: ["Defined profiles, jobs, and applications in Postgres.", "Added scheduled ingestion and embedding tasks through Celery and Redis.", "Combined vector and keyword retrieval with model-backed reranking.", "Documented provider configuration, migrations, workers, and health checks."],
     visualKind: "ai-system",
   },
   "ad-sakhi-ad-ops-studio": {
@@ -307,23 +315,26 @@ const detailsBySlug: Record<string, Omit<CaseStudyDetail, "process">> = {
     visualKind: "website",
   },
   "hjsn-digital-platform": {
+    engagement: "Architecture engagement",
     headline: "An education and profession platform with identity, membership, and modular services.",
     context:
       "HJSN needed Android, web, admin, and third-party gateways on one architecture: Aadhaar, Voter ID, payments, SMS, maps, and AI document checks.",
     challenge:
-      "Listing the Android app and the website as two projects would double-count the same system. The architecture is one platform.",
+      "Identity, membership, education, and professional services needed shared access rules across mobile and web clients.",
     solution:
       "Avlys designed a five-layer stack — client, API gateway, application services, data, infrastructure — so new modules can attach without a rebuild. Cover is the architecture the team uses.",
-    deliverables: ["Android and web clients", "Identity and membership services", "Education and help-network modules", "Aadhaar and payment integrations"],
+    deliverables: ["Android and web client architecture", "Identity and membership service design", "Education and help-network module design", "Verification and payment integration boundaries"],
     outcomes: [
       "Mobile, web, and admin share one gateway.",
       "Identity verification is a service, not a one-off screen.",
       "Vector search and object storage sit beside Postgres, not as a second product.",
-      "Website and app are not listed twice.",
+      "Infrastructure and cross-cutting concerns are defined alongside the application layers.",
     ],
+    process: ["Mapped mobile, web, admin, and third-party client needs.", "Separated identity, membership, education, and professional service responsibilities.", "Defined data stores and external integration boundaries.", "Documented proposed infrastructure, access controls, and operational concerns."],
     visualKind: "marketplace",
   },
   "integrated-erp-and-club-management": {
+    engagement: "Architecture engagement",
     headline: "An ERP that puts HR, finance, membership, and club billing on one database.",
     context:
       "The club needed employee, membership, billing, inventory, and approvals without reconciling five tools.",
@@ -545,6 +556,7 @@ const detailsBySlug: Record<string, Omit<CaseStudyDetail, "process">> = {
     visualKind: "marketplace",
   },
   "kristen-leaman-creator-and-brand-jobs-board": {
+    engagement: "Prototype / MVP",
     headline: "A creator-brand jobs board MVP with portals, payments, and CRM sync.",
     context:
       "The project needed to connect creators and brands through role-based access, job posting, applications, payments, and operational CRM workflows.",
@@ -596,6 +608,13 @@ const detailsBySlug: Record<string, Omit<CaseStudyDetail, "process">> = {
     visualKind: "ai-system",
   },
   "agentic-ai-architecture-and-engineering": {
+    engagement: "Architecture engagement",
+    process: [
+      "Mapped agent responsibilities, shared state, and operational constraints.",
+      "Designed orchestration and human-review checkpoints.",
+      "Specified state transitions, error recovery, and escalation paths.",
+      "Documented the architecture and implementation considerations.",
+    ],
     headline: "Enterprise multi-agent architecture for stateful workflows and human-in-the-loop control.",
     context:
       "The work focused on designing robust agentic systems that could coordinate multiple agents, state, tasks, errors, and documentation.",
@@ -613,6 +632,13 @@ const detailsBySlug: Record<string, Omit<CaseStudyDetail, "process">> = {
     visualKind: "ai-system",
   },
   "multi-agent-customer-support-system": {
+    engagement: "Architecture engagement",
+    process: [
+      "Mapped request types and support knowledge sources.",
+      "Separated intent routing, policy retrieval, and structured data lookup.",
+      "Specified grounding and observability requirements.",
+      "Documented the proposed support architecture for implementation.",
+    ],
     headline: "A three-agent support system design for routing, retrieval, and structured customer answers.",
     context:
       "The system explored how an ecommerce support flow could use multiple agents to route requests, answer policy questions, and retrieve structured data.",
@@ -690,18 +716,16 @@ export const caseStudies: CaseStudy[] = portfolioItems.map((item) => {
   return {
     ...item,
     ...detail,
-    process: processByKind[detail.visualKind],
+    process: detail.process ?? processByKind[detail.visualKind],
   };
 });
 
 // Curated for the enterprise audience: platform and AI builds lead.
 const featuredSlugs = [
-  "multi-vendor-marketplace-platform",
-  "agentic-ai-architecture-and-engineering",
-  "joanna-koh-client-vendor-service-platform",
-  "ai-real-estate-voice-agent",
-  "kristen-leaman-creator-and-brand-jobs-board",
-  "aqua-flight-luxury-yacht-services-rebuild",
+  "mike-legal-ai",
+  "workshop-management-system",
+  "hospital-voice-agent",
+  "hiredesk-recruiting-match-system",
 ];
 
 export const featuredCaseStudies = featuredSlugs

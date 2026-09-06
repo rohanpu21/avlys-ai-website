@@ -6,16 +6,14 @@ export const siteConfig = {
   email: "sales@avlysai.com",
   phone: "+91 99377 30039",
   phoneHref: "+919937730039",
-  // WhatsApp line for the "Book a strategy call" CTAs. Digits only, with the
-  // country code and no "+", as wa.me requires.
+  // Dedicated chat channel, separate from scheduling.
   whatsappNumber: "919937730039",
   city: "Hyderabad",
   region: "Telangana",
   country: "IN",
-  // Cal.com event link. Only used when whatsappNumber is empty: WhatsApp takes
-  // precedence for every "Book a strategy call" CTA. While both are empty,
-  // CTAs fall back to the contact form.
-  bookingUrl: "",
+  // Public HTTPS calendar URL (Cal.com, Calendly, or another scheduler).
+  // Without it, CTAs honestly offer a call request via the contact form.
+  bookingUrl: process.env.NEXT_PUBLIC_BOOKING_URL?.trim() ?? "",
   socialLinks: [
     "https://www.linkedin.com/company/avlys-ai/",
     "https://www.instagram.com/avlysai?igsh=azd6aTB5eHpxd3Jq",

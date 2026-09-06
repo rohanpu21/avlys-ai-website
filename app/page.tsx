@@ -3,12 +3,15 @@ import CallToAction from "./components/CallToAction";
 import CaseStudyStrip from "./components/CaseStudyStrip";
 import FAQ, { homepageFaqs } from "./components/FAQ";
 import Footer from "./components/Footer";
+import TeamPreview from "./components/TeamPreview";
+import StudioReels from "./components/StudioReels";
 import Hero from "./components/Hero";
 import IntegrationTile from "./components/IntegrationTile";
 import LaunchFilmTile from "./components/LaunchFilmTile";
 import LogoMarquee from "./components/LogoMarquee";
 import Navbar from "./components/Navbar";
 import Process from "./components/Process";
+import PressMentions from "./components/PressMentions";
 import ServicesGrid from "./components/ServicesGrid";
 import StickyCtaBar from "./components/StickyCtaBar";
 import StructuredData from "./components/StructuredData";
@@ -72,12 +75,15 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
+        <PressMentions />
+        <CaseStudyStrip />
+        <ServicesGrid />
+        <IntegrationTile />
+        <Process />
+        <TeamPreview />
+        <StudioReels standalone />
         <LaunchFilmTile />
         <LogoMarquee />
-        <IntegrationTile />
-        <ServicesGrid />
-        <Process />
-        <CaseStudyStrip />
         <Testimonials />
         <WhyAvlys />
         <FAQ />

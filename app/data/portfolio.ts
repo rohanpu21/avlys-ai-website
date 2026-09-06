@@ -6,6 +6,7 @@ export type PortfolioItemBase = {
   description: string;
   category: string;
   coverImage?: string;
+  architectureImage?: string;
   liveUrl?: string;
 };
 
@@ -32,13 +33,14 @@ export const categories = [
 const rawPortfolioItems: PortfolioItemBase[] = [
   {
     title: "Workshop Management System",
-    type: "Enterprise Operations Platform",
-    stack: "Next.js + Fastify + PostgreSQL + Azure OpenAI",
+    type: "Workshop Operations Prototype",
+    stack: "Next.js + Fastify + mock adapters + Drizzle schema",
     market: "India / International",
     description:
-      "An HR workshop platform with capacity-capped registration, waitlists, Google Workspace reminders, and AI insight drafts that stay behind approval.",
+      "An HR workshop demo with capacity-capped registration, waitlists, and approval rules. Production storage and provider wiring remain pending.",
     category: "Marketplace & Platform Builds",
-    coverImage: "/portfolio/traincore.jpg",
+    coverImage: "/portfolio/covers/workshop-management-system.png",
+    architectureImage: "/portfolio/architecture/workshop-management-system-layered.png",
   },
   {
     title: "Mike Legal AI",
@@ -48,7 +50,8 @@ const rawPortfolioItems: PortfolioItemBase[] = [
     description:
       "A legal document workspace that ingests files, converts office formats, and lets teams query and review them through a model-backed interface.",
     category: "AI & Agentic Systems",
-    coverImage: "/portfolio/mike-legal-ai.jpg",
+    coverImage: "/portfolio/covers/mike-legal-ai.png",
+    architectureImage: "/portfolio/architecture/mike-legal-ai-layered.png",
   },
   {
     title: "Magic Creation Studio - Wedding Photography ERP",
@@ -69,7 +72,8 @@ const rawPortfolioItems: PortfolioItemBase[] = [
     description:
       "A Hindi, Odia, and English hospital receptionist that answers inbound calls and books appointments into Google Calendar.",
     category: "AI & Agentic Systems",
-    coverImage: "/portfolio/hospital-voice-agent.jpg",
+    coverImage: "/portfolio/covers/hospital-voice-agent.png",
+    architectureImage: "/portfolio/architecture/hospital-voice-agent-layered.png",
     liveUrl: "https://hospital-voice-agent.vercel.app",
   },
   {
@@ -80,7 +84,8 @@ const rawPortfolioItems: PortfolioItemBase[] = [
     description:
       "A recruiting desk that parses resumes, ingests jobs, and ranks matches with embeddings and LLM reranking.",
     category: "AI & Agentic Systems",
-    coverImage: "/portfolio/hiredesk.jpg",
+    coverImage: "/portfolio/covers/hiredesk-recruiting-match-system.png",
+    architectureImage: "/portfolio/architecture/hiredesk-recruiting-match-system-layered.png",
   },
   {
     title: "ad sakhi - Ad-Ops Studio",
@@ -173,9 +178,10 @@ const rawPortfolioItems: PortfolioItemBase[] = [
     stack: "Android + Web + API Gateway + PostgreSQL",
     market: "India (INR)",
     description:
-      "A modular education and profession network with identity verification, membership, notifications, and Aadhaar/Voter ID integrations — one platform, not a separate website and app story.",
+      "A proposed architecture for an education and profession network, covering identity verification, membership, notifications, and external integration boundaries.",
     category: "Marketplace & Platform Builds",
-    coverImage: "/portfolio/hjsn-architecture.jpg",
+    coverImage: "/portfolio/covers/hjsn-digital-platform.png",
+    architectureImage: "/portfolio/architecture/hjsn-digital-platform.jpeg",
   },
   {
     title: "Integrated ERP and Club Management",

@@ -7,9 +7,10 @@ import BookCallCta from "./BookCallCta";
 
 const navLinks = [
   { label: "Services", href: "/services" },
+  { label: "AI Training Data", href: "/data" },
   { label: "Case Studies", href: "/case-studies" },
   { label: "Portfolio", href: "/portfolio" },
-  { label: "About", href: "/about" },
+  { label: "About Us", href: "/about" },
   { label: "Insights", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ];
@@ -37,7 +38,7 @@ const Navbar = () => {
 
   return (
     <header className="sticky top-0 z-50 bg-true-black text-on-dark">
-      <nav className="mx-auto flex h-12 w-full max-w-5xl items-center justify-between px-6">
+      <nav className="mx-auto flex h-12 w-full max-w-6xl items-center justify-between px-6">
         <Link
           href="/"
           onClick={() => setMobileMenuOpen(false)}
@@ -57,7 +58,7 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop nav links */}
-        <div className="hidden items-center gap-7 md:flex">
+        <div className="hidden items-center gap-5 lg:flex">
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -82,7 +83,7 @@ const Navbar = () => {
             onClick={() => setMobileMenuOpen((prev) => !prev)}
             aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={mobileMenuOpen}
-            className="flex h-9 w-9 items-center justify-center rounded-lg text-on-dark-muted transition-all active:scale-95 hover:text-on-dark md:hidden focus:outline-none"
+            className="flex h-11 w-11 items-center justify-center rounded-lg text-on-dark-muted transition-all active:scale-95 hover:text-on-dark lg:hidden focus-visible:outline-2"
           >
             <svg
               className="h-5 w-5"
@@ -113,7 +114,7 @@ const Navbar = () => {
 
       {/* Mobile drawer overlay */}
       {mobileMenuOpen && (
-        <div className="fixed inset-x-0 top-12 bottom-0 z-40 bg-true-black/95 backdrop-blur-xl border-t border-white/10 px-6 py-8 md:hidden animate-in fade-in duration-200">
+        <div className="fixed inset-x-0 top-12 bottom-0 z-40 bg-true-black/95 backdrop-blur-xl border-t border-white/10 px-6 py-8 lg:hidden animate-in fade-in duration-200">
           <div className="mx-auto flex h-full max-w-md flex-col justify-between">
             <div className="flex flex-col gap-5">
               {navLinks.map((link) => (
@@ -129,7 +130,7 @@ const Navbar = () => {
             </div>
             <div className="border-t border-white/10 pt-6">
               <p className="type-caption text-on-dark-muted">
-                Hyderabad, India · Serving US &amp; Indian teams
+                Hyderabad · Bengaluru, India · Working globally
               </p>
             </div>
           </div>

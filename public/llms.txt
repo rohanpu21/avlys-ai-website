@@ -3,7 +3,7 @@
 > Avlys AI builds custom software and integrates AI into the systems
 > enterprises already run - ERP, CRM, and legacy applications. Fixed-scope
 > pilots delivered in 4-6 weeks by senior engineers, serving US and Indian
-> teams from Hyderabad, India.
+> teams from Hyderabad and Bengaluru, India.
 
 ## Services
 
@@ -12,7 +12,7 @@
 - [AI Agent Development](https://avlysai.com/services/ai-agents): support, sales, and voice agents with human-in-the-loop orchestration.
 - [AI Automation](https://avlysai.com/services/ai-automation): lead response, support triage, and document processing wired into existing tools.
 - [Data Collection & Preparation](https://avlysai.com/services/ai-training-data): collection, annotation, cleaning, and evaluation sets for AI training - delivered by a core team under NDA/DPA.
-- [AI Consulting for Mid-Sized Companies](https://avlysai.com/services/ai-consulting-mid-market): readiness assessment, use-case ranking, and a costed pilot plan.
+- [Enterprise AI Consulting](https://avlysai.com/services/enterprise-ai-consulting): readiness assessment, use-case ranking, and a costed pilot plan.
 
 ## Proof
 
@@ -21,5 +21,5 @@
 
 ## Company
 
-- [About](https://avlysai.com/about): Hyderabad-based engineering team serving US and Indian clients.
+- [About](https://avlysai.com/about): Hyderabad- and Bengaluru-based engineering team serving US and Indian clients.
 - [Contact](https://avlysai.com/contact): book a strategy call or send project details. Email: sales@avlysai.com

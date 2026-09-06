@@ -7,6 +7,7 @@ import Footer from "../../components/Footer";
 import Navbar from "../../components/Navbar";
 import StructuredData from "../../components/StructuredData";
 import { caseStudies, getCaseStudy } from "../../data/caseStudies";
+import { architectureDescriptions } from "../../data/architecture";
 import { absoluteUrl, siteConfig } from "../../lib/site";
 
 type CaseStudyPageProps = {
@@ -147,7 +148,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
               {caseStudy.headline}
             </p>
             <p className="type-caption mt-6 text-ink-faint">
-              {caseStudy.type} · {caseStudy.stack} · {caseStudy.market}
+              {caseStudy.engagement ?? "Software build"} · {caseStudy.type} · {caseStudy.stack}
             </p>
             {caseStudy.liveUrl ? (
               <p className="mt-6">
@@ -171,6 +172,18 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
               sizes="(min-width: 1024px) 64rem, 100vw"
             />
           </div>
+          <div className="mx-auto mt-3 flex max-w-5xl flex-wrap items-center justify-between gap-3">
+            <p className="type-fine-print text-ink-muted">Project illustration. Not a verified production screenshot.</p>
+          </div>
+          <div className="mx-auto mt-8 max-w-5xl border-t border-hairline pt-6">
+            <p className="type-caption text-ink-muted"><strong>Engagement:</strong> {caseStudy.engagement ?? "Software build"}. {caseStudy.engagement === "Architecture engagement" ? "Architecture and design scope; this is not a claim of a live production deployment." : "The case study documents the implementation scope. Live deployment status and usage are not asserted."}</p>
+            {caseStudy.deliveryTimeline && <p className="type-caption mt-3 text-ink-muted"><strong>Delivery timeline:</strong> {caseStudy.deliveryTimeline}</p>}
+            {caseStudy.verifiedResults?.length ? (
+              <dl className="mt-6 grid gap-6 sm:grid-cols-3">
+                {caseStudy.verifiedResults.map((result) => <div key={result.label}><dt className="type-caption">{result.label}</dt><dd className="mt-2 text-[28px] font-semibold">{result.value}</dd><dd className="type-caption mt-2 text-ink-muted">{result.measurementNote}</dd></div>)}
+              </dl>
+            ) : <p className="type-caption mt-3 text-ink-muted">The capabilities below describe the work delivered. Quantified business results have not been published.</p>}
+          </div>
         </section>
 
         <section className="bg-parchment px-6 py-16">
@@ -190,6 +203,30 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
           </div>
         </section>
 
+        {caseStudy.architectureImage && (
+          <section aria-labelledby="architecture-heading" className="bg-canvas px-6 py-16">
+            <div className="mx-auto w-full max-w-6xl">
+              <p className="type-caption-strong uppercase tracking-wide text-primary">Inside the project</p>
+              <h2 id="architecture-heading" className="type-display-lg mt-4 text-ink">System architecture.</h2>
+              <p className="type-caption mt-4 max-w-2xl text-ink-muted">Logical components and integration boundaries. This diagram is not a deployment or compliance certification.</p>
+              <figure className="mt-8">
+                <div className="overflow-hidden rounded-[18px] border border-hairline">
+                  <CaseStudyImage slug={caseStudy.slug} title={caseStudy.title} coverImage={caseStudy.architectureImage} sizes="(min-width: 1280px) 72rem, 100vw" />
+                </div>
+                <figcaption className="mt-3">
+                  <a href={caseStudy.architectureImage} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-[15px] text-primary underline underline-offset-4">Open full-size diagram ↗</a>
+                </figcaption>
+              </figure>
+              {architectureDescriptions[caseStudy.slug] && (
+                <details className="mt-5 rounded-[11px] border border-hairline p-4">
+                  <summary className="cursor-pointer text-[15px] font-medium text-ink">Architecture explained in text</summary>
+                  <p className="type-caption mt-4 text-ink-muted">{architectureDescriptions[caseStudy.slug]}</p>
+                </details>
+              )}
+            </div>
+          </section>
+        )}
+
         <section className="bg-canvas px-6 py-16">
           <div className="mx-auto grid w-full max-w-6xl gap-12 lg:grid-cols-2">
             <div>
@@ -207,7 +244,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
               </div>
             </div>
             <div>
-              <h2 className="type-display-lg text-ink">Outcomes.</h2>
+              <h2 className="type-display-lg text-ink">{caseStudy.engagement === "Architecture engagement" ? "Design outcomes." : "Capabilities delivered."}</h2>
               <div className="mt-8 flex flex-col gap-3">
                 {caseStudy.outcomes.map((outcome) => (
                   <div
@@ -225,7 +262,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
 
         <section className="on-dark bg-tile-1 px-6 py-16 text-on-dark">
           <div className="mx-auto w-full max-w-6xl">
-            <h2 className="type-display-lg text-center">How it was built.</h2>
+            <h2 className="type-display-lg text-center">{caseStudy.engagement === "Architecture engagement" ? "How it was designed." : "How it was built."}</h2>
             <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
               {caseStudy.process.map((step, index) => (
                 <div key={step} className="rounded-[18px] bg-tile-3 p-6">
