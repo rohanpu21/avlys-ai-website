@@ -598,5 +598,3 @@ export const servicePages: ServicePage[] = [
 
 export const getServicePage = (slug: string) =>
   servicePages.find((service) => service.slug === slug);
-
-export const featuredServicePages = servicePages.slice(0, 6);
