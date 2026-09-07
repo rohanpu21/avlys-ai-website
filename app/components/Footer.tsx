@@ -48,6 +48,9 @@ const Footer = () => {
               <Link href="/blog" className="transition-opacity hover:opacity-60">
                 Insights
               </Link>
+              <Link href="/#press" className="transition-opacity hover:opacity-60">
+                Press
+              </Link>
               <Link href="/contact" className="transition-opacity hover:opacity-60">
                 Contact
               </Link>

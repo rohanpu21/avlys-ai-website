@@ -2,12 +2,24 @@ import Image from "next/image";
 
 const publications = [
   {
+    name: "Business Upturn",
+    href: "https://businessupturn.com/brand-post/the-agency-that-says-no-why-avlys-ai-is-betting-on-less-software-not-more/",
+    category: "Brand post",
+  },
+  {
+    name: "India Shorts",
+    href: "https://indiashorts.com/the-agency-that-says-no-why-avlys-ai-is-betting-on-less-software-not-more/297759/",
+    category: "Press release",
+  },
+  {
     name: "The Eastern Herald",
     href: "https://easternherald.com/2026/09/05/the-agency-that-says-no-why-avlys-ai-is-betting-on-less-software-not-more/",
+    category: "Press release",
   },
   {
     name: "KaroStartup",
     href: "https://www.karostartup.com/article/the-agency-that-says-no-why-avlys-ai-is-betting-on-less-software-not-more",
+    category: "Press release",
   },
 ];
 
@@ -45,11 +57,14 @@ export default function PressMentions() {
             The Agency That Says No: Why Avlys AI Is Betting on Less Software,
             Not More
           </p>
-          <ul className="mt-6 grid gap-5 border-t border-hairline pt-5 sm:grid-cols-2 sm:gap-6">
+          <p className="type-caption mt-3 text-ink-muted">
+            Selected publications of our press release. <time dateTime="2026-09-05">5 September 2026</time>
+          </p>
+          <ul className="mt-6 grid gap-x-6 sm:grid-cols-2">
             {publications.map((publication) => (
               <li
                 key={publication.name}
-                className="not-first:border-t not-first:border-hairline not-first:pt-5 sm:not-first:border-l sm:not-first:border-t-0 sm:not-first:pl-6 sm:not-first:pt-0"
+                className="border-t border-hairline py-4"
               >
                 <a
                   href={publication.href}
@@ -62,7 +77,7 @@ export default function PressMentions() {
                     {publication.name}
                   </span>
                   <span className="type-caption mt-1 block text-ink-muted">
-                    Press release
+                    {publication.category}
                   </span>
                   <span className="type-caption mt-2 inline-flex min-h-11 items-center gap-2 text-primary group-hover:underline group-hover:underline-offset-4">
                     Read article <span aria-hidden="true">↗</span>
