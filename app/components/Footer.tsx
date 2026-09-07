@@ -28,6 +28,9 @@ const Footer = () => {
                 <Link href="/blog" className="transition-opacity hover:opacity-50">
                   Blog
                 </Link>
+                <Link href="/#press" className="transition-opacity hover:opacity-50">
+                  Press
+                </Link>
                 {featuredServicePages.map((service) => (
                   <Link
                     key={service.slug}
