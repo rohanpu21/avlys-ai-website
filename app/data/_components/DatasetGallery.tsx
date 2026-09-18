@@ -21,7 +21,7 @@ export default function DatasetGallery() {
         ))}
       </div>
       <p className={styles.galleryNote} role="status">
-        {selected === "all" ? "Four collection categories" : `${categories[0].label} category`} · Public samples coming soon
+        {selected === "all" ? "Four data formats to explore" : `${categories[0].label} format guide`} · Public sample previews coming soon
       </p>
       <div id="dataset-results" className={styles.gallery}>
         {categories.map((item) => (
@@ -29,22 +29,23 @@ export default function DatasetGallery() {
             <div className={styles.sampleVisual}>
               <span className={styles.visualIndex}>{item.number} / {item.shortLabel.toUpperCase()}</span>
               <ModalityMark type={item.id} />
-              <span className={styles.placeholderLabel}>Sample space reserved</span>
+              <span className={styles.placeholderLabel}>Format guide · Preview pending</span>
             </div>
             <div className={styles.sampleBody}>
               <div className={styles.cardTitle}><h3>{item.label}</h3>{item.id === "egocentric" && <span className={styles.badge}>Pilot</span>}</div>
               <p>{item.description}</p>
               <p className={styles.useCase}>{item.useCase}</p>
               <details className={styles.sampleDetails}>
-                <summary>What the sample will include</summary>
+                <summary>Specifications to discuss</summary>
                 <p>{item.previewDescription}</p>
                 <ul>{item.details.map((detail) => <li key={detail}>{detail}</li>)}</ul>
               </details>
+              <a href="#data-brief" className={styles.textLink}>Discuss {item.id === "image" ? "image" : item.shortLabel.toLowerCase()} data <span aria-hidden="true">↗</span></a>
             </div>
           </article>
         ))}
       </div>
-      <p className={styles.galleryFootnote}>These are collection categories, not downloadable datasets. Approved previews, quantities, and licensing details will be added with each collection.</p>
+      <p className={styles.galleryFootnote}>These guides describe potential project scope, not available inventory. Collection availability, approved previews, quantities, and licensing are confirmed separately.</p>
     </>
   );
 }
