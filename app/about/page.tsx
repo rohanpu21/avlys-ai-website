@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import CallToAction from "../components/CallToAction";
 import Footer from "../components/Footer";
@@ -8,6 +7,7 @@ import Reveal from "../components/Reveal";
 import { team } from "../data/team";
 import TeamPortrait from "../components/TeamPortrait";
 import StudioReels from "../components/StudioReels";
+import OfficePhoto from "../components/OfficePhoto";
 import StructuredData from "../components/StructuredData";
 import { absoluteUrl, siteConfig } from "../lib/site";
 
@@ -32,23 +32,11 @@ const structuredData = {
 };
 
 const studioPhotos = [
-  {
-    src: "/studio/laptop.jpeg",
-    alt: "Building at a desk in the Avlys studio",
-  },
-  {
-    src: "/studio/dont-hire-us.jpeg",
-    alt: "Avlys studio screen: Please Don't Hire Us. Seriously.",
-  },
-  {
-    src: "/studio/logo-wall.jpeg",
-    alt: "Avlys mark on the studio screen",
-  },
-  {
-    src: "/studio/whiteboard.jpeg",
-    alt: "Planning session at the Avlys studio whiteboard",
-  },
-];
+  { photo: "whiteboard", caption: "At the whiteboard." },
+  { photo: "workingSession", caption: "A working session." },
+  { photo: "workspace", caption: "Our shared workspace." },
+  { photo: "review", caption: "Back around the table." },
+] as const;
 
 const LinkedInIcon = () => (
   <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor">
@@ -70,9 +58,7 @@ export default function AboutPage() {
               <p className="type-lead mt-7 max-w-lg text-on-dark-muted">We are a founder-led AI-native software team helping enterprises build what their operations need next.</p>
             </Reveal>
             <Reveal delay={0.08}>
-              <div className="relative aspect-[4/3] overflow-hidden bg-tile-1">
-                <Image src="/team/office-build.jpeg" alt="An Avlys team member working from the office" fill priority sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
-              </div>
+              <OfficePhoto photo="discussion" preload />
             </Reveal>
           </div>
         </section>
@@ -125,20 +111,25 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section className="bg-canvas px-6 py-20 sm:py-24">
+        <section id="office" className="scroll-mt-20 bg-canvas px-6 py-20 sm:py-24">
           <div className="mx-auto grid w-full max-w-6xl gap-12 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-center">
             <Reveal>
-              <p className="type-caption-strong uppercase tracking-[0.18em] text-ink-faint">Studio journal</p>
-              <h2 className="type-display-lg mt-4 text-ink">Follow the work as it happens.</h2>
-              <p className="type-caption mt-6 max-w-md text-ink-muted">Inside Avlys: product demos, engineering sessions, and the people building your next system.</p>
+              <p className="type-caption-strong uppercase tracking-[0.18em] text-ink-faint">Inside our office</p>
+              <h2 className="type-display-lg mt-4 text-ink">A look at the everyday work.</h2>
+              <p className="type-caption mt-6 max-w-md text-ink-muted">Our team, our workspace, and the conversations around the table. A few moments from the Avlys office.</p>
               <a href={siteConfig.socialLinks[1]} target="_blank" rel="noopener noreferrer" className="btn-pill-primary mt-8">View Avlys on Instagram</a>
+              <figure className="mt-9 max-w-[240px]">
+                <video aria-label="A brief silent clip of the Avlys team working around the office table" aria-describedby="office-video-caption" width={576} height={1024} controls muted playsInline preload="none" poster="/office/office-moment-poster.webp" className="aspect-[9/16] w-full bg-parchment object-contain">
+                  <source src="/office/office-moment.mp4" type="video/mp4" />
+                  <a href="/office/office-moment.mp4">Watch the office clip</a>
+                </video>
+                <figcaption id="office-video-caption" className="mt-3 text-[12px] leading-relaxed text-ink-muted">A moment around the office table. 2-second silent clip.</figcaption>
+              </figure>
             </Reveal>
             <Reveal delay={0.08}>
-              <div className="grid grid-cols-2 border-l border-t border-hairline">
+              <div className="grid grid-cols-1 gap-x-4 gap-y-7 min-[400px]:grid-cols-2">
                 {studioPhotos.map((photo) => (
-                  <div key={photo.src} className="relative aspect-square overflow-hidden border-b border-r border-hairline bg-parchment">
-                    <Image src={photo.src} alt={photo.alt} fill sizes="(min-width: 1024px) 28vw, 50vw" className="object-cover" />
-                  </div>
+                  <OfficePhoto key={photo.photo} photo={photo.photo} caption={photo.caption} portrait sizes="(min-width: 1200px) 320px, (min-width: 1024px) 28vw, (min-width: 400px) 46vw, calc(100vw - 48px)" />
                 ))}
               </div>
             </Reveal>

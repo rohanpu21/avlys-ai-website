@@ -2,6 +2,7 @@ import Link from "next/link";
 import { team } from "../data/team";
 import TeamPortrait from "./TeamPortrait";
 import Reveal from "./Reveal";
+import OfficePhoto from "./OfficePhoto";
 
 export default function TeamPreview() {
   return (
@@ -15,6 +16,10 @@ export default function TeamPreview() {
           </div>
           <Link href="/about" className="inline-flex min-h-11 items-center text-primary">About Us →</Link>
         </Reveal>
+        <div className="mt-10 grid gap-5 sm:grid-cols-2">
+          <OfficePhoto photo="discussion" caption="Around the table at Avlys." />
+          <OfficePhoto photo="whiteboard" caption="Working through ideas together." />
+        </div>
         <div className="mt-12 grid gap-10 sm:grid-cols-3">
           {team.filter((person) => ["Gopal Jain", "Gaurav Purohit", "Rohan Purohit"].includes(person.name)).map((person) => (
             <Reveal key={person.name}>
