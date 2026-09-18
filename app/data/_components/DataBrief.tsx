@@ -10,12 +10,19 @@ export default function DataBrief() {
   function prepareBrief(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const fields = new FormData(event.currentTarget);
-    const body = `Hi Avlys Data,\n\nI would like to discuss a data requirement.\n\nData type: ${fields.get("modality")}\nLanguage / domain: ${fields.get("domain") || "To discuss"}\nRequirements:\n${fields.get("requirements")}\n\n`;
+    const body = `Hi Avlys Data,\n\nI would like to discuss a data requirement.\n\nService: ${fields.get("service")}\nData type: ${fields.get("modality")}\nLanguage / domain: ${fields.get("domain") || "To discuss"}\nRequirements:\n${fields.get("requirements")}\n\n`;
     setEmailDraft(`mailto:${siteConfig.email}?subject=${encodeURIComponent("Avlys Data — project brief")}&body=${encodeURIComponent(body)}`);
   }
 
   return (
     <form className={styles.briefForm} onSubmit={prepareBrief} onChange={() => setEmailDraft("")}>
+      <label htmlFor="data-service">What do you need help with?</label>
+      <select id="data-service" name="service" defaultValue="Help me choose">
+        <option>Help me choose</option>
+        <option>Explore an existing collection</option>
+        <option>Custom data collection</option>
+        <option>Annotation & quality review</option>
+      </select>
       <label htmlFor="data-modality">What kind of data?</label>
       <select id="data-modality" name="modality" required defaultValue="">
         <option value="" disabled>Select a format</option>

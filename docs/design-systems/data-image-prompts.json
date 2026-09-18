@@ -1,0 +1,35 @@
+{
+  "mode": "Built-in image_gen",
+  "purpose": "Conceptual editorial illustrations for Avlys data formats; not dataset samples. Sample library remains empty.",
+  "references": [
+    "docs/design-systems/user-selected/design (3) (1).md",
+    "docs/design-systems/user-selected/design (12).md",
+    "docs/design-systems/user-selected/design (1) (1).md"
+  ],
+  "images": [
+    {
+      "id": "text-documents",
+      "prompt": "Use case: product-mockup. Create a finished high-quality editorial photographic image for the Avlys AI data website. Landscape 3:2. Art direction: quiet Swiss precision, tactile materials, generous negative space, premium actual studio photography rather than 3D clipart. Strict palette of white #ffffff, light gray #f5f5f7, charcoal #1d1d1f and restrained Avlys blue #0066cc. Soft directional daylight, delicate real contact shadows, believable fine texture, carefully composed and sharp, no dramatic cinematic effects. No text, lettering, numbers, logos, watermark, badges, interface panels, neon, gradients, glassmorphism, floating objects, glowing neural networks, robots or generic AI symbols. Objects must physically rest on a surface. This is a conceptual editorial illustration, not a purported dataset sample. Subject: a precise overhead still life of two ivory archival document sheets partly overlapping a slim blue paper folder on a white desk. One sheet has restrained charcoal printed paragraph-like horizontal rules and a small aligned table, no readable words; an understated blue indexing tab. Real cut paper edges and fine fiber texture. Deliberate asymmetry, main composition centered with generous 15 percent margins; simple enough to read in a small card. Avoid piles, stationery clutter and fake dashboards.",
+      "source": "C:\\Users\\KIIT\\.codex\\generated_images\\01a07a02-f7b0-78b2-9612-fc2683e7707a\\exec-6e0e0a45-53b8-4462-9b6b-0d770e19f475.png",
+      "asset": "public/data/visuals/text-documents.webp"
+    },
+    {
+      "id": "image-vision",
+      "prompt": "Use case: product-mockup. Create a finished high-quality editorial photographic image for the Avlys AI data website. Landscape 3:2. Art direction: quiet Swiss precision, tactile materials, generous negative space, premium actual studio photography rather than 3D clipart. Strict palette of white #ffffff, light gray #f5f5f7, charcoal #1d1d1f and restrained Avlys blue #0066cc. Soft directional daylight, delicate real contact shadows, believable fine texture, carefully composed and sharp, no dramatic cinematic effects. No text, lettering, numbers, logos, watermark, badges, interface panels, neon, gradients, glassmorphism, floating objects, glowing neural networks, robots or generic AI symbols. Objects must physically rest on a surface. This is a conceptual editorial illustration, not a purported dataset sample. Subject: a curated contact-sheet still life: three physical fine-art photographic prints on a white tabletop arranged in a disciplined asymmetric composition, slight overlap. Photographs show architectural geometry: white concrete facade with one blue window, charcoal stair rail against pale concrete, close detail of blue-gray industrial panel. Consistent daylight within prints, crisp paper borders and grounded contact shadows. No lettering, no annotation overlays, no decorative camera icon. Center main composition with 15 percent margins, minimal and confident; looks like a carefully art-directed photography editor's desk.",
+      "source": "C:\\Users\\KIIT\\.codex\\generated_images\\01a07a02-f7b0-78b2-9612-fc2683e7707a\\exec-c6a8970e-2145-4600-a446-302d9a07d3c5.png",
+      "asset": "public/data/visuals/image-vision.webp"
+    },
+    {
+      "id": "voice-audio",
+      "prompt": "Use case: product-mockup. Create a finished high-quality editorial photographic image for the Avlys AI data website. Landscape 3:2. Art direction: quiet Swiss precision, tactile materials, generous negative space, premium actual studio photography rather than 3D clipart. Strict palette of white #ffffff, light gray #f5f5f7, charcoal #1d1d1f and restrained Avlys blue #0066cc. Soft directional daylight, delicate real contact shadows, believable fine texture, carefully composed and sharp, no dramatic cinematic effects. No text, lettering, numbers, logos, watermark, badges, interface panels, neon, gradients, glassmorphism, floating objects, glowing neural networks, robots or generic AI symbols. Objects must physically rest on a surface. This is a conceptual editorial illustration, not a purported dataset sample. Subject: a beautiful actual charcoal studio microphone with finely detailed metal mesh grille, a small quiet blue accent ring, on a short compact tabletop stand at a slight diagonal in a pale white recording studio. A neat arc of its charcoal cable lies on the surface. One subtly textured white acoustic panel in soft background focus. Tight premium industrial-design photography, genuine material construction, no people, no waveform overlays, no mixing board, no headphones. Keep entire microphone and stand in frame with 15 percent breathing space, clear silhouette.",
+      "source": "C:\\Users\\KIIT\\.codex\\generated_images\\01a07a02-f7b0-78b2-9612-fc2683e7707a\\exec-34d31682-00dc-494a-966b-903434ce8a07.png",
+      "asset": "public/data/visuals/voice-audio.webp"
+    },
+    {
+      "id": "egocentric-capture",
+      "prompt": "Use case: product-mockup. Create a finished high-quality editorial photographic image for the Avlys AI data website. Landscape 3:2. Art direction: quiet Swiss precision, tactile materials, generous negative space, premium actual studio photography rather than 3D clipart. Strict palette of white #ffffff, light gray #f5f5f7, charcoal #1d1d1f and restrained Avlys blue #0066cc. Soft directional daylight, delicate real contact shadows, believable fine texture, carefully composed and sharp, no dramatic cinematic effects. No text, lettering, numbers, logos, watermark, badges, interface panels, neon, gradients, glassmorphism, floating objects, glowing neural networks, robots or generic AI symbols. Objects must physically rest on a surface. This is a conceptual editorial illustration, not a purported dataset sample. Subject: natural first-person photographic view looking down at two human hands in charcoal long sleeves carefully placing a small cobalt-blue rectangular component into a fitted white tray on an immaculate light gray workbench. One simple steel measuring tool rests parallel nearby. Anatomically correct five-finger hands with natural skin texture, believable contact and grip. Restrained blue, white and charcoal environment, no futuristic robot, no HUD overlays, no headset, no duplicate fingers. Emphasize a concrete manual inspection task in an ordinary real workspace. Wide balanced composition, both hands and tray centered with enough crop-safe margins.",
+      "source": "C:\\Users\\KIIT\\.codex\\generated_images\\01a07a02-f7b0-78b2-9612-fc2683e7707a\\exec-e838030a-6b53-4f1f-82b2-21064f952fb4.png",
+      "asset": "public/data/visuals/egocentric-capture.webp"
+    }
+  ]
+}

@@ -21,14 +21,17 @@
 .actions > a:first-child { gap: 12px; font-size: 15px; }
 .textLink { display: inline-flex; align-items: center; gap: 12px; color: var(--primary); font-size: 15px; min-height: 44px; }
 .textLink:hover { text-decoration: underline; text-underline-offset: 4px; }
-.formatStrip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; margin-top: 60px; text-align: left; }
-.formatTile { position: relative; display: flex; align-items: center; gap: 12px; min-height: 160px; padding: 24px 22px; background: var(--parchment); transition: background .2s; }
+.formatStrip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 60px; text-align: left; }
+.formatTile { position: relative; display: flex; flex-direction: column; min-width: 0; overflow: hidden; background: var(--parchment); transition: background .2s; }
 .formatTile:hover { background: var(--hairline); }
-.formatTile > svg { width: 105px; flex-shrink: 0; color: var(--primary); }
+.formatVisual { display: block; width: 100%; aspect-ratio: 3 / 2; overflow: hidden; }
+.formatVisual img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.formatLabel { width: 100%; padding: 20px 34px 22px 20px; }
 .formatTile div > span { font-size: 9px; letter-spacing: .12em; font-weight: 600; }
 .formatTile p { font-size: 16px; font-weight: 600; margin-top: 7px; }
-.formatArrow { position: absolute; right: 16px; top: 12px; color: var(--primary); font-size: 16px; }
+.formatArrow { position: absolute; right: 16px; bottom: 22px; color: var(--primary); font-size: 16px; }
 .heroCaption { font-size: 12px; color: var(--ink-muted-80); margin-top: 20px; }
+.imageCaption { font-size: 10px; color: var(--ink-muted-80); margin-top: 8px; }
 .section { padding-block: 80px; }
 .sectionHeading { display: flex; justify-content: space-between; align-items: end; gap: 48px; margin-bottom: 34px; }
 .sectionHeading > p { max-width: 365px; color: var(--ink-muted-80); font-size: 17px; line-height: 1.6; }
@@ -40,8 +43,8 @@
 .galleryNote { margin: 22px 0 16px; font-size: 12px; color: var(--ink-muted-80); }
 .gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; align-items: start; }
 .sampleCard { border: 1px solid var(--hairline); border-radius: 18px; overflow: hidden; min-width: 0; }
-.sampleVisual { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 225px; background: var(--parchment); }
-.sampleVisual > svg { width: 175px; height: 110px; color: var(--primary); }
+.sampleVisual { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 155px; background: var(--parchment); }
+.sampleVisual > svg { width: 140px; height: 85px; color: var(--primary); }
 .visualIndex { position: absolute; top: 18px; left: 24px; font-family: monospace; font-size: 10px; letter-spacing: .1em; color: var(--ink-muted-80); }
 .placeholderLabel { font-size: 11px; letter-spacing: .02em; color: var(--ink-muted-80); margin-top: 12px; }
 .sampleBody { padding: 25px 28px 0; }
@@ -50,6 +53,7 @@
 .badge { font-size: 10px; border: 1px solid var(--hairline); border-radius: 999px; padding: 3px 9px; }
 .sampleBody > p { font-size: 15px; line-height: 1.6; color: var(--ink-muted-80); margin-top: 12px; }
 .sampleBody .useCase { font-size: 11px; margin: 18px 0 20px; }
+.sampleBody > a { margin-bottom: 16px; }
 .sampleDetails { border-top: 1px solid var(--hairline); font-size: 13px; }
 .sampleDetails summary, .faq summary { cursor: pointer; padding-block: 20px; }
 .sampleDetails summary { color: var(--primary); }
@@ -74,24 +78,48 @@
 .deliveryNote > span { font-size: 9px; letter-spacing: .12em; color: var(--body-muted-on-dark); }
 .deliveryNote p { font-size: 12px; color: var(--body-muted-on-dark); line-height: 1.8; }
 .deliveryNote b { color: var(--primary-on-dark); font-weight: 400; padding-inline: 9px; }
+.specGrid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 80px; align-items: start; }
+.specIntro { margin-top: 24px; max-width: 350px; font-size: 17px; line-height: 1.65; color: var(--ink-muted-80); }
+.specIntro + a { margin-top: 20px; }
+.specList > div { border-top: 1px solid var(--hairline); padding: 20px 0; }
+.specList > div:last-child { border-bottom: 1px solid var(--hairline); }
+.specList dt { display: flex; align-items: baseline; gap: 20px; font-weight: 600; font-size: 17px; }
+.specList dt span { color: var(--primary); font-family: monospace; font-weight: 400; font-size: 11px; }
+.specList dd { padding-left: 35px; margin-top: 7px; font-size: 14px; line-height: 1.6; color: var(--ink-muted-80); }
+.egoSection { padding-block: 72px; background: var(--parchment); }
 .egoGrid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 72px; }
-.egoPlaceholder { min-height: 390px; background: var(--parchment); display: flex; align-items: center; flex-direction: column; justify-content: center; padding: 32px; text-align: center; }
-.egoPlaceholder .eyebrow { font-size: 10px; }
-.egoPlaceholder svg { width: 200px; height: 155px; margin-block: 22px; color: var(--primary); }
-.egoPlaceholder p { font-size: 18px; font-weight: 600; }
-.egoPlaceholder > span:last-child { font-size: 11px; color: var(--ink-muted-80); margin-top: 8px; }
+.egoScope { background: var(--canvas); border: 1px solid var(--hairline); border-radius: 18px; padding: 32px; }
+.egoScope .eyebrow { font-size: 10px; }
+.egoImage { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; margin-bottom: 24px; }
+.egoScope ul { list-style: none; font-size: 14px; line-height: 1.6; }
+.egoScope li { padding-block: 12px; border-top: 1px solid var(--hairline); }
+.egoScope > p { font-size: 11px; line-height: 1.5; color: var(--ink-muted-80); margin-top: 12px; }
 .egoCopy { font-size: 16px; line-height: 1.65; color: var(--ink-muted-80); margin-top: 20px; }
 .egoCopy + a { margin-top: 18px; }
 .faqSection { padding-block: 72px; border-top: 1px solid var(--hairline); }
-.faqGrid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; }
+.faqGrid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: start; }
+.faqGrid > div:first-child { position: sticky; top: 145px; }
+.faqIntro { color: var(--ink-muted-80); font-size: 16px; line-height: 1.65; margin-top: 22px; max-width: 330px; }
+.faqNav { display: flex; flex-direction: column; margin: 24px 0 18px; max-width: 310px; }
+.faqNav a { display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--hairline); font-size: 14px; min-height: 44px; }
+.faqNav a span { color: var(--primary); }
+.faqNav a:hover { color: var(--primary); }
+.faqGroup { scroll-margin-top: 140px; }
+.faqGroup + .faqGroup { margin-top: 36px; }
+.faqGroup > h3 { color: var(--primary); font-size: 12px; line-height: 1.6; font-weight: 600; letter-spacing: .04em; padding-bottom: 6px; }
 .faq { border-bottom: 1px solid var(--hairline); }
-.faq summary { font-size: 16px; font-weight: 600; line-height: 1.5; }
+.faq summary { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; list-style: none; font-size: 16px; font-weight: 600; line-height: 1.5; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; color: var(--primary); font-weight: 400; font-size: 22px; line-height: 1; flex-shrink: 0; }
+.faq[open] summary::after { content: "−"; }
 .faq p { font-size: 15px; color: var(--ink-muted-80); line-height: 1.7; padding: 0 0 24px; }
 .contactSection { padding-block: 80px; background: var(--parchment); border-bottom: 1px solid var(--hairline); }
 .contactGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: start; }
 .contactGrid > div > p:not(.eyebrow) { margin-top: 24px; max-width: 400px; font-size: 17px; line-height: 1.6; color: var(--ink-muted-80); }
 .contactEmail { display: inline-block; color: var(--primary); margin-top: 28px; font-size: 20px; padding-block: 8px; }
-.phone { display: block; font-size: 15px; width: fit-content; min-height: 44px; padding-block: 12px; }
+.nextStep { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--hairline); max-width: 400px; }
+.nextStep h3 { font-size: 14px; font-weight: 600; }
+.nextStep p { font-size: 14px; line-height: 1.65; color: var(--ink-muted-80); margin-top: 8px; }
 .briefForm { background: var(--canvas); border-radius: 18px; border: 1px solid var(--hairline); padding: 32px; }
 .briefForm label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; }
 .briefForm label span { font-weight: 400; }
@@ -104,43 +132,47 @@
 .draftReady > a { display: inline-block; padding-block: 14px; }
 .draftReady a { color: var(--primary); text-decoration: underline; text-underline-offset: 3px; }
 @media (max-width: 1023px) {
-  .formatTile { padding: 20px 14px; flex-direction: column; align-items: start; gap: 8px; }
-  .formatTile svg { width: 100px; }
+  .formatLabel { padding-left: 16px; }
+  .formatTile p { font-size: 14px; }
   .egoGrid { gap: 36px; }
-  .contactGrid, .faqGrid { gap: 40px; }
+  .contactGrid, .faqGrid, .specGrid { gap: 40px; }
   .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .deliveryNote { align-items: start; flex-direction: column; }
 }
 @media (max-width: 640px) {
   .subnav > div { min-height: 56px; }
   .subnav nav { gap: 16px; font-size: 12px; }
-  .subnav nav a:nth-child(2) { display: none; }
+  .subnav nav a:nth-child(1), .subnav nav a:nth-child(2) { display: none; }
   .wordmark { font-size: 19px; }
   .hero { padding-top: 48px; }
   .hero h1 { font-size: clamp(36px, 9vw, 50px); }
   .hero .eyebrow { font-size: 9px; }
   .heroCopy { font-size: 17px; }
+  .desktopBreak { display: none; }
   .actions { gap: 12px; flex-direction: column; }
-  .formatStrip { margin-top: 34px; }
-  .formatTile { align-items: center; text-align: center; padding: 26px 6px 16px; min-height: 146px; }
-  .formatTile > svg { width: 75px; }
+  .formatStrip { margin-top: 34px; grid-template-columns: 1fr; gap: 10px; }
+  .formatTile { display: grid; grid-template-columns: 112px minmax(0, 1fr); align-items: center; min-height: 112px; }
+  .formatVisual { height: 100%; aspect-ratio: auto; }
+  .formatLabel { padding: 16px 24px 16px 16px; }
   .formatTile div > span { font-size: 8px; letter-spacing: .04em; }
-  .formatTile p { display: none; }
-  .formatArrow { font-size: 12px; right: 10px; top: 8px; }
+  .formatTile p { font-size: 13px; }
+  .formatArrow { font-size: 12px; right: 10px; bottom: 12px; }
   .heroCaption { font-size: 10px; }
-  .section, .offers, .process, .faqSection, .contactSection { padding-block: 52px; }
+  .section, .offers, .process, .egoSection, .faqSection, .contactSection { padding-block: 52px; }
   .sectionHeading { align-items: start; flex-direction: column; gap: 22px; }
   .sectionHeading > p { font-size: 16px; }
   .filter { padding-inline: 16px; font-size: 12px; }
-  .gallery, .offerGrid, .egoGrid, .faqGrid, .contactGrid { grid-template-columns: 1fr; }
+  .gallery, .offerGrid, .egoGrid, .faqGrid, .contactGrid, .specGrid { grid-template-columns: 1fr; }
   .sampleBody { padding-inline: 22px; }
-  .sampleVisual { height: 205px; }
+  .sampleVisual { height: 150px; }
   .offerGrid { gap: 30px; }
   .offerGrid article + article { border-top: 1px solid var(--hairline); padding-top: 26px; }
   .steps { gap: 28px 22px; margin-top: 32px; }
   .steps h3 { font-size: 16px; }
   .steps p { font-size: 13px; }
-  .egoPlaceholder { min-height: 300px; }
+  .egoScope { padding: 24px; }
+  .faqGrid > div:first-child { position: static; }
+  .faqNav { max-width: none; }
   .faqGrid, .contactGrid { gap: 28px; }
   .briefForm { padding: 24px; }
 }
