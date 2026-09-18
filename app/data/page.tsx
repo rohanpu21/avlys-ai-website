@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import OfficePhoto from "../components/OfficePhoto";
 import { siteConfig } from "../lib/site";
 import DataBrief from "./_components/DataBrief";
 import { dataFaqGroups } from "./dataFaq";
@@ -32,6 +33,14 @@ const deliveryChecklist = [
   ["Source & usage notes", "Collection method, relevant permissions, permitted uses, and restrictions."],
   ["Known limitations", "Coverage gaps, ambiguous labels, exclusions, and intended use boundaries."],
 ];
+
+const officeGallery = [
+  { photo: "discussion", caption: "Around the table at Avlys." },
+  { photo: "whiteboard", caption: "Working through ideas together." },
+  { photo: "workingSession", caption: "A working session." },
+  { photo: "workspace", caption: "Our shared workspace." },
+  { photo: "review", caption: "Back around the table." },
+] as const;
 
 export default function DataPage() {
   return (
@@ -108,6 +117,26 @@ export default function DataPage() {
               <p>Concept illustration. No sample footage displayed.</p>
             </div>
             <div><p className={styles.eyebrow}>EGOCENTRIC VIDEO / PILOT</p><h2 id="ego-heading">A first-person view.<br />A focused pilot.</h2><p className={styles.egoCopy}>Explore task-based capture for robotics and embodied-AI research alongside our text, image, and voice work. Begin with one environment and a clear capture protocol.</p><p className={styles.egoCopy}>Human first-person video is different from robot action trajectories. Camera setup, sensors, labels, and suitability for your pipeline need to be confirmed in the pilot scope.</p><a className={styles.textLink} href="#data-brief">Discuss a capture pilot <span aria-hidden="true">↗</span></a></div>
+          </div>
+        </section>
+
+        <section id="data-team" className={styles.section} aria-labelledby="data-team-heading">
+          <div className={styles.container}>
+            <div className={styles.sectionHeading}>
+              <div><p className={styles.eyebrow}>THE PEOPLE BEHIND AVLYS</p><h2 id="data-team-heading">Inside our office.<br />Close to the work.</h2></div>
+              <p>Meet the team behind the conversation. Real moments from our office, from whiteboard discussions to working sessions.</p>
+            </div>
+            <div className="grid gap-x-5 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+              {officeGallery.map(({ photo, caption }) => <OfficePhoto key={photo} photo={photo} caption={caption} sizes="(min-width: 1200px) 371px, (min-width: 1024px) 31vw, (min-width: 640px) 46vw, calc(100vw - 48px)" />)}
+              <figure className="min-w-0">
+                <video aria-label="A brief silent clip of the Avlys team around the office table" aria-describedby="data-office-video-caption" width={576} height={1024} controls muted playsInline preload="none" poster="/office/office-moment-poster.webp" className="aspect-[4/3] w-full bg-parchment object-contain">
+                  <source src="/office/office-moment.mp4" type="video/mp4" />
+                  <a href="/office/office-moment.mp4">Watch the office clip</a>
+                </video>
+                <figcaption id="data-office-video-caption" className="mt-3 text-[12px] leading-relaxed text-ink-muted">A moment in the office. 2-second silent clip.</figcaption>
+              </figure>
+            </div>
+            <a href="/about" className={`${styles.textLink} mt-7`}>Get to know the Avlys team <span aria-hidden="true">↗</span></a>
           </div>
         </section>
 
