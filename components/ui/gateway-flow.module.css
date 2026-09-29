@@ -1,0 +1,19 @@
+.flow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  /* Keep the supplied convergence visible at the sides and the copy clear. */
+  mask-image: radial-gradient(ellipse 42% 76% at 50% 48%, transparent 46%, #000 100%);
+}
+
+@media (max-width: 640px) {
+  .canvas {
+    mask-image: radial-gradient(ellipse 70% 58% at 50% 46%, transparent 50%, #000 100%);
+  }
+}
