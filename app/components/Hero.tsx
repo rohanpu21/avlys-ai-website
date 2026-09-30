@@ -5,6 +5,7 @@ import { Fragment, useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import BookCallCta from "./BookCallCta";
+import { FluidParticlesBackground } from "@/components/ui/fluid-particles-background";
 
 gsap.registerPlugin(useGSAP);
 
@@ -74,7 +75,7 @@ const Hero = () => {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10"
       >
-        <div className="hero-grid absolute inset-0" />
+        <FluidParticlesBackground />
         <div className="hero-aura absolute left-1/2 top-[18%] h-[420px] w-[min(680px,92vw)] -translate-x-1/2" />
       </div>
 
