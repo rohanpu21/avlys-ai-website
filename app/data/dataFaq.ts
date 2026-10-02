@@ -1,17 +1,28 @@
+import { dataDefinition } from "./dataContent";
+
 // Buyer concerns and editorial decisions are traced in
 // docs/avlys-data-page-research-2026-09-18.md. Terms remain project-specific.
+// Public-source additions: docs/research/public-data-catalogue-2026-10-02.md.
 export const dataFaqGroups = [
   {
     id: "getting-started",
     title: "Choosing the right data",
     items: [
       {
+        question: "What is Avlys Data?",
+        answer: dataDefinition,
+      },
+      {
+        question: "What does off-the-shelf (OTS) training data mean?",
+        answer: "OTS means an existing collection considered for your task, rather than a new collection built entirely to your brief. Avlys OTS Data describes image, audio and video options and the preparation they may need. Confirm coverage, formats, availability and applicable usage terms before agreeing on supply. Custom text and document work is scoped separately.",
+      },
+      {
         question: "Should I use an existing dataset or commission a custom collection?",
         answer: "An existing collection is useful when its task, language, environment, labels, and usage rights match your needs. Custom collection is worth considering when those details do not fit. If you already have authorized source data, annotation and review may be the better starting point. Share the requirement so we can assess the options and availability.",
       },
       {
         question: "Can I review or download a sample before committing?",
-        answer: "The sample library is coming soon and currently has no previews or downloads. You can share your requirements to discuss evaluation options, access, and permitted use. A small, agreed pilot can help evaluate fit before a larger collection.",
+        answer: "The Avlys OTS Data catalogue shows descriptions, not downloadable files. Tell us which collection fits your task. We will confirm availability, the requested selection and evaluation arrangements before agreeing on a first batch.",
       },
       {
         question: "How much training data do I need?",
@@ -51,7 +62,11 @@ export const dataFaqGroups = [
     items: [
       {
         question: "What usage rights come with a dataset?",
-        answer: "Permitted use is agreed for each collection. Training, evaluation, commercial deployment, redistribution, and exclusivity can have different terms. Public availability is not evidence of unrestricted reuse. Review source information and the applicable rights before accepting a collection; a preview is not a license to use the full dataset.",
+        answer: "Your quote and delivery agreement confirm the intended use, applicable third-party conditions and any restrictions before data is supplied. Avlys OTS Data can include third-party collections; the Avlys label does not transfer ownership of the underlying material. Any custom collection or exclusivity arrangement must be agreed separately.",
+      },
+      {
+        question: "What is included in an Avlys OTS Data quote?",
+        answer: "The quote sets out the selected data, requested volume and any preparation needed: selection, deduplication, formatting, annotation, quality review and delivery documentation. Storage, transfer, evaluation arrangements and any additional work are specified before you proceed.",
       },
       {
         question: "Can you work with confidential or personal data?",
@@ -67,6 +82,10 @@ export const dataFaqGroups = [
     id: "pricing-delivery",
     title: "Pricing & delivery",
     items: [
+      {
+        question: "Does Avlys work with data buyers outside India?",
+        answer: "Yes. Avlys AI works from Hyderabad and Bengaluru, India, with teams globally. Share your data task, region, language coverage and delivery needs. Processing location, access requirements, transfer arrangements and project feasibility are confirmed for your brief before work begins.",
+      },
       {
         question: "How is a data project priced? Is there a minimum order?",
         answer: "A quote depends on accepted units, collection difficulty, language or domain expertise, annotation depth, review, and usage rights. Units might be records, images, audio hours, or video episodes. Share an approximate volume and budget so pilot size, inclusions, minimum batch size, and pricing can be confirmed in your project quote.",

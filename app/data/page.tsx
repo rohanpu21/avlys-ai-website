@@ -1,22 +1,36 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import GatewayFlow from "@/components/ui/gateway-flow";
+import Link from "next/link";
+import { Geist } from "next/font/google";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import OfficePhoto from "../components/OfficePhoto";
-import { siteConfig } from "../lib/site";
+import StructuredData from "../components/StructuredData";
+import GatewayFlow from "@/components/ui/gateway-flow";
+import { siteConfig, whatsappUrl } from "../lib/site";
 import DataBrief from "./_components/DataBrief";
+import OtsDataCatalogue from "./_components/PublicDataCatalogue";
+import { publicDatasets } from "./publicDatasetCatalog";
+import { toOtsCatalogue } from "./otsCataloguePresentation";
 import { dataFaqGroups } from "./dataFaq";
+import { dataDefinition, dataDescription } from "./dataContent";
+import { buildDataSchema } from "./dataSeo";
 import styles from "./data.module.css";
 
-const description = "Scope AI training and evaluation data with Avlys: text, images, voice, custom collection, and annotation. Discuss a pilot, quality criteria, and usage rights.";
+const geist = Geist({
+  subsets: ["latin"],
+  variable: "--font-data-sans",
+  display: "swap",
+});
+
+const description = dataDescription;
 
 export const metadata: Metadata = {
-  title: "Avlys Data — AI Training Data & Annotation",
+  title: { absolute: "AI Training Data, Collection & Annotation | Avlys Data" },
   description,
   alternates: { canonical: "/data" },
-  openGraph: { title: "Avlys Data — AI training data, built for your task.", description, url: "/data", type: "website" },
-  twitter: { card: "summary_large_image", title: "Avlys Data — AI Training Data & Annotation", description },
+  openGraph: { title: "Avlys OTS Data — AI training data, built for your task.", description, url: "/data", type: "website" },
+  twitter: { card: "summary_large_image", title: "Avlys OTS Data — AI Training Data & Annotation", description },
 };
 
 const steps = [
@@ -45,13 +59,14 @@ const officeGallery = [
 
 export default function DataPage() {
   return (
-    <div className={styles.page}>
+    <div className={`${geist.variable} ${styles.page}`}>
+      <StructuredData data={buildDataSchema({ path: "/data", title: "Avlys Data — AI training data, collection and annotation", description, faqs: dataFaqGroups.flatMap((group) => [...group.items]) })} />
       <a className={styles.skipLink} href="#data-main">Skip to data content</a>
       <Navbar />
       <div className={styles.subnav}>
         <div className={styles.container}>
           <a href="#data-main" className={styles.wordmark}>Avlys Data</a>
-          <nav aria-label="Data page"><a href="#samples">Sample library</a><a href="#process">Our approach</a><a href="#data-faq">FAQs</a><a href="#data-brief">Let’s talk <span aria-hidden="true">↗</span></a></nav>
+          <nav aria-label="Data page"><a href="#datasets">Catalogue</a><a href="#process">Our approach</a><a href="#data-faq">FAQs</a><a href="#data-brief">Let’s talk <span aria-hidden="true">↗</span></a></nav>
         </div>
       </div>
       <main id="data-main">
@@ -60,42 +75,40 @@ export default function DataPage() {
             <div className={`hero-aura ${styles.heroAura}`} aria-hidden="true" />
             <GatewayFlow opacity={0.55} />
             <div className={`${styles.container} ${styles.heroContent}`}>
-              <h1 id="data-heading" className="type-hero">AI training data.<br />Built for your task.</h1>
-              <p className={`type-lead ${styles.heroCopy}`}>Text, images, and voice for training and evaluation. Scope your collection, annotation, and quality requirements around a pilot you can inspect.</p>
-              <div className={styles.actions}><a href="#data-brief" className="btn-pill-primary">Discuss your data brief</a><a href="#process" className="btn-pill-ghost">Explore our approach</a></div>
+              <nav className={`${styles.breadcrumbs} ${styles.heroBreadcrumbs}`} aria-label="Breadcrumb"><Link href="/">Home</Link><span aria-hidden="true">/</span><span aria-current="page">Avlys Data</span></nav>
+              <p className={styles.heroEyebrow}>Avlys Data / Off-the-shelf · Custom · Annotation</p>
+              <h1 id="data-heading" className="type-hero">AI training data.<br /><span>Built for your task.</span></h1>
+              <p className={`type-lead ${styles.heroCopy}`}>{dataDefinition}</p>
+              <div className={styles.actions}><a href="#data-brief" className="btn-pill-primary">Request sample & pricing</a><a href="#datasets" className="btn-pill-ghost">Explore Avlys OTS Data</a></div>
               <p className={`type-caption ${styles.heroCaption}`}><span>Task-specific scope</span> <b aria-hidden="true">·</b> <span>Pilot before scale</span> <b aria-hidden="true">·</b> <span>Documented delivery</span></p>
             </div>
           </div>
           <div className={styles.container}>
             <div className={styles.formatStrip} aria-label="Our primary data formats">
-              {([{ type: "text", image: "text-documents", label: "Language & document AI", name: "Text & documents" }, { type: "image", image: "image-vision", label: "Computer vision", name: "Images" }, { type: "voice", image: "voice-audio", label: "Speech & conversational AI", name: "Voice & audio" }] as const).map((format) => (
-                <a key={format.type} href="#data-brief" className={styles.formatTile}>
+              {([{ type: "text", image: "text-documents", label: "Language & document AI", name: "Text & documents", href: "#data-brief" }, { type: "image", image: "image-vision", label: "Computer vision", name: "Images", href: "/data/image" }, { type: "voice", image: "voice-audio", label: "Speech & conversational AI", name: "Voice & audio", href: "/data/audio" }] as const).map((format) => (
+                <a key={format.type} href={format.href} className={styles.formatTile}>
                   <span className={styles.formatVisual}><Image src={`/data/visuals/${format.image}.webp`} alt="" width={1536} height={1024} sizes="(max-width: 640px) 112px, (max-width: 1200px) 33vw, 371px" /></span>
                   <div className={styles.formatLabel}><span className="type-caption">{format.name}</span><p>{format.label}</p></div>
                   <span className={styles.formatArrow} aria-hidden="true">→</span>
                 </a>
               ))}
             </div>
-            <p className={`type-fine-print ${styles.imageCaption}`}>Concept illustrations · Dataset samples coming separately</p>
+            <p className={`type-fine-print ${styles.imageCaption}`}>Concept illustrations, not dataset samples. Text and document work is scoped separately from the OTS catalogue.</p>
           </div>
         </section>
+
+        <OtsDataCatalogue datasets={toOtsCatalogue(publicDatasets)} />
 
         <section className={styles.offers} aria-labelledby="offers-heading">
           <div className={styles.container}>
             <div className={styles.centeredHeading}><p className={styles.eyebrow}>Ways to work together</p><h2 id="offers-heading" className="type-display-lg">Your brief. The right starting point.</h2></div>
             <div className={styles.offerGrid}>
               {[
-                ["01", "Explore existing data", "Have a defined task? Discuss collection fit, availability, and licensing. Evaluate a relevant sample when access is confirmed."],
+                ["01", "Explore Avlys OTS Data", "Compare data types, coverage and formats. Request a quote for your selected collection and evaluate a sample once availability is confirmed."],
                 ["02", "Collect to your brief", "Need a specific language, environment, or edge case? Define the capture requirements and start with a scoped pilot."],
                 ["03", "Annotate & review", "Already have authorized data? Agree on labels, transcripts, review criteria, and correction terms before work begins."],
               ].map(([n, title, text]) => <article key={n}><span className={`type-caption-strong ${styles.offerNumber}`}>{n}</span><h3>{title}</h3><p className="type-caption">{text}</p><a className={styles.textLink} href="#data-brief">Discuss the scope <span aria-hidden="true">→</span></a></article>)}
             </div>
-          </div>
-        </section>
-
-        <section id="samples" className={styles.section} aria-labelledby="samples-heading">
-          <div className={styles.container}>
-            <div className={styles.sectionHeading}><div><p className={styles.eyebrow}>Sample library</p><h2 id="samples-heading" className="type-display-lg">Coming soon.</h2></div><p className="type-lead-airy">Samples will be added here when they are ready.</p></div>
           </div>
         </section>
 
@@ -142,6 +155,7 @@ export default function DataPage() {
                 <figcaption id="data-office-video-caption" className="mt-3 text-[12px] leading-relaxed text-ink-muted">A moment in the office. 2-second silent clip.</figcaption>
               </figure>
             </div>
+            <p className={styles.locationNote}>Avlys AI works from Hyderabad and Bengaluru, India, with teams globally. Data project scope and delivery arrangements are agreed for each brief.</p>
             <a href="/about" className={`${styles.textLink} mt-7`}>Get to know the Avlys team <span aria-hidden="true">→</span></a>
           </div>
         </section>
@@ -153,7 +167,7 @@ export default function DataPage() {
 
         <section id="data-brief" className={styles.contactSection} aria-labelledby="brief-heading"><div className={`${styles.container} ${styles.contactGrid}`}>
           <div><p className={styles.eyebrow}>Let’s start with the task</p><h2 id="brief-heading" className="type-display-lg">Tell us what<br />good data looks like.</h2><p className="type-lead-airy">A useful brief starts with the task, data format, language or domain, approximate volume, and timeline. We’ll use it to discuss feasibility and a first batch.</p><div className={styles.nextStep}><h3>What happens next?</h3><p>After you send the email, the next conversation covers fit, access requirements, and a scoped pilot or quote.</p></div><a href={`mailto:${siteConfig.email}`} className={styles.contactEmail}>{siteConfig.email} <span aria-hidden="true">→</span></a></div>
-          <DataBrief />
+          <div><DataBrief /><div className={styles.contactActions}><a href={whatsappUrl("Hi Avlys Data, I would like to discuss training data, sample availability and pricing.")} target="_blank" rel="noopener noreferrer">Discuss on WhatsApp ↗</a><a href={`tel:${siteConfig.phoneHref}`}>Call {siteConfig.phone}</a></div></div>
         </div></section>
       </main>
       <Footer />

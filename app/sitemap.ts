@@ -3,6 +3,7 @@ import { blogPosts } from "./data/blog";
 import { caseStudies } from "./data/caseStudies";
 import { servicePages } from "./data/services";
 import { absoluteUrl } from "./lib/site";
+import { dataCategories, dataUpdatedAt } from "./data/dataContent";
 
 // Honest lastModified dates: bump these when the corresponding content
 // actually changes (a `new Date()` on every build devalues the signal).
@@ -25,10 +26,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: absoluteUrl("/data"),
-      lastModified: SITE_REDESIGN_DATE,
+      lastModified: new Date(dataUpdatedAt),
       changeFrequency: "monthly",
       priority: 0.85,
     },
+    ...dataCategories.map(({ id }) => ({
+      url: absoluteUrl(`/data/${id}`),
+      lastModified: new Date(dataUpdatedAt),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })),
     {
       url: absoluteUrl("/case-studies"),
       lastModified: CASE_STUDIES_UPDATED,

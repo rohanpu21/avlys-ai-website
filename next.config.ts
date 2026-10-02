@@ -1,6 +1,13 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Opt-in for disk-constrained local previews; normal development and builds are unchanged.
+  webpack(config, { dev }) {
+    if (dev && process.env.AVLYS_PREVIEW_MEMORY_CACHE === "1") {
+      config.cache = { type: "memory" };
+    }
+    return config;
+  },
   turbopack: {
     root: process.cwd(),
   },

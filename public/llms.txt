@@ -14,6 +14,18 @@
 - [Data Collection & Preparation](https://avlysai.com/services/ai-training-data): collection, annotation, cleaning, and evaluation sets for AI training - delivered by a core team under NDA/DPA.
 - [Enterprise AI Consulting](https://avlysai.com/services/enterprise-ai-consulting): readiness assessment, use-case ranking, and a costed pilot plan.
 
+## Avlys Data
+
+Avlys Data is the AI training-data service from Avlys AI: off-the-shelf collection options, custom collection, preparation and annotation. Data project timing, availability and pricing are confirmed for the brief; software pilot timelines above do not apply automatically to data work.
+
+- [Avlys Data](https://avlysai.com/data): service overview, collection catalogue, pilot process, delivery checklist and buyer FAQs.
+- [Image training data](https://avlysai.com/data/image): captioned photographs, satellite imagery, apparel, synthetic visual reasoning, characters and cultural/scientific imagery.
+- [Audio training data](https://avlysai.com/data/audio): multilingual and Indian-language speech, read speech, audiobooks and voice commands.
+- [Video training data](https://avlysai.com/data/video): robot demonstrations, manipulation trajectories and synthetic multi-view scenes. Human egocentric capture is a separately scoped pilot.
+- [Request sample availability and pricing](https://avlysai.com/data#data-brief): share the task, format, coverage, approximate volume and timeline. Email: sales@avlysai.com. Phone: +91 99377 30039.
+
+The catalogue provides descriptions, not downloadable datasets or confirmed stock. Avlys OTS Data includes third-party and public research collections with Avlys sourcing and preparation services; the Avlys label does not establish ownership of underlying material. Sizes describe reference collections. Availability, applicable usage terms, preparation and delivery scope are confirmed before supply.
+
 ## Proof
 
 - [Case Studies](https://avlysai.com/case-studies): delivered marketplaces, AI agent architectures, voice agents, and automation systems.
