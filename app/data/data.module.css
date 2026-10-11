@@ -1,4 +1,5 @@
 .page { background: var(--canvas); color: var(--ink); --data-glass-shadow: 0 8px 32px #1b4c8112, inset 0 1px 0 #fff; font-family: var(--font-data-sans), sans-serif; font-weight: 400; letter-spacing: -.012em; font-optical-sizing: auto; }
+.rootPage { font-family: var(--font-inter), sans-serif; }
 .page :is(button, input, select, textarea) { font-family: inherit; }
 .page :global(.type-display-lg) { font-weight: 550; letter-spacing: -.035em; line-height: 1.12; }
 .page :global(.type-lead-airy) { font-weight: 400; letter-spacing: -.015em; }
@@ -62,6 +63,8 @@
 .heroCaption span { white-space: nowrap; }
 .heroCaption b { padding-inline: 4px; font-weight: 400; }
 .imageCaption { color: #515766; margin-top: 16px; }
+.rootPage .imageCaption a { color: var(--primary); text-decoration: underline; text-underline-offset: 3px; }
+.rootPage .imageCaption a:hover { text-decoration-thickness: 2px; }
 .section { padding-block: 80px; }
 .sectionHeading { display: flex; justify-content: space-between; align-items: end; gap: 48px; margin-bottom: 40px; }
 .sectionHeading > p { max-width: 448px; color: var(--ink-muted-80); }

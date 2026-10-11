@@ -7,11 +7,12 @@ type DataSchemaInput = {
   description: string;
   faqs: readonly { question: string; answer: string }[];
   categoryLabel?: string;
+  dateModified?: string;
 };
 
 // Describe the service, not an owned/in-stock Dataset or a priced Product.
 // FAQs come from the same records rendered visibly on each page.
-export function buildDataSchema({ path, title, description, faqs, categoryLabel }: DataSchemaInput) {
+export function buildDataSchema({ path, title, description, faqs, categoryLabel, dateModified }: DataSchemaInput) {
   const url = absoluteUrl(path);
   const organization = { "@id": absoluteUrl("/#organization") };
   const breadcrumbs = [
@@ -25,7 +26,7 @@ export function buildDataSchema({ path, title, description, faqs, categoryLabel 
       {
         "@type": categoryLabel ? "CollectionPage" : "WebPage",
         "@id": `${url}#webpage`, url, name: title, description,
-        inLanguage: "en", dateModified: dataUpdatedAt,
+        inLanguage: "en", dateModified: dateModified ?? dataUpdatedAt,
         isPartOf: { "@id": absoluteUrl("/#website") },
         publisher: organization,
         about: { "@id": `${url}#service` },

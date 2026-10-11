@@ -29,13 +29,20 @@
 .categoryIntro { display: flex; align-items: start; gap: 40px; margin-bottom: 24px; }
 .categoryIntro h3 { min-width: 220px; font-size: 26px; font-weight: 600; letter-spacing: -.03em; }
 .categoryIntro p { max-width: 720px; font-size: 14px; color: var(--catalogue-muted); line-height: 1.7; }
-.controls { display: grid; grid-template-columns: minmax(0, 1fr); }
+.suggestions { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: -4px 0 22px; }
+.suggestionsLabel { margin-right: 4px; color: var(--catalogue-muted); font-size: 12px; font-weight: 600; }
+.suggestion { min-height: 36px; padding: 7px 12px; border: 1px solid #c6d5e6; border-radius: 999px; background: #ffffffa8; color: #334357; font: inherit; font-size: 12px; cursor: pointer; transition: background .18s, border-color .18s, color .18s; }
+.suggestion:hover { border-color: #8caccd; background: #fff; }
+.suggestion[aria-pressed="true"] { border-color: var(--primary); background: #eaf4ff; color: #005ab5; }
+.controls { display: grid; grid-template-columns: minmax(0, 1.4fr) repeat(2, minmax(190px, .8fr)); align-items: end; gap: 12px; }
+.search, .filter { min-width: 0; }
 .controls label { display: block; font-size: 12px; font-weight: 500; margin-bottom: 9px; color: var(--catalogue-muted); }
 .searchField { position: relative; }
 .searchField svg { position: absolute; left: 18px; top: 17px; width: 20px; height: 20px; color: var(--catalogue-muted); pointer-events: none; }
-.search input, .reviewFilter select { width: 100%; min-height: 54px; padding: 14px 18px; background: #fff; border: 1px solid #b8c7d8; border-radius: 18px; box-shadow: inset 0 1px 0 #fff, 0 3px 12px #18395704; color: var(--ink); font: inherit; font-size: 15px; }
+.search input, .filter select { width: 100%; min-height: 54px; padding: 14px 18px; background: #fff; border: 1px solid #b8c7d8; border-radius: 18px; box-shadow: inset 0 1px 0 #fff, 0 3px 12px #18395704; color: var(--ink); font: inherit; font-size: 15px; }
 .search input { padding-left: 48px; }
 .search input::placeholder { color: var(--catalogue-muted); }
+.filterHint { margin-top: 12px; color: var(--catalogue-muted); font-size: 12px; line-height: 1.6; }
 .resultsMeta { display: flex; align-items: center; justify-content: space-between; min-height: 60px; gap: 16px; font-size: 12px; color: var(--catalogue-muted); }
 .resultsMeta button, .empty button { background: none; color: var(--primary); border: 0; font: inherit; cursor: pointer; text-decoration: underline; text-underline-offset: 4px; min-height: 44px; }
 .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; align-items: start; }
@@ -85,7 +92,7 @@
 /* Opaque defaults also cover browsers without backdrop-filter. */
 @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .categories { background: linear-gradient(120deg, #ffffffba, #ffffff66); -webkit-backdrop-filter: blur(24px) saturate(135%); backdrop-filter: blur(24px) saturate(135%); }
-  .search input, .reviewFilter select { background: #ffffffb8; -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); }
+  .search input, .filter select { background: #ffffffb8; -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); }
 }
 @media (max-width: 1000px) {
   .category { padding: 18px 12px; gap: 10px; }
@@ -95,6 +102,8 @@
 @media (max-width: 900px) {
   .heading { gap: 24px; grid-template-columns: 1fr; }
   .heading > p { max-width: 640px; }
+  .controls { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .search { grid-column: 1 / -1; }
   .card { padding: 24px 22px 0; }
   .cardHeader { flex-direction: column; align-items: start; gap: 10px; }
   .cardFooter { flex-wrap: wrap; gap: 0 16px; }
@@ -120,8 +129,11 @@
   .categoryIntro { display: block; margin-bottom: 24px; }
   .categoryIntro h3 { font-size: 24px; margin-bottom: 10px; min-width: 0; }
   .categoryIntro p { font-size: 14px; }
+  .suggestions { gap: 8px; margin-bottom: 18px; }
+  .suggestionsLabel { flex-basis: 100%; }
   .controls, .grid { grid-template-columns: 1fr; }
-  .search input, .reviewFilter select { font-size: 16px; }
+  .search input, .filter select { font-size: 16px; }
+  .search { grid-column: auto; }
   .card { border-radius: 22px; padding: 24px 22px 0; }
   .cardHeader { flex-direction: row; }
   .card :is(h3, h4) { font-size: 26px; }
@@ -132,14 +144,14 @@
   .pilot { padding-top: 32px; }
   .pilot > a { width: 100%; justify-content: center; }
 }
-@media (prefers-reduced-motion: reduce) { .category { transition: none; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .category, .suggestion { transition: none; transform: none; } }
 @media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
-  .categories, .search input, .reviewFilter select { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; border-color: #7b8798; box-shadow: none; }
+  .categories, .search input, .filter select { background: #fff; -webkit-backdrop-filter: none; backdrop-filter: none; border-color: #7b8798; box-shadow: none; }
   .category[aria-pressed="true"] { background: #e8f2ff; border-color: var(--primary); box-shadow: none; }
   .section::before { display: none; }
 }
 @media (forced-colors: active) {
-  .categories, .card, .search input, .reviewFilter select { border: 1px solid CanvasText; background: Canvas; }
+  .categories, .card, .search input, .filter select { border: 1px solid CanvasText; background: Canvas; }
   .category[aria-pressed="true"] { border: 2px solid Highlight; }
   .categoryIcon, .count, .brandTag { background: Canvas; color: CanvasText; }
   .category[aria-pressed="true"] .categoryIcon, .category[aria-pressed="true"] .count { background: Highlight; color: HighlightText; }

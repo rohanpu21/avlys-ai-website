@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Geist } from "next/font/google";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import OfficePhoto from "../components/OfficePhoto";
@@ -12,16 +11,11 @@ import DataBrief from "./_components/DataBrief";
 import OtsDataCatalogue from "./_components/PublicDataCatalogue";
 import { publicDatasets } from "./publicDatasetCatalog";
 import { toOtsCatalogue } from "./otsCataloguePresentation";
+import { toDataPageCatalogue } from "./dataPageCatalogue";
 import { dataFaqGroups } from "./dataFaq";
-import { dataDefinition, dataDescription } from "./dataContent";
+import { dataDefinition, dataDescription, dataPageUpdatedAt } from "./dataPageContent";
 import { buildDataSchema } from "./dataSeo";
 import styles from "./data.module.css";
-
-const geist = Geist({
-  subsets: ["latin"],
-  variable: "--font-data-sans",
-  display: "swap",
-});
 
 const description = dataDescription;
 
@@ -34,9 +28,9 @@ export const metadata: Metadata = {
 };
 
 const steps = [
-  ["Define the task.", "Specify the use case, coverage, sources, labels, and permitted use. Confirm feasibility before committing."],
-  ["Scope a pilot.", "Agree on a representative first batch, review method, acceptance criteria, price, and timeline."],
-  ["Review together.", "Inspect the files and labels. Record defects, resolve ambiguous instructions, and agree on corrections."],
+  ["Define the task.", "Specify the use case, coverage, labels, and permitted use. Confirm feasibility before committing."],
+  ["Calibrate a small batch.", "Start with a small paid calibration batch against the agreed labels. Review real output and resolve edge cases before setting the production quality bar."],
+  ["Review together.", "For custom annotation, a second pass independently scores the work against a held-out gold set. Record agreement, defects, and corrections before delivery."],
   ["Scale what works.", "Use the accepted pilot to plan production batches, versioned delivery, and any further review."],
 ];
 
@@ -45,7 +39,7 @@ const deliveryChecklist = [
   ["Labels & schema", "Field definitions, annotation guidelines, examples, and version notes."],
   ["Coverage & splits", "Relevant language, domain, or capture metadata and agreed evaluation splits."],
   ["Quality findings", "Review method, checked sample size, defect categories, and corrections."],
-  ["Source & usage notes", "Collection method, relevant permissions, permitted uses, and restrictions."],
+  ["Usage terms & rights", "Applicable permissions, permitted uses, and restrictions."],
   ["Known limitations", "Coverage gaps, ambiguous labels, exclusions, and intended use boundaries."],
 ];
 
@@ -59,8 +53,8 @@ const officeGallery = [
 
 export default function DataPage() {
   return (
-    <div className={`${geist.variable} ${styles.page}`}>
-      <StructuredData data={buildDataSchema({ path: "/data", title: "Avlys Data — AI training data, collection and annotation", description, faqs: dataFaqGroups.flatMap((group) => [...group.items]) })} />
+    <div className={`${styles.page} ${styles.rootPage}`}>
+      <StructuredData data={buildDataSchema({ path: "/data", title: "Avlys Data — AI training data, collection and annotation", description, faqs: dataFaqGroups.flatMap((group) => [...group.items]), dateModified: dataPageUpdatedAt })} />
       <a className={styles.skipLink} href="#data-main">Skip to data content</a>
       <Navbar />
       <div className={styles.subnav}>
@@ -93,11 +87,11 @@ export default function DataPage() {
                 </a>
               ))}
             </div>
-            <p className={`type-fine-print ${styles.imageCaption}`}>Concept illustrations, not dataset samples. Text and document work is scoped separately from the OTS catalogue.</p>
+            <p className={`type-fine-print ${styles.imageCaption}`}>Concept illustrations, not dataset samples. Text and document work is scoped separately from the OTS catalogue. <Link href="/services/ai-training-data">Explore AI training data, collection &amp; annotation.</Link></p>
           </div>
         </section>
 
-        <OtsDataCatalogue datasets={toOtsCatalogue(publicDatasets)} />
+        <OtsDataCatalogue datasets={toDataPageCatalogue(toOtsCatalogue(publicDatasets))} />
 
         <section className={styles.offers} aria-labelledby="offers-heading">
           <div className={styles.container}>
@@ -116,7 +110,7 @@ export default function DataPage() {
           <div className={styles.container}>
             <div className={styles.centeredHeading}><p className={styles.eyebrow}>From requirement to delivery</p><h2 id="process-heading" className="type-display-lg">Start small. Set the standard.</h2><p className="type-lead-airy">Agree on what a useful batch looks like before expanding the project. The pilot establishes the task, review process, and delivery expectations.</p></div>
             <ol className={styles.steps}>{steps.map(([title, body], index) => <li key={title}><span className="type-caption-strong">0{index + 1}</span><h3>{title}</h3><p className="type-caption">{body}</p></li>)}</ol>
-            <div className={styles.deliveryNote}><span className="type-caption-strong">The delivery conversation</span><p className="type-caption">Files & schema <b aria-hidden="true">·</b> Review criteria <b aria-hidden="true">·</b> Provenance & rights <b aria-hidden="true">·</b> Known limitations</p></div>
+            <div className={styles.deliveryNote}><span className="type-caption-strong">The delivery conversation</span><p className="type-caption">Files & schema <b aria-hidden="true">·</b> Review criteria <b aria-hidden="true">·</b> Usage terms & rights <b aria-hidden="true">·</b> Known limitations</p></div>
           </div>
         </section>
 
@@ -143,7 +137,7 @@ export default function DataPage() {
           <div className={styles.container}>
             <div className={styles.sectionHeading}>
               <div><p className={styles.eyebrow}>The people behind Avlys</p><h2 id="data-team-heading" className="type-display-lg">Inside our office.<br />Close to the work.</h2></div>
-              <p className="type-lead-airy">Meet the team behind the conversation. Real moments from our office, from whiteboard discussions to working sessions.</p>
+              <p className="type-lead-airy">Our accountable core data team handles collection, cleaning, annotation, and review for Avlys Data projects. The gallery shares real moments from our office, including whiteboard discussions and working sessions.</p>
             </div>
             <div className="grid gap-x-5 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
               {officeGallery.map(({ photo, caption }) => <OfficePhoto key={photo} photo={photo} caption={caption} sizes="(min-width: 1200px) 371px, (min-width: 1024px) 31vw, (min-width: 640px) 46vw, calc(100vw - 48px)" />)}
