@@ -16,6 +16,13 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+## Website analytics
+
+PostHog is initialized in `instrumentation-client.ts` for every page. Configure
+the public project token and host in `.env.local` and in Vercel before building.
+See [the analytics setup guide](docs/analytics.md) for configuration, tracked
+events, and verification steps.
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
