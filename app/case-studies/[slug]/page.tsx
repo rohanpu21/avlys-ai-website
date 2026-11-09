@@ -82,6 +82,13 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
   }
 
   const caseStudyUrl = absoluteUrl(`/case-studies/${caseStudy.slug}`);
+  const isDesign = caseStudy.engagement === "Architecture engagement" || caseStudy.engagement === "Scope proposal";
+  const isPrototype = caseStudy.engagement === "Prototype / MVP";
+  const engagementNote = isDesign
+    ? "Architecture and proposed workflows; implementation and production deployment are outside the documented scope."
+    : isPrototype
+      ? "Prototype capabilities and their limits are described below. Production deployment and usage are not asserted."
+      : "The case study documents implementation scope. Live deployment status and usage are not asserted.";
   const related = caseStudies
     .filter((item) => item.slug !== caseStudy.slug)
     .filter((item) => item.category === caseStudy.category || item.visualKind === caseStudy.visualKind)
@@ -148,7 +155,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
               {caseStudy.headline}
             </p>
             <p className="type-caption mt-6 text-ink-faint">
-              {caseStudy.engagement ?? "Software build"} · {caseStudy.type} · {caseStudy.stack}
+              {caseStudy.engagement} · {caseStudy.type} · {caseStudy.stack}
             </p>
             {caseStudy.liveUrl ? (
               <p className="mt-6">
@@ -176,13 +183,13 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             <p className="type-fine-print text-ink-muted">Project illustration. Not a verified production screenshot.</p>
           </div>
           <div className="mx-auto mt-8 max-w-5xl border-t border-hairline pt-6">
-            <p className="type-caption text-ink-muted"><strong>Engagement:</strong> {caseStudy.engagement ?? "Software build"}. {caseStudy.engagement === "Architecture engagement" ? "Architecture and design scope; this is not a claim of a live production deployment." : "The case study documents the implementation scope. Live deployment status and usage are not asserted."}</p>
+            <p className="type-caption text-ink-muted"><strong>Engagement:</strong> {caseStudy.engagement}. {engagementNote}</p>
             {caseStudy.deliveryTimeline && <p className="type-caption mt-3 text-ink-muted"><strong>Delivery timeline:</strong> {caseStudy.deliveryTimeline}</p>}
             {caseStudy.verifiedResults?.length ? (
               <dl className="mt-6 grid gap-6 sm:grid-cols-3">
                 {caseStudy.verifiedResults.map((result) => <div key={result.label}><dt className="type-caption">{result.label}</dt><dd className="mt-2 text-[28px] font-semibold">{result.value}</dd><dd className="type-caption mt-2 text-ink-muted">{result.measurementNote}</dd></div>)}
               </dl>
-            ) : <p className="type-caption mt-3 text-ink-muted">The capabilities below describe the work delivered. Quantified business results have not been published.</p>}
+            ) : <p className="type-caption mt-3 text-ink-muted">Quantified business results have not been published.</p>}
           </div>
         </section>
 
@@ -230,7 +237,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
         <section className="bg-canvas px-6 py-16">
           <div className="mx-auto grid w-full max-w-6xl gap-12 lg:grid-cols-2">
             <div>
-              <h2 className="type-display-lg text-ink">Delivered.</h2>
+              <h2 className="type-display-lg text-ink">{isDesign ? "Design scope." : "Implementation scope."}</h2>
               <div className="mt-8 flex flex-col gap-3">
                 {caseStudy.deliverables.map((deliverable) => (
                   <div
@@ -244,7 +251,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
               </div>
             </div>
             <div>
-              <h2 className="type-display-lg text-ink">{caseStudy.engagement === "Architecture engagement" ? "Design outcomes." : "Capabilities delivered."}</h2>
+              <h2 className="type-display-lg text-ink">{isDesign ? "Design outcomes." : isPrototype ? "Prototype capabilities." : "Product capabilities."}</h2>
               <div className="mt-8 flex flex-col gap-3">
                 {caseStudy.outcomes.map((outcome) => (
                   <div
@@ -260,9 +267,9 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
           </div>
         </section>
 
-        <section className="on-dark bg-tile-1 px-6 py-16 text-on-dark">
+        {caseStudy.process.length > 0 && <section className="on-dark bg-tile-1 px-6 py-16 text-on-dark">
           <div className="mx-auto w-full max-w-6xl">
-            <h2 className="type-display-lg text-center">{caseStudy.engagement === "Architecture engagement" ? "How it was designed." : "How it was built."}</h2>
+            <h2 className="type-display-lg text-center">{isDesign ? "Design approach." : isPrototype ? "Prototype approach." : "Implementation approach."}</h2>
             <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
               {caseStudy.process.map((step, index) => (
                 <div key={step} className="rounded-[18px] bg-tile-3 p-6">
@@ -274,7 +281,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
               ))}
             </div>
           </div>
-        </section>
+        </section>}
 
         {related.length > 0 && (
           <section className="bg-parchment px-6 py-16">

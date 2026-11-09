@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     absolute: "Portfolio - Platforms, AI Systems & Custom Software | Avlys AI",
   },
   description:
-    "Browse delivered Avlys AI projects: marketplaces, AI agent systems, automation workflows, e-commerce builds, and custom software for Indian and US clients.",
+    "Explore Avlys AI projects and engineering engagements: custom software, AI systems, automation, commerce, websites, prototypes, and architecture.",
   alternates: {
     canonical: "/portfolio",
   },
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     url: absoluteUrl("/portfolio"),
     title: "Portfolio - Platforms, AI Systems & Custom Software | Avlys AI",
     description:
-      "Delivered projects: marketplaces, AI agent systems, automation workflows, e-commerce builds, and custom software.",
+      "Projects and engineering engagements spanning custom software, AI systems, automation, commerce, websites, prototypes, and architecture.",
   },
 };
 

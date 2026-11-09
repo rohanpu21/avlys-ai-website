@@ -1,5 +1,6 @@
-import { NextResponse } from "next/server";
+import { after, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+import { captureSavedLead } from "../../lib/analytics-server";
 
 type LeadPayload = {
   name?: string;
@@ -35,9 +36,7 @@ const getSupabaseClient = () => {
   const url = process.env.SUPABASE_URL;
   const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-  if (!url || !serviceRoleKey) {
-    throw new Error("Missing Supabase environment variables.");
-  }
+  if (!url?.trim() || !serviceRoleKey?.trim()) return null;
 
   return createClient(url, serviceRoleKey, {
     auth: { persistSession: false },
@@ -46,7 +45,22 @@ const getSupabaseClient = () => {
 
 export async function POST(request: Request) {
   try {
-    const payload = (await request.json()) as LeadPayload;
+    let body: unknown;
+    try {
+      body = await request.json();
+    } catch {
+      return NextResponse.json({ error: "Please submit valid project details." }, { status: 400 });
+    }
+
+    if (!body || typeof body !== "object" || Array.isArray(body)) {
+      return NextResponse.json({ error: "Please submit valid project details." }, { status: 400 });
+    }
+
+    const payload = body as LeadPayload;
+    const fields = ["name", "email", "phone", "company", "projectType", "message", "website", "source"] as const;
+    if (fields.some((field) => payload[field] !== undefined && typeof payload[field] !== "string")) {
+      return NextResponse.json({ error: "Please submit valid project details." }, { status: 400 });
+    }
 
     // Honeypot: bots fill the hidden field; answer success and drop it.
     if (payload.website) {
@@ -81,6 +95,8 @@ export async function POST(request: Request) {
       email.length > MAX_FIELD_LENGTH ||
       phone.length > MAX_FIELD_LENGTH ||
       (payload.company?.length ?? 0) > MAX_FIELD_LENGTH ||
+      (projectType?.length ?? 0) > MAX_FIELD_LENGTH ||
+      (payload.source?.length ?? 0) > MAX_FIELD_LENGTH ||
       message.length > MAX_MESSAGE_LENGTH
     ) {
       return NextResponse.json(
@@ -97,6 +113,12 @@ export async function POST(request: Request) {
     }
 
     const supabase = getSupabaseClient();
+    if (!supabase) {
+      return NextResponse.json(
+        { error: "The inquiry form is temporarily unavailable. Please email us instead." },
+        { status: 503 }
+      );
+    }
     const { error } = await supabase.from("lead_submissions").insert([
       {
         name,
@@ -109,16 +131,19 @@ export async function POST(request: Request) {
     ]);
 
     if (error) {
-      console.error("Lead insert failed:", error.message);
-      return NextResponse.json({ error: "Unable to save the request." }, { status: 500 });
+      // Database error messages can include submitted data. Log only the code.
+      console.error("Lead insert failed:", error.code);
+      return NextResponse.json({ error: "Unable to save your inquiry. Please try again or email us." }, { status: 503 });
     }
 
-    return NextResponse.json({ ok: true }, { status: 200 });
-  } catch (error) {
-    console.error(
-      "Lead endpoint error:",
-      error instanceof Error ? error.message : error
-    );
-    return NextResponse.json({ error: "Unexpected server error." }, { status: 500 });
+    try {
+      after(() => captureSavedLead(request, projectType));
+    } catch {
+      // Even a scheduling failure cannot undo an acknowledged database write.
+    }
+    return NextResponse.json({ ok: true, saved: true }, { status: 201 });
+  } catch {
+    console.error("Lead endpoint failed before acknowledging the inquiry.");
+    return NextResponse.json({ error: "Unable to confirm your inquiry. Please try again or email us." }, { status: 503 });
   }
 }

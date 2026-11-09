@@ -3,6 +3,8 @@
 import Link from "next/link";
 import posthog from "posthog-js";
 import { siteConfig } from "../lib/site";
+import { getBookingDestination } from "../lib/booking";
+import { getCampaignAttribution } from "../lib/campaign-attribution";
 
 type BookCallCtaProps = {
   label?: string;
@@ -12,25 +14,15 @@ type BookCallCtaProps = {
 };
 
 // Only a configured HTTPS scheduler may be presented as instant booking.
-const bookingUrl = (() => {
-  try {
-    const url = new URL(siteConfig.bookingUrl);
-    return url.protocol === "https:" ? url.href : null;
-  } catch {
-    return null;
-  }
-})();
+const booking = getBookingDestination(siteConfig.bookingUrl);
 
 export default function BookCallCta({ label, variant = "primary", location, className = "" }: BookCallCtaProps) {
-  const text = bookingUrl ? (label ?? "Book a strategy call") : "Request a call";
+  const text = booking ? (label ?? "Book a discovery call") : "Request a call";
   const buttonClass = `${variant === "primary" ? "btn-pill-primary" : "btn-pill-ghost"} ${className}`;
   const trackClick = () => {
-    posthog.capture("cta_click", { location, booking_enabled: Boolean(bookingUrl) });
-    posthog.capture(bookingUrl ? "booking_opened" : "call_request_opened", { location });
+    const attribution = getCampaignAttribution();
+    posthog.capture("cta_click", { location, booking_enabled: Boolean(booking), ...attribution });
+    posthog.capture(booking ? "booking_opened" : "call_request_opened", { location, ...attribution });
   };
-  return bookingUrl ? (
-    <a href={bookingUrl} target="_blank" rel="noopener noreferrer" onClick={trackClick} className={buttonClass}>{text}</a>
-  ) : (
-    <Link href="/contact#project-form" onClick={trackClick} className={buttonClass}>{text}</Link>
-  );
+  return <Link href="/book" onClick={trackClick} className={buttonClass}>{text}</Link>;
 }

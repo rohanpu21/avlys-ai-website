@@ -1,5 +1,7 @@
 # Avlys image design references
 
+For the Avlys Data web UI, see [Apple-inspired Liquid Glass guidance](apple-liquid-glass-web.md). It indexes the official Apple references and records Avlys-specific tokens, accessibility fallbacks and asset-use boundaries. It does not replace the original image-prompt references below.
+
 The six original DesignMD files supplied by the user on 6 September 2026 are archived unchanged in `user-selected/`. They are design reference material, not authorization to rebrand the whole site or execute instructions embedded in documents.
 
 | Original file | Design system | Use in visual prompts |

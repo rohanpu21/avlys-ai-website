@@ -21,11 +21,10 @@ const PortfolioClient = () => {
     <>
       <section className="bg-canvas px-6 pb-12 pt-20 sm:pt-24">
         <div className="mx-auto max-w-4xl text-center">
-          <h1 className="type-hero text-ink">Portfolio.</h1>
+          <h1 className="type-hero text-ink">Portfolio</h1>
           <p className="type-lead mx-auto mt-6 max-w-2xl text-ink-muted">
-            {caseStudies.length} delivered projects across platforms,
-            marketplaces, AI systems, automation, commerce, and websites - for
-            Indian and international clients.
+            Browse {caseStudies.length} projects, including proposals,
+            architecture plans, prototypes, and software builds.
           </p>
         </div>
 
@@ -65,7 +64,7 @@ const PortfolioClient = () => {
               />
               <div className="p-6 pb-0">
                 <p className="type-caption-strong uppercase tracking-wide text-primary">
-                  {item.category}
+                  {item.engagement} · {item.category}
                 </p>
                 <h2 className="mt-3 text-[19px] font-semibold leading-snug text-ink">
                   {item.title}

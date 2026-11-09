@@ -12,16 +12,14 @@ const Footer = () => {
           <div>
             <p className="text-[17px] font-semibold text-ink">Avlys AI</p>
             <p className="type-caption mt-3 max-w-xs">
-              AI-native custom software and intelligent systems for enterprises.
-              From Hyderabad and Bengaluru, working with teams in India and globally.
+              An AI-native product studio and enterprise engineering partner.
+              Custom software, from discovery to launch and ongoing improvement.
+              Based in Hyderabad and Bengaluru, India.
             </p>
           </div>
           <div>
             <p className="type-caption-strong text-ink">Services</p>
             <div className="mt-3 grid gap-1 text-[15px] leading-[2.2]">
-              <Link href="/data" className="transition-opacity hover:opacity-60">
-                Avlys Data
-              </Link>
               {servicePages.map((service) => (
                 <Link
                   key={service.slug}
@@ -31,6 +29,9 @@ const Footer = () => {
                   {service.title}
                 </Link>
               ))}
+              <Link href="/data" className="transition-opacity hover:opacity-60">
+                Avlys Data
+              </Link>
             </div>
           </div>
           <div>
@@ -49,7 +50,7 @@ const Footer = () => {
                 Insights
               </Link>
               <Link href="/#press" className="transition-opacity hover:opacity-60">
-                Press
+                Media
               </Link>
               <Link href="/contact" className="transition-opacity hover:opacity-60">
                 Contact

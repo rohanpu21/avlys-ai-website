@@ -32,7 +32,7 @@ const StickyCtaBar = () => {
       <div className="border-t border-hairline bg-parchment/80 px-6 py-3 backdrop-blur-xl">
         <div className="mx-auto flex w-full max-w-5xl items-center justify-between gap-4">
           <p className="type-caption hidden text-ink sm:block">
-            30 minutes, engineers on the call, no deck.
+            Have a software project in mind?
           </p>
           <BookCallCta location="sticky_bar" className="!min-h-0 !py-2 !text-[15px]" />
         </div>

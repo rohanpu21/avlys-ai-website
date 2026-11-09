@@ -10,7 +10,7 @@ import { absoluteUrl, siteConfig } from "../lib/site";
 
 const pageTitle = "Case Studies - Platforms, AI Agents & Automation | Avlys AI";
 const pageDescription =
-  "Shipped systems: marketplaces, AI agent architectures, voice agents, automation suites, and custom platforms - each with context, solution, and delivery scope.";
+  "Case studies in custom software, AI, prototyping, and architecture. See what each team needed and what Avlys designed or built.";
 
 export const metadata: Metadata = {
   title: {
@@ -85,11 +85,10 @@ export default function CaseStudiesPage() {
       <main>
         <section className="bg-canvas px-6 pb-16 pt-20 sm:pt-24">
           <div className="mx-auto w-full max-w-4xl text-center">
-            <h1 className="type-hero text-ink">Selected work.</h1>
+            <h1 className="type-hero text-ink">Case studies</h1>
             <p className="type-lead mx-auto mt-6 max-w-2xl text-ink-muted">
-              Marketplaces, AI agent architectures, voice agents, automations,
-              and custom platforms - each documented with the context, the
-              solution, and what was delivered.
+              See what each team needed, what we designed or built, and how far
+              the project went.
             </p>
           </div>
         </section>
@@ -110,7 +109,7 @@ export default function CaseStudiesPage() {
                   />
                   <div className="p-6 pb-0">
                     <p className="type-caption-strong uppercase tracking-wide text-primary">
-                      {caseStudy.engagement ?? "Software build"}
+                      {caseStudy.engagement}
                     </p>
                     <h2 className="mt-3 text-[21px] font-semibold leading-snug text-ink">
                       {caseStudy.headline}

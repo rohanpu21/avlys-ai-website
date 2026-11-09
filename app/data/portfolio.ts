@@ -1,4 +1,6 @@
 export type PortfolioItemBase = {
+  /** Preserve published URLs when a project's display title changes. */
+  slug?: string;
   title: string;
   type: string;
   stack: string;
@@ -54,12 +56,13 @@ const rawPortfolioItems: PortfolioItemBase[] = [
     architectureImage: "/portfolio/architecture/mike-legal-ai-layered.png",
   },
   {
-    title: "Magic Creation Studio - Wedding Photography ERP",
-    type: "Industry ERP",
+    slug: "magic-creation-studio-wedding-photography-erp",
+    title: "Magic Creation Studio - Studio Operations Platform",
+    type: "Photography Studio Operations",
     stack: "Next.js 14 + Supabase + shadcn/ui",
     market: "India (INR)",
     description:
-      "A wedding photography business OS covering bookings, shoots, albums, and studio operations in one signed-in product.",
+      "A custom operations platform for photography studios, connecting client bookings, shoots, albums, and delivery in one workspace.",
     category: "Marketplace & Platform Builds",
     coverImage: "/portfolio/magic-creation-studio.jpg",
     liveUrl: "https://magic-creation-studio-next.vercel.app",
@@ -78,11 +81,11 @@ const rawPortfolioItems: PortfolioItemBase[] = [
   },
   {
     title: "Hiredesk - Recruiting Match System",
-    type: "AI Recruiting Platform",
+    type: "AI Recruiting Backend",
     stack: "FastAPI + Celery + Postgres + Redis + embeddings",
     market: "India / International",
     description:
-      "A recruiting desk that parses resumes, ingests jobs, and ranks matches with embeddings and LLM reranking.",
+      "A recruiting backend that parses resumes, ingests jobs, and ranks matches with embeddings and LLM reranking.",
     category: "AI & Agentic Systems",
     coverImage: "/portfolio/covers/hiredesk-recruiting-match-system.png",
     architectureImage: "/portfolio/architecture/hiredesk-recruiting-match-system-layered.png",
@@ -167,7 +170,7 @@ const rawPortfolioItems: PortfolioItemBase[] = [
     stack: "Next.js + Vercel",
     market: "India / International",
     description:
-      "A focused indexing product surface for search visibility work, shipped as one web app rather than a separate marketing site.",
+      "A focused web interface for search visibility and indexing work.",
     category: "Website Development & Redesign",
     coverImage: "/portfolio/indexpilot.jpg",
     liveUrl: "https://indexpilot-ashen.vercel.app",
@@ -184,12 +187,13 @@ const rawPortfolioItems: PortfolioItemBase[] = [
     architectureImage: "/portfolio/architecture/hjsn-digital-platform.jpeg",
   },
   {
-    title: "Integrated ERP and Club Management",
-    type: "Enterprise ERP",
-    stack: "Full-stack ERP + role-based workflows",
+    slug: "integrated-erp-and-club-management",
+    title: "Club Operations Platform Architecture",
+    type: "Operations Platform Design",
+    stack: "Shared data model + role-based workflow design",
     market: "India (INR)",
     description:
-      "A unified ERP for HR, finance, membership, billing, inventory, and club operations on one database.",
+      "A proposed operations architecture connecting membership, billing, HR, finance, and inventory through shared records and approval workflows.",
     category: "Marketplace & Platform Builds",
     coverImage: "/portfolio/club-erp.jpg",
   },
@@ -199,7 +203,7 @@ const rawPortfolioItems: PortfolioItemBase[] = [
     stack: "Multi-city web + CRM + call masking",
     market: "India (INR)",
     description:
-      "A bike-service platform for multi-city booking, masked calling, mechanic assignment, and leakage control — website and ops desk as one system.",
+      "A service-platform design connecting multi-city bookings, masked calling, mechanic assignment, and customer follow-up.",
     category: "Marketplace & Platform Builds",
     coverImage: "/portfolio/bromechanic.jpg",
   },
@@ -209,7 +213,7 @@ const rawPortfolioItems: PortfolioItemBase[] = [
     stack: "Job APIs + matching + application engine",
     market: "India / International",
     description:
-      "An MNS-branded career portal for students with profile, matching, auto-apply, and admin pipeline — nursing and healthcare as a core track.",
+      "A scoped career-portal proposal covering student profiles, job matching, applications, and an admin pipeline, with nursing and healthcare as a core track.",
     category: "Marketplace & Platform Builds",
     coverImage: "/portfolio/mns-careers.jpg",
   },
@@ -229,17 +233,18 @@ const rawPortfolioItems: PortfolioItemBase[] = [
     stack: "Embedded C/C++ + Android/iOS + WebRTC",
     market: "India (INR)",
     description:
-      "A direct device-to-device camera stack: firmware bridge, native apps, and a live web view with no cloud video relay. One ecosystem, not a website plus a separate app case.",
+      "A scoped camera ecosystem covering a firmware bridge, native apps, and a web viewer, designed for device-to-device video without a cloud relay.",
     category: "AI & Agentic Systems",
     coverImage: "/portfolio/p2p-camera.jpg",
   },
   {
-    title: "RealCRM - Real Estate Pipeline",
-    type: "CRM + Lead Automation",
+    slug: "realcrm-real-estate-pipeline",
+    title: "RealCRM - Real Estate Sales Operations",
+    type: "Custom Sales Operations",
     stack: "CRM + email sequences + WhatsApp",
     market: "India (INR)",
     description:
-      "A real-estate contact pipeline with scoring, owner routing, and a buyer nurture sequence from ad click to closed-won.",
+      "A custom real-estate sales workspace connecting contact scoring, owner assignment, pipeline stages, and buyer follow-up.",
     category: "Automation & Chatbot Systems",
     coverImage: "/portfolio/realcrm.jpg",
   },
@@ -302,7 +307,7 @@ const rawPortfolioItems: PortfolioItemBase[] = [
     stack: "Full-Stack Mobile + Web",
     market: "India (INR)",
     description:
-      "A scalable commerce marketplace with admin panels, customer and vendor apps, onboarding, order management, checkout, and commission logic.",
+      "A commerce marketplace with admin panels, customer and vendor apps, onboarding, order management, checkout, and commission logic.",
     category: "Marketplace & Platform Builds",
     coverImage: "/portfolio/multi-vendor.jpg",
   },
@@ -332,7 +337,7 @@ const rawPortfolioItems: PortfolioItemBase[] = [
     stack: "React/Next.js + Node.js/Laravel + PostgreSQL + Stripe",
     market: "International (USD)",
     description:
-      "A service marketplace with smart matching, scheduling, escrow payments, reviews, ratings, and a complete admin dashboard.",
+      "A service-marketplace design covering matching, scheduling, payment flows, reviews, and an admin dashboard.",
     category: "Marketplace & Platform Builds",
     coverImage: "/portfolio/joanna-koh.jpg",
   },
@@ -342,7 +347,7 @@ const rawPortfolioItems: PortfolioItemBase[] = [
     stack: "Ubuntu + Ollama + LocalAI + n8n + ChromaDB + Wav2Lip",
     market: "India (INR)",
     description:
-      "A fully offline modular AI ecosystem with LLM routing, outreach automation, content generation, local RAG, and avatar rendering.",
+      "A modular local AI prototype connecting LLM routing, automation, content generation, retrieval, and avatar rendering.",
     category: "AI & Agentic Systems",
     coverImage: "/portfolio/off-grid-ai.jpg",
   },
@@ -372,7 +377,7 @@ const rawPortfolioItems: PortfolioItemBase[] = [
     stack: "AI Voice + WhatsApp API",
     market: "India / International",
     description:
-      "A 24/7 lead qualification system that handles calls, screens budget and timeline, schedules visits, and sends brochures over WhatsApp.",
+      "A voice-and-WhatsApp workflow design for buyer qualification, visit scheduling, brochure delivery, and structured sales handoff.",
     category: "AI & Agentic Systems",
     coverImage: "/portfolio/real-estate-voice.jpg",
   },
@@ -382,7 +387,7 @@ const rawPortfolioItems: PortfolioItemBase[] = [
     stack: "CRM + AI + Automation",
     market: "India / International",
     description:
-      "An end-to-end lead capture, qualification, scoring, routing, and nurturing system for faster sales follow-up.",
+      "An automation design connecting lead capture, qualification, scoring, routing, and nurture sequences.",
     category: "Automation & Chatbot Systems",
     coverImage: "/portfolio/lead-automation.jpg",
   },
@@ -392,7 +397,7 @@ const rawPortfolioItems: PortfolioItemBase[] = [
     stack: "WhatsApp API + AI",
     market: "India / International",
     description:
-      "Smart WhatsApp bots for brochures, FAQs, buyer requirements, and automated follow-up sequences across real estate, D2C, and services.",
+      "WhatsApp workflow designs for brochures, FAQs, buyer requirements, and follow-up across real estate, D2C, and services.",
     category: "Automation & Chatbot Systems",
     coverImage: "/portfolio/whatsapp-bots.jpg",
   },
@@ -400,7 +405,7 @@ const rawPortfolioItems: PortfolioItemBase[] = [
 
 export const portfolioItems: PortfolioItem[] = rawPortfolioItems.map((item) => ({
   ...item,
-  slug: createProjectSlug(item.title),
+  slug: item.slug ?? createProjectSlug(item.title),
 }));
 
 export const portfolioPreviewItems = portfolioItems.slice(0, 4);

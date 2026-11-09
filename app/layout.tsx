@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   applicationName: siteConfig.name,
   manifest: "/site.webmanifest",
   title: {
-    default: "Enterprise AI Development & Custom Software Company | Avlys AI",
+    default: "AI-Native Product Studio & Enterprise Engineering | Avlys AI",
     template: "%s | Avlys AI",
   },
   description: siteConfig.description,
@@ -52,12 +52,12 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteConfig.url,
     siteName: siteConfig.name,
-    title: "Enterprise AI Development & Custom Software Company | Avlys AI",
+    title: "AI-Native Product Studio & Enterprise Engineering | Avlys AI",
     description: siteConfig.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Enterprise AI Development & Custom Software Company | Avlys AI",
+    title: "AI-Native Product Studio & Enterprise Engineering | Avlys AI",
     description: siteConfig.description,
   },
 };
@@ -87,8 +87,8 @@ const organizationSchema = {
       email: siteConfig.email,
       telephone: siteConfig.phone,
       areaServed: [
-        { "@type": "Country", name: "United States" },
         { "@type": "Country", name: "India" },
+        { "@type": "Country", name: "United States" },
         { "@type": "Place", name: "Global remote delivery" },
       ],
       address: {
@@ -98,11 +98,12 @@ const organizationSchema = {
         addressCountry: siteConfig.country,
       },
       serviceType: [
-        "Enterprise AI development",
-        "AI integration services",
-        "Custom software development",
+        "Custom enterprise software development",
+        "AI-native product engineering",
         "AI agent development",
         "AI automation services",
+        "Software integration and modernization",
+        "Ongoing software engineering and support",
         "AI consulting",
       ],
     },
@@ -130,6 +131,20 @@ export default function RootLayout({
       className={`${inter.variable} h-full antialiased`}
       suppressHydrationWarning
     >
+      <head>
+        <script
+          async
+          src="https://www.googletagmanager.com/gtm.js?id=GTM-TBTTLJPG"
+        />
+        <script
+          id="google-tag-manager-init"
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());`,
+          }}
+        />
+      </head>
       <body className="min-h-full bg-canvas text-ink" suppressHydrationWarning>
         <StructuredData data={organizationSchema} />
         {children}

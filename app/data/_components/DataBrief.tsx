@@ -11,7 +11,7 @@ export default function DataBrief() {
     event.preventDefault();
     const fields = new FormData(event.currentTarget);
     const body = `Hi Avlys Data,\n\nI would like to discuss a data requirement.\n\nService: ${fields.get("service")}\nData type: ${fields.get("modality")}\nLanguage / domain: ${fields.get("domain") || "To discuss"}\nRequirements:\n${fields.get("requirements")}\n\n`;
-    setEmailDraft(`mailto:${siteConfig.email}?subject=${encodeURIComponent("Avlys Data — project brief")}&body=${encodeURIComponent(body)}`);
+    setEmailDraft(`mailto:${siteConfig.email}?subject=${encodeURIComponent("Avlys Data project brief")}&body=${encodeURIComponent(body)}`);
   }
 
   return (
@@ -19,7 +19,7 @@ export default function DataBrief() {
       <label htmlFor="data-service">What do you need help with?</label>
       <select id="data-service" name="service" defaultValue="Help me choose">
         <option>Help me choose</option>
-        <option>Explore an existing collection</option>
+        <option>Avlys OTS Data</option>
         <option>Custom data collection</option>
         <option>Annotation & quality review</option>
       </select>
@@ -27,7 +27,7 @@ export default function DataBrief() {
       <select id="data-modality" name="modality" required defaultValue="">
         <option value="" disabled>Select a format</option>
         <option>Text & documents</option><option>Images</option><option>Voice & audio</option>
-        <option>Egocentric video pilot</option><option>Multiple formats</option>
+        <option>Video & robot observation data</option><option>Egocentric video pilot</option><option>Multiple formats</option>
       </select>
       <label htmlFor="data-domain">Language or domain <span>(optional)</span></label>
       <input id="data-domain" name="domain" maxLength={160} placeholder="e.g. Hindi speech, retail images" />
