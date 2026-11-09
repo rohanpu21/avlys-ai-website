@@ -4,6 +4,7 @@ import CaseStudyStrip from "./components/CaseStudyStrip";
 import FAQ, { homepageFaqs } from "./components/FAQ";
 import Footer from "./components/Footer";
 import Hero from "./components/Hero";
+import LaunchFilmTile from "./components/LaunchFilmTile";
 import Navbar from "./components/Navbar";
 import Process from "./components/Process";
 import PressMentions from "./components/PressMentions";
@@ -72,6 +73,7 @@ export default function Home() {
         <CaseStudyStrip />
         <ServicesGrid />
         <Process />
+        <LaunchFilmTile />
         <FAQ />
         <CallToAction compact />
       </main>
