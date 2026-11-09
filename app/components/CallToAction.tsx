@@ -3,20 +3,38 @@ import BookCallCta from "./BookCallCta";
 import Reveal from "./Reveal";
 import WhatsAppCta from "./WhatsAppCta";
 import { siteConfig } from "../lib/site";
+import Link from "next/link";
 
-const CallToAction = () => {
+const CallToAction = ({ compact = false }: { compact?: boolean }) => {
+  if (compact) {
+    return (
+      <section id="contact" className="on-dark bg-tile-1 px-6 py-16 text-on-dark">
+        <div className="mx-auto max-w-2xl text-center">
+          <h2 className="type-display-lg">What do you want to build?</h2>
+          <p className="mt-4 text-[18px] leading-relaxed text-on-dark-muted">
+            Tell us what you need the software to do.
+          </p>
+          <div className="mt-7">
+            <BookCallCta location="footer_cta" />
+          </div>
+          <Link href="/contact#project-form" className="mt-4 inline-flex min-h-11 items-center text-[14px] text-on-dark-muted underline underline-offset-4 hover:text-on-dark">
+            Send your project details
+          </Link>
+        </div>
+      </section>
+    );
+  }
   return (
     <section id="contact" className="on-dark bg-tile-1 px-6 py-20 text-on-dark">
       <div className="mx-auto w-full max-w-6xl">
         <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-start">
           <Reveal>
             <h2 className="type-display-lg">
-              Let’s scope your next system.
+              Let’s talk about what you want to build.
             </h2>
             <p className="type-lead-airy mt-4 max-w-md text-on-dark-muted">
-              30 minutes, engineers on the call, no deck. We&rsquo;ll map your
-              workflow and tell you honestly whether AI pays back - and what a
-              fixed-price pilot would look like.
+              A 30-minute discovery call to discuss your product, the workflows
+              it needs to support, and the next step toward a scoped build.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <BookCallCta location="footer_cta" />
@@ -43,7 +61,7 @@ const CallToAction = () => {
                 Tell us about the project
               </p>
               <p className="type-caption mt-1 text-ink-faint">
-                Request a call or share your requirements. We reply within one business day.
+                Share the problem, the people who will use the software, and what success looks like.
               </p>
               <div className="mt-5">
                 <LeadCaptureForm />

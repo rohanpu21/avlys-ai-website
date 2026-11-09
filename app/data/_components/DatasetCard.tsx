@@ -11,7 +11,7 @@ export function FormatIcon({ modality }: { modality: DataModality }) {
 
 export default function DatasetCard({ dataset, headingLevel = "h4" }: { dataset: OtsDataset; headingLevel?: "h3" | "h4" }) {
   const Heading = headingLevel;
-  const brief = `mailto:${siteConfig.email}?subject=${encodeURIComponent(`Avlys OTS Data — ${dataset.name}`)}&body=${encodeURIComponent(`Hi Avlys Data,\n\nPlease quote for ${dataset.name}.\n\nOur task:\nRequired coverage / volume:\nPreferred formats and annotations:\nPreparation needed:\nTimeline:\n\nPlease confirm availability, sample options and delivery scope.\n`)}`;
+  const brief = `mailto:${siteConfig.email}?subject=${encodeURIComponent(`Avlys OTS Data request for ${dataset.name}`)}&body=${encodeURIComponent(`Hi Avlys Data,\n\nPlease quote for ${dataset.name}.\n\nOur task:\nRequired coverage / volume:\nPreferred formats and annotations:\nPreparation needed:\nTimeline:\n\nPlease confirm availability, sample options and delivery scope.\n`)}`;
   return <article className={styles.card} aria-labelledby={`dataset-${dataset.id}`}>
     <div className={styles.cardHeader}><p className={styles.kind}><FormatIcon modality={dataset.modality} />{dataset.kind}</p><span className={styles.brandTag}>Avlys OTS Data</span></div>
     <Heading id={`dataset-${dataset.id}`}>{dataset.name}</Heading>

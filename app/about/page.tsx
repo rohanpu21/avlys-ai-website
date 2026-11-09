@@ -14,7 +14,7 @@ import { absoluteUrl, siteConfig } from "../lib/site";
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Meet the founder-led team building AI-native custom software and enterprise automation at Avlys AI.",
+    "Meet Avlys AI, a founder-led AI-native product studio and enterprise engineering partner based in Hyderabad and Bengaluru, India.",
   alternates: { canonical: "/about" },
 };
 
@@ -55,7 +55,7 @@ export default function AboutPage() {
             <Reveal>
               <p className="type-caption-strong uppercase tracking-[0.18em] text-on-dark-muted">About Avlys</p>
               <h1 className="type-hero mt-5 max-w-xl text-on-dark">Built close to the work.</h1>
-              <p className="type-lead mt-7 max-w-lg text-on-dark-muted">We are a founder-led AI-native software team helping enterprises build what their operations need next.</p>
+              <p className="type-lead mt-7 max-w-lg text-on-dark-muted">We are an AI-native product studio and enterprise engineering partner. From Hyderabad and Bengaluru, we work with your team to design, build, and evolve the software your business needs.</p>
             </Reveal>
             <Reveal delay={0.08}>
               <OfficePhoto photo="discussion" preload />
@@ -101,11 +101,11 @@ export default function AboutPage() {
           <div className="mx-auto grid w-full max-w-6xl gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(300px,0.75fr)] lg:items-center">
             <Reveal>
               <p className="type-caption-strong uppercase tracking-[0.18em] text-on-dark-muted">How we work</p>
-              <h2 className="type-display-lg mt-4 max-w-3xl">AI should live in the way work gets done—not beside it.</h2>
+              <h2 className="type-display-lg mt-4 max-w-3xl">Product thinking. Engineering ownership.</h2>
             </Reveal>
             <Reveal delay={0.08} className="space-y-5 text-on-dark-muted">
-              <p className="text-[17px] leading-[1.55]">We begin with the operating reality: the decisions, handoffs, tools, data, and people that make your business move.</p>
-              <p className="text-[17px] leading-[1.55]">Then we design, build, and evolve custom software that gives your team leverage without asking them to reinvent how they work.</p>
+              <p className="text-[17px] leading-[1.55]">We start with the people using the product, the business problem, and the decisions the software needs to support. Together, we turn those requirements into a clear scope.</p>
+              <p className="text-[17px] leading-[1.55]">Then we take the work through design, engineering, testing, and deployment. AI capabilities, integrations, and ongoing improvements are built around the product and the team operating it.</p>
               <Link href="/contact" className="inline-flex pt-2 text-[17px] text-primary-on-dark transition-opacity hover:opacity-70">Start a conversation <span className="ml-2">→</span></Link>
             </Reveal>
           </div>

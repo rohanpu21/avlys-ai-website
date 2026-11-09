@@ -2,14 +2,14 @@ import Reveal from "./Reveal";
 
 const commitments = [
   {
-    title: "Fixed price before work begins",
+    title: "Clarity before the build",
     description:
-      "Every phase is scoped and priced upfront. No open-ended billing, no surprise change orders.",
+      "Agree the scope, deliverables, pricing, and responsibilities for each phase before work begins.",
   },
   {
-    title: "Senior engineers on every call",
+    title: "Work with the builders",
     description:
-      "The people who scope your project are the people who build it. No sales layer, no handoff chain.",
+      "Collaborate with the people designing and engineering your product through working demos and technical decisions.",
   },
   {
     title: "Your IP, completely",
@@ -17,9 +17,9 @@ const commitments = [
       "Source code, infrastructure, and documentation transfer to you. We work in your repos and cloud when you prefer.",
   },
   {
-    title: "We don't leave after launch",
+    title: "Plan beyond launch",
     description:
-      "90 days of post-deploy tuning included on every build - real usage reviewed, edge cases fixed, team trained.",
+      "Agree a support and handover plan, with documentation, operating responsibilities, and room for the product to evolve.",
   },
 ];
 
@@ -29,7 +29,7 @@ const WhyAvlys = () => {
       <div className="mx-auto w-full max-w-6xl">
         <Reveal className="mx-auto max-w-2xl text-center">
           <h2 className="type-display-lg text-ink">
-            How we keep the risk on our side.
+            A partnership with clear ownership.
           </h2>
         </Reveal>
         <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">

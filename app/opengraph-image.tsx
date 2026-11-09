@@ -81,7 +81,7 @@ export default function Image() {
               fontSize: 24,
             }}
           >
-            Book a strategy call
+            Book a discovery call
           </div>
           <div style={{ display: "flex", color: "#7a7a7a", fontSize: 20 }}>
             AI Integration · Custom Software · AI Agents

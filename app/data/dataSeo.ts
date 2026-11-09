@@ -35,7 +35,7 @@ export function buildDataSchema({ path, title, description, faqs, categoryLabel,
       },
       {
         "@type": "Service", "@id": `${url}#service`, url,
-        name: categoryLabel ? `Avlys ${categoryLabel.toLowerCase()} sourcing and preparation` : "Avlys Data — AI training data, collection and annotation",
+        name: categoryLabel ? `Avlys ${categoryLabel.toLowerCase()} sourcing and preparation` : "Avlys Data collection and annotation services",
         description,
         serviceType: categoryLabel ? `${categoryLabel} sourcing, preparation and annotation` : "AI training data sourcing, custom collection and annotation",
         provider: organization,

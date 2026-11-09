@@ -188,18 +188,29 @@ export default async function ServicePage({ params }: ServicePageProps) {
                 </Reveal>
               ))}
             </div>
-            <Reveal className="mt-10 text-center">
-              <p className="type-caption-strong uppercase tracking-wide text-ink-faint">
-                Systems we work with
-              </p>
-              <div className="mt-4 flex flex-wrap justify-center gap-x-5 gap-y-2">
-                {service.systems.map((system) => (
-                  <span key={system} className="type-caption text-ink-muted">
-                    {system}
-                  </span>
+            <div className="mt-8 border-t border-hairline pt-6">
+              <h3 className="type-caption-strong text-ink">Built into delivery</h3>
+              <ul className="mt-4 grid gap-x-8 gap-y-3 sm:grid-cols-2">
+                {service.outcomes.map((outcome) => (
+                  <li key={outcome} className="flex items-start gap-3 text-[15px] leading-relaxed text-ink-muted">
+                    <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
+                    {outcome}
+                  </li>
                 ))}
-              </div>
-            </Reveal>
+              </ul>
+            </div>
+            <details className="mt-6 border-t border-hairline pt-4">
+              <summary className="cursor-pointer text-[15px] font-medium text-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary">
+                Systems and technologies
+              </summary>
+              <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2">
+                {service.systems.map((system) => (
+                  <li key={system} className="type-caption text-ink-muted">
+                    {system}
+                  </li>
+                ))}
+              </ul>
+            </details>
           </div>
         </section>
 
@@ -219,31 +230,6 @@ export default async function ServicePage({ params }: ServicePageProps) {
                     <p className="type-caption mt-3 flex-1 text-on-dark-muted">
                       {step.detail}
                     </p>
-                    <p className="type-fine-print mt-4 text-on-dark-muted">
-                      {step.artifacts.join(" · ")}
-                    </p>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="bg-canvas px-6 py-16">
-          <div className="mx-auto w-full max-w-3xl">
-            <Reveal>
-              <h2 className="type-display-lg text-center text-ink">
-                What you get out of it.
-              </h2>
-            </Reveal>
-            <div className="mt-10 flex flex-col gap-4">
-              {service.outcomes.map((outcome) => (
-                <Reveal key={outcome}>
-                  <div className="flex items-start gap-4 rounded-[18px] border border-hairline p-5">
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary" />
-                    <p className="text-[15px] leading-relaxed text-ink-muted">
-                      {outcome}
-                    </p>
                   </div>
                 </Reveal>
               ))}
@@ -260,22 +246,21 @@ export default async function ServicePage({ params }: ServicePageProps) {
             </Reveal>
             <div className="mt-10 flex flex-col gap-4">
               {service.faqs.map((faq) => (
-                <Reveal key={faq.question}>
-                  <div className="rounded-[18px] border border-hairline bg-canvas p-6">
-                    <h3 className="text-[17px] font-semibold text-ink">
-                      {faq.question}
-                    </h3>
-                    <p className="mt-3 text-[15px] leading-relaxed text-ink-muted">
-                      {faq.answer}
-                    </p>
-                  </div>
-                </Reveal>
+                <details key={faq.question} className="group rounded-[18px] border border-hairline bg-canvas">
+                  <summary className="flex cursor-pointer list-none items-start justify-between gap-4 rounded-[18px] px-6 py-5 text-[17px] font-semibold text-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary [&::-webkit-details-marker]:hidden">
+                    <span>{faq.question}</span>
+                    <span aria-hidden="true" className="shrink-0 text-primary transition-transform group-open:rotate-45">+</span>
+                  </summary>
+                  <p className="px-6 pb-6 text-[15px] leading-relaxed text-ink-muted">
+                    {faq.answer}
+                  </p>
+                </details>
               ))}
             </div>
           </div>
         </section>
 
-        <CallToAction />
+        <CallToAction compact />
       </main>
       <Footer />
     </div>

@@ -11,7 +11,7 @@ export type VisualKind =
 
 export type CaseStudyDetail = {
   headline: string;
-  engagement?: "Software build" | "Architecture engagement" | "Prototype / MVP";
+  engagement: "Software build" | "Architecture engagement" | "Scope proposal" | "Prototype / MVP";
   deliveryTimeline?: string;
   verifiedResults?: { label: string; value: string; measurementNote: string }[];
   context: string;
@@ -24,51 +24,6 @@ export type CaseStudyDetail = {
 };
 
 export type CaseStudy = PortfolioItem & CaseStudyDetail;
-
-const processByKind: Record<VisualKind, string[]> = {
-  website: [
-    "Audited the existing presence, audience, and the conversion paths that mattered.",
-    "Defined the information architecture, page structure, and content plan.",
-    "Built the responsive interface, lead capture, and on-page SEO foundations.",
-    "Tested performance and responsiveness, then handed over with documentation.",
-  ],
-  commerce: [
-    "Mapped the catalog, checkout flow, and the trust points buyers need before paying.",
-    "Designed the storefront structure, product presentation, and merchandising sections.",
-    "Built the catalog, cart, checkout, and payment integration with speed work included.",
-    "Verified the purchase flow end to end and set up the store for ongoing campaigns.",
-  ],
-  marketplace: [
-    "Mapped every role - customers, vendors, admins - and the rules connecting them.",
-    "Designed the data model, matching or listing logic, and payment/commission flows.",
-    "Built the portals, onboarding, order management, and admin controls.",
-    "Stress-tested the role workflows and handed over with operating documentation.",
-  ],
-  "ai-system": [
-    "Audited the data sources, workflows, and constraints the system had to respect.",
-    "Designed the agent architecture: orchestration, state, grounding, and human checkpoints.",
-    "Built the pipelines, integrations, and evaluation harness around real cases.",
-    "Reviewed accuracy and failure modes, then documented the architecture for extension.",
-  ],
-  "voice-agent": [
-    "Defined call scenarios, qualification questions, escalation rules, and tone.",
-    "Designed the call flow with structured data capture and handoff points.",
-    "Connected telephony, scheduling, WhatsApp follow-up, and lead storage.",
-    "Tested edge cases - failed calls, transfers, after-hours - before go-live.",
-  ],
-  automation: [
-    "Mapped the manual workflow: where requests arrive, wait, and get dropped.",
-    "Designed the automation rules, routing logic, and approval gates with the team.",
-    "Built the flows, integrations, and logging so every action is traceable.",
-    "Monitored the first weeks of real usage and tuned rules against actual cases.",
-  ],
-  maintenance: [
-    "Audited the sites: versions, vulnerabilities, backup state, and performance.",
-    "Set the maintenance calendar: updates, backups, scans, and reporting cadence.",
-    "Ran the monthly cycle of patching, content updates, and performance fixes.",
-    "Reported the work done each month with issues found and actions taken.",
-  ],
-};
 
 const detailsBySlug: Record<string, Omit<CaseStudyDetail, "process"> & { process?: string[] }> = {
   "workshop-management-system": {
@@ -91,6 +46,7 @@ const detailsBySlug: Record<string, Omit<CaseStudyDetail, "process"> & { process
     visualKind: "marketplace",
   },
   "mike-legal-ai": {
+    engagement: "Software build",
     headline: "A legal document workspace for ingest, conversion, and model-backed review.",
     context:
       "Legal teams needed a signed-in workspace to store documents, convert office files, and ask questions against the corpus without a loose chat window.",
@@ -109,13 +65,14 @@ const detailsBySlug: Record<string, Omit<CaseStudyDetail, "process"> & { process
     visualKind: "ai-system",
   },
   "magic-creation-studio-wedding-photography-erp": {
-    headline: "A wedding photography ERP for bookings, shoots, albums, and studio ops.",
+    engagement: "Software build",
+    headline: "A custom studio operations platform for bookings, shoots, albums, and delivery.",
     context:
       "A photography studio needed one signed-in system for client bookings, shoot days, album delivery, and the admin work that usually sits in WhatsApp and sheets.",
     challenge:
       "Wedding studios lose track of dates, packages, and deliverables when operations stay in chat. The product had to feel like a business OS, not a brochure site.",
     solution:
-      "Avlys built a Next.js 14 and Supabase ERP with authenticated studio workflows, operational records, and a shadcn/ui interface designed for daily use.",
+      "Avlys built a Next.js 14 and Supabase platform with authenticated studio workflows, operational records, and a shadcn/ui interface designed for daily use.",
     deliverables: ["Studio login and roles", "Booking and shoot records", "Album and delivery tracking", "Operational admin views"],
     outcomes: [
       "Studio work sits in one product instead of scattered chats.",
@@ -126,6 +83,7 @@ const detailsBySlug: Record<string, Omit<CaseStudyDetail, "process"> & { process
     visualKind: "marketplace",
   },
   "hospital-voice-agent": {
+    engagement: "Software build",
     headline: "A trilingual hospital receptionist that books appointments from inbound calls.",
     context:
       "This project explores inbound appointment reception in Hindi, Odia, and English, with bookings recorded in Google Calendar.",
@@ -144,7 +102,8 @@ const detailsBySlug: Record<string, Omit<CaseStudyDetail, "process"> & { process
     visualKind: "voice-agent",
   },
   "hiredesk-recruiting-match-system": {
-    headline: "A recruiting match desk that parses resumes, ingests jobs, and ranks fit.",
+    engagement: "Software build",
+    headline: "A recruiting backend that parses resumes, ingests jobs, and ranks fit.",
     context:
       "Hiring teams needed a backend that could store resumes, pull jobs, and score matches instead of reading every PDF by hand.",
     challenge:
@@ -162,6 +121,7 @@ const detailsBySlug: Record<string, Omit<CaseStudyDetail, "process"> & { process
     visualKind: "ai-system",
   },
   "ad-sakhi-ad-ops-studio": {
+    engagement: "Software build",
     headline: "A tiny ad-ops studio that turns a product URL into a 9:16 creative.",
     context:
       "A small team needed a desk to make vertical ads from a product page and then watch spend, without a full agency stack.",
@@ -179,6 +139,7 @@ const detailsBySlug: Record<string, Omit<CaseStudyDetail, "process"> & { process
     visualKind: "automation",
   },
   "bidsure-ai-tender-eligibility-platform": {
+    engagement: "Software build",
     headline: "A tender desk that checks contractor eligibility before a bid is assembled.",
     context:
       "Contractors waste time on tenders they cannot bid. The product needed to read requirements and flag eligibility before the writing starts.",
@@ -196,6 +157,7 @@ const detailsBySlug: Record<string, Omit<CaseStudyDetail, "process"> & { process
     visualKind: "ai-system",
   },
   "brand-sahayak-social-content-platform": {
+    engagement: "Software build",
     headline: "A social content desk with AI copy, brand-glossary translation, and scheduling.",
     context:
       "Brands needed one workspace to generate captions, keep terminology consistent across languages, and schedule posts without a spreadsheet calendar.",
@@ -213,6 +175,7 @@ const detailsBySlug: Record<string, Omit<CaseStudyDetail, "process"> & { process
     visualKind: "automation",
   },
   "siddhi-vinayak-tiles-3d-showroom-website": {
+    engagement: "Software build",
     headline: "A 3D showroom website for tiles, marble, granite, and sanitaryware.",
     context:
       "A family-run showroom in Nuapada needed a site that could show materials in a room, not only as a flat catalog of photos.",
@@ -230,13 +193,14 @@ const detailsBySlug: Record<string, Omit<CaseStudyDetail, "process"> & { process
     visualKind: "website",
   },
   "godwit-cafe-multi-city-website": {
+    engagement: "Software build",
     headline: "A three-city cafe website that sends guests to the right outlet, not a third-party app.",
     context:
       "Godwit Cafe runs Indore, Raipur, and Nagpur with different service models. Party-hall booking in Raipur still lived on phone and aggregator apps.",
     challenge:
-      "Three outlets cannot share one generic landing page. Guests need the right menu, hours, and booking path without paying a 30 percent platform cut on every repeat visit.",
+      "Each outlet has different menus, hours, and booking needs. Guests needed a clear route to the right location and a direct enquiry option.",
     solution:
-      "Avlys built a single Next.js site with city pages, menu, and a direct booking path. Vercel and Lovable previews were the same website, not a second app.",
+      "Avlys built a Next.js site with city pages, menus, and a direct booking path for the three outlets.",
     deliverables: ["Multi-city website", "Outlet pages and menu", "Direct booking path", "Instagram and maps"],
     outcomes: [
       "One owned site for Indore, Raipur, and Nagpur.",
@@ -247,70 +211,72 @@ const detailsBySlug: Record<string, Omit<CaseStudyDetail, "process"> & { process
     visualKind: "website",
   },
   "kikki-s-cafe-raipur-website": {
+    engagement: "Software build",
     headline: "A neighborhood cafe site for Kikki's on GE Road, Raipur.",
     context:
       "Kikki's Cafe has been a pure-veg comfort cafe since 2015. Reservations and story lived on Google and Instagram.",
     challenge:
       "A single outlet does not need an app. It needs a fast page for menu, reviews, hours, and a phone or WhatsApp enquiry.",
     solution:
-      "Avlys shipped one website — kikkis-cafe.vercel.app — covering story, favourites, Google reviews, maps, and Instagram. The Lovable URL is the same site, not a second product.",
+      "Avlys built a website covering the cafe's story, favourites, Google reviews, maps, and Instagram.",
     deliverables: ["Single-outlet website", "Menu and story", "Maps and reviews", "Instagram embed"],
     outcomes: [
       "Raipur guests can read the menu without opening Zomato first.",
       "Reviews and address sit on a page the cafe owns.",
       "Phone and directions stay one tap away.",
-      "No duplicate app case study.",
+      "The cafe's story and social content are accessible alongside practical visit information.",
     ],
     visualKind: "website",
   },
   "taomish-ctrm-website-redesign": {
+    engagement: "Software build",
     headline: "An enterprise CTRM website redesign for trading, treasury, risk, and derivatives.",
     context:
       "Taomish needed taomish.com rebuilt as a premium B2B presence for Xceler, with clearer solution stories and a demo request path.",
     challenge:
       "Commodity CTRM sites fail when they look like a brochure. Navigation, storytelling, and lead capture had to match an enterprise buyer.",
     solution:
-      "Avlys designed and built a Next.js redesign covering trading, treasury, risk analytics, and hedging, with a demo form. This is the website, not a second CTRM application case.",
+      "Avlys designed and built a Next.js website covering trading, treasury, risk analytics, and hedging, with a demo form. The engagement covered the marketing website; Xceler application development was outside this scope.",
     deliverables: ["Information architecture", "Enterprise UI", "Solution pages", "Demo lead capture"],
     outcomes: [
       "Trading, treasury, risk, and derivatives each have a clear path.",
       "Demo requests land in one form instead of a generic contact dump.",
       "The stack can take a headless CMS later without a rebuild.",
-      "Website work stays separate from the Xceler product itself.",
+      "Solution pages explain the Xceler offer to enterprise evaluators.",
     ],
     visualKind: "website",
   },
   "girish-lakhotya-bondsman-website": {
+    engagement: "Software build",
     headline: "A founder website for Girish Lakhotya and the Bond Smart initiative.",
     context:
-      "Girish Lakhotya needed a public site for essays, video, and Bond Smart without splitting the brand into a marketing site and a separate app case.",
+      "Girish Lakhotya needed a public home for his professional biography, essays, video, and the Bond Smart initiative.",
     challenge:
-      "Personal brand sites either hide the product or become a second product. Bond Smart had to live as a section, not a duplicate portfolio card.",
+      "Visitors needed to understand the founder's work, find relevant media, and contact him about speaking, press, or the Bond Smart initiative.",
     solution:
-      "Avlys built girish-lakhotya.vercel.app as one Next.js presence: biography, thoughts, video, podcast, and Bond Smart. No second app listing.",
+      "Avlys built a Next.js website with biography, essays, video, podcasts, a Bond Smart section, and an inquiry form.",
     deliverables: ["Founder website", "Thoughts and video index", "Bond Smart section", "Inquiry form"],
     outcomes: [
-      "Press and speaking requests have a single URL.",
-      "Bond Smart is explained without a separate product card.",
+      "Press and speaking enquiries have a direct contact path.",
+      "A dedicated section explains the Bond Smart initiative.",
       "Essays and video sit next to the biography.",
-      "The same deployment is not listed twice under another domain.",
+      "Visitors can explore written and recorded material from the same site.",
     ],
     visualKind: "website",
   },
   "indexpilot": {
-    headline: "A small indexing product shipped as one web surface.",
+    engagement: "Software build",
+    headline: "A focused web interface for search visibility and indexing work.",
     context:
-      "IndexPilot needed a public app for search-visibility work without a marketing site plus a dashboard as two portfolio items.",
+      "IndexPilot needed a public web interface for its search-visibility and indexing offer.",
     challenge:
-      "Tiny tools get over-sold as platforms. This had to stay one URL.",
+      "The project needed a focused interface and an accessible deployment for users to explore the indexing offer.",
     solution:
-      "Avlys shipped indexpilot-ashen.vercel.app as the product itself.",
+      "Avlys implemented a Next.js web interface and deployed it on Vercel. This case documents the web surface; indexing effectiveness has not been measured here.",
     deliverables: ["Single web app", "Indexing surface", "Vercel deploy"],
     outcomes: [
-      "One URL to share.",
-      "No parallel marketing-site case study.",
-      "A base that can grow modules later.",
-      "Kept in the website group because that is the delivered surface.",
+      "A web interface for the indexing offer.",
+      "A deployed surface available through the project link.",
     ],
     visualKind: "website",
   },
@@ -322,12 +288,12 @@ const detailsBySlug: Record<string, Omit<CaseStudyDetail, "process"> & { process
     challenge:
       "Identity, membership, education, and professional services needed shared access rules across mobile and web clients.",
     solution:
-      "Avlys designed a five-layer stack — client, API gateway, application services, data, infrastructure — so new modules can attach without a rebuild. Cover is the architecture the team uses.",
+      "Avlys defined the modules and integration boundaries for the client, API gateway, application services, data, and infrastructure. This case study includes an architecture diagram. The cover is a product illustration.",
     deliverables: ["Android and web client architecture", "Identity and membership service design", "Education and help-network module design", "Verification and payment integration boundaries"],
     outcomes: [
       "Mobile, web, and admin share one gateway.",
       "Identity verification is a service, not a one-off screen.",
-      "Vector search and object storage sit beside Postgres, not as a second product.",
+      "Vector search, object storage, and PostgreSQL have defined responsibilities in the proposed data layer.",
       "Infrastructure and cross-cutting concerns are defined alongside the application layers.",
     ],
     process: ["Mapped mobile, web, admin, and third-party client needs.", "Separated identity, membership, education, and professional service responsibilities.", "Defined data stores and external integration boundaries.", "Documented proposed infrastructure, access controls, and operational concerns."],
@@ -335,57 +301,60 @@ const detailsBySlug: Record<string, Omit<CaseStudyDetail, "process"> & { process
   },
   "integrated-erp-and-club-management": {
     engagement: "Architecture engagement",
-    headline: "An ERP that puts HR, finance, membership, and club billing on one database.",
+    headline: "An operations architecture connecting club membership, billing, HR, and finance.",
     context:
       "The club needed employee, membership, billing, inventory, and approvals without reconciling five tools.",
     challenge:
-      "ERP and a public website are different jobs. This case is the operations platform only.",
+      "Membership, employee records, billing, and approvals needed shared data and clear access boundaries across locations.",
     solution:
-      "Avlys proposed a unified ERP with role-based access, multi-location support, and dashboards on a single source of truth.",
-    deliverables: ["HR and payroll", "Membership and billing", "Inventory and assets", "Approvals and reporting"],
+      "Avlys proposed a unified operations platform with role-based access, multi-location workflows, and reporting over shared records. This engagement covers architecture and scope, rather than an implemented application.",
+    deliverables: ["HR and payroll module scope", "Membership and billing model", "Inventory and asset requirements", "Approval and reporting design"],
     outcomes: [
-      "Membership and finance share the same record.",
-      "Approvals are workflow, not email chains.",
-      "Multi-location reporting sits on one schema.",
-      "No extra website card for the same ERP.",
+      "A shared record model for membership and finance.",
+      "Defined approval steps and role boundaries.",
+      "A reporting design covering multiple locations.",
+      "Documented module boundaries for a future build.",
     ],
     visualKind: "marketplace",
   },
   "bromechanic-multi-city-service-platform": {
-    headline: "A multi-city bike-service platform with booking, masked calls, and CRM.",
+    engagement: "Architecture engagement",
+    headline: "A multi-city bike-service platform design for bookings, dispatch, and follow-up.",
     context:
       "BroMechanic was expanding beyond Bangalore with Google Ads dependence, mechanic leakage, and no city-wise routing.",
     challenge:
       "A marketing site without ops still leaks repeat jobs to mechanics. The website, CRM, and call masking had to be one platform.",
     solution:
       "Avlys designed city landing pages, slot booking, Exotel-style masked calling, mechanic assignment, and follow-up sequences as a single system.",
-    deliverables: ["Multi-city SEO site", "Booking and CRM", "Call masking", "Mechanic assignment and follow-up"],
+    deliverables: ["City-page and booking flow design", "Customer pipeline design", "Call-masking integration plan", "Mechanic assignment and follow-up rules"],
     outcomes: [
-      "City pages and lead routing share the same pipeline.",
-      "Customer and mechanic numbers can stay masked.",
-      "Repeat service can be tracked instead of lost to WhatsApp.",
-      "Not split into a website case and an app case.",
+      "A shared design for city-level intake and lead routing.",
+      "Defined call-masking boundaries between customers and mechanics.",
+      "A repeat-service tracking flow for the operations team.",
+      "Connected requirements for bookings, dispatch, and follow-up.",
     ],
     visualKind: "marketplace",
   },
   "mns-job-and-career-portal": {
-    headline: "An MNS-branded career portal with matching and auto-apply for students.",
+    engagement: "Scope proposal",
+    headline: "A career-portal proposal for student matching, applications, and recruitment tracking.",
     context:
       "MNS Institute wanted students to search and apply inside an MNS product, with nursing and healthcare as a core track, while jobs still come from partner APIs.",
     challenge:
       "A careers website that dumps students onto third-party boards loses the relationship. The portal had to own profile, matching, and tracking.",
     solution:
       "Avlys scoped a student portal, admin pipeline, job APIs, matching, and an application engine with email and WhatsApp notifications.",
-    deliverables: ["Student profiles and resumes", "Job aggregation", "Match and auto-apply", "Admin recruitment dashboard"],
+    deliverables: ["Student profile requirements", "Job aggregation scope", "Matching and application workflow scope", "Admin recruitment dashboard requirements"],
     outcomes: [
-      "Students stay on an MNS-branded surface.",
-      "Applications can be recorded even when a provider has no API.",
-      "Nursing and other categories share the same filters.",
-      "Not listed again as a separate mobile app.",
+      "A proposed student journey within the MNS brand.",
+      "Application tracking requirements for different job providers.",
+      "Shared filtering requirements for nursing and other categories.",
+      "A defined starting scope for implementation planning.",
     ],
     visualKind: "marketplace",
   },
   "ai-trade-intel-equity-and-derivatives": {
+    engagement: "Software build",
     headline: "A behavioral-intelligence desk for Indian equity and derivatives.",
     context:
       "The client needed news ingest, swarm simulation, technical confirmation, and broker execution with explicit risk caps. The name stays confidential.",
@@ -403,28 +372,30 @@ const detailsBySlug: Record<string, Omit<CaseStudyDetail, "process"> & { process
     visualKind: "ai-system",
   },
   "p2p-wi-fi-camera-ecosystem": {
-    headline: "A P2P camera stack from firmware to phone, with no cloud video hop.",
+    engagement: "Scope proposal",
+    headline: "A P2P camera ecosystem proposal spanning firmware, mobile, and web.",
     context:
       "Sanjay Pal needed firmware, Android, iOS, and a web viewer that pair on the local network without sending video through Avlys servers.",
     challenge:
-      "Firmware, mobile, and web are one product. Splitting them into a website case and an app case would hide the hard part: pairing and WebRTC on the device.",
+      "Firmware, mobile clients, and a browser viewer needed a shared pairing and WebRTC design that avoids a central video relay.",
     solution:
       "Avlys scoped an embedded C/C++ bridge, native apps, PIN pairing, and a live web dashboard as a single ecosystem.",
-    deliverables: ["Firmware WebRTC bridge", "Android and iOS apps", "Web live view", "mDNS pairing"],
+    deliverables: ["Firmware WebRTC bridge scope", "Android and iOS client requirements", "Web viewer requirements", "mDNS and PIN-pairing design"],
     outcomes: [
-      "Video stays device-to-device.",
-      "Pairing uses a rotating PIN, not a cloud account.",
-      "Web and mobile share the same handshake.",
-      "Listed once, not as website plus app.",
+      "A proposed device-to-device video path.",
+      "A rotating-PIN pairing design.",
+      "A shared handshake specification for web and mobile.",
+      "Defined responsibilities across firmware and client applications.",
     ],
     visualKind: "ai-system",
   },
   "realcrm-real-estate-pipeline": {
-    headline: "A real-estate CRM with pipeline stages and a buyer nurture sequence.",
+    engagement: "Software build",
+    headline: "A custom sales workspace connecting real-estate enquiries, ownership, and buyer follow-up.",
     context:
-      "Sales managers needed contacts, scores, owners, and an email sequence in one desk, not a spreadsheet plus a separate automation product.",
+      "Sales managers needed contacts, scores, owners, and follow-up sequences in one workspace so each enquiry had a clear next step.",
     challenge:
-      "Lead-automation diagrams and CRM screens are the same system. This card is the product UI, not a second website.",
+      "Enquiries from different channels needed consistent qualification, a responsible sales owner, and visible progress through the buying journey.",
     solution:
       "Avlys delivered a contact pipeline from new lead to closed-won, with an editable buyer nurture sequence and owner routing.",
     deliverables: ["Contact pipeline", "Scoring and owners", "Email sequence builder", "Export and add-contact flows"],
@@ -432,11 +403,12 @@ const detailsBySlug: Record<string, Omit<CaseStudyDetail, "process"> & { process
       "Stage counts sit above the same contact table.",
       "Nurture steps are visible next to the pipeline.",
       "WhatsApp and Meta ads can feed the same record.",
-      "Not duplicated as a separate lead-automation website.",
+      "Owner assignment gives each contact a clear follow-up responsibility.",
     ],
     visualKind: "automation",
   },
   "darshan-thaker-b2b-engineering-cms-website": {
+    engagement: "Software build",
     headline: "A B2B engineering CMS built for technical trust and search visibility.",
     context:
       "The business needed a service-led website that could explain engineering capabilities, publish project content, and support local discovery.",
@@ -454,6 +426,7 @@ const detailsBySlug: Record<string, Omit<CaseStudyDetail, "process"> & { process
     visualKind: "website",
   },
   "aqua-flight-luxury-yacht-services-rebuild": {
+    engagement: "Software build",
     headline: "A luxury service rebuild with refined navigation and premium service storytelling.",
     context:
       "Aqua Flight needed a full website rebuild that matched the expectations of luxury yacht buyers, charter clients, and concierge-style service users.",
@@ -471,6 +444,7 @@ const detailsBySlug: Record<string, Omit<CaseStudyDetail, "process"> & { process
     visualKind: "website",
   },
   "luis-orozco-casino-and-gaming-brand-website": {
+    engagement: "Software build",
     headline: "A gaming brand website designed for atmosphere, credibility, and regional relevance.",
     context:
       "The brand needed an immersive website for Mexico and LATAM audiences, with research-led positioning and responsive execution.",
@@ -488,6 +462,7 @@ const detailsBySlug: Record<string, Omit<CaseStudyDetail, "process"> & { process
     visualKind: "website",
   },
   "alesonfoods-d2c-food-e-commerce-website": {
+    engagement: "Software build",
     headline: "A mobile-first food commerce site with trust, checkout, and catalog clarity.",
     context:
       "The D2C food brand needed a storefront that could present products clearly, support cart and checkout, and build buyer trust on mobile.",
@@ -505,6 +480,7 @@ const detailsBySlug: Record<string, Omit<CaseStudyDetail, "process"> & { process
     visualKind: "commerce",
   },
   "fat-cow-skincare-d2c-beauty-e-commerce-website": {
+    engagement: "Software build",
     headline: "An editorial skincare storefront built around concerns, ingredients, and trust.",
     context:
       "The skincare brand needed a commerce experience that felt educational, premium, and helpful before asking visitors to buy.",
@@ -522,7 +498,8 @@ const detailsBySlug: Record<string, Omit<CaseStudyDetail, "process"> & { process
     visualKind: "commerce",
   },
   "multi-vendor-marketplace-platform": {
-    headline: "A scalable marketplace platform with customer, vendor, and admin workflows.",
+    engagement: "Software build",
+    headline: "A marketplace platform with customer, vendor, and admin workflows.",
     context:
       "The platform needed to support multiple vendors, customers, onboarding, order management, checkout, and commission logic across web and mobile surfaces.",
     challenge:
@@ -533,12 +510,13 @@ const detailsBySlug: Record<string, Omit<CaseStudyDetail, "process"> & { process
     outcomes: [
       "A clearer operating system for marketplace roles.",
       "Separate workflows for customers, vendors, and admins.",
-      "A scalable foundation for commerce operations.",
+      "Shared order and commission records for commerce operations.",
       "Improved visibility over onboarding, orders, and commissions.",
     ],
     visualKind: "marketplace",
   },
   "ariana-lloyd-webflow-directory-platform": {
+    engagement: "Software build",
     headline: "A Webflow directory platform with profiles, filtering, memberships, and booking flows.",
     context:
       "The project needed a directory-style marketplace that could support profiles, membership access, filtering, booking, messaging, and editorial content.",
@@ -574,23 +552,25 @@ const detailsBySlug: Record<string, Omit<CaseStudyDetail, "process"> & { process
     visualKind: "marketplace",
   },
   "joanna-koh-client-vendor-service-platform": {
-    headline: "A full-stack service marketplace with matching, scheduling, escrow, and admin control.",
+    engagement: "Architecture engagement",
+    headline: "A service-marketplace architecture for matching, scheduling, payments, and admin control.",
     context:
       "The platform needed to coordinate clients and vendors through smart matching, scheduling, payments, reviews, and operational oversight.",
     challenge:
       "Service marketplaces need trust and control on both sides. Matching, escrow, scheduling, reviews, and admin visibility had to work as a complete system.",
     solution:
       "Avlys designed a full-stack service marketplace using React/Next.js, backend services, PostgreSQL, and Stripe with smart matching, scheduling, escrow payments, reviews, ratings, and admin dashboard.",
-    deliverables: ["Smart matching", "Scheduling flows", "Escrow payments", "Reviews, ratings, and admin dashboard"],
+    deliverables: ["Matching and scheduling design", "Payment and escrow workflow design", "Review and rating model", "Admin dashboard requirements"],
     outcomes: [
-      "A clearer marketplace workflow from discovery to payment.",
-      "Better trust mechanisms through reviews and escrow.",
-      "Operational visibility for platform admins.",
-      "A full-stack base for service marketplace growth.",
+      "A defined marketplace workflow from discovery to payment.",
+      "Proposed trust mechanisms using reviews and payment controls.",
+      "Documented operational views for platform admins.",
+      "Architecture and workflow requirements for a future build.",
     ],
     visualKind: "marketplace",
   },
   "off-grid-modular-ai-ecosystem": {
+    engagement: "Prototype / MVP",
     headline: "An offline modular AI ecosystem for local routing, RAG, automation, and avatar rendering.",
     context:
       "The system needed to run AI workflows in an off-grid local environment with modular services for LLMs, automation, retrieval, and content generation.",
@@ -656,7 +636,8 @@ const detailsBySlug: Record<string, Omit<CaseStudyDetail, "process"> & { process
     visualKind: "ai-system",
   },
   "ai-real-estate-voice-agent": {
-    headline: "A 24/7 real estate voice agent for calls, qualification, visits, and WhatsApp follow-up.",
+    engagement: "Architecture engagement",
+    headline: "A real-estate voice-agent design for qualification, visits, and WhatsApp follow-up.",
     context:
       "Real estate teams miss high-intent leads when calls arrive after hours or during busy periods. The system needed to qualify and route prospects quickly.",
     challenge:
@@ -665,15 +646,16 @@ const detailsBySlug: Record<string, Omit<CaseStudyDetail, "process"> & { process
       "Avlys designed a voice and WhatsApp automation system that handles calls, screens buyer intent, schedules visits, sends brochures, and prepares structured lead notes.",
     deliverables: ["AI voice call flow", "Lead qualification script", "Visit scheduling handoff", "WhatsApp brochure follow-up"],
     outcomes: [
-      "Fewer missed real estate inquiries after hours.",
-      "Consistent qualification across every call.",
-      "Structured notes for sales follow-up.",
-      "A faster bridge from call interest to WhatsApp engagement.",
+      "A proposed intake flow for after-hours enquiries.",
+      "Defined qualification questions and handoff rules.",
+      "A structured note format for sales follow-up.",
+      "A designed handoff from calls to WhatsApp information delivery.",
     ],
     visualKind: "voice-agent",
   },
   "lead-automation-suite": {
-    headline: "A lead automation suite for capture, qualification, scoring, routing, and nurture.",
+    engagement: "Architecture engagement",
+    headline: "A lead-automation design for capture, qualification, scoring, routing, and nurture.",
     context:
       "The system needed to reduce manual follow-up delays and make lead handling more consistent across capture channels.",
     challenge:
@@ -682,15 +664,16 @@ const detailsBySlug: Record<string, Omit<CaseStudyDetail, "process"> & { process
       "Avlys designed an end-to-end lead system with capture, qualification, scoring, routing, CRM handoff, and nurture sequences.",
     deliverables: ["Lead capture flow", "Qualification and scoring", "CRM routing", "Automated nurture sequences"],
     outcomes: [
-      "Faster first response to inbound leads.",
-      "Better prioritization for sales teams.",
-      "Cleaner handoffs from intake to CRM.",
-      "More consistent follow-up for not-ready prospects.",
+      "Defined response and routing rules for inbound leads.",
+      "A scoring model for sales prioritization.",
+      "Documented handoffs from intake to the sales workspace.",
+      "Nurture-sequence designs for prospects who are not ready to buy.",
     ],
     visualKind: "automation",
   },
   "whatsapp-chatbot-systems": {
-    headline: "WhatsApp chatbot systems for FAQs, brochures, buyer requirements, and follow-up.",
+    engagement: "Architecture engagement",
+    headline: "WhatsApp workflow designs for FAQs, brochures, buyer requirements, and follow-up.",
     context:
       "Many Indian and global customers prefer WhatsApp for quick inquiry and follow-up. The system needed to make that channel more structured and useful.",
     challenge:
@@ -699,10 +682,10 @@ const detailsBySlug: Record<string, Omit<CaseStudyDetail, "process"> & { process
       "Avlys designed WhatsApp bots for brochures, FAQs, buyer requirements, lead capture, and automated follow-up across real estate, D2C, and service workflows.",
     deliverables: ["WhatsApp FAQ flow", "Brochure automation", "Buyer requirement capture", "Follow-up sequences"],
     outcomes: [
-      "Instant responses to common WhatsApp questions.",
-      "More structured buyer and customer data.",
-      "Faster brochure and information delivery.",
-      "Cleaner routing from chat to sales or support.",
+      "Defined answer paths for common WhatsApp questions.",
+      "A structured buyer-requirement capture flow.",
+      "Brochure and information delivery rules.",
+      "Designed routing from chat to sales or support.",
     ],
     visualKind: "automation",
   },
@@ -716,7 +699,8 @@ export const caseStudies: CaseStudy[] = portfolioItems.map((item) => {
   return {
     ...item,
     ...detail,
-    process: detail.process ?? processByKind[detail.visualKind],
+    // Only publish process steps documented for this engagement.
+    process: detail.process ?? [],
   };
 });
 

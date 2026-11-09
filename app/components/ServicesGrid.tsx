@@ -1,35 +1,46 @@
 import Link from "next/link";
-import { servicePages } from "../data/services";
 import Reveal from "./Reveal";
 
-// Utility-card grid per DESIGN-apple.md: white cards, hairline border,
-// 18px radius, no shadows.
-const ServicesGrid = () => {
+const capabilities = [
+  {
+    title: "Custom platforms",
+    detail: "Customer portals, marketplaces and products built around your business.",
+    href: "/services/custom-software-development",
+    example: "Built for your customers",
+  },
+  {
+    title: "Internal tools",
+    detail: "Give your team one place to manage work, data and decisions.",
+    href: "/services/custom-software-development",
+    example: "Built for your team",
+  },
+  {
+    title: "AI workflows",
+    detail: "Put agents, document intelligence and automation into everyday work.",
+    href: "/services/ai-agents",
+    example: "Built into your operations",
+  },
+];
+
+export default function ServicesGrid() {
   return (
-    <section id="services" className="bg-canvas px-6 py-20">
+    <section id="services" className="bg-canvas px-6 py-16">
       <div className="mx-auto w-full max-w-6xl">
-        <Reveal className="mx-auto max-w-2xl text-center">
-          <h2 className="type-display-lg text-ink">What we build.</h2>
-          <p className="type-lead-airy mt-4 text-ink-muted">
-            Six ways teams work with us - every one starting with a fixed
-            scope and a success metric.
-          </p>
+        <Reveal className="flex flex-wrap items-end justify-between gap-4">
+          <h2 className="type-display-lg text-ink">What we can build for you.</h2>
+          <Link href="/services" className="inline-flex min-h-11 items-center text-[15px] text-primary underline-offset-4 hover:underline">
+            All services <span className="ml-2" aria-hidden="true">→</span>
+          </Link>
         </Reveal>
-        <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {servicePages.map((service, index) => (
-            <Reveal key={service.slug} delay={index * 0.05}>
-              <Link
-                href={`/services/${service.slug}`}
-                className="flex h-full flex-col rounded-[18px] border border-hairline bg-canvas p-6 transition-colors hover:border-ink-faint"
-              >
-                <h3 className="text-[17px] font-semibold text-ink">
-                  {service.title}
-                </h3>
-                <p className="type-caption mt-3 flex-1 text-ink-muted">
-                  {service.description}
-                </p>
-                <span className="mt-5 text-[14px] text-primary">
-                  Learn more &rarr;
+        <div className="mt-8 grid gap-4 md:grid-cols-3">
+          {capabilities.map((item, index) => (
+            <Reveal key={item.title} delay={index * 0.05}>
+              <Link href={item.href} className="group flex h-full flex-col rounded-[18px] border border-hairline bg-parchment p-6 transition-colors hover:border-primary">
+                <p className="type-caption text-ink-muted">{item.example}</p>
+                <h3 className="mt-4 text-[22px] font-semibold tracking-tight text-ink">{item.title}</h3>
+                <p className="mt-3 flex-1 text-[16px] leading-relaxed text-ink-muted">{item.detail}</p>
+                <span className="mt-5 inline-flex min-h-11 items-center text-[14px] font-medium text-primary">
+                  Explore <span className="ml-2 transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
                 </span>
               </Link>
             </Reveal>
@@ -38,6 +49,4 @@ const ServicesGrid = () => {
       </div>
     </section>
   );
-};
-
-export default ServicesGrid;
+}

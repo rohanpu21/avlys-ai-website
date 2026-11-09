@@ -4,7 +4,7 @@ import { FormatIcon } from "./DatasetCard";
 import styles from "./catalogue.module.css";
 
 export default function DataPageDatasetCard({ dataset }: { dataset: OtsDataset }) {
-  const brief = `mailto:${siteConfig.email}?subject=${encodeURIComponent(`Avlys OTS Data — ${dataset.name}`)}&body=${encodeURIComponent(`Hi Avlys Data,\n\nPlease confirm availability and pricing for ${dataset.name}.\n\nOur task:\nRequired coverage / volume:\nPreferred formats and annotations:\nPreparation needed:\nTimeline:\n\nPlease confirm sample options and delivery scope.\n`)}`;
+  const brief = `mailto:${siteConfig.email}?subject=${encodeURIComponent(`Avlys OTS Data request for ${dataset.name}`)}&body=${encodeURIComponent(`Hi Avlys Data,\n\nPlease confirm availability and pricing for ${dataset.name}.\n\nOur task:\nRequired coverage / volume:\nPreferred formats and annotations:\nPreparation needed:\nTimeline:\n\nPlease confirm sample options and delivery scope.\n`)}`;
   return <article className={styles.card} aria-labelledby={`dataset-${dataset.id}`}>
     <div className={styles.cardHeader}><p className={styles.kind}><FormatIcon modality={dataset.modality} />{dataset.kind}</p><span className={styles.brandTag}>Reference option</span></div>
     <h4 id={`dataset-${dataset.id}`}>{dataset.name}</h4>

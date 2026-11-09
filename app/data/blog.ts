@@ -23,30 +23,30 @@ export const blogPosts: BlogPost[] = [
       "How to Integrate AI into Existing Software: A Step-by-Step Guide for Enterprises (2026)",
     metaTitle: "How to Integrate AI into Existing Software (2026)",
     metaDescription:
-      "A step-by-step engineering guide to adding AI to the ERP, CRM, and custom software you already run — integration patterns, pilot scoping, and failure modes.",
+      "How to add AI to the ERP, CRM, and custom software you already use. Compare integration options, plan a pilot, and spot common problems.",
     excerpt:
       "Most companies don't need a new AI product. They need AI working inside the software they already run. Here is the integration playbook, step by step.",
     publishedDate: "2026-06-11",
-    updatedDate: "2026-09-06",
-    body: `Many enterprises don't need a new AI product. They need AI working inside the systems they already run: the ERP that holds orders, the CRM that holds customers, the ticketing tool that holds problems. Rip-and-replace projects fail for organizational reasons before they fail for technical ones — so the practical question is not "what can we build with AI?" but "where does AI attach to what we have?"
+    updatedDate: "2026-11-09",
+    body: `Many enterprises need AI inside the software they already use to manage orders, customer records, and support tickets. Replacing an entire system often creates organizational problems before the technical work starts. Start by asking where AI can help in an existing workflow.
 
 This guide covers the three integration patterns that work, a seven-step process for getting from idea to production, and the failure modes that kill these projects.
 
 ## The three ways AI attaches to existing software
 
-**1. The API layer.** Your existing application calls a model provider (OpenAI, Anthropic, or a self-hosted model) through a thin internal service. Nothing about your core system changes except that one workflow — drafting a response, classifying a document, extracting fields from a PDF — now goes through the model. This is the cheapest pattern, the fastest to ship, and the right default for a first project.
+**1. The API layer.** Your existing application calls a model provider (OpenAI, Anthropic, or a self-hosted model) through a thin internal service. The model handles one task, such as drafting a response, classifying a document, or extracting fields from a PDF. The rest of the system works as before. This is usually the quickest and least expensive option for a first project.
 
 **2. The sidecar service.** A separate small application sits next to your system of record and handles one job end to end: an agent that reads inbound invoices and writes structured rows into the ERP, or a service that listens to new support tickets and drafts triage notes. The sidecar talks to your existing software through the same APIs and webhooks a human-built integration would use. Your core system stays untouched, which is exactly why this pattern survives security review.
 
-**3. Embedded AI features.** Model calls are built directly into your product's codebase — an AI summary inside your dashboard, a copilot inside your internal tool. This is the right pattern when AI is becoming part of the product itself, but it couples model behavior to your release cycle, so it should come after a sidecar or API-layer project has proven value.
+**3. Embedded AI features.** Build model calls into the product itself, such as a summary in a dashboard or an assistant in an internal tool. This ties model changes to your release cycle, so try it after a sidecar or API-layer project has shown that the feature is useful.
 
-Salesforce, SAP, NetSuite, and ServiceNow all expose REST APIs, webhooks, and event streams that make patterns 1 and 2 workable without touching vendor internals. Legacy systems without APIs usually still have a database, a file export, or an email trail — less elegant, still integrable.
+Salesforce, SAP, NetSuite, and ServiceNow all expose REST APIs, webhooks, and event streams that make patterns 1 and 2 workable without touching vendor internals. For older systems without APIs, look for a database, file export, or email trail you can use.
 
 ## The seven-step process
 
 ### Step 1: Audit the workflow and the data, not the technology
 
-Pick the workflow first. Write down, in plain language: what enters the workflow, who touches it, what judgment they apply, what leaves it, and where the data for each step lives. The most common discovery at this stage is that the data needed to automate a judgment is scattered across systems or lives in people's heads. That finding is the project — data consolidation comes before model calls.
+Pick the workflow first. Write down what goes in, who handles it, what decisions they make, what comes out, and where the data for each step lives. You may find that people piece together information from several systems or rely on knowledge that nobody has written down. Bring that information together before connecting a model.
 
 ### Step 2: Pick one use case by ROI and feasibility, not excitement
 
@@ -58,15 +58,15 @@ Use the decision rule above: API layer for a single model-powered step, sidecar 
 
 ### Step 4: Ground the model in your data
 
-A model that hasn't seen your price list will invent one. Retrieval-augmented generation (RAG) — retrieving relevant documents from your own knowledge base and injecting them into the model's context — is the standard pattern for grounding answers in company data. For structured data, function calling (the model requests a database lookup; your code executes it) keeps the model out of the database entirely. Either way the rule is the same: the model reasons, your systems remain the source of truth.
+A model can make up prices if it has no access to your price list. Retrieval-augmented generation (RAG) gives the model relevant documents from your knowledge base so it can answer from company data. For structured data, use function calling. The model requests a lookup, and your code runs it without giving the model direct database access. Your systems remain the source of truth in both cases.
 
 ### Step 5: Scope a pilot with success criteria written down
 
-Define, before any code is written: the metric (minutes per ticket, days per invoice cycle, percentage of drafts accepted without edits), the current baseline, the target, and the evaluation set you'll test against. A pilot without a numeric success criterion cannot fail — which means it also cannot succeed. MIT's NANDA initiative reported in 2025 that 95% of enterprise GenAI pilots were showing no measurable P&L impact; the missing ingredient is almost never model quality, it's measurement and workflow integration.
+Before writing code, agree on a metric, the current baseline, the target, and the cases you'll use to evaluate the pilot. You could measure minutes per ticket, days per invoice cycle, or the percentage of drafts accepted without edits. Without a measurable target, you can't tell whether the pilot worked. MIT's NANDA initiative reported in 2025 that 95% of enterprise GenAI pilots showed no measurable P&L impact. Decide how you'll measure results in the actual workflow.
 
 ### Step 6: Pass the security and compliance gates early
 
-Bring security in at the design stage with concrete answers: which data leaves your environment, which provider processes it, whether the provider trains on your data (enterprise API terms from the major providers do not, by default), how access is logged, and what the data-residency story is. If you handle regulated data, decide now whether you need zero-retention API terms, a VPC deployment, or a self-hosted model.
+Bring security in at the design stage with concrete answers: which data leaves your environment, which provider processes it, how long each endpoint retains it, and how access is logged. Provider terms vary by product and tier. OpenAI says API data is not used for training by default, while abuse-monitoring logs may retain content for up to 30 days; Anthropic says commercial/API inputs and outputs are not used for training by default; Google distinguishes unpaid Gemini API use, where content may be used to improve products, from its paid service terms. Verify the exact service, retention, residency, and opt-in settings before sending client data. For regulated data, get security and legal approval before using an external model service.
 
 ### Step 7: Roll out behind a human, then widen
 
@@ -78,21 +78,33 @@ Ship the system in draft mode: AI proposes, a person approves. Measure the edit 
 - **Skipping data cleanup.** If the knowledge base is stale, RAG retrieves stale answers with confidence. Budget for curation.
 - **No evaluation set.** Teams that don't keep a fixed test set of real cases cannot tell whether a prompt change improved or degraded the system.
 - **No owner after launch.** Models, prompts, and your business all drift. Someone must own the metric after go-live, or quality decays silently.
-- **Pilot-to-production amnesia.** A demo on ten hand-picked examples is not a pilot. If it never touched your real systems, the integration work — the actual hard part — hasn't started.
+- **A demo disconnected from real systems.** Ten hand-picked examples can show what a model does. A pilot also needs to test how it works with the systems you use.
 
 ## A realistic timeline
 
-For a single workflow with accessible data: one to two weeks for the audit and scoping, two to four weeks to a working pilot integrated with real data, and another two to four weeks of supervised rollout before full automation of the safe categories. Months-long timelines usually mean the scope is a program pretending to be a project.
+For planning, a single workflow with accessible data might need one to two weeks for audit and scoping, two to four weeks for an integrated working pilot, and another two to four weeks of supervised rollout before automating safe categories. These are broad estimates; access, data readiness, security review, and operational risk can change the schedule. Avlys scopes a fixed-price pilot around one workflow with a published working window of 4-6 weeks, then agrees the specific schedule and success criteria before work begins.
 
-Avlys AI builds and integrates systems like these for enterprise teams in the US and India — fixed-scope pilots, integrated into the software you already run. If you have a workflow in mind, [request a strategy call](/contact#project-form).`,
+Avlys AI builds fixed-scope pilots for enterprise teams in the US and India. We connect them to the software you already use. See our [AI integration services](/services/ai-integration) or [book a discovery call](/book) to discuss a workflow.`,
     sources: [
       {
-        name: "MIT NANDA — The GenAI Divide: State of AI in Business 2025",
+        name: "The GenAI Divide: State of AI in Business 2025 (MIT NANDA)",
         url: "https://nanda.media.mit.edu/ai_report_2025.pdf",
       },
       {
-        name: "RAND Corporation — The Root Causes of Failure for Artificial Intelligence Projects (2024)",
+        name: "The Root Causes of Failure for Artificial Intelligence Projects (RAND Corporation, 2024)",
         url: "https://www.rand.org/pubs/research_reports/RRA2680-1.html",
+      },
+      {
+        name: "Data controls in the OpenAI platform",
+        url: "https://platform.openai.com/docs/models/default-usage-policies-by-endpoint",
+      },
+      {
+        name: "Is my data used for model training? (Anthropic commercial products)",
+        url: "https://privacy.claude.com/en/articles/7996868-is-my-data-used-for-model-training",
+      },
+      {
+        name: "Gemini API Additional Terms of Service (Google)",
+        url: "https://ai.google.dev/gemini-api/terms",
       },
     ],
   },
@@ -105,12 +117,12 @@ Avlys AI builds and integrates systems like these for enterprise teams in the US
     excerpt:
       "Published estimates for AI projects span an order of magnitude. Here is how to read those ranges, what actually drives cost, and the line items vendors skip.",
     publishedDate: "2026-06-11",
-    updatedDate: "2026-09-06",
-    body: `Ask three vendors what an AI project costs and you'll get numbers an order of magnitude apart — all of them defensible, because "AI integration" covers everything from a two-week API hookup to a multi-year platform build. This article breaks the question into project types with realistic ranges, explains what moves a project up or down inside a range, and lists the costs that don't appear in proposals but always appear in invoices.
+    updatedDate: "2026-11-09",
+    body: `Quotes for AI integration can vary by a factor of ten because the work can range from a two-week API integration to a platform build that takes years. Here are typical price ranges by project type, what drives the cost, and what to budget for beyond the initial quote.
 
 ## The ranges, by project type
 
-Published cost guides from development firms and cloud-cost analysts (CloudZero, Walturn, Uptech, Appinventiv, Coherent Solutions — linked below) converge on roughly these bands:
+These ranges are based on published cost guides from CloudZero, Walturn, Uptech, Appinventiv, and Coherent Solutions. The sources are listed below.
 
 | Project type | Typical range (2026) | Timeline |
 | --- | --- | --- |
@@ -120,15 +132,15 @@ Published cost guides from development firms and cloud-cost analysts (CloudZero,
 | Ongoing model usage (inference/API costs) | Depends on model choice, volume, context length, and latency requirements | Ongoing |
 | Maintenance, evals, prompt and model updates | Commonly budgeted at 15–25% of build cost per year | Ongoing |
 
-Two notes on reading this table honestly. First, the bands overlap because complexity, not category, sets the price — a "simple chatbot" that must answer from 4,000 unmaintained documents costs more than a "custom agent" with one clean data source. Second, the cheapest band is the most underrated: a large share of real business value ships there, because modern foundation models already handle drafting, extraction, and classification without custom training.
+The ranges overlap because the work involved varies within each category. A chatbot that needs to answer from 4,000 outdated documents can cost more than an agent with one reliable data source. Many drafting, extraction, and classification tasks fit in the lowest price range because existing models can handle them without custom training.
 
 ## What actually drives the number
 
-**Data readiness is the biggest swing factor.** If the knowledge the AI needs is consolidated, current, and accessible by API, you're at the bottom of the band. If it's scattered across SharePoint exports, inbox folders, and a legacy database with no API, the integration project is mostly a data project — and the AI line item is the small one.
+**Data readiness is the biggest swing factor.** If the knowledge the AI needs is consolidated, current, and accessible by API, you're at the bottom of the band. If it's scattered across SharePoint exports, inbox folders, and a legacy database with no API, most of the budget can go toward preparing the data. When the work needs separate collection, annotation, or evaluation scope, see [Avlys Data's AI training-data service](/services/ai-training-data).
 
 **Integration surface.** Each system the AI must read from or write to (Salesforce, SAP, NetSuite, a custom ERP) adds authentication, schema mapping, error handling, and testing. One integration is a pilot; five is an architecture.
 
-**Error tolerance.** A drafting tool a human reviews can ship at 90% quality. An automation that acts unreviewed needs evaluation suites, guardrails, override paths, and audit logging — engineering that can cost more than the core feature.
+**Error tolerance.** A drafting tool a human reviews can ship at 90% quality. A tool that acts without review needs evaluation suites, guardrails, override paths, and audit logging. Building those safeguards can cost more than building the feature itself.
 
 **Compliance.** HIPAA, SOC 2 environments, data residency, or zero-retention requirements move you toward enterprise API terms, VPC deployments, or self-hosting. None of this is exotic anymore, but each gate adds weeks.
 
@@ -138,46 +150,46 @@ Two notes on reading this table honestly. First, the bands overlap because compl
 
 These rarely appear in proposals and always appear in reality:
 
-- **Data cleanup and curation** — frequently the largest single block of effort on RAG projects.
-- **Evaluation sets** — building and maintaining the fixed test set of real cases that tells you whether changes help or hurt.
-- **Inference costs at scale** — per-call pricing looks like rounding error until a workflow runs 50,000 times a month; model choice and caching strategy change this bill several-fold.
-- **Model churn** — providers retire and replace models on roughly an annual cadence; someone must re-test and re-tune on each migration.
-- **The second integration** — the pilot integrates with one system; production usually needs two or three more.
+- **Data cleanup and curation.** This is often the largest part of a RAG project.
+- **Evaluation sets.** Build and maintain a fixed set of real cases so you can tell whether changes improve results.
+- **Inference costs at scale.** Per-call costs add up when a workflow runs 50,000 times a month. The model you choose and how you cache results can change the bill several-fold.
+- **Model replacements.** Providers retire and replace models roughly once a year. Budget time to test and tune each replacement.
+- **Additional integrations.** A pilot connects to one system. Production usually needs two or three more.
 
 ## How to cap the risk: fixed-scope pilots
 
-The pattern that consistently protects buyers: a fixed-price, fixed-scope pilot of four to six weeks with a numeric success criterion agreed upfront, integrated with at least one real system and tested on real data. It converts an open-ended "AI initiative" into a bounded purchase with a go/no-go gate, and it surfaces the data-readiness problems while the spend is still five figures. Research on AI project failure (RAND 2024; MIT NANDA 2025) consistently attributes failure to unclear objectives and weak integration with real workflows — exactly the two things a properly scoped pilot forces you to define.
+Start with a pilot lasting four to six weeks, with a fixed price and scope. Agree on a measurable target before work begins. Connect the pilot to at least one real system and test it on real data so you can decide whether to continue and find data problems while the spend is still in five figures. RAND (2024) and MIT NANDA (2025) cite unclear objectives and weak integration with existing workflows as reasons AI projects fail.
 
 Questions that separate serious vendors from slide decks: What exactly ships at the end of the pilot? Which of our systems will it actually touch? What is the success metric and who measures it? What are the monthly run costs at production volume? Who owns the code and prompts? (The answer to the last one should be: you.)
 
-Avlys AI delivers AI integration for enterprise companies in the US and India on exactly this model — fixed-scope pilots priced before work begins, integrated into the systems you already run, with IP assigned to you. [Request a strategy call](/contact#project-form) to scope yours.`,
+Avlys AI offers [AI integration services](/services/ai-integration) to enterprise teams in the US and India. We agree on the pilot's price and scope before work starts, connect it to your existing systems, and assign the IP to you. [Book a discovery call](/book) to discuss your pilot.`,
     sources: [
       {
-        name: "CloudZero — How Much Does AI Cost?",
+        name: "How Much Does AI Cost? (CloudZero)",
         url: "https://www.cloudzero.com/blog/how-much-does-ai-cost/",
       },
       {
-        name: "Walturn — The Cost of Implementing AI in a Business",
+        name: "The Cost of Implementing AI in a Business (Walturn)",
         url: "https://www.walturn.com/insights/the-cost-of-implementing-ai-in-a-business-a-comprehensive-analysis",
       },
       {
-        name: "Uptech — AI Development Cost Estimation",
+        name: "AI Development Cost Estimation (Uptech)",
         url: "https://www.uptech.team/blog/ai-cost",
       },
       {
-        name: "Appinventiv — AI Development Cost Breakdown",
+        name: "AI Development Cost Breakdown (Appinventiv)",
         url: "https://appinventiv.com/blog/ai-development-cost/",
       },
       {
-        name: "Coherent Solutions — AI Development Cost Estimation, Pricing Structure & ROI",
+        name: "AI Development Cost Estimation, Pricing Structure & ROI (Coherent Solutions)",
         url: "https://www.coherentsolutions.com/insights/ai-development-cost-estimation-pricing-structure-roi",
       },
       {
-        name: "RAND Corporation — The Root Causes of Failure for AI Projects (2024)",
+        name: "The Root Causes of Failure for AI Projects (RAND Corporation, 2024)",
         url: "https://www.rand.org/pubs/research_reports/RRA2680-1.html",
       },
       {
-        name: "MIT NANDA — The GenAI Divide: State of AI in Business 2025",
+        name: "The GenAI Divide: State of AI in Business 2025 (MIT NANDA)",
         url: "https://nanda.media.mit.edu/ai_report_2025.pdf",
       },
     ],
@@ -189,10 +201,10 @@ Avlys AI delivers AI integration for enterprise companies in the US and India on
     metaDescription:
       "RPA executes fixed rules; AI agents reason over messy input. Where each wins, where each fails, the hybrid pattern, and a decision framework for CTOs.",
     excerpt:
-      "RPA bots replay rules against stable interfaces. AI agents reason over messy, variable input. Most back offices need both — here is the decision framework.",
+      "RPA bots follow rules in stable interfaces. AI agents handle input that varies. Here's how to decide which to use and when to combine them.",
     publishedDate: "2026-06-11",
-    updatedDate: "2026-09-06",
-    body: `Robotic process automation (RPA) and AI agents both promise the same thing — software doing work people do today — which is why they get confused in buying decisions. Technically they are almost opposites. RPA executes predefined rules against structured interfaces: click this field, copy this value, paste it there. AI agents use a language model to interpret a goal, reason over unstructured input, and decide which actions to take. One replays a recording; the other improvises within guardrails.
+    updatedDate: "2026-11-09",
+    body: `Robotic process automation (RPA) and AI agents can both take over manual tasks. RPA follows predefined steps in a structured interface, such as copying a value from one field to another. AI agents use a language model to interpret a goal and choose actions based on input that may vary from case to case.
 
 That difference decides which one fits a given workflow, and getting it wrong is expensive in both directions.
 
@@ -202,7 +214,7 @@ RPA earns its keep when the process is genuinely deterministic: the same fields,
 
 - **Stable, structured processes.** Copying values between two systems with fixed schemas, running a nightly report, applying an exact pricing rule. There is nothing to "reason" about, and a reasoning system adds cost and variance to a job that needs neither.
 - **Exactness requirements.** When the regulator, the auditor, or the ledger requires the same input to produce the same output every time, deterministic automation is a feature, not a limitation.
-- **Systems with no integration path.** Old desktop software with no API is RPA's home turf — screen-level automation is sometimes the only door in.
+- **Systems with no API.** An RPA bot can work through the screens of older desktop software when there's no other way to connect.
 
 RPA's weakness is well known to anyone who has operated it: brittleness. The bot breaks when the screen changes, and the maintenance backlog grows with every UI update. Automating the first process is easy; maintaining the fiftieth is the expensive part.
 
@@ -211,18 +223,18 @@ RPA's weakness is well known to anyone who has operated it: brittleness. The bot
 AI agents earn their keep where the input is messy and the judgment is mild.
 
 - **Unstructured input.** Invoices in fourteen layouts, emails that mix three requests, contracts where the date you need is phrased five ways. Rules can't enumerate this; models read it.
-- **Variable workflows.** Triage — deciding what a ticket, lead, or document is about and where it should go — is inherently interpretive. This is the canonical agent use case.
+- **Variable workflows.** An agent can read a ticket, lead, or document, work out what it's about, and decide where to send it.
 - **Conversation.** Anything that involves understanding a human's request and responding (support, lead qualification, internal helpdesk) is out of reach for RPA by construction.
-- **API-era integration.** Agents work best calling real APIs (Salesforce, NetSuite, ServiceNow, your internal services) through function calling rather than puppeting screens — which makes agent automations less brittle than screen-scraping bots wherever APIs exist.
+- **API integration.** Agents can use function calling to work with Salesforce, NetSuite, ServiceNow, or your internal services. API calls are less likely to break when the screen layout changes.
 
-The agent's weakness is the mirror image of RPA's: non-determinism. The same input can produce different output. Agents therefore need evaluation suites, guardrails, logging, and human-review paths — engineering RPA never needed. An agent without an eval set is an outage you haven't had yet.
+An agent can produce different outputs from the same input. Use evaluation suites, guardrails, logs, and human review to catch problems that deterministic RPA rules don't introduce.
 
 ## The comparison, compressed
 
 | Dimension | RPA | AI agents |
 | --- | --- | --- |
 | Input | Structured, predictable | Unstructured, variable |
-| Behavior | Deterministic — same input, same output | Probabilistic — reasoning, needs guardrails |
+| Behavior | Deterministic (same input gives the same output) | Probabilistic (needs guardrails) |
 | Breaks when | UI or schema changes | Edge cases outside grounding |
 | Integration | Screen/UI level (APIs optional) | API and document level (function calling, RAG) |
 | Error handling | Hard stop on unexpected state | Can interpret novel states; can also be confidently wrong |
@@ -233,7 +245,7 @@ The agent's weakness is the mirror image of RPA's: non-determinism. The same inp
 
 The strongest 2026 back-office architecture is not either/or. It is an agent at the messy front of the process and deterministic automation at the exact back of it.
 
-Invoice processing is the clean example. An agent reads the PDF or email — any layout, any phrasing — and extracts vendor, amounts, dates, and line items into a validated, structured record. Deterministic code (an API integration, or RPA where no API exists) then posts that record to the ERP, applies three-way matching rules, and routes exceptions to a person. The model handles ambiguity; the rules handle money. Every major RPA vendor has spent the last two years bolting agent capabilities onto exactly this pattern — UiPath now markets "agentic automation" as its core platform direction — which tells you where the industry landed.
+Take invoice processing. An agent reads invoices in different PDF or email formats and extracts the vendor, amounts, dates, and line items into a validated record. Deterministic code posts the record to the ERP, applies three-way matching rules, and sends exceptions to a person. Use an API to post the record if the ERP has one. Otherwise, an RPA bot can do it. RPA vendors have begun to offer this combination. UiPath, for example, markets it as "agentic automation."
 
 ## A decision framework for CTOs
 
@@ -242,18 +254,18 @@ Ask four questions about the workflow you want to automate:
 1. **Is the input structured or messy?** Structured → rules/RPA. Messy (documents, emails, conversations) → agent.
 2. **Does the step require interpretation?** If a competent new hire would need judgment to do it, it's agent territory. If they'd follow a checklist exactly, it's rules.
 3. **What is the cost of a wrong answer?** High and uncorrectable → deterministic, or agent-with-human-approval. Low or human-reviewed → agent can act.
-4. **Is there an API?** If yes, prefer agent + API integration over any screen automation. If no, RPA may be the only entry point — and an agent can still sit in front of it.
+4. **Is there an API?** If there is, have the agent call it. If the system only accepts input through its screens, an agent can prepare the data for an RPA bot to enter.
 
-If you already run RPA: don't rip it out. The highest-ROI move is usually adding an agent layer at the intake end — the place where your team currently does manual reading, typing, and routing before the bots can take over — and letting your existing deterministic automation keep doing what it's good at.
+If you already use RPA, look at the manual work your team does before the bots take over. An agent can help read, enter, and route incoming information while your existing bots keep running the steps that follow fixed rules.
 
-Avlys AI designs and builds exactly these hybrid automations — agents grounded in your data, integrated with the ERP, CRM, and ticketing systems you already run — for enterprise teams in the US and India. [Request a strategy call](/contact#project-form) to map your highest-ROI workflow.`,
+Avlys AI designs and builds these hybrid workflows through [AI Agent Development](/services/ai-agents) and [AI Automation](/services/ai-automation) for enterprise teams in the US and India. [Book a discovery call](/book) to map your highest-ROI workflow.`,
     sources: [
       {
-        name: "UiPath — Agentic AI (RPA vendor's agent + RPA hybrid positioning)",
+        name: "Agentic AI (UiPath)",
         url: "https://www.uipath.com/ai/agentic-ai",
       },
       {
-        name: "Zapier — AI agents vs. RPA: what's the difference?",
+        name: "AI agents vs. RPA: what's the difference? (Zapier)",
         url: "https://zapier.com/blog/ai-agents-vs-rpa/",
       },
     ],

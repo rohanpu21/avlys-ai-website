@@ -10,7 +10,7 @@ import { absoluteUrl, siteConfig } from "../lib/site";
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Book a strategy call or send project details. Avlys AI replies within one business day - custom software and AI integration for US and Indian teams.",
+    "Discuss your custom software project with Avlys AI, an AI-native product studio and enterprise engineering partner in India. Book a discovery call or share your requirements.",
   alternates: {
     canonical: "/contact",
   },
@@ -41,11 +41,11 @@ export default function ContactPage() {
       <main>
         <section className="bg-canvas px-6 pb-10 pt-20 sm:pt-24">
           <div className="mx-auto w-full max-w-4xl text-center">
-            <h1 className="type-hero text-ink">Talk to an engineer.</h1>
+            <h1 className="type-hero text-ink">Let&rsquo;s talk about what you want to build.</h1>
             <p className="type-lead mx-auto mt-6 max-w-2xl text-ink-muted">
-              Tell us about the workflow or system. We&rsquo;ll tell you
-              honestly whether AI pays back, and what a fixed-price first phase
-              would look like.
+              Bring your product idea, business workflow, or existing application.
+              We&rsquo;ll discuss the requirements, where AI can help, and the
+              next step toward a scoped software project.
             </p>
           </div>
         </section>

@@ -33,26 +33,53 @@ const pilotWorkflow: ServiceWorkflowStep[] = [
   {
     title: "Audit",
     detail:
-      "We map your current systems, data sources, and the workflow you want to change, then define the success metric with you before anything is built.",
+      "Map the workflow, check data readiness, and agree the success criteria.",
     artifacts: ["System map", "Data readiness review", "Success criteria document"],
   },
   {
     title: "Pilot",
     detail:
-      "A fixed-scope, fixed-price build of the core working loop in 4-6 weeks. Working software your team can test against real cases, not a slide deck.",
+      "Test one working workflow in a fixed-scope, fixed-price pilot over 4-6 weeks.",
     artifacts: ["Working pilot system", "Evaluation results", "Pilot-to-production plan"],
   },
   {
     title: "Integrate",
     detail:
-      "We wire the system into your stack - CRM, ERP, databases, telephony, internal tools - with access controls, logging, and human-review checkpoints.",
+      "Connect your systems with access controls, logging, and human-review checkpoints.",
     artifacts: ["Production integrations", "Access and audit controls", "Runbook"],
   },
   {
     title: "Scale",
     detail:
-      "90 days of post-deploy tuning are included. We review real usage, fix edge cases, and hand over a system your team can operate and extend.",
+      "Hand over the system and improve it under the support scope agreed with you.",
     artifacts: ["Usage reviews", "Documentation", "Handover and training"],
+  },
+];
+
+const productWorkflow: ServiceWorkflowStep[] = [
+  {
+    title: "Scope",
+    detail:
+      "Agree the users, workflows, responsibilities, and acceptance criteria for the first release.",
+    artifacts: ["Product scope", "User workflows", "Acceptance criteria"],
+  },
+  {
+    title: "Design and build",
+    detail:
+      "Build the application and integrations together, with regular working demonstrations.",
+    artifacts: ["Product designs", "Working software", "Progress reviews"],
+  },
+  {
+    title: "Validate and launch",
+    detail:
+      "Test real use cases, permissions, and failure paths; prepare deployment with your operators.",
+    artifacts: ["Validation results", "Deployment plan", "Operator documentation"],
+  },
+  {
+    title: "Improve and support",
+    detail:
+      "Review usage and feedback, then maintain and improve the product under an agreed support plan.",
+    artifacts: ["Handover", "Support plan", "Improvement backlog"],
   },
 ];
 
@@ -62,133 +89,53 @@ const dataWorkflow: ServiceWorkflowStep[] = [
   {
     title: "Scope",
     detail:
-      "We define the dataset with you: what the model has to learn, the label taxonomy, the edge cases that decide quality, and the bar that counts as done - written down before any data is touched.",
+      "Agree the model task, label taxonomy, edge cases, and quality thresholds.",
     artifacts: ["Annotation guidelines", "Label taxonomy", "Quality thresholds"],
   },
   {
     title: "Calibrate",
     detail:
-      "A small paid batch against the real taxonomy. You review actual output and we resolve genuine disagreements, so the guidelines are corrected on evidence rather than assumption before volume begins.",
+      "Review a small paid batch together and refine the guidelines before volume production.",
     artifacts: ["Sample dataset", "Calibration notes", "Per-unit pricing"],
   },
   {
     title: "Produce",
     detail:
-      "The core team collects, cleans, and labels to the agreed guidelines, with automated checks for duplicates, malformed records, and missing fields running alongside the human work.",
+      "Collect, clean, and label data, checking for duplicates, malformed records, and missing fields.",
     artifacts: ["Working dataset", "Automated check log", "Progress reporting"],
   },
   {
     title: "Audit",
     detail:
-      "A second pass reviews the work independently of whoever produced it and scores it against a held-out gold set, so quality arrives as a number you can inspect instead of a claim.",
+      "Independently review the output against a held-out gold set and document corrections.",
     artifacts: ["Gold-set audit results", "Agreement scores", "Correction log"],
   },
   {
     title: "Deliver",
     detail:
-      "Structured delivery in the format your pipeline expects, with schema, guidelines, and known limitations documented - and the option to carry it straight into the build that consumes it.",
+      "Deliver in your pipeline's format, with a schema, guidelines, and known limitations.",
     artifacts: ["Final dataset", "Schema and data dictionary", "Handover documentation"],
   },
 ];
 
 export const servicePages: ServicePage[] = [
   {
-    slug: "ai-integration",
-    title: "AI Integration",
-    metaTitle: "AI Integration Services for Enterprise Systems | Avlys AI",
-    metaDescription:
-      "Embed AI into Salesforce, SAP, and custom apps without disrupting operations. RAG, copilots, AI agents - delivered by US + India teams. Fixed-price pilot scope.",
-    keywords: [
-      "AI integration services",
-      "integrate AI into existing software",
-      "enterprise AI integration",
-      "AI integration company",
-    ],
-    eyebrow: "AI Integration Services",
-    h1: "AI built into the systems you already run.",
-    description:
-      "Most AI projects fail because they try to replace working systems instead of extending them. We embed AI capability - retrieval, reasoning, automation - into your existing ERP, CRM, and custom applications, so your team keeps the tools and data they know.",
-    proof: ["No rip-and-replace", "Fixed-scope pilots", "90-day post-deploy tuning"],
-    capabilities: [
-      {
-        title: "Retrieval-augmented generation (RAG)",
-        description:
-          "LLM answers grounded in your documents, policies, tickets, and databases - with citations, access control, and evaluation suites so answers stay accurate.",
-      },
-      {
-        title: "Copilots inside existing tools",
-        description:
-          "Assistants embedded in the software your team already uses: drafting in your CRM, lookups in your ERP, summaries in your support desk.",
-      },
-      {
-        title: "Document and data pipelines",
-        description:
-          "Extraction, classification, and routing for invoices, contracts, claims, and emails - structured output written back into your systems of record.",
-      },
-      {
-        title: "API and middleware integration",
-        description:
-          "Model providers (OpenAI, Anthropic, open-source) connected to your stack through a maintainable service layer with logging, fallbacks, and cost controls.",
-      },
-    ],
-    systems: [
-      "Salesforce",
-      "SAP",
-      "HubSpot",
-      "NetSuite",
-      "ServiceNow",
-      "Zendesk",
-      "PostgreSQL",
-      "Legacy ERPs",
-      "Internal tools",
-    ],
-    outcomes: [
-      "AI features running inside your current stack instead of another disconnected tool.",
-      "Answers and automations grounded in your data, with citations and audit trails.",
-      "A measured pilot before any production commitment - success criteria agreed upfront.",
-      "An integration layer your engineers can maintain, documented and handed over.",
-    ],
-    workflow: pilotWorkflow,
-    faqs: [
-      {
-        question: "Can you integrate AI without replacing our existing software?",
-        answer:
-          "Yes - that is the core of what we do. We build an integration layer around your current ERP, CRM, or custom applications. Your systems of record stay where they are; AI reads from and writes to them through controlled APIs.",
-      },
-      {
-        question: "How do you keep our data secure?",
-        answer:
-          "Engagements run under NDA. We design around least-privilege access, keep your data inside your cloud where possible, support private model deployments when required, and document every data flow before it ships.",
-      },
-      {
-        question: "What does a typical engagement look like?",
-        answer:
-          "A fixed-price, fixed-scope pilot of 4-6 weeks that ships a working integration against one workflow, measured against success criteria we agree on in week one. If the pilot proves out, we move to production integration and scaling.",
-      },
-      {
-        question: "Which AI models do you work with?",
-        answer:
-          "OpenAI, Anthropic, Google, and open-source models, chosen per use case for accuracy, latency, cost, and data-residency requirements - not by default vendor preference.",
-      },
-    ],
-  },
-  {
     slug: "custom-software-development",
     title: "Custom Software Development",
-    metaTitle: "Custom Software Development Services - USA & India | Avlys AI",
+    metaTitle: "Custom Enterprise Software Development in India | Avlys AI",
     metaDescription:
-      "Web platforms, internal tools, and marketplaces built by senior engineers across the US and India. AI-native architecture, fixed-scope delivery, full IP transfer.",
+      "AI-native enterprise platforms, internal tools, and customer applications. Avlys's India-based product and engineering team takes software from discovery to launch and support.",
     keywords: [
       "custom software development company",
-      "custom software development USA India",
+      "custom software development India",
       "web application development company",
       "enterprise software development",
     ],
     eyebrow: "Custom Software Development",
-    h1: "Software built for your operation, not adapted to it.",
+    h1: "Enterprise software built around your business.",
     description:
-      "Platforms, internal tools, marketplaces, and customer-facing products - designed around your workflows and built AI-native from the first commit. Senior engineers, US-hours communication, India build velocity, and full IP transfer on every engagement.",
-    proof: ["Senior engineers on every call", "Full IP transfer", "US + India delivery"],
+      "Custom platforms, internal tools, and customer applications, from product discovery to launch and ongoing engineering.",
+    proof: ["Product design + engineering", "Scope agreed before build", "India-based team"],
     capabilities: [
       {
         title: "Web platforms and portals",
@@ -223,32 +170,47 @@ export const servicePages: ServicePage[] = [
       "Vercel",
     ],
     outcomes: [
-      "A system shaped by your operating model instead of workarounds shaped by a template.",
-      "Production architecture: typed codebases, CI, staging environments, and documentation.",
-      "Transparent fixed-scope phases - you know the price before each phase begins.",
-      "Your code, your infrastructure, your IP - handed over completely.",
+      "Workflows shaped around your business.",
+      "Typed code, CI, staging, and documentation.",
+      "A fixed scope and price for each phase.",
+      "Ownership of your code, infrastructure, and IP.",
     ],
-    workflow: pilotWorkflow,
+    workflow: productWorkflow,
     faqs: [
+      {
+        question: "What kinds of custom software does Avlys AI build?",
+        answer:
+          "Avlys AI builds custom web platforms and portals, internal operations tools and dashboards, marketplaces, and customer-facing applications. Each scope starts with your workflows; integrations and AI features are included where they fit.",
+      },
+      {
+        question: "When should a business choose custom software over an off-the-shelf product?",
+        answer:
+          "Custom software makes sense when a critical workflow, integration, or product requirement is poorly served by available tools and the cost of workarounds justifies a build. If an off-the-shelf product meets the requirements more simply, Avlys recommends buying it instead. The decision is scoped around workflow fit, integrations, ownership needs, and the total cost of operating the system.",
+      },
+      {
+        question: "How long does custom software development take?",
+        answer:
+          "A first working pilot for one scoped workflow typically takes 4-6 weeks. A full production build can take longer depending on product scope, integrations, testing, and rollout needs. Avlys scopes and prices each phase before work begins, so there is no single timeline for every build.",
+      },
       {
         question: "Who owns the code and IP?",
         answer:
           "You do, fully. Source code, infrastructure, designs, and documentation transfer to you. We work in your repositories and your cloud accounts whenever you prefer.",
       },
       {
-        question: "How do you price projects?",
+        question: "How much does custom software development cost?",
         answer:
-          "Fixed scope, fixed price, phase by phase. Every engagement starts with a scoped first phase priced before work begins, so there is no open-ended billing surprise.",
+          "Custom software pricing depends on the workflow, integrations, security requirements, and rollout needs, so there is no single price for every build. Avlys scopes the first phase after a 30-minute call, then agrees a fixed price before work begins. A first working pilot for one workflow typically takes 4-6 weeks; later production phases are scoped separately.",
       },
       {
-        question: "How does the US + India model work?",
+        question: "Where is the team, and how do we work together?",
         answer:
-          "Senior engineers in India deliver the build; communication, demos, and decision meetings run on US-friendly hours. You get one accountable team, not a handoff chain.",
+          "Our team works from Hyderabad and Bengaluru, India. We agree a communication cadence, working demonstrations, and decision points with you, including time-zone overlap for clients outside India.",
       },
       {
         question: "Do you maintain software after launch?",
         answer:
-          "Yes. Every build includes 90 days of post-deploy tuning, and we offer ongoing maintenance retainers covering updates, monitoring, fixes, and feature iterations.",
+          "Yes. We agree post-launch support with you as part of the engagement. Ongoing engineering and maintenance can cover monitoring, fixes, updates, and new product capabilities through a separately scoped retainer.",
       },
     ],
   },
@@ -267,8 +229,8 @@ export const servicePages: ServicePage[] = [
     eyebrow: "AI Agent Development",
     h1: "Agents that complete workflows, not just conversations.",
     description:
-      "We design and ship AI agents that execute real business processes - qualifying leads, resolving support tickets, handling calls, processing documents - with the orchestration, state management, and human checkpoints that production systems require.",
-    proof: ["Human-in-the-loop by design", "Grounded answers only", "Production orchestration"],
+      "AI agents for support, sales, voice, and document workflows, with business rules, evaluation, and human checkpoints.",
+    proof: ["Human review built in", "Grounding and evaluation", "Production orchestration"],
     capabilities: [
       {
         title: "Support and service agents",
@@ -303,17 +265,17 @@ export const servicePages: ServicePage[] = [
       "Custom CRMs",
     ],
     outcomes: [
-      "Agents constrained to your business rules, with escalation paths for everything else.",
-      "Structured data written back to your systems - not transcripts left in another inbox.",
-      "Evaluation and monitoring so you can see accuracy, coverage, and failure modes.",
-      "A system your operators control: prompts, rules, and knowledge sources they can update.",
+      "Business rules and defined escalation paths.",
+      "Structured updates in your existing systems.",
+      "Measured accuracy, coverage, and failure modes.",
+      "Prompts, rules, and knowledge your team can manage.",
     ],
     workflow: pilotWorkflow,
     faqs: [
       {
         question: "How do you stop an agent from making things up?",
         answer:
-          "Grounding and constraint. Agents answer only from approved knowledge sources, cite what they used, refuse outside their scope, and escalate to humans on low confidence. We ship evaluation suites that measure this before and after launch.",
+          "We ground responses in approved sources, add citations where available, and design refusal and human-escalation paths. These controls reduce risk but do not eliminate errors. Evaluation before and after launch checks accuracy, scope adherence, and failure cases against agreed criteria.",
       },
       {
         question: "Can agents hand off to our team?",
@@ -329,6 +291,11 @@ export const servicePages: ServicePage[] = [
         question: "How long until a working agent?",
         answer:
           "A scoped pilot agent against one workflow typically ships in 4-6 weeks, including integration with your data sources and a measured evaluation against agreed success criteria.",
+      },
+      {
+        question: "How much does AI agent development cost?",
+        answer:
+          "Avlys prices an agent pilot as a fixed-scope, fixed-price phase after a 30-minute scoping call. The quote depends on the workflow, channels, system integrations, evaluation, and human-review requirements. You agree the scope and success metric before build work begins; larger delivery is priced phase by phase.",
       },
     ],
   },
@@ -347,13 +314,13 @@ export const servicePages: ServicePage[] = [
     eyebrow: "AI Automation Services",
     h1: "Workflows that run themselves, with your rules.",
     description:
-      "The repetitive layer of your operation - lead follow-up, support triage, data entry, document handling, status chasing - automated with AI and wired into the tools you already use. Every automation follows business logic you approve and can change.",
+      "Automate lead follow-up, support triage, and document handling inside your existing tools, with rules and approval steps you control.",
     proof: ["Your tools, automated", "Approval gates built in", "Measured before scaled"],
     capabilities: [
       {
         title: "Lead response and routing",
         description:
-          "Instant first response across web, chat, and phone; qualification questions; scoring; CRM updates; and routing to the right salesperson with context.",
+          "Automated response, qualification, scoring, and CRM routing across agreed channels, with response-time targets set during scoping.",
       },
       {
         title: "Support triage and resolution",
@@ -383,10 +350,10 @@ export const servicePages: ServicePage[] = [
       "Custom APIs",
     ],
     outcomes: [
-      "First response in seconds on the channels where you currently lose leads.",
-      "Consistent handling: the same questions, rules, and routing on every case.",
-      "Hours of manual data movement replaced with logged, auditable automations.",
-      "Visibility - dashboards showing what ran, what escalated, and what failed.",
+      "Response times measured against your baseline.",
+      "Documented questions, rules, and routing.",
+      "Logged, auditable handoffs between tools.",
+      "Visibility into completed, escalated, and failed runs.",
     ],
     workflow: pilotWorkflow,
     faqs: [
@@ -398,7 +365,7 @@ export const servicePages: ServicePage[] = [
       {
         question: "Will automation break when our process changes?",
         answer:
-          "Automations are built with explicit, documented rules your team can update, plus monitoring that flags failures instead of hiding them. Change the process, update the rule - no rebuild.",
+          "We document the rules your team can update and add monitoring to flag failures. Some process changes need only configuration; new integrations or major workflow changes may require engineering and testing. We assess that scope with you before making the change.",
       },
       {
         question: "Do we need new software for this?",
@@ -410,6 +377,192 @@ export const servicePages: ServicePage[] = [
         answer:
           "Each automation ships with a success metric defined upfront - response time, resolution rate, hours saved - and a dashboard that tracks it against the pre-automation baseline.",
       },
+      {
+        question: "How much does AI workflow automation cost?",
+        answer:
+          "Avlys scopes and prices each automation before work begins. The quote depends on workflow complexity, data readiness, integrations, and the approval or monitoring rules required. The first phase is fixed-price and measured against a success metric agreed upfront.",
+      },
+    ],
+  },
+  {
+    slug: "ai-integration",
+    title: "AI Integration",
+    metaTitle: "AI Integration Services for Enterprise Systems | Avlys AI",
+    metaDescription:
+      "Connect AI capabilities to your enterprise applications. RAG, copilots, document pipelines, and controlled integrations from Avlys's India-based engineering team.",
+    keywords: [
+      "AI integration services",
+      "integrate AI into existing software",
+      "enterprise AI integration",
+      "AI integration company",
+    ],
+    eyebrow: "AI Integration Services",
+    h1: "AI built into the systems you already run.",
+    description:
+      "Connect AI search, copilots, and document workflows to your existing applications through controlled integrations.",
+    proof: ["Works with your systems", "4-6 week pilots", "Support scoped with you"],
+    capabilities: [
+      {
+        title: "Retrieval-augmented generation (RAG)",
+        description:
+          "Retrieval from your documents and databases, with citations, access controls, and evaluation to measure answer quality.",
+      },
+      {
+        title: "Copilots inside existing tools",
+        description:
+          "Assistants embedded in the software your team already uses: drafting in your CRM, lookups in your ERP, summaries in your support desk.",
+      },
+      {
+        title: "Document and data pipelines",
+        description:
+          "Extraction, classification, and routing for invoices, contracts, claims, and emails - structured output written back into your systems of record.",
+      },
+      {
+        title: "API and middleware integration",
+        description:
+          "Model providers (OpenAI, Anthropic, open-source) connected to your stack through a maintainable service layer with logging, fallbacks, and cost controls.",
+      },
+    ],
+    systems: [
+      "Salesforce",
+      "SAP",
+      "HubSpot",
+      "NetSuite",
+      "ServiceNow",
+      "Zendesk",
+      "PostgreSQL",
+      "Legacy ERPs",
+      "Internal tools",
+    ],
+    outcomes: [
+      "AI capabilities inside your existing applications.",
+      "Source grounding, citations, and audit trails.",
+      "A measured pilot before production rollout.",
+      "A documented integration layer your engineers can maintain.",
+    ],
+    workflow: pilotWorkflow,
+    faqs: [
+      {
+        question: "Can you integrate AI without replacing our existing software?",
+        answer:
+          "Yes. For integration engagements, we build around your current ERP, CRM, or custom applications. Your systems of record stay where they are; AI reads from and writes to them through controlled APIs.",
+      },
+      {
+        question: "How do you keep our data secure?",
+        answer:
+          "Engagements run under NDA. We design around least-privilege access, keep your data inside your cloud where possible, support private model deployments when required, and document every data flow before it ships.",
+      },
+      {
+        question: "What does a typical engagement look like?",
+        answer:
+          "A fixed-price, fixed-scope pilot of 4-6 weeks that ships a working integration against one workflow, measured against success criteria we agree on in week one. If the pilot proves out, we move to production integration and scaling.",
+      },
+      {
+        question: "How much does AI integration cost?",
+        answer:
+          "Avlys quotes each AI integration after a 30-minute scope call. The price depends on the workflow, systems to connect, data readiness, model choice, and security requirements. The first phase is a fixed-scope, fixed-price pilot, typically 4-6 weeks for one workflow; production work is scoped and priced separately.",
+      },
+      {
+        question: "Which AI models do you work with?",
+        answer:
+          "OpenAI, Anthropic, Google, and open-source models, chosen per use case for accuracy, latency, cost, and data-residency requirements - not by default vendor preference.",
+      },
+    ],
+  },
+  {
+    slug: "enterprise-ai-consulting",
+    title: "Enterprise AI Consulting",
+    metaTitle: "Enterprise AI Consulting | Avlys AI",
+    metaDescription:
+      "AI strategy for enterprises: readiness assessment, use-case selection, build-vs-buy analysis, and a costed pilot plan.",
+    keywords: [
+      "enterprise AI consulting",
+      "AI readiness assessment",
+      "AI strategy consulting",
+      "enterprise AI adoption",
+    ],
+    eyebrow: "Enterprise AI Consulting",
+    h1: "An AI roadmap your enterprise can build on.",
+    description:
+      "Choose the right AI use case and leave with a costed build plan, based on your systems, data, and business priorities.",
+    proof: ["Fixed-price assessment", "Build-vs-buy honesty", "Ends in a costed plan"],
+    capabilities: [
+      {
+        title: "AI readiness assessment",
+        description:
+          "A structured review of your systems, data quality, and workflows that identifies what AI can use today and what needs fixing first.",
+      },
+      {
+        title: "Use-case selection by ROI",
+        description:
+          "Candidate use cases ranked by measurable impact, feasibility, and time to value - with the weak ones eliminated before they consume budget.",
+      },
+      {
+        title: "Build-vs-buy analysis",
+        description:
+          "Where an off-the-shelf tool is the right answer, we say so. Custom builds are recommended only where they create a durable advantage.",
+      },
+      {
+        title: "Pilot roadmap and costing",
+        description:
+          "A concrete first pilot: scope, architecture, success metrics, timeline, and a fixed price - ready to execute with us or any competent team.",
+      },
+    ],
+    systems: [
+      "Your existing CRM/ERP",
+      "OpenAI",
+      "Anthropic",
+      "Open-source LLMs",
+      "Data warehouses",
+      "Spreadsheet workflows",
+    ],
+    outcomes: [
+      "Expected impact with assumptions made explicit.",
+      "Lower-value use cases identified before a build.",
+      "A pilot scope, success criteria, and fixed price.",
+      "A plan your leadership and engineering teams can use.",
+    ],
+    workflow: [
+      {
+        title: "Discover",
+        detail:
+          "Review workflows, systems, and data with your operators.",
+        artifacts: ["Workflow inventory", "Data readiness review"],
+      },
+      {
+        title: "Evaluate",
+        detail:
+          "Compare use cases by impact, feasibility, and cost; assess build versus buy.",
+        artifacts: ["Ranked use-case matrix", "Build-vs-buy analysis"],
+      },
+      {
+        title: "Plan",
+        detail:
+          "Define the pilot's scope, architecture, success criteria, and fixed price.",
+        artifacts: ["Pilot specification", "Costed roadmap", "Executive summary"],
+      },
+    ],
+    faqs: [
+      {
+        question: "Can we start with the data and systems we already have?",
+        answer:
+          "Often, yes. Workflows such as lead response, support triage, and document processing can use the data already in your CRM, helpdesk, and inbox. The assessment tells you precisely what is realistic with what you have.",
+      },
+      {
+        question: "Are you just going to recommend hiring you to build it?",
+        answer:
+          "The deliverable is a plan you can execute with any competent team - scope, architecture, and success metrics included. If an off-the-shelf product fits better than a custom build, the plan says so.",
+      },
+      {
+        question: "How long does the assessment take?",
+        answer:
+          "A focused assessment typically takes two to three weeks. Timing depends on system access, stakeholder availability, and the workflows in scope. We agree the schedule before discovery begins.",
+      },
+      {
+        question: "What does it cost?",
+        answer:
+          "It is a fixed-price engagement, quoted after a 30-minute scoping call based on the number of workflows and systems in scope - agreed before work begins, like everything we do.",
+      },
     ],
   },
   {
@@ -417,7 +570,7 @@ export const servicePages: ServicePage[] = [
     title: "Data Collection & Preparation",
     metaTitle: "AI Training Data Services - Collection & Preparation | Avlys AI",
     metaDescription:
-      "Datasets built for the model you are training: collection, annotation, cleaning, and evaluation sets. Delivered by a named core team under NDA and DPA.",
+      "AI training data services: image, audio and video catalogue options, plus custom text, collection, annotation, cleaning and evaluation scoped to your model task.",
     keywords: [
       "AI training data services",
       "data collection and preparation",
@@ -428,7 +581,7 @@ export const servicePages: ServicePage[] = [
     eyebrow: "Data Collection & Preparation",
     h1: "The dataset your model actually needs.",
     description:
-      "Collection, annotation, cleaning, and evaluation sets - scoped to the model you are training rather than sold by the seat. Delivered by the same core team that builds the systems the data feeds.",
+      "Collection, annotation, and evaluation for your model task. Explore image, audio, and video catalogue options; text and document work is custom-scoped.",
     proof: ["Core team, not a crowd", "Paid calibration batch first", "Per-unit pricing"],
     capabilities: [
       {
@@ -464,10 +617,10 @@ export const servicePages: ServicePage[] = [
       "Custom schemas",
     ],
     outcomes: [
-      "A dataset shaped by your model's actual failure modes, not a generic labeling template.",
-      "Quality you can inspect: a held-out gold set, agreement scores, and a correction log.",
-      "Per-unit pricing agreed after a paid calibration batch - no open-ended data spend.",
-      "Documented schema and guidelines, so the dataset stays usable long after handover.",
+      "Data scoped around your model's failure modes.",
+      "Gold-set results, agreement scores, and corrections.",
+      "Per-unit pricing after a paid calibration batch.",
+      "Documented schema, guidelines, and limitations.",
     ],
     workflow: dataWorkflow,
     faqs: [
@@ -479,7 +632,7 @@ export const servicePages: ServicePage[] = [
       {
         question: "What data types can you handle?",
         answer:
-          "Text, documents, images, audio, video, and multilingual data, scoped per project. We agree the taxonomy and quality bar with you first. If a dataset needs specialist domain knowledge we do not have, we say so before the engagement starts rather than after.",
+          "The current off-the-shelf catalogue describes image, audio and video options. Text and document data, custom collection, and other task-specific work are scoped per project. We agree on the taxonomy and quality bar first. If specialist domain expertise is needed, we confirm fit before the engagement.",
       },
       {
         question: "How do you measure quality?",
@@ -487,110 +640,19 @@ export const servicePages: ServicePage[] = [
           "Every project runs a second review pass, independent of whoever produced the work, scored against a held-out gold set. You receive the agreement scores and the correction log along with the data - not just the finished files.",
       },
       {
+        question: "How much does AI training data cost?",
+        answer:
+          "Custom training-data pricing depends on accepted units, collection difficulty, language or domain expertise, annotation depth, review, and permitted use. Avlys agrees the unit definition, minimum batch, and per-unit quote after a paid calibration batch and before production begins.",
+      },
+      {
         question: "Who owns the data, and how is it protected?",
         answer:
-          "You own the dataset outright. Engagements run under NDA with a data processing agreement, least-privilege access, and your data kept in your storage where you prefer. We do not currently hold HIPAA or SOC 2 certification - if your data requires certified handling, we will tell you that upfront instead of after signing.",
+          "For custom work, the written agreement defines rights in the agreed deliverables. For off-the-shelf options, permitted use and any restrictions are confirmed in the written terms; Avlys cannot transfer rights outside those terms. Before client data is shared, agree on access, storage location, transfer, retention, deletion, and any required processing terms. Avlys does not currently hold HIPAA or SOC 2 certification; if certified handling is required, we will say so before work begins.",
       },
       {
         question: "Can you also build the system that uses the data?",
         answer:
           "Yes, and that is usually the point. Most data vendors hand over files and leave. We can prepare the dataset and carry it straight into the pilot that consumes it, so nothing is lost translating between two vendors.",
-      },
-    ],
-  },
-  {
-    slug: "enterprise-ai-consulting",
-    title: "Enterprise AI Consulting",
-    metaTitle: "Enterprise AI Consulting | Avlys AI",
-    metaDescription:
-      "AI strategy for enterprises: readiness assessment, use-case selection, build-vs-buy analysis, and a costed pilot plan.",
-    keywords: [
-      "enterprise AI consulting",
-      "AI readiness assessment",
-      "AI strategy consulting",
-      "enterprise AI adoption",
-    ],
-    eyebrow: "Enterprise AI Consulting",
-    h1: "An AI roadmap your enterprise can build on.",
-    description:
-      "Align your business priorities, data readiness, security requirements, and existing systems before you invest in AI. We deliver that as a fixed-price engagement that ends in a costed, buildable plan.",
-    proof: ["Fixed-price assessment", "Build-vs-buy honesty", "Ends in a costed plan"],
-    capabilities: [
-      {
-        title: "AI readiness assessment",
-        description:
-          "A structured review of your systems, data quality, and workflows that identifies what AI can use today and what needs fixing first.",
-      },
-      {
-        title: "Use-case selection by ROI",
-        description:
-          "Candidate use cases ranked by measurable impact, feasibility, and time to value - with the weak ones eliminated before they consume budget.",
-      },
-      {
-        title: "Build-vs-buy analysis",
-        description:
-          "Where an off-the-shelf tool is the right answer, we say so. Custom builds are recommended only where they create a durable advantage.",
-      },
-      {
-        title: "Pilot roadmap and costing",
-        description:
-          "A concrete first pilot: scope, architecture, success metrics, timeline, and a fixed price - ready to execute with us or any competent team.",
-      },
-    ],
-    systems: [
-      "Your existing CRM/ERP",
-      "OpenAI",
-      "Anthropic",
-      "Open-source LLMs",
-      "Data warehouses",
-      "Spreadsheet workflows",
-    ],
-    outcomes: [
-      "A clear answer to 'where does AI actually pay back for us' - with numbers and assumptions shown.",
-      "Use cases you should not pursue, identified before they cost you a failed project.",
-      "A pilot plan with fixed scope, success metrics, and price - executable immediately.",
-      "Plain-language documentation your leadership team can act on.",
-    ],
-    workflow: [
-      {
-        title: "Discover",
-        detail:
-          "Interviews with your operators and a review of your systems and data - where time goes, where leads leak, where decisions wait.",
-        artifacts: ["Workflow inventory", "Data readiness review"],
-      },
-      {
-        title: "Evaluate",
-        detail:
-          "Candidate AI use cases scored on impact, feasibility, and cost, with build-vs-buy recommendations for each.",
-        artifacts: ["Ranked use-case matrix", "Build-vs-buy analysis"],
-      },
-      {
-        title: "Plan",
-        detail:
-          "The strongest use case turned into a concrete pilot: scope, architecture, integration points, success metrics, and a fixed price.",
-        artifacts: ["Pilot specification", "Costed roadmap", "Executive summary"],
-      },
-    ],
-    faqs: [
-      {
-        question: "Can we start with the data and systems we already have?",
-        answer:
-          "Often, yes. Workflows such as lead response, support triage, and document processing can use the data already in your CRM, helpdesk, and inbox. The assessment tells you precisely what is realistic with what you have.",
-      },
-      {
-        question: "Are you just going to recommend hiring you to build it?",
-        answer:
-          "The deliverable is a plan you can execute with any competent team - scope, architecture, and success metrics included. If an off-the-shelf product fits better than a custom build, the plan says so.",
-      },
-      {
-        question: "How long does the assessment take?",
-        answer:
-          "A focused assessment typically takes two to three weeks. Timing depends on system access, stakeholder availability, and the workflows in scope. We agree the schedule before discovery begins.",
-      },
-      {
-        question: "What does it cost?",
-        answer:
-          "It is a fixed-price engagement, quoted after a 30-minute scoping call based on the number of workflows and systems in scope - agreed before work begins, like everything we do.",
       },
     ],
   },

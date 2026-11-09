@@ -7,10 +7,10 @@ import BookCallCta from "./BookCallCta";
 
 const navLinks = [
   { label: "Services", href: "/services" },
-  { label: "AI Training Data", href: "/data" },
   { label: "Case Studies", href: "/case-studies" },
   { label: "Portfolio", href: "/portfolio" },
   { label: "About Us", href: "/about" },
+  { label: "AI Training Data", href: "/data" },
   { label: "Insights", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ];
@@ -73,7 +73,7 @@ const Navbar = () => {
         <div className="flex items-center gap-3">
           <BookCallCta
             location="navbar"
-            label="Book a call"
+            label="Book a discovery call"
             className="!min-h-0 !px-4 !py-1.5 !text-[12px]"
           />
 

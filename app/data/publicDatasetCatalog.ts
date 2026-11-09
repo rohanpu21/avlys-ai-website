@@ -60,7 +60,7 @@ export type PublicDataset = {
 };
 
 export const datasetCategories: { id: DataModality; title: string; subtitle: string; description: string }[] = [
-  { id: "image", title: "Images", subtitle: "Vision, captions & recognition", description: "Photographs, satellite patches, handwriting and rendered scenes. Match the image type and labels to the task—not just the file count." },
+  { id: "image", title: "Images", subtitle: "Vision, captions & recognition", description: "Photographs, satellite patches, handwriting and rendered scenes. Choose by image type and labels before comparing file counts." },
   { id: "audio", title: "Audio", subtitle: "Speech, languages & commands", description: "Multilingual reading, spontaneous speech, audiobooks and short commands. These are not interchangeable with live customer-service or human–bot conversations." },
   { id: "video", title: "Video", subtitle: "Motion, views & robot actions", description: "Robot observation sequences and synthetic multi-view video. These sources are distinct from human first-person footage; a custom egocentric pilot needs its own scope." },
 ];
@@ -92,7 +92,7 @@ export const publicDatasets: PublicDataset[] = [
     scale: "70,000 images · 10 classes", coverage: "28 × 28 pixels · 60,000 train / 10,000 test",
     formats: "Compressed IDX image and label files", annotations: "One apparel class per image.",
     useCases: ["Image classification", "Baseline benchmarking"],
-    limitations: "Low-resolution benchmark—not full-resolution product photography, a retail catalogue or a detection dataset.",
+    limitations: "This low-resolution benchmark has no full-resolution product photos, retail catalogue or object detection labels.",
     licence: "mit", sourceUrl: "https://github.com/zalandoresearch/fashion-mnist", licenceEvidenceUrl: "https://github.com/zalandoresearch/fashion-mnist/blob/master/LICENSE",
     access: "Public source; no purchase price listed.",
   },

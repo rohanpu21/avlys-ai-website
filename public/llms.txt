@@ -1,22 +1,22 @@
 # Avlys AI
 
-> Avlys AI builds custom software and integrates AI into the systems
-> enterprises already run - ERP, CRM, and legacy applications. Fixed-scope
-> pilots delivered in 4-6 weeks by senior engineers, serving US and Indian
-> teams from Hyderabad and Bengaluru, India.
+> Avlys AI is an AI-native product studio and enterprise engineering partner.
+> We design, build, and evolve custom platforms, internal tools, and intelligent
+> applications from discovery through deployment and support. Our team is based
+> in Hyderabad and Bengaluru, India, and works with Indian and global clients.
 
 ## Services
 
-- [AI Integration](https://avlysai.com/services/ai-integration): RAG, copilots, and document pipelines embedded into Salesforce, SAP, and custom apps.
-- [Custom Software Development](https://avlysai.com/services/custom-software-development): platforms, internal tools, and marketplaces - US + India delivery, full IP transfer.
+- [Custom Software Development](https://avlysai.com/services/custom-software-development): enterprise platforms, internal tools, marketplaces, and customer applications, from product discovery through launch and support.
 - [AI Agent Development](https://avlysai.com/services/ai-agents): support, sales, and voice agents with human-in-the-loop orchestration.
 - [AI Automation](https://avlysai.com/services/ai-automation): lead response, support triage, and document processing wired into existing tools.
-- [Data Collection & Preparation](https://avlysai.com/services/ai-training-data): collection, annotation, cleaning, and evaluation sets for AI training - delivered by a core team under NDA/DPA.
+- [AI Integration](https://avlysai.com/services/ai-integration): RAG, copilots, document pipelines, and controlled connections to existing applications and data.
 - [Enterprise AI Consulting](https://avlysai.com/services/enterprise-ai-consulting): readiness assessment, use-case ranking, and a costed pilot plan.
+- [Data Collection & Preparation](https://avlysai.com/services/ai-training-data): collection, annotation, cleaning, and evaluation sets scoped to the model task and agreed handling terms.
 
 ## Avlys Data
 
-Avlys Data is the AI training-data service from Avlys AI: off-the-shelf collection options, custom collection, preparation and annotation. Data project timing, availability and pricing are confirmed for the brief; software pilot timelines above do not apply automatically to data work.
+Avlys Data is the AI training-data service from Avlys AI: off-the-shelf collection options, custom collection, preparation and annotation. Data project timing, availability and pricing are confirmed for the brief; software delivery estimates do not apply automatically to data work.
 
 - [Avlys Data](https://avlysai.com/data): service overview, collection catalogue, pilot process, delivery checklist and buyer FAQs.
 - [Image training data](https://avlysai.com/data/image): captioned photographs, satellite imagery, apparel, synthetic visual reasoning, characters and cultural/scientific imagery.
@@ -28,10 +28,10 @@ The catalogue provides descriptions, not downloadable datasets or confirmed stoc
 
 ## Proof
 
-- [Case Studies](https://avlysai.com/case-studies): delivered marketplaces, AI agent architectures, voice agents, and automation systems.
-- [Portfolio](https://avlysai.com/portfolio): all delivered projects by category.
+- [Case Studies](https://avlysai.com/case-studies): software builds, prototypes, architectures, voice agents, and intelligent workflows. Each detail page describes the scope and available evidence.
+- [Portfolio](https://avlysai.com/portfolio): selected projects by category. Project illustrations are not verified product screenshots; deployment status must be read from the individual project.
 
 ## Company
 
-- [About](https://avlysai.com/about): Hyderabad- and Bengaluru-based engineering team serving US and Indian clients.
-- [Contact](https://avlysai.com/contact): book a strategy call or send project details. Email: sales@avlysai.com
+- [About](https://avlysai.com/about): founder-led product and engineering team based in Hyderabad and Bengaluru, India.
+- [Contact](https://avlysai.com/contact): discuss a software project, arrange a discovery call, or share requirements. Email: sales@avlysai.com

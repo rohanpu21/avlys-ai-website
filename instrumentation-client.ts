@@ -1,4 +1,8 @@
 import posthog from "posthog-js";
+import { getCampaignAttribution } from "./app/lib/campaign-attribution";
+
+// Keep campaign labels through the internal /book handoff without forwarding PII.
+getCampaignAttribution();
 
 // Keep the original variable working for existing deployments.
 const posthogToken = (

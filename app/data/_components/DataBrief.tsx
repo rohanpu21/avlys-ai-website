@@ -11,7 +11,7 @@ export default function DataBrief() {
     event.preventDefault();
     const fields = new FormData(event.currentTarget);
     const body = `Hi Avlys Data,\n\nI would like to discuss a data requirement.\n\nService: ${fields.get("service")}\nData type: ${fields.get("modality")}\nLanguage / domain: ${fields.get("domain") || "To discuss"}\nRequirements:\n${fields.get("requirements")}\n\n`;
-    setEmailDraft(`mailto:${siteConfig.email}?subject=${encodeURIComponent("Avlys Data — project brief")}&body=${encodeURIComponent(body)}`);
+    setEmailDraft(`mailto:${siteConfig.email}?subject=${encodeURIComponent("Avlys Data project brief")}&body=${encodeURIComponent(body)}`);
   }
 
   return (

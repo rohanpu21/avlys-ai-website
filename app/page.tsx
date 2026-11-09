@@ -3,36 +3,29 @@ import CallToAction from "./components/CallToAction";
 import CaseStudyStrip from "./components/CaseStudyStrip";
 import FAQ, { homepageFaqs } from "./components/FAQ";
 import Footer from "./components/Footer";
-import TeamPreview from "./components/TeamPreview";
-import StudioReels from "./components/StudioReels";
 import Hero from "./components/Hero";
-import IntegrationTile from "./components/IntegrationTile";
-import LaunchFilmTile from "./components/LaunchFilmTile";
-import LogoMarquee from "./components/LogoMarquee";
 import Navbar from "./components/Navbar";
 import Process from "./components/Process";
 import PressMentions from "./components/PressMentions";
 import ServicesGrid from "./components/ServicesGrid";
 import StickyCtaBar from "./components/StickyCtaBar";
 import StructuredData from "./components/StructuredData";
-import Testimonials from "./components/Testimonials";
-import WhyAvlys from "./components/WhyAvlys";
 import { siteConfig } from "./lib/site";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "Enterprise AI Development & Custom Software Company | Avlys AI",
+    absolute: "AI-native Product Studio & Enterprise Engineering Partner | Avlys AI",
   },
   description:
-    "Avlys AI builds AI-native custom software, intelligent agents, and enterprise automation systems for teams in India and globally.",
+    "Avlys AI is an AI-native product studio and enterprise engineering partner in India. We design, build, and evolve custom platforms, internal tools, and intelligent applications.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
     url: siteConfig.url,
-    title: "Enterprise AI Development & Custom Software Company | Avlys AI",
+    title: "AI-native Product Studio & Enterprise Engineering Partner | Avlys AI",
     description:
-      "AI-native custom software, intelligent agents, and operational automation for enterprise teams.",
+      "Custom platforms, internal tools, and intelligent applications, from product discovery to production and ongoing improvement.",
   },
 };
 
@@ -43,7 +36,7 @@ const homeSchema = {
       "@type": "WebPage",
       "@id": `${siteConfig.url}/#webpage`,
       url: siteConfig.url,
-      name: "Enterprise AI Development & Custom Software Company - Avlys AI",
+      name: "AI-native Product Studio & Enterprise Engineering Partner - Avlys AI",
       isPartOf: {
         "@id": `${siteConfig.url}/#website`,
       },
@@ -78,16 +71,9 @@ export default function Home() {
         <PressMentions />
         <CaseStudyStrip />
         <ServicesGrid />
-        <IntegrationTile />
         <Process />
-        <TeamPreview />
-        <StudioReels standalone />
-        <LaunchFilmTile />
-        <LogoMarquee />
-        <Testimonials />
-        <WhyAvlys />
         <FAQ />
-        <CallToAction />
+        <CallToAction compact />
       </main>
       <StickyCtaBar />
       <Footer />

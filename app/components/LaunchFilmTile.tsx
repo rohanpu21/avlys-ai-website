@@ -76,7 +76,7 @@ const LaunchFilmTile = () => {
             className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-4 border-t border-white/10 bg-black/40 px-6 py-4 backdrop-blur-xl transition-colors hover:bg-black/55 sm:px-10"
           >
             <span className="type-tagline text-left text-on-dark">
-              Avlys AI &mdash; watch the launch film
+              Avlys AI launch film
             </span>
             <span className="inline-flex min-h-[44px] items-center justify-center whitespace-nowrap rounded-full border border-primary-on-dark px-5 text-[14px] text-primary-on-dark transition-transform active:scale-95">
               Watch &#9656;

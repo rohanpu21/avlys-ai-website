@@ -18,13 +18,14 @@ import { buildDataSchema } from "./dataSeo";
 import styles from "./data.module.css";
 
 const description = dataDescription;
+const title = "AI Training Data, Collection & Annotation | Avlys Data";
 
 export const metadata: Metadata = {
-  title: { absolute: "AI Training Data, Collection & Annotation | Avlys Data" },
+  title: { absolute: title },
   description,
   alternates: { canonical: "/data" },
-  openGraph: { title: "Avlys OTS Data — AI training data, built for your task.", description, url: "/data", type: "website" },
-  twitter: { card: "summary_large_image", title: "Avlys OTS Data — AI Training Data & Annotation", description },
+  openGraph: { title, description, url: "/data", type: "website" },
+  twitter: { card: "summary_large_image", title, description },
 };
 
 const steps = [
@@ -54,7 +55,7 @@ const officeGallery = [
 export default function DataPage() {
   return (
     <div className={`${styles.page} ${styles.rootPage}`}>
-      <StructuredData data={buildDataSchema({ path: "/data", title: "Avlys Data — AI training data, collection and annotation", description, faqs: dataFaqGroups.flatMap((group) => [...group.items]), dateModified: dataPageUpdatedAt })} />
+      <StructuredData data={buildDataSchema({ path: "/data", title, description, faqs: dataFaqGroups.flatMap((group) => [...group.items]), dateModified: dataPageUpdatedAt })} />
       <a className={styles.skipLink} href="#data-main">Skip to data content</a>
       <Navbar />
       <div className={styles.subnav}>

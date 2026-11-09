@@ -1,65 +1,56 @@
-import Reveal from "./Reveal";
+import Link from "next/link";
 
 const faqs = [
   {
-    question: "How do engagements work and what do they cost?",
-    answer:
-      "Every project starts with a fixed-scope, fixed-price phase - usually a 4-6 week pilot against one workflow - quoted after a 30-minute scoping call. You know the price before work begins, and each subsequent phase is scoped and priced the same way. Larger builds run as fixed-price phases; ongoing work runs as a monthly retainer.",
+    question: "What does Avlys AI build?",
+    answer: "AI-native custom software: platforms, internal tools and intelligent workflows. We build new products and connect them to the systems your team already uses.",
+    link: { href: "/services", label: "Explore Avlys services" },
   },
   {
-    question: "Who owns the code, and how is our data protected?",
-    answer:
-      "You own everything: source code, infrastructure, designs, and documentation. Engagements run under NDA, access follows least-privilege, your data stays inside your cloud where possible, and every data flow is documented before it ships.",
+    question: "How much will it cost?",
+    answer: "We start with a discovery call, then propose a scoped first phase with deliverables, pricing and milestones. You review the plan before committing to the build.",
   },
   {
-    question: "How are you different from a traditional outsourcing firm?",
-    answer:
-      "Small senior team, AI-native from the start, and no pyramid: the engineers who scope your project build it. We integrate into the systems you already run instead of selling a platform migration, and we commit to a measurable success metric per engagement instead of billable hours.",
+    question: "How long does a build take?",
+    answer: "It depends on the scope, data and integrations. We agree milestones upfront and share working increments so you can review progress.",
   },
   {
-    question: "Can you work with our existing ERP, CRM, or legacy systems?",
-    answer:
-      "Yes - that is most of our work. We build integration layers around Salesforce, SAP, HubSpot, NetSuite, helpdesks, databases, and custom or legacy applications, so AI capability lands inside the tools your team already uses.",
+    question: "Who owns the software after launch?",
+    answer: "You own the code and project deliverables. We agree access, documentation, handover and any ongoing support as part of the engagement.",
   },
   {
-    question: "How fast can we see something working?",
-    answer:
-      "A scoped pilot ships in 4-6 weeks: a working system tested against your real cases and measured against success criteria agreed in week one. An AI readiness assessment - if you want a plan before a build - takes 2-3 weeks.",
-  },
-  {
-    question: "Where is the team, and how do time zones work?",
-    answer:
-      "Our team works from Hyderabad and Bengaluru, India, with delivery for US and Indian clients. Demos, decisions, and communication run on your hours; the build runs on ours - which usually means you wake up to progress.",
+    question: "Does Avlys AI also help with AI training data?",
+    answer: "Yes. Avlys Data offers image, audio and video options. Text, document work and custom collection are scoped separately; availability and permitted use are confirmed for each brief.",
+    link: { href: "/data", label: "Explore Avlys Data" },
   },
 ];
 
-const FAQ = () => {
+export default function FAQ() {
   return (
-    <section id="faq" className="bg-parchment px-6 py-20">
+    <section id="faq" className="bg-canvas px-6 py-16">
       <div className="mx-auto w-full max-w-3xl">
-        <Reveal>
-          <h2 className="type-display-lg text-center text-ink">
-            Questions buyers actually ask.
-          </h2>
-        </Reveal>
-        <div className="mt-12 flex flex-col gap-4">
+        <h2 className="type-display-lg text-center text-ink">Common questions</h2>
+        <div className="mt-8 divide-y divide-hairline border-y border-hairline">
           {faqs.map((faq) => (
-            <Reveal key={faq.question}>
-              <div className="rounded-[18px] border border-hairline bg-canvas p-6">
-                <h3 className="text-[17px] font-semibold text-ink">
-                  {faq.question}
-                </h3>
-                <p className="mt-3 text-[15px] leading-relaxed text-ink-muted">
-                  {faq.answer}
-                </p>
+            <details key={faq.question} className="group">
+              <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-5 rounded-sm py-5 text-[17px] font-semibold text-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary [&::-webkit-details-marker]:hidden">
+                <span>{faq.question}</span>
+                <span aria-hidden="true" className="shrink-0 text-[24px] font-normal text-primary group-open:rotate-45">+</span>
+              </summary>
+              <div className="pb-6 pr-8">
+                <p className="text-[16px] leading-relaxed text-ink-muted">{faq.answer}</p>
+                {faq.link && (
+                  <Link href={faq.link.href} className="mt-2 inline-flex min-h-11 items-center text-[14px] font-medium text-primary underline-offset-4 hover:underline">
+                    {faq.link.label} <span className="ml-2" aria-hidden="true">→</span>
+                  </Link>
+                )}
               </div>
-            </Reveal>
+            </details>
           ))}
         </div>
       </div>
     </section>
   );
-};
+}
 
 export { faqs as homepageFaqs };
-export default FAQ;

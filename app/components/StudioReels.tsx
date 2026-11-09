@@ -124,7 +124,7 @@ export default function StudioReels({ standalone = false }: { standalone?: boole
               <article key={reel.id} className={styles.card} aria-label={`${index + 1} of ${reels.length}: ${reel.title}`} aria-roledescription="slide">
                 <div className={styles.media}>
                   {playing ? (
-                    <iframe src={`${url}embed/`} title={`${reel.title} — Instagram player`} allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen className="absolute inset-0 h-full w-full border-0 bg-canvas" />
+                    <iframe src={`${url}embed/`} title={`${reel.title} (Instagram video)`} allow="autoplay; encrypted-media; picture-in-picture" allowFullScreen className="absolute inset-0 h-full w-full border-0 bg-canvas" />
                   ) : (
                     <button
                       ref={(node) => { playButtons.current[index] = node; }}

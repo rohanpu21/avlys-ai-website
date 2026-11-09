@@ -10,7 +10,7 @@ import { FluidParticlesBackground } from "@/components/ui/fluid-particles-backgr
 gsap.registerPlugin(useGSAP);
 
 // Split per word so each can ride up out of its own clip box.
-const headlineWords = ["AI-native", "custom", "software", "for", "enterprises."];
+const headlineWords = ["Custom", "software", "built", "around", "your", "business."];
 
 const Hero = () => {
   const ref = useRef<HTMLElement>(null);
@@ -68,7 +68,7 @@ const Hero = () => {
   return (
     <section
       ref={ref}
-      className="relative isolate overflow-hidden bg-canvas px-6 pb-20 pt-20 sm:pt-28"
+      className="relative isolate overflow-hidden bg-canvas px-6 py-14 sm:py-16"
     >
       <div
         data-hero-atmosphere
@@ -80,6 +80,9 @@ const Hero = () => {
       </div>
 
       <div className="mx-auto flex w-full max-w-4xl flex-col items-center text-center">
+        <p data-hero-fade className="type-caption-strong uppercase tracking-[0.14em] text-primary">
+          AI-native product studio
+        </p>
         <h1 ref={headlineRef} className="type-hero mt-6 max-w-3xl text-ink">
           {headlineWords.map((word, index) => (
             <Fragment key={`${word}-${index}`}>
@@ -94,20 +97,19 @@ const Hero = () => {
         </h1>
 
         <p data-hero-fade className="type-lead mt-6 max-w-2xl text-ink-muted">
-          We build intelligent applications and integrate AI into your existing
-          systems—from the first pilot to production.
+          We build customer portals, internal tools, and AI workflows for
+          enterprise teams.
         </p>
 
-        <div data-hero-fade className="mt-9 flex flex-col gap-4 sm:flex-row">
+        <div data-hero-fade className="mt-8 flex flex-col items-center gap-2 sm:flex-row sm:gap-6">
           <BookCallCta location="hero" />
-          <Link href="/case-studies" className="btn-pill-ghost">
-            See case studies
+          <Link href="/case-studies" className="inline-flex min-h-11 items-center text-[15px] font-medium text-primary underline-offset-4 hover:underline">
+            See our work <span className="ml-2" aria-hidden="true">→</span>
           </Link>
         </div>
 
-        <p data-hero-fade className="type-caption mt-8 text-ink-faint">
-          Fixed-scope pilots in 4-6 weeks. Senior engineers on every call. Full
-          IP transfer.
+        <p data-hero-fade className="type-caption mt-4 text-ink-muted">
+          30 minutes to talk about what you need.
         </p>
       </div>
     </section>

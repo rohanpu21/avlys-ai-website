@@ -10,10 +10,10 @@ import { absoluteUrl, siteConfig } from "../lib/site";
 
 export const metadata: Metadata = {
   title: {
-    absolute: "AI Development & Custom Software Services | Avlys AI",
+    absolute: "Custom Software & AI Product Engineering Services | Avlys AI",
   },
   description:
-    "AI-native custom software development, AI agents, workflow automation, and enterprise AI consulting - fixed-scope engagements for global teams.",
+    "Custom enterprise software, AI applications, agents, and workflow automation. Avlys brings product thinking and engineering from discovery through launch and support.",
   alternates: {
     canonical: "/services",
   },
@@ -28,9 +28,9 @@ const structuredData = {
       "@type": "CollectionPage",
       "@id": `${servicesUrl}#webpage`,
       url: servicesUrl,
-      name: "AI Development & Custom Software Services - Avlys AI",
+      name: "Custom Software & AI Product Engineering Services - Avlys AI",
       description:
-        "AI integration, custom software development, AI agent development, AI automation, and AI consulting services from Avlys AI.",
+        "Custom enterprise software, AI agents, workflow automation, integration, and consulting from Avlys AI, an India-based product studio and engineering partner.",
       isPartOf: {
         "@id": `${siteConfig.url}/#website`,
       },
@@ -57,11 +57,10 @@ export default function ServicesPage() {
       <main>
         <section className="bg-canvas px-6 pb-16 pt-20 sm:pt-24">
           <div className="mx-auto w-full max-w-4xl text-center">
-            <h1 className="type-hero text-ink">Services.</h1>
+            <h1 className="type-hero text-ink">From product idea to working software.</h1>
             <p className="type-lead mx-auto mt-6 max-w-2xl text-ink-muted">
-              Six ways teams work with us. Every engagement is fixed-scope,
-              priced before work begins, and measured against a success metric
-              agreed upfront.
+              Custom platforms, internal tools, and AI applications. Product
+              design and engineering, from discovery to launch.
             </p>
           </div>
         </section>
@@ -90,7 +89,7 @@ export default function ServicesPage() {
             ))}
           </div>
         </section>
-        <CallToAction />
+        <CallToAction compact />
       </main>
       <Footer />
     </div>
