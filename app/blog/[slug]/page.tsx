@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -107,12 +106,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           {
             "@type": "ListItem",
             position: 2,
-            name: "Insights",
-            item: absoluteUrl("/blog"),
-          },
-          {
-            "@type": "ListItem",
-            position: 3,
             name: post.title,
             item: postUrl,
           },
@@ -157,14 +150,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               </ul>
             </footer>
           )}
-          <div className="mx-auto mt-10 w-full max-w-3xl text-center">
-            <Link
-              href="/blog"
-              className="text-[15px] text-primary transition-opacity hover:opacity-70"
-            >
-              &larr; All insights
-            </Link>
-          </div>
         </article>
         <CallToAction />
       </main>
