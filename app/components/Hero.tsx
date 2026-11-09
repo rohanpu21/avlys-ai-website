@@ -95,7 +95,7 @@ const Hero = () => {
 
         <p data-hero-fade className="type-lead mt-6 max-w-2xl text-ink-muted">
           We build intelligent applications and integrate AI into your existing
-          systems—from the first pilot to production.
+          systems, from the first pilot to production.
         </p>
 
         <div data-hero-fade className="mt-9 flex flex-col gap-4 sm:flex-row">
