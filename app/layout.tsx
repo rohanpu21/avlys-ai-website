@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import StructuredData from "./components/StructuredData";
+import OpenAIMeasurement from './components/OpenAIMeasurement';
 import "./globals.css";
 import { absoluteUrl, siteConfig } from "./lib/site";
 
@@ -125,6 +126,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const openAIPixelId = process.env.NEXT_PUBLIC_OPENAI_ADS_PIXEL_ID?.trim();
   return (
     <html
       lang="en"
@@ -148,6 +150,7 @@ gtag('js', new Date());`,
       <body className="min-h-full bg-canvas text-ink" suppressHydrationWarning>
         <StructuredData data={organizationSchema} />
         {children}
+        {openAIPixelId && <OpenAIMeasurement pixelId={openAIPixelId} />}
       </body>
     </html>
   );

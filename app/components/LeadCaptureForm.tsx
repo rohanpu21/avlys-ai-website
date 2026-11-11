@@ -5,6 +5,8 @@ import { useRef, useState } from "react";
 import posthog from "posthog-js";
 import { siteConfig } from "../lib/site";
 
+import { trackMarketingConversion } from '../lib/marketing-events';
+
 type FormStatus = "idle" | "submitting" | "success" | "error";
 
 type LeadFormState = {
@@ -134,6 +136,7 @@ const LeadCaptureForm = () => {
       }
 
       setStatus("success");
+      trackMarketingConversion("avlys_lead_submitted");
       // A conversion represents an acknowledged database write, never an email draft.
       try {
         posthog.capture("lead_submitted", {
