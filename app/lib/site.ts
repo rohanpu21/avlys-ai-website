@@ -14,6 +14,8 @@ export const siteConfig = {
   // Public HTTPS event URL. Hosted Cal.com events are embedded at /book.
   // Without it, /book offers a call request instead of a pretend calendar.
   bookingUrl: process.env.NEXT_PUBLIC_BOOKING_URL?.trim() ?? "",
+  // Bump when /privacy text changes; shown on the page and used in the sitemap.
+  privacyUpdated: "2026-11-11",
   socialLinks: [
     "https://www.linkedin.com/company/avlys-ai/",
     "https://www.instagram.com/avlysai?igsh=azd6aTB5eHpxd3Jq",

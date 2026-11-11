@@ -3,6 +3,7 @@
 import type { ChangeEvent, FormEvent } from "react";
 import { useRef, useState } from "react";
 import posthog from "posthog-js";
+import { trackMarketingConversion } from "../lib/marketing-events";
 import { siteConfig } from "../lib/site";
 
 type FormStatus = "idle" | "submitting" | "success" | "error";
@@ -134,6 +135,7 @@ const LeadCaptureForm = () => {
       }
 
       setStatus("success");
+      trackMarketingConversion("avlys_lead_submitted");
       // A conversion represents an acknowledged database write, never an email draft.
       try {
         posthog.capture("lead_submitted", {
@@ -269,6 +271,15 @@ const LeadCaptureForm = () => {
             Open an email draft
           </a>{" "}
           to {siteConfig.email}. You will need to send it from your email app.
+        </p>
+      )}
+      {status !== "success" && (
+        <p className="text-[13px] text-ink-muted">
+          We use these details only to reply about your project. See our{" "}
+          <a href="/privacy" className="font-semibold text-primary underline">
+            Privacy Policy
+          </a>
+          .
         </p>
       )}
       {status === "success" && (

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import AdMeasurement from "./components/AdMeasurement";
 import StructuredData from "./components/StructuredData";
 import "./globals.css";
 import { absoluteUrl, siteConfig } from "./lib/site";
@@ -125,6 +126,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Dataset ID from Meta Events Manager; without it no pixel or banner renders.
+  const metaPixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID?.trim();
   return (
     <html
       lang="en"
@@ -148,6 +151,7 @@ gtag('js', new Date());`,
       <body className="min-h-full bg-canvas text-ink" suppressHydrationWarning>
         <StructuredData data={organizationSchema} />
         {children}
+        {metaPixelId && <AdMeasurement pixelId={metaPixelId} />}
       </body>
     </html>
   );
