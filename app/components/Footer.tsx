@@ -1,4 +1,5 @@
 import Link from "next/link";
+import AdSettingsLink from "./AdSettingsLink";
 import AskAi from "./AskAi";
 import { servicePages } from "../data/services";
 import { siteConfig } from "../lib/site";
@@ -52,6 +53,11 @@ const Footer = () => {
               <Link href="/contact" className="transition-opacity hover:opacity-60">
                 Contact
               </Link>
+              <Link href="/privacy" className="transition-opacity hover:opacity-60">
+                Privacy Policy
+              </Link>
+              {/* Only when the Meta Pixel is configured, matching app/layout.tsx. */}
+              {process.env.NEXT_PUBLIC_META_PIXEL_ID?.trim() && <AdSettingsLink />}
             </div>
           </div>
           <div>

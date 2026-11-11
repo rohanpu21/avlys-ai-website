@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { blogPosts } from "./data/blog";
 import { caseStudies } from "./data/caseStudies";
 import { servicePages } from "./data/services";
-import { absoluteUrl } from "./lib/site";
+import { absoluteUrl, siteConfig } from "./lib/site";
 import { dataCategories, dataUpdatedAt } from "./data/dataContent";
 
 // Honest lastModified dates: bump these when the corresponding content
@@ -65,6 +65,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: STUDIO_UPDATE_DATE,
       changeFrequency: "monthly",
       priority: 0.8,
+    },
+    {
+      url: absoluteUrl("/privacy"),
+      lastModified: new Date(siteConfig.privacyUpdated),
+      changeFrequency: "yearly",
+      priority: 0.3,
     },
     ...blogPosts.map((post) => ({
       url: absoluteUrl(`/blog/${post.slug}`),
