@@ -54,7 +54,12 @@ export function setMetaMeasurementConsent(pixelId: string, allowed: boolean) {
 
   const fbq = installFbq(target);
   fbq("consent", "grant");
-  fbq("init", pixelId);
+  // Stop the pixel from scanning the page (form fields, buttons, metadata) on
+  // its own; we only send the explicit events below. Automatic Advanced
+  // Matching must also stay off for this dataset in Meta Events Manager.
+  fbq("set", "autoConfig", false, pixelId);
+  // Empty advanced-matching object: no hashed email or phone is ever sent.
+  fbq("init", pixelId, {});
   fbq("track", "PageView");
   pixelInitialized = true;
 }
