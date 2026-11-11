@@ -7,8 +7,6 @@ import { useEffect, useRef, useState } from "react";
 import { bookingOutcome, withCampaignAttribution, type BookingDestination, type CampaignAttribution } from "../lib/booking";
 import { getCampaignAttribution } from "../lib/campaign-attribution";
 
-import { trackMarketingConversion } from '../lib/marketing-events';
-
 const namespace = "avlys-discovery";
 
 export default function CalBooking({ booking }: { booking: BookingDestination }) {
@@ -55,7 +53,6 @@ export default function CalBooking({ booking }: { booking: BookingDestination })
           if (window.sessionStorage.getItem(key)) return;
           window.sessionStorage.setItem(key, "1");
         } catch { /* In-memory deduplication still applies when storage is blocked. */ }
-        if (result === "booking_confirmed") trackMarketingConversion("avlys_booking_confirmed");
         posthog.capture(result, {
           provider: "cal.com",
           confirmation_source: "embed",
