@@ -1,5 +1,7 @@
-// Meta Pixel wrapper. Nothing loads until the visitor allows ad measurement,
-// and no visitor or enquiry details (names, emails, phones) are ever sent.
+// Meta Pixel wrapper. Nothing loads until the visitor allows ad measurement.
+// Meta's automatic configuration and advanced matching are left on, so the
+// pixel may send hashed contact details from page forms; /privacy and the
+// consent notice in AdMeasurement.tsx disclose this. Keep all three in step.
 
 type MarketingConversion = "avlys_lead_submitted" | "avlys_booking_confirmed";
 
@@ -54,12 +56,7 @@ export function setMetaMeasurementConsent(pixelId: string, allowed: boolean) {
 
   const fbq = installFbq(target);
   fbq("consent", "grant");
-  // Stop the pixel from scanning the page (form fields, buttons, metadata) on
-  // its own; we only send the explicit events below. Automatic Advanced
-  // Matching must also stay off for this dataset in Meta Events Manager.
-  fbq("set", "autoConfig", false, pixelId);
-  // Empty advanced-matching object: no hashed email or phone is ever sent.
-  fbq("init", pixelId, {});
+  fbq("init", pixelId);
   fbq("track", "PageView");
   pixelInitialized = true;
 }
@@ -74,7 +71,7 @@ export function trackMetaPageView() {
   }
 }
 
-/** Send a conversion without any visitor or enquiry details. */
+/** Send a named conversion event; this call itself adds no enquiry details. */
 export function trackMarketingConversion(event: MarketingConversion) {
   if (typeof window === "undefined") return;
   if (!(event in metaEvents)) return;

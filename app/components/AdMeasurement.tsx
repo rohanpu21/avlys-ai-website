@@ -76,7 +76,7 @@ export default function AdMeasurement({ pixelId }: { pixelId: string }) {
     <section aria-label="Ad measurement" className="fixed inset-x-3 bottom-3 z-50 max-w-sm rounded-[18px] border border-hairline bg-canvas p-4 text-sm text-ink shadow-lg">
       <p className="font-semibold">Ad measurement</p>
       <p className="mt-1 text-ink-muted">
-        Allow Meta (Facebook and Instagram) to set cookies so we can see whether our ads lead to bookings and enquiries? We never send your name, email, or phone number.{" "}
+        Allow Meta (Facebook and Instagram) to set cookies and receive hashed (scrambled) contact details you enter on this site, such as your email or phone number, so we can see whether our ads lead to bookings and enquiries?{" "}
         <Link href="/privacy#cookies" className="text-primary underline">Privacy Policy</Link>
       </p>
       <div className="mt-3 flex flex-wrap gap-2">
