@@ -4,13 +4,21 @@ import Cal, { getCalApi, type EmbedEvent } from "@calcom/embed-react";
 import Link from "next/link";
 import posthog from "posthog-js";
 import { useEffect, useRef, useState } from "react";
+import { preconnect, preload } from "react-dom";
 import { bookingOutcome, withCampaignAttribution, type BookingDestination, type CampaignAttribution } from "../lib/booking";
 import { getCampaignAttribution } from "../lib/campaign-attribution";
 import { trackMarketingConversion } from "../lib/marketing-events";
 
 const namespace = "avlys-discovery";
+const calOrigin = "https://app.cal.com";
+// The URL @calcom/embed-react loads by default; fetching it early shortens the wait for open times.
+const calEmbedScript = `${calOrigin}/embed/embed.js`;
 
 export default function CalBooking({ booking }: { booking: BookingDestination }) {
+  if (booking.calLink) {
+    preconnect(calOrigin);
+    preload(calEmbedScript, { as: "script" });
+  }
   const [attribution, setAttribution] = useState<CampaignAttribution | null>(null);
   const [status, setStatus] = useState<"loading" | "ready" | "unavailable">("loading");
   const [outcome, setOutcome] = useState<"booking_confirmed" | "booking_requested" | null>(null);
@@ -73,7 +81,10 @@ export default function CalBooking({ booking }: { booking: BookingDestination })
       cal("on", { action: "linkFailed", callback: onFailed });
       cal("on", { action: "bookingSuccessfulV2", callback: onBooked });
       cal("on", { action: "rescheduleBookingSuccessfulV2", callback: onRescheduled });
-      cal("ui", { theme: "light", hideEventTypeDetails: false, layout: "month_view" });
+      // On phones, skip Cal's event summary so the open dates show without scrolling;
+      // this card's heading already names the 30-minute call.
+      const compact = window.matchMedia("(max-width: 1023px)").matches;
+      cal("ui", { theme: "light", hideEventTypeDetails: compact, layout: "month_view" });
       removeListeners = () => {
         cal("off", { action: "linkReady", callback: onReady });
         cal("off", { action: "linkFailed", callback: onFailed });
@@ -95,7 +106,7 @@ export default function CalBooking({ booking }: { booking: BookingDestination })
   return (
     <div>
       <div className="mb-5 flex flex-wrap items-center justify-between gap-3 text-sm">
-        <p className="text-ink-muted">Choose a time that works for you.</p>
+        <p className="text-ink-muted">Choose a time for your 30-minute call.</p>
         <a href={directUrl} target="_blank" rel="noopener noreferrer"
           onClick={(event) => {
             const campaign = getCampaignAttribution();
@@ -122,7 +133,7 @@ export default function CalBooking({ booking }: { booking: BookingDestination })
           )}
           {attribution && (
             <Cal namespace={namespace} calLink={booking.calLink}
-              calOrigin="https://app.cal.com"
+              calOrigin={calOrigin}
               config={{ layout: "month_view", theme: "light", ...booking.calConfig, ...attribution }}
               className="min-h-[650px] w-full overflow-auto rounded-2xl" />
           )}
