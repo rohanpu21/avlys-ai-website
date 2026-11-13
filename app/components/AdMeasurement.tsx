@@ -72,16 +72,20 @@ export default function AdMeasurement({ pixelId }: { pixelId: string }) {
   // Once a choice is made, the notice stays hidden; the footer link reopens it.
   if (preference && !editing) return null;
 
+  // A slim bottom bar on phones so it doesn't hide the page (ad visitors land on /book);
+  // a small card from sm up. Same opt-in choice and disclosure as /privacy#cookies.
   return (
-    <section aria-label="Ad measurement" className="fixed inset-x-3 bottom-3 z-50 max-w-sm rounded-[18px] border border-hairline bg-canvas p-4 text-sm text-ink shadow-lg">
-      <p className="font-semibold">Ad measurement</p>
-      <p className="mt-1 text-ink-muted">
-        Allow Meta (Facebook and Instagram) to set cookies and receive hashed (scrambled) contact details you enter on this site, such as your email or phone number, so we can see whether our ads lead to bookings and enquiries?{" "}
+    <section
+      aria-label="Ad measurement"
+      className="fixed inset-x-0 bottom-0 z-50 border-t border-hairline bg-canvas px-4 py-3 text-ink sm:inset-x-auto sm:bottom-3 sm:left-3 sm:max-w-md sm:rounded-[18px] sm:border"
+    >
+      <p className="text-[13px] leading-snug text-ink-muted">
+        Can Meta (Facebook, Instagram) measure our ads here? This sets cookies and sends hashed (scrambled) contact details you type on this site.{" "}
         <Link href="/privacy#cookies" className="text-primary underline">Privacy Policy</Link>
       </p>
-      <div className="mt-3 flex flex-wrap gap-2">
-        <button type="button" onClick={() => choose("allow")} className="btn-pill-primary min-h-11 px-4 text-sm">Allow</button>
-        <button type="button" onClick={() => choose("decline")} className="min-h-11 rounded-full border border-hairline px-4 font-medium">Decline</button>
+      <div className="mt-2 flex gap-2">
+        <button type="button" onClick={() => choose("allow")} className="btn-pill-primary min-h-11 px-5 text-sm">Allow</button>
+        <button type="button" onClick={() => choose("decline")} className="min-h-11 rounded-full border border-hairline px-5 text-sm font-medium">Decline</button>
       </div>
     </section>
   );
