@@ -19,6 +19,8 @@ export type ServicePage = {
   h1: string;
   description: string;
   proof: string[];
+  /** Published case-study slugs shown as related work; builds first, labelled by engagement type. */
+  relatedCaseStudies: string[];
   capabilities: ServiceCapability[];
   systems: string[];
   outcomes: string[];
@@ -124,7 +126,7 @@ export const servicePages: ServicePage[] = [
     title: "Custom Software Development",
     metaTitle: "Custom Enterprise Software Development in India | Avlys AI",
     metaDescription:
-      "AI-native enterprise platforms, internal tools, and customer applications. Avlys's India-based product and engineering team takes software from discovery to launch and support.",
+      "Custom enterprise software development in India: internal tools, platforms and customer apps, built from discovery to launch and support. You own the code.",
     keywords: [
       "custom software development company",
       "custom software development India",
@@ -136,6 +138,7 @@ export const servicePages: ServicePage[] = [
     description:
       "Custom platforms, internal tools, and customer applications, from product discovery to launch and ongoing engineering.",
     proof: ["Product design + engineering", "Scope agreed before build", "India-based team"],
+    relatedCaseStudies: ["magic-creation-studio-wedding-photography-erp", "realcrm-real-estate-pipeline", "workshop-management-system"],
     capabilities: [
       {
         title: "Web platforms and portals",
@@ -231,6 +234,7 @@ export const servicePages: ServicePage[] = [
     description:
       "AI agents for support, sales, voice, and document workflows, with business rules, evaluation, and human checkpoints.",
     proof: ["Human review built in", "Grounding and evaluation", "Production orchestration"],
+    relatedCaseStudies: ["hospital-voice-agent", "multi-agent-customer-support-system", "ai-real-estate-voice-agent"],
     capabilities: [
       {
         title: "Support and service agents",
@@ -316,6 +320,7 @@ export const servicePages: ServicePage[] = [
     description:
       "Automate lead follow-up, support triage, and document handling inside your existing tools, with rules and approval steps you control.",
     proof: ["Your tools, automated", "Approval gates built in", "Measured before scaled"],
+    relatedCaseStudies: ["ad-sakhi-ad-ops-studio", "lead-automation-suite", "whatsapp-chatbot-systems"],
     capabilities: [
       {
         title: "Lead response and routing",
@@ -389,7 +394,7 @@ export const servicePages: ServicePage[] = [
     title: "AI Integration",
     metaTitle: "AI Integration Services for Enterprise Systems | Avlys AI",
     metaDescription:
-      "Connect AI capabilities to your enterprise applications. RAG, copilots, document pipelines, and controlled integrations from Avlys's India-based engineering team.",
+      "AI integration services for enterprise systems: RAG, copilots and document pipelines connected to the apps you already run, starting with a scoped pilot.",
     keywords: [
       "AI integration services",
       "integrate AI into existing software",
@@ -401,6 +406,7 @@ export const servicePages: ServicePage[] = [
     description:
       "Connect AI search, copilots, and document workflows to your existing applications through controlled integrations.",
     proof: ["Works with your systems", "4-6 week pilots", "Support scoped with you"],
+    relatedCaseStudies: ["mike-legal-ai", "bidsure-ai-tender-eligibility-platform", "hiredesk-recruiting-match-system"],
     capabilities: [
       {
         title: "Retrieval-augmented generation (RAG)",
@@ -486,6 +492,7 @@ export const servicePages: ServicePage[] = [
     description:
       "Choose the right AI use case and leave with a costed build plan, based on your systems, data, and business priorities.",
     proof: ["Fixed-price assessment", "Build-vs-buy honesty", "Ends in a costed plan"],
+    relatedCaseStudies: ["agentic-ai-architecture-and-engineering", "integrated-erp-and-club-management", "hjsn-digital-platform"],
     capabilities: [
       {
         title: "AI readiness assessment",
@@ -568,9 +575,9 @@ export const servicePages: ServicePage[] = [
   {
     slug: "ai-training-data",
     title: "Data Collection & Preparation",
-    metaTitle: "AI Training Data Services - Collection & Preparation | Avlys AI",
+    metaTitle: "AI Training Data Collection and Preparation | Avlys AI",
     metaDescription:
-      "AI training data services: image, audio and video catalogue options, plus custom text, collection, annotation, cleaning and evaluation scoped to your model task.",
+      "AI training data services: image, audio and video catalogue data, plus custom collection, annotation, cleaning and evaluation scoped to your model task.",
     keywords: [
       "AI training data services",
       "data collection and preparation",
@@ -583,6 +590,8 @@ export const servicePages: ServicePage[] = [
     description:
       "Collection, annotation, and evaluation for your model task. Explore image, audio, and video catalogue options; text and document work is custom-scoped.",
     proof: ["Core team, not a crowd", "Paid calibration batch first", "Per-unit pricing"],
+    // No published training-data case study yet; the section stays hidden.
+    relatedCaseStudies: [],
     capabilities: [
       {
         title: "Collection and sourcing",
