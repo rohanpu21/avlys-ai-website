@@ -65,6 +65,9 @@ must continue to work when analytics is unavailable.
 | `booking_opened` | CTA selected with a valid configured scheduler; navigation goes to `/book` |
 | `call_request_opened` | CTA selected without a configured scheduler; navigation goes to the request fallback on `/book` |
 | `booking_external_opened` | Direct scheduler link selected from `/book`; completion in that external page is not observed |
+| `booking_calendar_ready` | Cal.com embed reports `linkReady` (calendar visible), once per visit to `/book`; `load_ms` since the embed started, `page_age_ms` since the page opened, `after_timeout` if the 15 s fallback had already shown |
+| `booking_calendar_failed` | Embed reports `linkFailed` (`reason=link_failed`), its script fails to load (`script_failed`), or it is not ready after 15 s (`timeout_15s`, which a later `booking_calendar_ready` can follow) |
+| `booking_calendar_left_loading` | Page hidden or closed before the calendar was ready; sent with `sendBeacon`. Measures visitors lost to load time |
 | `booking_confirmed` | Cal.com embed reports a booking UID, status `ACCEPTED`, and `paymentRequired: false` |
 | `booking_requested` | Cal.com embed reports a booking UID and either `PENDING`, or `ACCEPTED` with payment still required |
 | `booking_rescheduled` | Cal.com embed reports successful rescheduling; diagnostic only |
