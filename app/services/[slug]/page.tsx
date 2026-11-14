@@ -7,6 +7,7 @@ import Navbar from "../../components/Navbar";
 import Reveal from "../../components/Reveal";
 import StructuredData from "../../components/StructuredData";
 import BookCallCta from "../../components/BookCallCta";
+import { getCaseStudy, type CaseStudy } from "../../data/caseStudies";
 import { getServicePage, servicePages } from "../../data/services";
 import { absoluteUrl, siteConfig } from "../../lib/site";
 
@@ -67,6 +68,12 @@ export default async function ServicePage({ params }: ServicePageProps) {
 
   const path = `/services/${service.slug}`;
   const serviceUrl = absoluteUrl(path);
+  // Fail the build on a mistyped slug rather than silently dropping proof from the page.
+  const relatedWork: CaseStudy[] = service.relatedCaseStudies.map((caseSlug) => {
+    const caseStudy = getCaseStudy(caseSlug);
+    if (!caseStudy) throw new Error(`Unknown related case study "${caseSlug}" on /services/${service.slug}`);
+    return caseStudy;
+  });
   const structuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -236,6 +243,35 @@ export default async function ServicePage({ params }: ServicePageProps) {
             </div>
           </div>
         </section>
+
+        {relatedWork.length > 0 && (
+          <section aria-labelledby="related-work" className="bg-canvas px-6 py-16">
+            <div className="mx-auto w-full max-w-6xl">
+              <Reveal className="flex flex-wrap items-end justify-between gap-5">
+                <h2 id="related-work" className="type-display-lg text-ink">Related work.</h2>
+                <Link href="/case-studies" className="inline-flex min-h-11 items-center text-primary">
+                  View all case studies →
+                </Link>
+              </Reveal>
+              <div className="mt-10 grid gap-5 md:grid-cols-3">
+                {relatedWork.map((caseStudy, index) => (
+                  <Reveal key={caseStudy.slug} delay={index * 0.04}>
+                    <Link
+                      href={`/case-studies/${caseStudy.slug}`}
+                      className="group flex h-full flex-col rounded-[18px] border border-hairline bg-canvas p-6 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+                    >
+                      {/* The engagement type keeps designs and prototypes distinct from shipped builds. */}
+                      <p className="type-caption text-ink-faint">{caseStudy.engagement} · {caseStudy.type}</p>
+                      <h3 className="mt-2 text-[17px] font-semibold text-ink group-hover:text-primary">{caseStudy.title}</h3>
+                      <p className="type-caption mt-3 flex-1 text-ink-muted">{caseStudy.headline}</p>
+                      <span className="mt-4 text-[15px] text-primary">View case study →</span>
+                    </Link>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
         <section className="bg-parchment px-6 py-16">
           <div className="mx-auto w-full max-w-3xl">
