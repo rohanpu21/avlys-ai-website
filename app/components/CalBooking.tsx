@@ -30,20 +30,57 @@ export default function CalBooking({ booking }: { booking: BookingDestination })
     const campaign = getCampaignAttribution();
     // Initialize the SDK and listeners before mounting the embedded calendar.
     if (!booking.calLink) return;
+
+    // The embed can take 10–30 s on phones. Record how long it took to appear, whether it
+    // failed, and whether the visitor left first. A ready event can follow a timeout.
+    const startedAt = performance.now();
+    const timing = () => ({
+      load_ms: Math.round(performance.now() - startedAt),
+      // Time since the browser opened the page: for ad visitors who land on /book, the wait since their tap.
+      page_age_ms: Math.round(performance.now()),
+    });
+    let ready = false;
+    let left = false;
+    const failures = new Set<string>();
+    const reportFailure = (reason: "timeout_15s" | "link_failed" | "script_failed") => {
+      if (failures.has(reason)) return;
+      failures.add(reason);
+      posthog.capture("booking_calendar_failed", { reason, ...timing(), ...campaign });
+    };
+    const onLeave = () => {
+      if (ready || left) return;
+      left = true;
+      // sendBeacon still delivers while the page is closing.
+      posthog.capture("booking_calendar_left_loading", { ...timing(), ...campaign },
+        { transport: "sendBeacon", send_instantly: true });
+    };
+    const onVisibility = () => {
+      if (document.visibilityState === "hidden") onLeave();
+    };
+    document.addEventListener("visibilitychange", onVisibility);
+    window.addEventListener("pagehide", onLeave);
+
     const timeout = window.setTimeout(() => {
-      if (!disposed) setStatus("unavailable");
+      if (disposed) return;
+      setStatus("unavailable");
+      reportFailure("timeout_15s");
     }, 15000);
 
     const onReady = () => {
       if (disposed) return;
       window.clearTimeout(timeout);
       setStatus("ready");
+      if (ready) return;
+      ready = true;
+      posthog.capture("booking_calendar_ready", { ...timing(), after_timeout: failures.has("timeout_15s"), ...campaign });
     };
-    const onFailed = () => {
+    const fail = (reason: "link_failed" | "script_failed") => {
       if (disposed) return;
       window.clearTimeout(timeout);
       setStatus("unavailable");
+      reportFailure(reason);
     };
+    const onFailed = () => fail("link_failed");
     const onBooked = async (event: EmbedEvent<"bookingSuccessfulV2">) => {
       if (disposed) return;
       const data = event.detail.data;
@@ -92,11 +129,13 @@ export default function CalBooking({ booking }: { booking: BookingDestination })
         cal("off", { action: "rescheduleBookingSuccessfulV2", callback: onRescheduled });
       };
       setAttribution(campaign);
-    }).catch(onFailed);
+    }).catch(() => fail("script_failed"));
 
     return () => {
       disposed = true;
       window.clearTimeout(timeout);
+      document.removeEventListener("visibilitychange", onVisibility);
+      window.removeEventListener("pagehide", onLeave);
       removeListeners?.();
     };
   }, [booking.calLink]);
